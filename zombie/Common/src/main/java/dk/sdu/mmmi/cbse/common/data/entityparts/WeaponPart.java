@@ -12,7 +12,9 @@ public class WeaponPart implements EntityPart{
     
     private int damage;
     private float range;
-    
+    private boolean isAttacking;
+
+
     public WeaponPart(int damage, float range) {
         this.damage = damage;
         this.range = range;
@@ -26,6 +28,10 @@ public class WeaponPart implements EntityPart{
         this.range = range;
     }
 
+    public void setIsAttacking(boolean isAttacking) {
+        this.isAttacking = isAttacking;
+    }
+
     public int getDamage() {
         return damage;
     }
@@ -33,4 +39,9 @@ public class WeaponPart implements EntityPart{
     public float getRange() {
         return range;
     }
+
+    public boolean isIsAttacking() {
+        return isAttacking;
+    }
+
 }

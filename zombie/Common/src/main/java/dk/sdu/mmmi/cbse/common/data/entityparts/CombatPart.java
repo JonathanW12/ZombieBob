@@ -14,8 +14,7 @@ import java.util.UUID;
 public class CombatPart implements EntityPart{
     
     private UUID currentWeapon;
-    private boolean isAttacking;
-    
+
     public CombatPart(UUID currentWeapon) {
         this.currentWeapon = currentWeapon;
     }
@@ -24,15 +23,8 @@ public class CombatPart implements EntityPart{
         this.currentWeapon = currentWeapon;
     }
 
-    public void setIsAttacking(boolean isAttacking) {
-        this.isAttacking = isAttacking;
-    }
-
     public UUID getCurrentWeapon() {
         return currentWeapon;
     }
 
-    public boolean isIsAttacking() {
-        return isAttacking;
-    }
 }
