@@ -13,6 +13,7 @@
         <module name="Zombie-app" />
         <module name="Common" />
         <module name="Core" />
+        <module name="TimerSystem" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -21,6 +22,7 @@
       <module name="Movement" target="1.8" />
       <module name="Player" target="1.8" />
       <module name="SilentUpdate" target="1.8" />
+      <module name="TimerSystem" target="1.8" />
       <module name="Zombie-app" target="1.8" />
       <module name="Zombie-branding" target="1.8" />
       <module name="Zombie-parent" target="1.5" />

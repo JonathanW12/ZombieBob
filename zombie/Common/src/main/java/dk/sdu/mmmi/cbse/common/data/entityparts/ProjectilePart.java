@@ -5,8 +5,6 @@
  */
 package dk.sdu.mmmi.cbse.common.data.entityparts;
 
-import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
-
 /**
  *ProjectilePart describes the type of an entity.
  */
