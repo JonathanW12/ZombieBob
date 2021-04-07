@@ -109,9 +109,6 @@ public class MovingPart
         return down;
     }
 
-    @Override
-    public void process(GameData gameData, EntityPart entityPart) {
 
-    }
 
 }
