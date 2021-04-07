@@ -39,14 +39,14 @@ public class PlayerPlugin implements IGamePluginService {
         world.addtoEntityPartMap(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed),playerShip);
         world.addtoEntityPartMap(new PositionPart(x, y, radians),playerShip);
         world.addtoEntityPartMap(new PlayerPart(),playerShip);
-        world.addtoEntityPartMap(new VisualPart(10,new float[]{60f, 179f, 113f, 1f}),playerShip);
+        world.addtoEntityPartMap(new VisualPart("PlayerWalk1", 80, 80), playerShip);
 
     }
 
     @Override
     public void stop(GameData gameData, World world) {
         // Remove entities
-        // world.removeEntity(player);
+        //world.removeEntity(player);
     }
 
 }

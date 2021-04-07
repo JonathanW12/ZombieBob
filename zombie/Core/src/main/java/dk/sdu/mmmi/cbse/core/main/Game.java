@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
@@ -17,7 +17,6 @@ import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 import dk.sdu.mmmi.cbse.core.managers.GameInputProcessor;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -34,7 +33,6 @@ public class Game implements ApplicationListener {
 
     private static OrthographicCamera cam;
     private ExtendViewport viewport;
-    private ShapeRenderer sr;
     private final Lookup lookup = Lookup.getDefault();
     private final GameData gameData = new GameData();
     private World world = new World();
@@ -57,8 +55,6 @@ public class Game implements ApplicationListener {
         cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
         viewport = new ExtendViewport(1100, 800, cam);
-
-        sr = new ShapeRenderer();
 
         Gdx.input.setInputProcessor(new GameInputProcessor(gameData));
 
@@ -98,52 +94,40 @@ public class Game implements ApplicationListener {
     }
 
     private void draw() {
-        
         batch.begin();  
+        
         for (Map.Entry<UUID, EntityPart> entry: world.getMapByPart("VisualPart").entrySet()){ 
             PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(entry.getKey());
+            VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entry.getKey());
             
             drawSprite(
-                "PlayerGun1",
+                visualPart.getSpriteName(),
                 positionPart.getX(),
                 positionPart.getY(),
-                positionPart.getRadians()
+                positionPart.getRadians(),
+                visualPart.getWidth(),
+                visualPart.getHeight()
             );
         }
+        
         batch.end();
-    /*
-        for (Map.Entry<UUID, EntityPart> entry: world.getMapByPart("VisualPart").entrySet()){
-            VisualPart entity = (VisualPart) entry.getValue();
-
-            sr.setColor(entity.getColor()[0],entity.getColor()[1],entity.getColor()[2],entity.getColor()[3]);
-            sr.begin(ShapeRenderer.ShapeType.Line);
-
-            float[] shapex = entity.getShapeX();
-            float[] shapey = entity.getShapeY();
-
-            for (int i = 0, j = shapex.length - 1;
-                    i < shapex.length;
-                    j = i++) {
-
-                sr.line(shapex[i], shapey[i], shapex[j], shapey[j]);
-            }
-
-            sr.end();
-        }
-    */
     }
     
-    private void drawSprite(String name, float x, float y, float radians) {
-        Sprite sprite = sprites.get(name);
-        sprite.setPosition(x, y);
-        sprite.setRotation((float) Math.toDegrees(radians));
+    private void drawSprite(String spriteName, float x, float y, float radians, float width, float height) {
+        Sprite sprite = sprites.get(spriteName);
+        
+        sprite.setBounds(x, y, width, height);
+        sprite.setOriginCenter();
+        sprite.setRotation((float) Math.toDegrees(radians - 3.1415f / 2));
+        sprite.translate(-(width / 2), -(height / 2));
+        
         sprite.draw(batch);
     }
     
     private void addSprites() {
-        Array<TextureAtlas.AtlasRegion> regions = textureAtlas.getRegions();
+        Array<AtlasRegion> regions = textureAtlas.getRegions();
 
-        for (TextureAtlas.AtlasRegion region : regions) {
+        for (AtlasRegion region : regions) {
             Sprite sprite = textureAtlas.createSprite(region.name);
 
             sprites.put(region.name, sprite);
