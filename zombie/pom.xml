@@ -62,6 +62,7 @@
         <module>Common</module>
         <module>Player</module>
         <module>Movement</module>
+        <module>AnimationSystem</module>
     </modules>
 
     <properties>
