@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>dk.sdu.mmmi.cbse</groupId>
-        <artifactId>AsteroidsNetbeansModules-parent</artifactId>
+        <artifactId>Zombie-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>AsteroidsNetbeansModules-branding</artifactId>
+    <artifactId>Zombie-branding</artifactId>
     <packaging>nbm</packaging>
 
-    <name>AsteroidsNetbeansModules-branding</name>
+    <name>Zombie-branding</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
