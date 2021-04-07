@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="AsteroidsNetbeansModules-app" />
+        <module name="Player" />
+        <module name="Movement" />
+        <module name="SilentUpdate" />
+        <module name="AsteroidsNetbeansModules-branding" />
+        <module name="Core" />
+        <module name="Common" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="AsteroidsNetbeansModules-app" target="1.8" />
+      <module name="AsteroidsNetbeansModules-branding" target="1.8" />
+      <module name="Common" target="1.8" />
+      <module name="Core" target="1.8" />
+      <module name="Movement" target="1.8" />
+      <module name="Player" target="1.8" />
+      <module name="SilentUpdate" target="1.8" />
+      <module name="Zombie-parent" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
