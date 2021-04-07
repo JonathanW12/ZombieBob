@@ -7,7 +7,9 @@ package dk.sdu.mmmi.cbse.common.data.entityparts;
 
 import dk.sdu.mmmi.cbse.common.data.GameData;
 
-
+/**
+ *PositionPart describes the position of an entity.
+ */
 public class PositionPart implements EntityPart {
 
     private float x;
@@ -48,6 +50,4 @@ public class PositionPart implements EntityPart {
     public void setRadians(float radians) {
         this.radians = radians;
     }
-
-
 }

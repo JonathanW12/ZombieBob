@@ -108,7 +108,4 @@ public class MovingPart
     public boolean isDown() {
         return down;
     }
-
-
-
 }
