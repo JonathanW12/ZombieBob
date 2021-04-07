@@ -17,9 +17,7 @@ public class PlayerPlugin implements IGamePluginService {
     public void start(GameData gameData, World world) {
 
         // Add player to the world
-
-            createPlayerShip(gameData, world);
-
+        createPlayerShip(gameData, world);
     }
 
 
@@ -40,6 +38,7 @@ public class PlayerPlugin implements IGamePluginService {
         world.addtoEntityPartMap(new PositionPart(x, y, radians),playerShip);
         world.addtoEntityPartMap(new PlayerPart(),playerShip);
         world.addtoEntityPartMap(new VisualPart(10,new float[]{60f, 179f, 113f, 1f}),playerShip);
+        world.addtoEntityPartMap(new TimerPart(10),playerShip);
 
     }
 

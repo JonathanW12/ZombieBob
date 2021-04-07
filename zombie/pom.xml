@@ -62,12 +62,13 @@
         <module>Common</module>
         <module>Player</module>
         <module>Movement</module>
+        <module>TimerSystem</module>
         <module>LootingSystem</module>
     </modules>
 
     <properties>
         <netbeans.version>RELEASE112</netbeans.version>
-        <brandingToken>asteroidsnetbeansmodules</brandingToken>
+        <brandingToken>zombie</brandingToken>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
