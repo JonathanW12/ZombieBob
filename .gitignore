@@ -14,6 +14,9 @@ local.properties
 .loadpath
 .recommenders
 
+# Netbeans actions
+**/nbactions.xml
+
 # External tool builders
 .externalToolBuilders/
 
