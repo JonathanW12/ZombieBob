@@ -8,5 +8,4 @@ package dk.sdu.mmmi.cbse.common.data.entityparts;
 
 
 public interface EntityPart {
-
 }

@@ -45,5 +45,4 @@ public class VisualPart implements EntityPart {
     public void setColor(float[] c) {
         this.color = c;
     }
-
 }
