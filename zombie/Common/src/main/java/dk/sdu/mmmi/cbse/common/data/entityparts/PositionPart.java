@@ -5,7 +5,6 @@
  */
 package dk.sdu.mmmi.cbse.common.data.entityparts;
 
-import dk.sdu.mmmi.cbse.common.data.GameData;
 
 /**
  *PositionPart describes the position of an entity.

@@ -5,7 +5,6 @@
  */
 package dk.sdu.mmmi.cbse.common.data.entityparts;
 
-import dk.sdu.mmmi.cbse.common.data.GameData;
 
 /**
  * LifePart describes the hit points an entity has.

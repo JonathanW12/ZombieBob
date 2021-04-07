@@ -5,7 +5,9 @@
  */
 package dk.sdu.mmmi.cbse.common.data.entityparts;
 
-import dk.sdu.mmmi.cbse.common.data.GameData;
+/**
+ * Used by all entities that can move
+ */
 
 public class MovingPart
         implements EntityPart {

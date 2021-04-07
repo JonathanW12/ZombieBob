@@ -5,7 +5,9 @@
  */
 package dk.sdu.mmmi.cbse.common.data.entityparts;
 
-
+/**
+ * Implemented by all entityParts, used for polymorphism
+ */
 
 public interface EntityPart {
 }

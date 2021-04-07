@@ -2,6 +2,10 @@ package dk.sdu.mmmi.cbse.common.data.entitytypeparts;
 
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
 
+/**
+ * Used by entities with visuals
+ */
+
 public class VisualPart implements EntityPart {
 
     private float radius;
