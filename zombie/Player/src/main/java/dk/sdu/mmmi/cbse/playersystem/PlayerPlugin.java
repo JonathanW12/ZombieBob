@@ -15,13 +15,8 @@ public class PlayerPlugin implements IGamePluginService {
 
     @Override
     public void start(GameData gameData, World world) {
-
-        // Add player to the world
-
-            createPlayerShip(gameData, world);
-
+        createPlayerShip(gameData, world);
     }
-
 
     private void createPlayerShip(GameData gameData, World world) {
 
@@ -36,11 +31,15 @@ public class PlayerPlugin implements IGamePluginService {
         Entity playerShip = new Entity();
 
         // TESTING THE HASHMAP, created entity got ID and linked all parts to ID.
+        AnimationPart animationPart = new AnimationPart();
+        animationPart.addAnimation("walk", "PlayerWalkAnimation", 2, 0.2f);
+        animationPart.setCurrentAnimation("walk");
+        
         world.addtoEntityPartMap(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed),playerShip);
         world.addtoEntityPartMap(new PositionPart(x, y, radians),playerShip);
         world.addtoEntityPartMap(new PlayerPart(),playerShip);
         world.addtoEntityPartMap(new VisualPart("PlayerWalk1", 80, 80), playerShip);
-
+        world.addtoEntityPartMap(animationPart, playerShip);
     }
 
     @Override

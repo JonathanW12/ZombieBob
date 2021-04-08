@@ -8,7 +8,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import dk.sdu.mmmi.cbse.commonanimation.Animation;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
@@ -23,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import com.badlogic.gdx.utils.Array;
+import dk.sdu.mmmi.cbse.common.data.entityparts.AnimationPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import java.util.concurrent.CopyOnWriteArrayList;
 import org.openide.util.Lookup;
@@ -40,7 +43,9 @@ public class Game implements ApplicationListener {
     private Lookup.Result<IGamePluginService> result;
     private SpriteBatch batch;
     private TextureAtlas textureAtlas;
+    private TextureAtlas animationTextureAtlas;
     private final HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
+    private final HashMap<String, TextureRegion> animationRegions = new HashMap<String, TextureRegion>();
 
     @Override
     public void create() {
@@ -49,7 +54,9 @@ public class Game implements ApplicationListener {
         
         batch = new SpriteBatch();
         textureAtlas = new TextureAtlas("../../assets/sprites.txt");
+        animationTextureAtlas = new TextureAtlas("../../assets/animations.txt");
         addSprites();
+        addAnimations();
 
         cam = new OrthographicCamera(gameData.getDisplayWidth(), gameData.getDisplayHeight());
         cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
@@ -99,15 +106,29 @@ public class Game implements ApplicationListener {
         for (Map.Entry<UUID, EntityPart> entry: world.getMapByPart("VisualPart").entrySet()){ 
             PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(entry.getKey());
             VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entry.getKey());
+            AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entry.getKey());
+
+            if (animationPart != null && animationPart.isAnimated()) {                
+                drawAnimation(
+                    animationPart,
+                    positionPart.getX(),
+                    positionPart.getY(),
+                    positionPart.getRadians(),
+                    visualPart.getWidth(),
+                    visualPart.getHeight(),
+                    animationPart.getAnimationByName(animationPart.getCurrentAnimationName()).getFrameCount()
+                ); 
+            } else {
+                drawSprite(
+                    visualPart.getSpriteName(),
+                    positionPart.getX(),
+                    positionPart.getY(),
+                    positionPart.getRadians(),
+                    visualPart.getWidth(),
+                    visualPart.getHeight()
+                );
+            }
             
-            drawSprite(
-                visualPart.getSpriteName(),
-                positionPart.getX(),
-                positionPart.getY(),
-                positionPart.getRadians(),
-                visualPart.getWidth(),
-                visualPart.getHeight()
-            );
         }
         
         batch.end();
@@ -124,6 +145,31 @@ public class Game implements ApplicationListener {
         sprite.draw(batch);
     }
     
+    private void drawAnimation(AnimationPart animationPart, float x, float y, float radians, float width, float height, int frameCount) {
+        TextureRegion region = animationRegions.get(animationPart.getAnimationByName(animationPart.getCurrentAnimationName()).getTextureFileName());
+        TextureRegion[] subRegions = new TextureRegion[frameCount];
+        Animation animation = animationPart.getCurrentAnimation();
+        
+        for (int i = 0; i < frameCount; i++) {
+            subRegions[i] = new TextureRegion(
+                region,
+                (i * (region.getRegionWidth() / frameCount)),
+                0,
+                region.getRegionWidth() / frameCount,
+                region.getRegionHeight()
+            );
+        }
+        
+        Sprite sprite = new Sprite(subRegions[animation.getCurrentFrame()]);
+       
+        sprite.setBounds(x, y, width, height);
+        sprite.setRotation((float) Math.toDegrees(radians - 3.1415f / 2));
+        sprite.setOriginCenter();
+        sprite.translate(-(width / 2), -(height / 2));
+
+        sprite.draw(batch);
+    }
+    
     private void addSprites() {
         Array<AtlasRegion> regions = textureAtlas.getRegions();
 
@@ -131,6 +177,14 @@ public class Game implements ApplicationListener {
             Sprite sprite = textureAtlas.createSprite(region.name);
 
             sprites.put(region.name, sprite);
+        }
+    }
+    
+    private void addAnimations() {
+        Array<AtlasRegion> regions = animationTextureAtlas.getRegions();
+
+        for (AtlasRegion region : regions) {
+            animationRegions.put(region.name, region);
         }
     }
 

@@ -3,6 +3,7 @@ package dk.sdu.mmmi.cbse.playersystem;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.AnimationPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
@@ -27,6 +28,11 @@ public class PlayerControlSystem implements IEntityProcessingService {
             PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(entry.getKey());
             MovingPart movingPart = (MovingPart) world.getMapByPart("MovingPart").get(entry.getKey());
             VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entry.getKey());
+            AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entry.getKey());
+            
+            animationPart.setIsAnimated(
+                (movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp())
+            );
 
             // movement
             movingPart.setLeft(gameData.getKeys().isDown(GameKeys.LEFT));
