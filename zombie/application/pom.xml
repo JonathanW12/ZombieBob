@@ -29,6 +29,7 @@
             <type>pom</type>
         </dependency>
         -->
+
         <!-- NB runtime -->
         <dependency>
             <groupId>org.netbeans.modules</groupId>
@@ -88,6 +89,11 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>TimerSystem</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>HealthSystem</artifactId>
             <version>${project.version}</version>
         </dependency>
 

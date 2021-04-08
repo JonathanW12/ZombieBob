@@ -14,6 +14,7 @@ public class LifePart implements EntityPart{
 
     private int life;
     private boolean isHit;
+    private boolean isDead;
     
     public LifePart(int life){
         this.life = life;
@@ -34,5 +35,12 @@ public class LifePart implements EntityPart{
     public void setIsHit(boolean isHit){
         this.isHit = isHit;
     }
-   
+
+    public boolean isDead() {
+        return isDead;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
+    }
 }
