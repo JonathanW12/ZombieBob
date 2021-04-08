@@ -67,6 +67,8 @@
         <module>LootingSystem</module>
         <module>BulletSystem</module>
         <module>CombatSystem</module>
+         <module>Enemy</module>
+        
     </modules>
 
     <properties>
