@@ -32,7 +32,7 @@ public class PlayerPlugin implements IGamePluginService {
 
         // TESTING THE HASHMAP, created entity got ID and linked all parts to ID.
         AnimationPart animationPart = new AnimationPart();
-        animationPart.addAnimation("walk", "PlayerWalkAnimation", 2, 0.2f);
+        animationPart.addAnimation("walk", "PlayerWalkAnimation", 4, 0.2f);
         animationPart.setCurrentAnimation("walk");
         
         world.addtoEntityPartMap(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed),playerShip);

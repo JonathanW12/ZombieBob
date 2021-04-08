@@ -1,12 +1,12 @@
 animations.png
-size: 622, 353
+size: 1244, 353
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 PlayerWalkAnimation
   rotate: false
   xy: 0, 0
-  size: 622, 353
-  orig: 622, 353
+  size: 1244, 353
+  orig: 1244, 353
   offset: 0, 0
   index: -1
