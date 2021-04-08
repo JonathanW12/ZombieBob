@@ -7,6 +7,8 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
  */
 
 public class VisualPart implements EntityPart {
+
+public class VisualPart implements EntityPart {
     
     private String spriteName;
     private float width;
@@ -40,5 +42,13 @@ public class VisualPart implements EntityPart {
     
     public void setSpriteName(String spriteName) {
         this.spriteName = spriteName;
+    }
+
+    public float[] getColor() {
+        return this.color;
+    }
+
+    public void setColor(float[] c) {
+        this.color = c;
     }
 }
