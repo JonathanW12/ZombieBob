@@ -19,10 +19,12 @@ public class AnimationSystem implements IEntityProcessingService{
             AnimationPart animationPart = (AnimationPart) entry.getValue();
             Animation animation = animationPart.getAnimationByName(animationPart.getCurrentAnimationName());
             
-            animation.increaseCurrentFrameDuration(gameData.getDelta());
-            
-            if (animation.getIsFrameExpired()) {
-                animation.nextFrame();
+            if (animationPart.isAnimated()) {
+                animation.increaseCurrentFrameDuration(gameData.getDelta());
+                
+                if (animation.getIsFrameExpired()) {
+                    animation.nextFrame();
+                }
             }
         }
     }

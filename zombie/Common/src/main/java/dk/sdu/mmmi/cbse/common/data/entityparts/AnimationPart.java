@@ -7,8 +7,10 @@ public class AnimationPart implements EntityPart {
     private HashMap<String, Animation> animations;
     private String currentAnimationName;
     private boolean isAnimated;
+    private boolean isInterruptable;
    
-    public AnimationPart() {
+    public AnimationPart(boolean isInterruptable) {
+        this.isInterruptable = isInterruptable;
         animations = new HashMap<>();
     }
     
@@ -23,7 +25,21 @@ public class AnimationPart implements EntityPart {
     }
     
     public void setIsAnimated(boolean isAnimated) {
-        this.isAnimated = isAnimated;
+        Animation animation = animations.get(currentAnimationName);
+        
+        if (!isInterruptable) {   
+            if (!isAnimated && animation.getCurrentFrame() < (animation.getFrameCount() - 1)) {
+                this.isAnimated = true;
+            } else {
+                this.isAnimated = isAnimated;
+            }
+        } else {
+            this.isAnimated = isAnimated;
+        }
+        
+        if (!this.isAnimated) {
+             animation.resetAnimation();
+        }
     }
     
     public Animation getAnimationByName(String animationName) {

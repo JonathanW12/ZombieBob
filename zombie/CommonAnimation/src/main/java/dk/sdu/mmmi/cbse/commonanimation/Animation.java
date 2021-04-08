@@ -12,7 +12,7 @@ public class Animation {
         this.textureFileName = textureFileName;
         this.frameCount = frameCount;
         this.frameDuration = frameDuration;
-        currentFrame = 1;
+        currentFrame = frameCount - 1;
         currentFrameDuration = 0;
         isFrameExpired = false;
     }
@@ -65,6 +65,12 @@ public class Animation {
     public void nextFrame() {
         currentFrame = (currentFrame + 1) % frameCount;
         currentFrameDuration = 0;
+    }
+    
+    public void resetAnimation() {
+        currentFrame = frameCount - 1;
+        currentFrameDuration = 0;
+        isFrameExpired = false;
     }
     
     private void checkIsFrameExpired() {
