@@ -3,7 +3,7 @@ size: 1244, 353
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-PlayerWalkAnimation
+PlayerWalk
   rotate: false
   xy: 0, 0
   size: 1244, 353

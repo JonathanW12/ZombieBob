@@ -55,6 +55,7 @@ public class Game implements ApplicationListener {
         batch = new SpriteBatch();
         textureAtlas = new TextureAtlas("../../assets/sprites.txt");
         animationTextureAtlas = new TextureAtlas("../../assets/animations.txt");
+        
         addSprites();
         addAnimations();
 
@@ -115,7 +116,6 @@ public class Game implements ApplicationListener {
                     positionPart.getY(),
                     positionPart.getRadians(),
                     visualPart.getWidth(),
-                    visualPart.getHeight(),
                     animationPart.getAnimationByName(animationPart.getCurrentAnimationName()).getFrameCount()
                 ); 
             } else {
@@ -124,8 +124,7 @@ public class Game implements ApplicationListener {
                     positionPart.getX(),
                     positionPart.getY(),
                     positionPart.getRadians(),
-                    visualPart.getWidth(),
-                    visualPart.getHeight()
+                    visualPart.getWidth()
                 );
             }
             
@@ -134,18 +133,22 @@ public class Game implements ApplicationListener {
         batch.end();
     }
     
-    private void drawSprite(String spriteName, float x, float y, float radians, float width, float height) {
+    private void drawSprite(String spriteName, float x, float y, float radians, float width) {
         Sprite sprite = sprites.get(spriteName);
+        float originalWidth = sprite.getWidth();
+        float originalHeight = sprite.getHeight();
+        float newHeight = (originalHeight / originalWidth) * width;
         
-        sprite.setBounds(x, y, width, height);
+        
+        sprite.setBounds(x, y, width, newHeight);
         sprite.setOriginCenter();
         sprite.setRotation((float) Math.toDegrees(radians - 3.1415f / 2));
-        sprite.translate(-(width / 2), -(height / 2));
+        sprite.translate(-(width / 2), -(newHeight / 2));
         
         sprite.draw(batch);
     }
     
-    private void drawAnimation(AnimationPart animationPart, float x, float y, float radians, float width, float height, int frameCount) {
+    private void drawAnimation(AnimationPart animationPart, float x, float y, float radians, float width, int frameCount) {
         TextureRegion region = animationRegions.get(animationPart.getAnimationByName(animationPart.getCurrentAnimationName()).getTextureFileName());
         TextureRegion[] subRegions = new TextureRegion[frameCount];
         Animation animation = animationPart.getCurrentAnimation();
@@ -161,11 +164,14 @@ public class Game implements ApplicationListener {
         }
         
         Sprite sprite = new Sprite(subRegions[animation.getCurrentFrame()]);
+        float originalWidth = sprite.getWidth();
+        float originalHeight = sprite.getHeight();
+        float newHeight = (originalHeight / originalWidth) * width;
        
-        sprite.setBounds(x, y, width, height);
+        sprite.setBounds(x, y, width, newHeight);
         sprite.setRotation((float) Math.toDegrees(radians - 3.1415f / 2));
         sprite.setOriginCenter();
-        sprite.translate(-(width / 2), -(height / 2));
+        sprite.translate(-(width / 2), -(newHeight / 2));
 
         sprite.draw(batch);
     }
@@ -204,7 +210,9 @@ public class Game implements ApplicationListener {
 
     @Override
     public void dispose() {
+        batch.dispose();
         textureAtlas.dispose();
+        animationTextureAtlas.dispose(); 
     }
 
     private Collection<? extends IEntityProcessingService> getEntityProcessingServices() {
