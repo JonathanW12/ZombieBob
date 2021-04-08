@@ -10,17 +10,25 @@
         <module name="Movement" />
         <module name="SilentUpdate" />
         <module name="Zombie-branding" />
+        <module name="BulletSystem" />
+        <module name="CombatSystem" />
         <module name="Zombie-app" />
-        <module name="HealthSystem" />
         <module name="Common" />
+        <module name="AIMovementSystem" />
+        <module name="LootingSystem" />
+        <module name="HealthSystem" />
         <module name="Core" />
         <module name="TimerSystem" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="AIMovementSystem" target="1.8" />
+      <module name="BulletSystem" target="1.8" />
+      <module name="CombatSystem" target="1.8" />
       <module name="Common" target="1.8" />
       <module name="Core" target="1.8" />
       <module name="HealthSystem" target="1.8" />
+      <module name="LootingSystem" target="1.8" />
       <module name="Movement" target="1.8" />
       <module name="Player" target="1.8" />
       <module name="SilentUpdate" target="1.8" />
