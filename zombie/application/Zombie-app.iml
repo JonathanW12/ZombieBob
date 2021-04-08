@@ -54,5 +54,6 @@
     <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx-freetype:1.5.0" level="project" />
     <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx-freetype-platform:natives-desktop:1.5.0" level="project" />
     <orderEntry type="module" module-name="Movement" />
+    <orderEntry type="module" module-name="TimerSystem" />
   </component>
 </module>

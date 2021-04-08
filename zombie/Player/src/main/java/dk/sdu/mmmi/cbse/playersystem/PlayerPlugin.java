@@ -2,12 +2,16 @@ package dk.sdu.mmmi.cbse.playersystem;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
+import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.*;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
+
+import java.util.Map;
+import java.util.UUID;
 
 @ServiceProviders(value = {
     @ServiceProvider(service = IGamePluginService.class),})
@@ -18,6 +22,7 @@ public class PlayerPlugin implements IGamePluginService {
 
         // Add player to the world
         createPlayerShip(gameData, world);
+
     }
 
 
@@ -39,13 +44,18 @@ public class PlayerPlugin implements IGamePluginService {
         world.addtoEntityPartMap(new PlayerPart(),playerShip);
         world.addtoEntityPartMap(new VisualPart(10,new float[]{60f, 179f, 113f, 1f}),playerShip);
         world.addtoEntityPartMap(new TimerPart(10),playerShip);
+        world.addtoEntityPartMap(new LifePart(100), playerShip);
 
     }
 
     @Override
     public void stop(GameData gameData, World world) {
-        // Remove entities
-        // world.removeEntity(player);
+
+        for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(PlayerPart.class.getSimpleName()).entrySet()){
+            // for every player in world get UUID and remove everything for that UUID
+            world.removeEntityParts(entry.getKey());
+        }
+
     }
 
 }
