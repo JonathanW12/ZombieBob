@@ -14,17 +14,25 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import java.util.Map;
 import java.util.UUID;
+import org.openide.util.lookup.ServiceProvider;
+import org.openide.util.lookup.ServiceProviders;
 
 /**
  *
  * @author phili
  */
+
+@ServiceProviders(value = {
+    @ServiceProvider(service = IEntityProcessingService.class)})
 public class CombatProcessingSystem implements IEntityProcessingService {
 
     @Override
     public void process(GameData gameData, World world) {
+        System.out.println("processing combat system");
         for(Map.Entry<UUID,EntityPart> entry : world.getMapByPart(CombatPart.class.getSimpleName()).entrySet()){
+            System.out.println("combat part registered ´- is attacking:"+ ((CombatPart)entry.getValue()).isAttacking());
             if(((CombatPart)entry.getValue()).isAttacking()){
+                System.out.println("player attacking");
                 UUID currentWeapon = ((CombatPart)entry.getValue()).getCurrentWeapon();
                 ((WeaponPart)world.getMapByPart(WeaponPart.class.getSimpleName()).get(currentWeapon)).setIsAttacking(true);
             }

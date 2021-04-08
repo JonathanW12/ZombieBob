@@ -16,6 +16,9 @@ public class CombatPart implements EntityPart{
     private UUID currentWeapon;
     private boolean isAttacking = false;
 
+    public CombatPart() {;
+    }
+    
     public CombatPart(UUID currentWeapon) {
         this.currentWeapon = currentWeapon;
     }
@@ -29,6 +32,7 @@ public class CombatPart implements EntityPart{
     }
     
     public void setAttacking(boolean b){
+        System.out.println(b);
         this.isAttacking = b;
     }
 

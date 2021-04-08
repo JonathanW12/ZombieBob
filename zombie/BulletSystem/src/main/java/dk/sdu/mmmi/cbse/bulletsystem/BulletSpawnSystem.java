@@ -20,11 +20,15 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import java.util.Map;
 import java.util.UUID;
+import org.openide.util.lookup.ServiceProvider;
+import org.openide.util.lookup.ServiceProviders;
 
 /**
  *
  * @author phili
  */
+@ServiceProviders(value = {
+    @ServiceProvider(service = IEntityProcessingService.class)})
 public class BulletSpawnSystem implements IEntityProcessingService{
 
     @Override
@@ -41,12 +45,13 @@ public class BulletSpawnSystem implements IEntityProcessingService{
                 
                 Entity bullet = new Entity();
                 world.addtoEntityPartMap(new PositionPart(spawnX, spawnY, weaponPosition.getRadians()), bullet);
-                world.addtoEntityPartMap(new ProjectilePart(80), bullet);
+                world.addtoEntityPartMap(new ProjectilePart(weaponPart.getRange()), bullet);
                 MovingPart movingPart = new MovingPart(20, 100, 120, 0);
                 movingPart.setUp(true);
                 world.addtoEntityPartMap(movingPart, bullet);
-                world.addtoEntityPartMap(new DamagePart(80), bullet);
+                world.addtoEntityPartMap(new DamagePart(weaponPart.getDamage()), bullet);
                 world.addtoEntityPartMap(new LifePart(1), bullet);
+                
                 
                 
                 

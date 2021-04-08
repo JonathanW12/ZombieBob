@@ -22,16 +22,23 @@ import dk.sdu.mmmi.cbse.common.data.entitytypeparts.VisualPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import java.util.Map;
 import java.util.UUID;
+import org.openide.util.lookup.ServiceProvider;
+import org.openide.util.lookup.ServiceProviders;
 
 /**
  *
  * @author phili
  * if entity is colliding with 
  */
+
+@ServiceProviders(value = {
+    @ServiceProvider(service = IEntityProcessingService.class)})
 public class LootingProcessingSystem implements IEntityProcessingService {
 
     @Override
     public void process(GameData gameData, World world) {
+        
+        if(world.getMapByPart(CollectorPart.class.getSimpleName()) !=null){
         for(Map.Entry<UUID,EntityPart> entry : world.getMapByPart(CollectorPart.class.getSimpleName()).entrySet()){
             WeaponInventoryPart weaponInventory = ((WeaponInventoryPart)world.getMapByPart(WeaponInventoryPart.class.getSimpleName()).get(entry.getKey()));
             if(weaponInventory!= null){
@@ -88,8 +95,8 @@ public class LootingProcessingSystem implements IEntityProcessingService {
                             ((ColliderPart)world.getMapByPart(ColliderPart.class.getSimpleName()).get(collidingEntity)).getCollidingEntities().remove(collidingEntity);
                         }
                     }
+                }
             }
         }
     }
-    
 }

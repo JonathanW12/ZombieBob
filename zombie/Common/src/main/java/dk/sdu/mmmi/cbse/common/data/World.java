@@ -10,11 +10,7 @@ public class World {
 
     private final Map<String, Entity> entityMap = new ConcurrentHashMap<>();
     private Map<String, Map<UUID,EntityPart>> entityPartMap = new ConcurrentHashMap<>();
-
-    public String addEntity(Entity entity) {
-        entityMap.put(entity.getID(), entity);
-        return entity.getID();
-    }
+    
     public void addtoEntityPartMap(EntityPart entityPart, Entity entity){
         String entityPartNameKey = entityPart.getClass().getSimpleName();
 

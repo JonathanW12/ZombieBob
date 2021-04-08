@@ -3,6 +3,7 @@ package dk.sdu.mmmi.cbse.playersystem;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.CombatPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
@@ -30,6 +31,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 PositionPart positionPart = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(entry.getKey());
                 MovingPart movingPart = (MovingPart) world.getMapByPart(MovingPart.class.getSimpleName()).get(entry.getKey());
                 VisualPart visualPart = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(entry.getKey());
+                CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey());
                 //LifePart lifePart = (LifePart) world.getMapByPart(LifePart.class.getSimpleName()).get(entry.getKey());
 
 
@@ -40,6 +42,9 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 movingPart.setRight(gameData.getKeys().isDown(GameKeys.RIGHT));
                 movingPart.setUp(gameData.getKeys().isDown(GameKeys.UP));
                 movingPart.setDown(gameData.getKeys().isDown(GameKeys.DOWN));
+                System.out.println("register space button: " + gameData.getKeys().isDown(GameKeys.SPACE));
+                combatPart.setAttacking(gameData.getKeys().isDown(GameKeys.SPACE));
+                
 
                 // update
                 updateShape(visualPart, positionPart);

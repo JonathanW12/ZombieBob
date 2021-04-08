@@ -36,8 +36,14 @@ public class PlayerPlugin implements IGamePluginService {
         float y = gameData.getDisplayHeight() / 2;
         float radians = 3.1415f / 2;
 
+        
+        
+        
+                
+        Entity playerGun = new Entity();
         Entity playerShip = new Entity();
-
+        
+        
         // TESTING THE HASHMAP, created entity got ID and linked all parts to ID.
         world.addtoEntityPartMap(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed),playerShip);
         world.addtoEntityPartMap(new PositionPart(x, y, radians),playerShip);
@@ -45,7 +51,15 @@ public class PlayerPlugin implements IGamePluginService {
         world.addtoEntityPartMap(new VisualPart(10,new float[]{60f, 179f, 113f, 1f}),playerShip);
         world.addtoEntityPartMap(new TimerPart(10),playerShip);
         world.addtoEntityPartMap(new LifePart(100), playerShip);
-
+        world.addtoEntityPartMap(new CombatPart(playerGun.getUUID()), playerShip);
+        
+        
+        
+        
+        world.addtoEntityPartMap(new WeaponPart(80, 150), playerGun);
+        world.addtoEntityPartMap(new BulletAmmoPart(), playerGun);
+        world.addtoEntityPartMap(world.getMapByPart(PositionPart.class.getSimpleName()).get(playerShip.getUUID()), playerGun);
+        
     }
 
     @Override
