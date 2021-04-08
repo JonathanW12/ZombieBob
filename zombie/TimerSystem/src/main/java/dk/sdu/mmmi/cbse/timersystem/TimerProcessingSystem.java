@@ -30,8 +30,6 @@ public class TimerProcessingSystem implements IEntityProcessingService {
                 // reduce expiration by delta
                 if (timerPart.getExpiration() > 0) {
                     timerPart.reduceExpiration(gameData.getDelta());
-                } else {
-                    world.removeEntityParts(entry.getKey());
                 }
             }
         }
