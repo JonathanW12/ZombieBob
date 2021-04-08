@@ -41,6 +41,8 @@ public class AnimationPart implements EntityPart {
         if (!this.isAnimated) {
              animation.resetAnimation();
              isAnimationDone = true;
+        } else {
+            isAnimationDone = false;
         }
     }
     
