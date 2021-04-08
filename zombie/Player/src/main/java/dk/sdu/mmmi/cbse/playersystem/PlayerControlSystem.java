@@ -3,6 +3,7 @@ package dk.sdu.mmmi.cbse.playersystem;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.AnimationPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.CombatPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
@@ -27,10 +28,15 @@ public class PlayerControlSystem implements IEntityProcessingService {
         if (world.getMapByPart(PlayerPart.class.getSimpleName()) != null){
             for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(PlayerPart.class.getSimpleName()).entrySet()){
 
-                // entity parts on player
-                PositionPart positionPart = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(entry.getKey());
-                MovingPart movingPart = (MovingPart) world.getMapByPart(MovingPart.class.getSimpleName()).get(entry.getKey());
-                VisualPart visualPart = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(entry.getKey());
+            // entity parts on player
+            PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(entry.getKey());
+            MovingPart movingPart = (MovingPart) world.getMapByPart("MovingPart").get(entry.getKey());
+            VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entry.getKey());
+            AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entry.getKey());
+            
+            animationPart.setIsAnimated(
+                (movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp())
+            );
                 CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey());
                 //LifePart lifePart = (LifePart) world.getMapByPart(LifePart.class.getSimpleName()).get(entry.getKey());
 
@@ -47,10 +53,8 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 
 
                 // update
-                updateShape(visualPart, positionPart);
             }
         }
-    }
 
     private void updateShape(VisualPart entity, PositionPart position) {
         float[] shapex = new float[4];
@@ -75,5 +79,4 @@ public class PlayerControlSystem implements IEntityProcessingService {
         entity.setShapeX(shapex);
         entity.setShapeY(shapey);
     }
-
 }

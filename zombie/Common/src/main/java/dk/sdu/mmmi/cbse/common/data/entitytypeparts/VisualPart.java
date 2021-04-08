@@ -7,46 +7,38 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
  */
 
 public class VisualPart implements EntityPart {
-
-    private float radius;
-    private float[] color = new float[]{240f,52f,52f,1f};
-    private float[] shapeX = new float[4];
-    private float[] shapeY = new float[4];
-
-    public VisualPart(float radius,float[] color){
-        this.radius = radius;
-        this.color = color;
+    
+    private String spriteName;
+    private float width;
+    private float height;
+    
+    public VisualPart(String spriteName, float width, float height){
+        this.spriteName = spriteName;
+        this.width = width;
+        this.height = height;
     }
 
-    public void setRadius(float r) {
-        this.radius = r;
+    public float getWidth() {
+        return width;
     }
-
-    public float getRadius() {
-        return radius;
+    
+    public float getHeight() {
+        return height;
     }
-
-    public float[] getShapeX() {
-        return shapeX;
+    
+    public String getSpriteName() {
+        return spriteName;
     }
-
-    public void setShapeX(float[] shapeX) {
-        this.shapeX = shapeX;
+    
+    public void setWidth(float width) {
+        this.width = width;
     }
-
-    public float[] getShapeY() {
-        return shapeY;
+    
+    public void setHeight(float height) {
+        this.height = height;
     }
-
-    public void setShapeY(float[] shapeY) {
-        this.shapeY = shapeY;
-    }
-
-    public float[] getColor() {
-        return this.color;
-    }
-
-    public void setColor(float[] c) {
-        this.color = c;
+    
+    public void setSpriteName(String spriteName) {
+        this.spriteName = spriteName;
     }
 }
