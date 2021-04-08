@@ -1,14 +1,11 @@
 package dk.sdu.mmmi.cbse.common.data;
 
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
+import dk.sdu.mmmi.cbse.common.data.entitytypeparts.PlayerPart;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- *
- * @author jcs
- */
 public class World {
 
     private final Map<String, Entity> entityMap = new ConcurrentHashMap<>();
@@ -20,7 +17,6 @@ public class World {
     }
     public void addtoEntityPartMap(EntityPart entityPart, Entity entity){
         String entityPartNameKey = entityPart.getClass().getSimpleName();
-
 
         if (!entityPartMap.containsKey(entityPartNameKey)){
             entityPartMap.put(entityPartNameKey, new ConcurrentHashMap<UUID, EntityPart>());
@@ -36,6 +32,14 @@ public class World {
     }
     public Map<UUID,EntityPart> getMapByPart(String partName){
         return entityPartMap.get(partName);
+    }
+
+    public void removeEntityParts(UUID uuid){
+        // Check every hashmap
+        for (Map.Entry<String,Map<UUID,EntityPart>> entry : entityPartMap.entrySet() ){
+            // Look for UUID in innerMaps(value map) remove if found
+            entry.getValue().entrySet().removeIf(innerEntry -> innerEntry.getKey().equals(uuid));
+        }
     }
 
     public void removeEntity(String entityID) {
