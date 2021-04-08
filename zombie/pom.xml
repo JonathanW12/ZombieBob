@@ -64,6 +64,8 @@
         <module>Movement</module>
         <module>TimerSystem</module>
         <module>LootingSystem</module>
+        <module>BulletSystem</module>
+        <module>CombatSystem</module>
     </modules>
 
     <properties>

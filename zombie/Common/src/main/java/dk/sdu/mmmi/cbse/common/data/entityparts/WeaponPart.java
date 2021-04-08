@@ -7,8 +7,7 @@ package dk.sdu.mmmi.cbse.common.data.entityparts;
 
 /**
  *WeaponPart describes the damage and range of a weapon.
- */
-public class WeaponPart implements EntityPart{
+ */public class WeaponPart implements EntityPart{
     
     private int damage;
     private float range;

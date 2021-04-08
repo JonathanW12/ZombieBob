@@ -18,6 +18,7 @@ import java.util.UUID;
 public class ColliderPart {
     private ArrayList<UUID> collidingEntities;
     
+    
     public ColliderPart(){
         this.collidingEntities = new ArrayList<UUID>();
     }

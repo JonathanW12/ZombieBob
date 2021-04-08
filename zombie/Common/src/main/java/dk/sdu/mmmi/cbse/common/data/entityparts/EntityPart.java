@@ -5,6 +5,8 @@
  */
 package dk.sdu.mmmi.cbse.common.data.entityparts;
 
+import java.util.UUID;
+
 /**
  * Implemented by all entityParts, used for polymorphism
  */
