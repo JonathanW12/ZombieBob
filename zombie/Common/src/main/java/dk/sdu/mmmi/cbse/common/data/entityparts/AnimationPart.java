@@ -8,6 +8,7 @@ public class AnimationPart implements EntityPart {
     private String currentAnimationName;
     private boolean isAnimated;
     private boolean isInterruptable;
+    private boolean isAnimationDone;
    
     public AnimationPart(boolean isInterruptable) {
         this.isInterruptable = isInterruptable;
@@ -39,7 +40,12 @@ public class AnimationPart implements EntityPart {
         
         if (!this.isAnimated) {
              animation.resetAnimation();
+             isAnimationDone = true;
         }
+    }
+    
+    public void setIsAnimationDone(boolean isAnimationDone) {
+        this.isAnimationDone = isAnimationDone;
     }
     
     public Animation getAnimationByName(String animationName) {
@@ -56,5 +62,9 @@ public class AnimationPart implements EntityPart {
     
     public boolean isAnimated() {
         return isAnimated;
+    }
+    
+    public boolean getIsAnimationDone() {
+        return isAnimationDone;
     }
 }
