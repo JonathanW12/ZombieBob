@@ -23,6 +23,7 @@
                         <publicPackage>dk.sdu.mmmi.cbse.common.events</publicPackage>
                         <publicPackage>dk.sdu.mmmi.cbse.common.services</publicPackage>
                         <publicPackage>dk.sdu.mmmi.cbse.common.data.entitytypeparts</publicPackage>
+                        <publicPackage>dk.sdu.mmmi.cbse.common.data.entityammoparts</publicPackage>
                     </publicPackages>
                 </configuration>
             </plugin>
