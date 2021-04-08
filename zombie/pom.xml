@@ -65,6 +65,8 @@
         <module>TimerSystem</module>
         <module>HealthSystem</module>
         <module>AIMovementSystem</module>
+        <module>CombatSystem</module>
+        <module>BulletSystem</module>
     </modules>
 
     <properties>

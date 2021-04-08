@@ -57,5 +57,7 @@
     <orderEntry type="module" module-name="TimerSystem" />
     <orderEntry type="module" module-name="HealthSystem" />
     <orderEntry type="module" module-name="AIMovementSystem" />
+    <orderEntry type="module" module-name="CombatSystem" />
+    <orderEntry type="module" module-name="BulletSystem" />
   </component>
 </module>

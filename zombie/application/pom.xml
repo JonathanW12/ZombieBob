@@ -101,6 +101,16 @@
             <artifactId>AIMovementSystem</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CombatSystem</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>BulletSystem</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
 
     </dependencies>
