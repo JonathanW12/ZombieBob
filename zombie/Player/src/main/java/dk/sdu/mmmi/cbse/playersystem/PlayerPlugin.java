@@ -21,12 +21,12 @@ public class PlayerPlugin implements IGamePluginService {
     public void start(GameData gameData, World world) {
 
         // Add player to the world
-        createPlayerShip(gameData, world);
+        createPlayer(gameData, world);
 
     }
 
 
-    private void createPlayerShip(GameData gameData, World world) {
+    private void createPlayer(GameData gameData, World world) {
 
         float deacceleration = 10;
         float acceleration = 200;
@@ -36,15 +36,16 @@ public class PlayerPlugin implements IGamePluginService {
         float y = gameData.getDisplayHeight() / 2;
         float radians = 3.1415f / 2;
 
-        Entity playerShip = new Entity();
+        Entity player = new Entity();
 
         // TESTING THE HASHMAP, created entity got ID and linked all parts to ID.
-        world.addtoEntityPartMap(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed),playerShip);
-        world.addtoEntityPartMap(new PositionPart(x, y, radians),playerShip);
-        world.addtoEntityPartMap(new PlayerPart(),playerShip);
-        world.addtoEntityPartMap(new VisualPart(10,new float[]{60f, 179f, 113f, 1f}),playerShip);
-        world.addtoEntityPartMap(new TimerPart(10),playerShip);
-        world.addtoEntityPartMap(new LifePart(100), playerShip);
+        world.addtoEntityPartMap(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed),player);
+        world.addtoEntityPartMap(new PositionPart(x, y, radians),player);
+        world.addtoEntityPartMap(new PlayerPart(),player);
+        world.addtoEntityPartMap(new VisualPart(10,new float[]{60f, 179f, 113f, 1f}),player);
+        world.addtoEntityPartMap(new TimerPart(10),player);
+        world.addtoEntityPartMap(new LifePart(100), player);
+        world.addtoEntityPartMap(new AiMovementPart(3),player);
 
     }
 

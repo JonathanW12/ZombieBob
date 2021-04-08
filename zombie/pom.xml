@@ -64,6 +64,7 @@
         <module>Movement</module>
         <module>TimerSystem</module>
         <module>HealthSystem</module>
+        <module>AIMovementSystem</module>
     </modules>
 
     <properties>

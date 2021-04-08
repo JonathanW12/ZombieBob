@@ -96,6 +96,11 @@
             <artifactId>HealthSystem</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>AIMovementSystem</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
     </dependencies>
 
