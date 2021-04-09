@@ -40,6 +40,7 @@ public class MovementSystem implements IPostEntityProcessingService{
                 float acceleration = movingPart.getAcceleration();
                 float deceleration = movingPart.getDeceleration();
 
+                
                 if (left) {
                     radians += rotationSpeed * dt;
                 }
@@ -47,36 +48,46 @@ public class MovementSystem implements IPostEntityProcessingService{
                 if (right) {
                     radians -= rotationSpeed * dt;
                 }
-
+                
                 // accelerating
+                float vec = (float) sqrt(dx * dx + dy * dy);
                 if (up) {
                     movingPart.setDx(dx += cos(radians) * acceleration * dt);
                     movingPart.setDy(dy += sin(radians) * acceleration * dt);
                 }
 
-                if (down) {
+                else if (down) {
+                    
                     movingPart.setDx(dx -= cos(radians) * acceleration * dt);
                     movingPart.setDy(dy -= sin(radians) * acceleration * dt);
                 }
-
-
-                // deccelerating
-
-                float vec = (float) sqrt(dx * dx + dy * dy);
-                if (vec > 0) {
-                    movingPart.setDx(dx -= (dx / vec) * deceleration * dt);
-                    movingPart.setDy(dy -= (dy / vec) * deceleration * dt);
+                
+                if(up){
+                    if (vec > maxSpeed ) {
+                    movingPart.setDx((float)cos(radians)*(maxSpeed-1));
+                    movingPart.setDy((float)sin(radians)*(maxSpeed-1));
+                    }
                 }
-                if (vec > maxSpeed) {
-                    dx = (dx / vec) * maxSpeed;
-                    dy = (dy / vec) * maxSpeed;
+                else if(down){
+                    if (vec > maxSpeed ) {
+                    movingPart.setDx((float)cos(radians)*(maxSpeed-1)*-1);
+                    movingPart.setDy((float)sin(radians)*(maxSpeed-1)*-1);
+                    }
                 }
-
+               
+                
+                // deccelerating (currently modelling friction of walking ie. no friction when walking (no air friction))
+                if(!up && !down || left || right){
+                    if (vec > 0) {
+                        movingPart.setDx(dx -= (dx / vec) * deceleration * dt);
+                        movingPart.setDy(dy -= (dy / vec) * deceleration * dt);
+                    }
+                }
 
 
                 // set position
-                x += dx * dt;
-                y += dy * dt;
+                x += movingPart.getDx() * dt;
+                y += movingPart.getDy() * dt;
 
 
                 if (x > gameData.getDisplayWidth()) {
@@ -99,8 +110,5 @@ public class MovementSystem implements IPostEntityProcessingService{
                 positionPart.setRadians(radians);
             }
         }
-
-
-
-
     }
+

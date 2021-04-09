@@ -28,19 +28,15 @@ public class PlayerPlugin implements IGamePluginService {
 
     private void createPlayer(GameData gameData, World world) {
 
-        float deacceleration = 10;
-        float acceleration = 200;
+        float deacceleration = 500;
+        float acceleration = 600;
         float maxSpeed = 300;
         float rotationSpeed = 5;
         float x = gameData.getDisplayWidth() / 2;
         float y = gameData.getDisplayHeight() / 2;
         float radians = 3.1415f / 2;
-
-        
-        
-        
                 
-        Entity playerGun = new Entity();
+        
         
         
         Entity player = new Entity();
@@ -55,12 +51,14 @@ public class PlayerPlugin implements IGamePluginService {
         world.addtoEntityPartMap(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed),player);
         world.addtoEntityPartMap(new PositionPart(x, y, radians),player);
         world.addtoEntityPartMap(new PlayerPart(),player);
-        world.addtoEntityPartMap(new VisualPart(10,new float[]{60f, 179f, 113f, 1f}),player);
         world.addtoEntityPartMap(new TimerPart(10),player);
         world.addtoEntityPartMap(new LifePart(100), player);
+        
+        
 
-        world.addtoEntityPartMap(new CombatPart(playerGun.getUUID()), player);
+        world.addtoEntityPartMap(new CombatPart(createPlayerGun(player, world).getUUID()), player);
         world.addtoEntityPartMap(new PlayerPart(),player);
+        
     }
 
     @Override
@@ -71,6 +69,14 @@ public class PlayerPlugin implements IGamePluginService {
             world.removeEntityParts(entry.getKey());
         }
 
+    }
+    
+    public Entity createPlayerGun(Entity owner, World world){
+        Entity playerGun = new Entity();
+        world.addtoEntityPartMap(new WeaponPart(80, 50000, 0.3f), playerGun);
+        world.addtoEntityPartMap((PositionPart)world.getMapByPart(PositionPart.class.getSimpleName()).get(owner.getUUID()),playerGun);
+        world.addtoEntityPartMap(new BulletAmmoPart(),playerGun);
+        return playerGun;
     }
 
 }

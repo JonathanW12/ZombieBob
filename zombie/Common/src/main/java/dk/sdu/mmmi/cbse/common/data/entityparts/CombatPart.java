@@ -32,7 +32,6 @@ public class CombatPart implements EntityPart{
     }
     
     public void setAttacking(boolean b){
-        System.out.println(b);
         this.isAttacking = b;
     }
 

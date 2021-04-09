@@ -28,13 +28,25 @@ public class CombatProcessingSystem implements IEntityProcessingService {
 
     @Override
     public void process(GameData gameData, World world) {
-        System.out.println("processing combat system");
         for(Map.Entry<UUID,EntityPart> entry : world.getMapByPart(CombatPart.class.getSimpleName()).entrySet()){
-            System.out.println("combat part registered ´- is attacking:"+ ((CombatPart)entry.getValue()).isAttacking());
             if(((CombatPart)entry.getValue()).isAttacking()){
-                System.out.println("player attacking");
+                //System.out.println("found attacking combatpart");
                 UUID currentWeapon = ((CombatPart)entry.getValue()).getCurrentWeapon();
-                ((WeaponPart)world.getMapByPart(WeaponPart.class.getSimpleName()).get(currentWeapon)).setIsAttacking(true);
+                
+                
+                if(world.getMapByPart(WeaponPart.class.getSimpleName())!=null){
+                    //System.out.println("found attached weapon to combat part");
+                    WeaponPart weaponPart = ((WeaponPart)world.getMapByPart(WeaponPart.class.getSimpleName()).get(currentWeapon));
+                    weaponPart.setTimeSinceLastTrigger(weaponPart.getTimeSinceLastTrigger() + gameData.getDelta());
+                    if(weaponPart.getTimeSinceLastTrigger() > weaponPart.getFireRate()){
+                        weaponPart.setIsAttacking(true);
+                        weaponPart.setTimeSinceLastTrigger(0);
+                        System.out.println("weapon part is set to attacking");
+                    }
+                    
+                } else {
+                    System.out.println("no weaponPart equipped as currentWeapon");
+                }
             }
         }
     }

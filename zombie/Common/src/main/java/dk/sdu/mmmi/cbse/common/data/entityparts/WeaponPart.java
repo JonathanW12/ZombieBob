@@ -13,11 +13,15 @@ public class WeaponPart implements EntityPart{
     private int damage;
     private float range;
     private boolean isAttacking;
+    private float fireRate;
+    private float timeSinceLastTrigger;
 
 
-    public WeaponPart(int damage, float range) {
+    public WeaponPart(int damage, float range, float fireRate) {
         this.damage = damage;
         this.range = range;
+        this.fireRate = fireRate;
+        this.timeSinceLastTrigger = 0;
     }
 
     public void setDamage(int damage) {
@@ -42,6 +46,18 @@ public class WeaponPart implements EntityPart{
 
     public boolean isIsAttacking() {
         return isAttacking;
+    }
+    
+    public float getFireRate(){
+        return this.fireRate;
+    }
+    
+    public float getTimeSinceLastTrigger(){
+        return this.timeSinceLastTrigger;
+    }
+    
+    public void setTimeSinceLastTrigger(float time){
+        this.timeSinceLastTrigger = time;
     }
 
 }
