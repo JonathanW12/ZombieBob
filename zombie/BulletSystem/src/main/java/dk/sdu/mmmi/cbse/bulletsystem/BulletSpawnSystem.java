@@ -37,6 +37,7 @@ public class BulletSpawnSystem implements IEntityProcessingService{
         if(world.getMapByPart(BulletAmmoPart.class.getSimpleName())!=null){
         for(Map.Entry<UUID,EntityPart> entry : world.getMapByPart(BulletAmmoPart.class.getSimpleName()).entrySet()){
             WeaponPart weaponPart = ((WeaponPart)world.getMapByPart(WeaponPart.class.getSimpleName()).get(entry.getKey()));
+            
             if(weaponPart.isIsAttacking()){
                 weaponPart.setIsAttacking(false);
                 

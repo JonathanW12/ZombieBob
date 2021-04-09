@@ -13,6 +13,8 @@ public class GameInputProcessor extends InputAdapter {
         this.gameData = gameData;
     }
 
+    
+    @Override
     public boolean keyDown(int k) {
         if (k == Keys.UP) {
             gameData.getKeys().setKey(GameKeys.UP, true);
@@ -41,6 +43,7 @@ public class GameInputProcessor extends InputAdapter {
         return true;
     }
 
+    @Override
     public boolean keyUp(int k) {
         if (k == Keys.UP) {
             gameData.getKeys().setKey(GameKeys.UP, false);

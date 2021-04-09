@@ -40,19 +40,12 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey());
                 //LifePart lifePart = (LifePart) world.getMapByPart(LifePart.class.getSimpleName()).get(entry.getKey());
 
-
-
-
                 // movement
                 movingPart.setLeft(gameData.getKeys().isDown(GameKeys.LEFT));
                 movingPart.setRight(gameData.getKeys().isDown(GameKeys.RIGHT));
                 movingPart.setUp(gameData.getKeys().isDown(GameKeys.UP));
                 movingPart.setDown(gameData.getKeys().isDown(GameKeys.DOWN));
                 combatPart.setAttacking(gameData.getKeys().isPressed(GameKeys.SPACE));
-                
-                if(gameData.getKeys().isPressed(GameKeys.SPACE)){
-                    System.out.println("player pressing space");
-                }
                 
 
                 // update
