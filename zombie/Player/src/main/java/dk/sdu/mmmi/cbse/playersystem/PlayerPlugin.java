@@ -6,6 +6,8 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.*;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import java.util.ArrayList;
+import java.util.UUID;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 
@@ -35,11 +37,15 @@ public class PlayerPlugin implements IGamePluginService {
         animationPart.addAnimation("walk", "PlayerWalkAnimation", 2, 0.2f);
         animationPart.setCurrentAnimation("walk");
         
+        //WeaponInventoryPart. Seems too messy. Maybe change
+        WeaponInventoryPart weaponInventoryPart = new WeaponInventoryPart(2);
+        
         world.addtoEntityPartMap(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed),playerShip);
         world.addtoEntityPartMap(new PositionPart(x, y, radians),playerShip);
         world.addtoEntityPartMap(new PlayerPart(),playerShip);
         world.addtoEntityPartMap(new VisualPart("PlayerWalk1", 80, 80), playerShip);
         world.addtoEntityPartMap(animationPart, playerShip);
+        world.addtoEntityPartMap(weaponInventoryPart, playerShip);
     }
 
     @Override

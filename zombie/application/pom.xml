@@ -90,6 +90,11 @@
             <artifactId>AnimationSystem</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Hotbar</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
