@@ -1,3 +1,4 @@
+
 package dk.sdu.mmmi.cbse.playersystem;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
@@ -48,6 +49,8 @@ public class PlayerPlugin implements IGamePluginService {
         animationPart.addAnimation("walk", "PlayerWalk", 4, 0.2f);
         animationPart.setCurrentAnimation("walk");
         
+        WeaponInventoryPart weaponInventoryPart = new WeaponInventoryPart(2);
+        
         world.addtoEntityPartMap(new VisualPart("playerIdle", 80, 80), player);
         world.addtoEntityPartMap(animationPart, player);
         world.addtoEntityPartMap(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed),player);
@@ -61,9 +64,9 @@ public class PlayerPlugin implements IGamePluginService {
         world.addtoEntityPartMap(new CombatPart(createPlayerGun(player, world).getUUID()), player);
         world.addtoEntityPartMap(new PlayerPart(),player);
         
-        world.addtoEntityPartMap(new VisualPart("PlayerWalk1", 80, 80), playerShip);
-        world.addtoEntityPartMap(animationPart, playerShip);
-        world.addtoEntityPartMap(weaponInventoryPart, playerShip);
+        world.addtoEntityPartMap(new VisualPart("PlayerWalk1", 80, 80), player);
+        world.addtoEntityPartMap(animationPart, player);
+        world.addtoEntityPartMap(weaponInventoryPart, player);
     }
 
     @Override

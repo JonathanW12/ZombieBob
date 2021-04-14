@@ -22,9 +22,10 @@ public class WeaponInventoryPart implements EntityPart{
         this.capacity = capacity;
         inventory = new ArrayList<UUID>();
     }
+    
     public boolean addWeapon(UUID weaponId){
-        if(this.weapons.size() < capacity){
-            this.weapons.add(weaponId);
+        if(this.inventory.size() < capacity){
+            this.inventory.add(weaponId);
             return true;
         } return false;
     }
@@ -45,7 +46,7 @@ public class WeaponInventoryPart implements EntityPart{
         this.capacity = capacity;
     }
    public void removeWeapon(UUID weaponId){
-        this.weapons.remove(weaponId);
+        this.inventory.remove(weaponId);
     }
 
 }
