@@ -42,7 +42,7 @@ public class BulletSpawnSystem implements IEntityProcessingService{
                     weaponPart.setIsAttacking(false);
 
                     PositionPart weaponPosition = ((PositionPart)world.getMapByPart(PositionPart.class.getSimpleName()).get(entry.getKey()));
-                    float spawnDistanceFromAttacker = 50f;
+                    float spawnDistanceFromAttacker = 40f;
                     float weaponRightDisplacementOfAttacker = 3;//not used, but should be in cases when fx a weapon like  RocketLauncher is on the shoulder
 
                     float spawnX = weaponPosition.getX() + spawnDistanceFromAttacker * (float)Math.cos(weaponPosition.getRadians());
