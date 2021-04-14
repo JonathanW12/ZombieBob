@@ -11,8 +11,6 @@ import org.openide.util.lookup.ServiceProvider;
 import java.util.Map;
 import java.util.UUID;
 
-import static java.lang.Math.*;
-
 @ServiceProvider(service = IPostEntityProcessingService.class)
 public class MovementSystem implements IPostEntityProcessingService{
 
@@ -35,49 +33,37 @@ public class MovementSystem implements IPostEntityProcessingService{
                 boolean right = movingPart.isRight();
                 boolean up = movingPart.isUp();
                 boolean down =  movingPart.isDown();
-                float maxSpeed = movingPart.getMaxSpeed();
-                float rotationSpeed = movingPart.getRotationSpeed();
-                float acceleration = movingPart.getAcceleration();
-                float deceleration = movingPart.getDeceleration();
+                float movementSpeed = movingPart.getMovementSpeed();
 
                 if (left) {
-                    radians += rotationSpeed * dt;
+                    //radians += rotationSpeed * dt;
+                    movingPart.setDx(-movementSpeed);
                 }
 
                 if (right) {
-                    radians -= rotationSpeed * dt;
+                    //radians -= rotationSpeed * dt;
+                    movingPart.setDx(movementSpeed);
                 }
 
                 // accelerating
                 if (up) {
-                    movingPart.setDx(dx += cos(radians) * acceleration * dt);
-                    movingPart.setDy(dy += sin(radians) * acceleration * dt);
+                    movingPart.setDy(movementSpeed);
                 }
 
                 if (down) {
-                    movingPart.setDx(dx -= cos(radians) * acceleration * dt);
-                    movingPart.setDy(dy -= sin(radians) * acceleration * dt);
+                    movingPart.setDy(-movementSpeed);
                 }
 
-
-                // deccelerating
-
-                float vec = (float) sqrt(dx * dx + dy * dy);
-                if (vec > 0) {
-                    movingPart.setDx(dx -= (dx / vec) * deceleration * dt);
-                    movingPart.setDy(dy -= (dy / vec) * deceleration * dt);
+                if (!up && !down){
+                    movingPart.setDy(0);
                 }
-                if (vec > maxSpeed) {
-                    dx = (dx / vec) * maxSpeed;
-                    dy = (dy / vec) * maxSpeed;
+                if (!left && !right){
+                    movingPart.setDx(0);
                 }
-
-
 
                 // set position
-                x += dx * dt;
-                y += dy * dt;
-
+                x += dx;
+                y += dy;
 
                 if (x > gameData.getDisplayWidth()) {
                     x = 0;
@@ -85,13 +71,11 @@ public class MovementSystem implements IPostEntityProcessingService{
                     x = gameData.getDisplayWidth();
                 }
 
-
                 if (y > gameData.getDisplayHeight()) {
                     y = 0;
                 } else if (y < 0) {
                     y = gameData.getDisplayHeight();
                 }
-
 
                 positionPart.setX(x);
                 positionPart.setY(y);
@@ -99,8 +83,4 @@ public class MovementSystem implements IPostEntityProcessingService{
                 positionPart.setRadians(radians);
             }
         }
-
-
-
-
     }

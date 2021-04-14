@@ -13,14 +13,11 @@ public class MovingPart
         implements EntityPart {
 
     private float dx, dy;
-    private float deceleration, acceleration;
-    private float maxSpeed, rotationSpeed;
+    private float movementSpeed, rotationSpeed;
     private boolean left, right, up, down;
 
-    public MovingPart(float deceleration, float acceleration, float maxSpeed, float rotationSpeed) {
-        this.deceleration = deceleration;
-        this.acceleration = acceleration;
-        this.maxSpeed = maxSpeed;
+    public MovingPart(float movementSpeed, float rotationSpeed) {
+        this.movementSpeed = movementSpeed;
         this.rotationSpeed = rotationSpeed;
     }
 
@@ -40,24 +37,9 @@ public class MovingPart
         this.dy = dy;
     }
 
-    public void setDeceleration(float deceleration) {
-        this.deceleration = deceleration;
+    public void setMovementSpeed(float movementSpeed) {
+        this.movementSpeed = movementSpeed;
     }
-
-    public void setAcceleration(float acceleration) {
-        this.acceleration = acceleration;
-    }
-
-    public void setMaxSpeed(float maxSpeed) {
-        this.maxSpeed = maxSpeed;
-    }
-
-    public void setSpeed(float speed) {
-        this.acceleration = speed;
-        this.maxSpeed = speed;
-    }
-
-
 
     public void setRotationSpeed(float rotationSpeed) {
         this.rotationSpeed = rotationSpeed;
@@ -79,16 +61,8 @@ public class MovingPart
         this.down = down;
     }
 
-    public float getDeceleration() {
-        return deceleration;
-    }
-
-    public float getAcceleration() {
-        return acceleration;
-    }
-
-    public float getMaxSpeed() {
-        return maxSpeed;
+    public float getMovementSpeed() {
+        return movementSpeed;
     }
 
     public float getRotationSpeed() {

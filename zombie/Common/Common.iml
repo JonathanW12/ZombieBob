@@ -14,5 +14,6 @@
     <orderEntry type="library" name="Maven: org.netbeans.api:org-openide-util:RELEASE112" level="project" />
     <orderEntry type="library" name="Maven: org.netbeans.api:org-openide-util-lookup:RELEASE112" level="project" />
     <orderEntry type="library" name="Maven: org.netbeans.api:org-openide-util-ui:RELEASE112" level="project" />
+    <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx:1.5.0" level="project" />
   </component>
 </module>

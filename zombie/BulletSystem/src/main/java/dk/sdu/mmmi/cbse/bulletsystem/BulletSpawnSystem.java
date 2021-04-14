@@ -9,7 +9,6 @@ import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityammoparts.BulletAmmoPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.CollectorPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.DamagePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
@@ -42,7 +41,7 @@ public class BulletSpawnSystem implements IEntityProcessingService{
                 Entity bullet = new Entity();
                 world.addtoEntityPartMap(new PositionPart(spawnX, spawnY, weaponPosition.getRadians()), bullet);
                 world.addtoEntityPartMap(new ProjectilePart(80), bullet);
-                MovingPart movingPart = new MovingPart(20, 100, 120, 0);
+                MovingPart movingPart = new MovingPart(120, 0);
                 movingPart.setUp(true);
                 world.addtoEntityPartMap(movingPart, bullet);
                 world.addtoEntityPartMap(new DamagePart(80), bullet);

@@ -19,6 +19,10 @@ import java.util.UUID;
 @ServiceProviders(value = {
     @ServiceProvider(service = IEntityProcessingService.class)})
 public class PlayerControlSystem implements IEntityProcessingService {
+
+    private int cooldown = 250;
+    private long shootDelay = System.currentTimeMillis();
+
     @Override
     public void process(GameData gameData, World world) {
 
@@ -32,8 +36,26 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 VisualPart visualPart = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(entry.getKey());
                 //LifePart lifePart = (LifePart) world.getMapByPart(LifePart.class.getSimpleName()).get(entry.getKey());
 
-
-
+                // Mouse event testing
+                if (gameData.getMouse().isLeftClick() && shootDelay <= System.currentTimeMillis()){
+                    shootDelay = System.currentTimeMillis()+cooldown;
+                    System.out.println("Left Click");
+                    //System.out.println("X: "+gameData.getMouse().getX()+" Y: "+gameData.getMouse().getY());
+                }
+                if (gameData.getMouse().isRightClick()){
+                    System.out.println("Right Click");
+                }
+                if (gameData.getMouse().isMiddleClick()){
+                    System.out.println("Middle Click");
+                }
+                if (gameData.getMouse().getScroll() == -1){
+                    System.out.println("Scroll Up");
+                    gameData.getMouse().setScroll(0);
+                }
+                if (gameData.getMouse().getScroll() == 1){
+                    System.out.println("Scroll Down");
+                    gameData.getMouse().setScroll(0);
+                }
 
                 // movement
                 movingPart.setLeft(gameData.getKeys().isDown(GameKeys.LEFT));

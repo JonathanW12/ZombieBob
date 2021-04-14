@@ -2,17 +2,22 @@ package dk.sdu.mmmi.cbse.core.main;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import dk.sdu.mmmi.cbse.common.data.GameData;
+import dk.sdu.mmmi.cbse.core.managers.GameInputProcessor;
+import dk.sdu.mmmi.cbse.core.managers.MouseInputProcessor;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.VisualPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
-import dk.sdu.mmmi.cbse.core.managers.GameInputProcessor;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +32,7 @@ public class Game implements ApplicationListener {
     private static OrthographicCamera cam;
     private ShapeRenderer sr;
     private final Lookup lookup = Lookup.getDefault();
-    private final GameData gameData = new GameData();
+    private static final GameData gameData = new GameData();
     private World world = new World();
     private List<IGamePluginService> gamePlugins = new CopyOnWriteArrayList<>();
     private Lookup.Result<IGamePluginService> result;
@@ -43,7 +48,24 @@ public class Game implements ApplicationListener {
 
         sr = new ShapeRenderer();
 
-        Gdx.input.setInputProcessor(new GameInputProcessor(gameData));
+        InputProcessor keyInputProcessor = new GameInputProcessor(gameData);
+        InputProcessor mouseInputProcessor = new MouseInputProcessor(gameData,cam);
+
+        InputMultiplexer inputMultiplexer = new InputMultiplexer();
+
+        Pixmap pm = new Pixmap(Gdx.files.local("raw-assets/crosshair.png"));
+        int xOffset = (pm.getWidth()/2);
+        int yOffset = (pm.getHeight()/2);
+
+        Gdx.input.setCursorImage(pm, xOffset, yOffset);
+        pm.dispose();
+
+
+
+        inputMultiplexer.addProcessor(keyInputProcessor);
+        inputMultiplexer.addProcessor(mouseInputProcessor);
+
+        Gdx.input.setInputProcessor(inputMultiplexer);
 
         result = lookup.lookupResult(IGamePluginService.class);
         result.addLookupListener(lookupListener);
@@ -53,10 +75,12 @@ public class Game implements ApplicationListener {
             plugin.start(gameData, world);
             gamePlugins.add(plugin);
         }
+
     }
 
     @Override
     public void render() {
+
         // clear screen to black
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -81,7 +105,6 @@ public class Game implements ApplicationListener {
     }
 
     private void draw() {
-
 
         for (Map.Entry<UUID, EntityPart> entry: world.getMapByPart("VisualPart").entrySet()){
             VisualPart entity = (VisualPart) entry.getValue();
@@ -122,6 +145,7 @@ public class Game implements ApplicationListener {
 
     @Override
     public void dispose() {
+
     }
 
     private Collection<? extends IEntityProcessingService> getEntityProcessingServices() {

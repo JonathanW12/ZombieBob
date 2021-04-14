@@ -1,5 +1,7 @@
 package dk.sdu.mmmi.cbse.common.data;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector3;
 import dk.sdu.mmmi.cbse.common.events.Event;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,7 @@ public class GameData {
     private int displayWidth;
     private int displayHeight;
     private final GameKeys keys = new GameKeys();
+    private final MouseMovement mouse = new MouseMovement();
     private List<Event> events = new CopyOnWriteArrayList<>();
 
     public void addEvent(Event e) {
@@ -27,6 +30,10 @@ public class GameData {
 
     public GameKeys getKeys() {
         return keys;
+    }
+
+    public MouseMovement getMouse(){
+        return mouse;
     }
 
     public void setDelta(float delta) {

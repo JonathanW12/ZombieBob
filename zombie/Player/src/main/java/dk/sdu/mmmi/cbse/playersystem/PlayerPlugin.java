@@ -2,7 +2,6 @@ package dk.sdu.mmmi.cbse.playersystem;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
-import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.*;
@@ -28,9 +27,7 @@ public class PlayerPlugin implements IGamePluginService {
 
     private void createPlayer(GameData gameData, World world) {
 
-        float deacceleration = 10;
-        float acceleration = 200;
-        float maxSpeed = 300;
+        float speed = 3;
         float rotationSpeed = 5;
         float x = gameData.getDisplayWidth() / 2;
         float y = gameData.getDisplayHeight() / 2;
@@ -39,13 +36,13 @@ public class PlayerPlugin implements IGamePluginService {
         Entity player = new Entity();
 
         // TESTING THE HASHMAP, created entity got ID and linked all parts to ID.
-        world.addtoEntityPartMap(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed),player);
+        world.addtoEntityPartMap(new MovingPart(speed, rotationSpeed),player);
         world.addtoEntityPartMap(new PositionPart(x, y, radians),player);
         world.addtoEntityPartMap(new PlayerPart(),player);
         world.addtoEntityPartMap(new VisualPart(10,new float[]{60f, 179f, 113f, 1f}),player);
         world.addtoEntityPartMap(new TimerPart(10),player);
         world.addtoEntityPartMap(new LifePart(100), player);
-        world.addtoEntityPartMap(new AiMovementPart(3),player);
+        world.addtoEntityPartMap(new AiMovementPart(5),player);
 
     }
 
