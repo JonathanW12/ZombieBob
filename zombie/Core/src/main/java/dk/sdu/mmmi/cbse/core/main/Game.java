@@ -26,6 +26,9 @@ import dk.sdu.mmmi.cbse.common.data.entitytypeparts.VisualPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -59,20 +62,30 @@ public class Game implements ApplicationListener {
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
 
+        String assetsPath = null;
+        try {
+            File file = new File(".").getCanonicalFile();
+            //System.out.println(file.getCanonicalPath());
+            assetsPath = file.getCanonicalPath();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         batch = new SpriteBatch();
+
         //textureAtlas = new TextureAtlas("../../assets/sprites.txt");
-        textureAtlas = new TextureAtlas(Gdx.files.local("assets/sprites.txt"));
+        textureAtlas = new TextureAtlas(assetsPath+"/assets/sprites.txt");
 
         //animationTextureAtlas = new TextureAtlas("../../assets/animations.txt");
-        animationTextureAtlas = new TextureAtlas(Gdx.files.local("assets/animations.txt"));
+        animationTextureAtlas = new TextureAtlas(assetsPath+"/assets/animations.txt");
 
         //temp way of adding hotbar
-        Texture img1 = new Texture(Gdx.files.local("assets/Hotbar_test4.png"));
+        Texture img1 = new Texture(assetsPath+"/assets/Hotbar_test4.png");
         //Texture img1 = new Texture("../../assets/Hotbar_test4.png");
         sprites.put("hotbar_sprite",new Sprite(img1));
         //Texture img2 = new Texture("../../assets/Weapon_test1.png");
-        Texture img2 = new Texture(Gdx.files.local("assets/Weapon_test1.png"));
+        Texture img2 = new Texture(assetsPath+"/assets/Weapon_test1.png");
         sprites.put("sword_sprite",new Sprite(img2));
 
         addSprites();

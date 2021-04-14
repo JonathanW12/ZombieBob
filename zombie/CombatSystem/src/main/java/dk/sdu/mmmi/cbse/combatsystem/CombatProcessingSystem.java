@@ -42,7 +42,7 @@ public class CombatProcessingSystem implements IEntityProcessingService {
                     }
                     
                 } else {
-                    System.out.println("no weaponPart equipped as currentWeapon");
+                    //System.out.println("no weaponPart equipped as currentWeapon");
                 }
             }
         }
