@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -46,7 +47,7 @@ public class Game implements ApplicationListener {
     private TextureAtlas animationTextureAtlas;
     private final HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
     private final HashMap<String, TextureRegion> animationRegions = new HashMap<String, TextureRegion>();
-
+    
     @Override
     public void create() {
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
@@ -55,6 +56,11 @@ public class Game implements ApplicationListener {
         batch = new SpriteBatch();
         textureAtlas = new TextureAtlas("../../assets/sprites.txt");
         animationTextureAtlas = new TextureAtlas("../../assets/animations.txt");
+        //temp way of adding hotbar
+        Texture img1 = new Texture("../../assets/Hotbar_test4.png");
+        sprites.put("hotbar_sprite",new Sprite(img1));
+        Texture img2 = new Texture("../../assets/Weapon_test1.png");
+        sprites.put("sword_sprite",new Sprite(img2));
         
         addSprites();
         addAnimations();

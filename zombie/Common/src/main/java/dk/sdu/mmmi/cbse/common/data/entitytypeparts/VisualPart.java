@@ -7,7 +7,7 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
  */
 
 public class VisualPart implements EntityPart {
-    
+
     private String spriteName;
     private float width;
     private float height;

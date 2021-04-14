@@ -7,6 +7,8 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.*;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import java.util.ArrayList;
+import java.util.UUID;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 
@@ -59,6 +61,9 @@ public class PlayerPlugin implements IGamePluginService {
         world.addtoEntityPartMap(new CombatPart(createPlayerGun(player, world).getUUID()), player);
         world.addtoEntityPartMap(new PlayerPart(),player);
         
+        world.addtoEntityPartMap(new VisualPart("PlayerWalk1", 80, 80), playerShip);
+        world.addtoEntityPartMap(animationPart, playerShip);
+        world.addtoEntityPartMap(weaponInventoryPart, playerShip);
     }
 
     @Override
