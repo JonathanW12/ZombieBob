@@ -7,6 +7,7 @@ public class Animation {
     private float frameDuration;
     private float currentFrameDuration;
     private boolean isFrameExpired;
+    private long loopCounter;
     
     public Animation(String textureFileName, int frameCount, float frameDuration) {
         this.textureFileName = textureFileName;
@@ -15,6 +16,7 @@ public class Animation {
         currentFrame = frameCount - 1;
         currentFrameDuration = 0;
         isFrameExpired = false;
+        loopCounter = 0;
     }
     
     public String getTextureFileName() {
@@ -37,6 +39,10 @@ public class Animation {
         return currentFrameDuration;
     }
     
+    public long getLoopCounter() {
+        return loopCounter;
+    }
+    
     public boolean getIsFrameExpired() {
         return isFrameExpired;
     }
@@ -54,6 +60,10 @@ public class Animation {
         this.textureFileName = textureFileName;
     }
     
+    public void resetLoopCounter() {
+        loopCounter = 0;
+    }
+    
     public void setFrameCount(int frameCount) {
         this.frameCount = frameCount;
     }
@@ -65,6 +75,9 @@ public class Animation {
     public void nextFrame() {
         currentFrame = (currentFrame + 1) % frameCount;
         currentFrameDuration = 0;
+        if (currentFrame == 0) {
+            loopCounter++;
+        }
     }
     
     public void resetAnimation() {

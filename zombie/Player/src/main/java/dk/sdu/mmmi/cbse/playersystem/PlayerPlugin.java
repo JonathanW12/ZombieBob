@@ -39,27 +39,23 @@ public class PlayerPlugin implements IGamePluginService {
         Entity player = new Entity();
 
         // TESTING THE HASHMAP, created entity got ID and linked all parts to ID.
-        AnimationPart animationPart = new AnimationPart(true);
+        AnimationPart animationPart = new AnimationPart(false);
         animationPart.addAnimation("walk", "PlayerWalk", 4, 0.2f);
+        animationPart.addAnimation("shoot", "PlayerShootGun", 2, 0.03f);
+        animationPart.addAnimation("walkGun", "PlayerWalkGun", 2, 0.2f);
         animationPart.setCurrentAnimation("walk");
-
-        WeaponInventoryPart weaponInventoryPart = new WeaponInventoryPart(2);
-
-        world.addtoEntityPartMap(new VisualPart("playerIdle", 80, 80), player);
         world.addtoEntityPartMap(animationPart, player);
+      
+        world.addtoEntityPartMap(new VisualPart("playerIdle", 80, 80), player);
         world.addtoEntityPartMap(new MovingPart(speed,rotationSpeed),player);
         world.addtoEntityPartMap(new PositionPart(x, y, radians),player);
         world.addtoEntityPartMap(new PlayerPart(),player);
         world.addtoEntityPartMap(new TimerPart(10),player);
         world.addtoEntityPartMap(new LifePart(100), player);
         world.addtoEntityPartMap(new AiMovementPart(5),player);
-
         world.addtoEntityPartMap(new CombatPart(createPlayerGun(player, world).getUUID()), player);
         world.addtoEntityPartMap(new PlayerPart(),player);
-
-        world.addtoEntityPartMap(new VisualPart("PlayerWalk1", 80, 80), player);
-        world.addtoEntityPartMap(animationPart, player);
-        world.addtoEntityPartMap(weaponInventoryPart, player);
+        world.addtoEntityPartMap(new WeaponInventoryPart(2), player); 
     }
 
     @Override

@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import dk.sdu.mmmi.cbse.commonanimation.Animation;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.g2d.Gdx2DPixmap;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.core.managers.GameInputProcessor;
 import dk.sdu.mmmi.cbse.core.managers.MouseInputProcessor;
@@ -97,7 +98,14 @@ public class Game implements ApplicationListener {
 
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
 
-        Pixmap pm = new Pixmap(Gdx.files.local("raw-assets/crosshair.png"));
+        Pixmap pm;
+        
+        try {
+            pm = new Pixmap(Gdx.files.local("raw-assets/crosshair.png"));
+        } catch (GdxRuntimeException e) {
+            pm = new Pixmap(Gdx.files.local("../../raw-assets/crosshair.png"));
+        }
+        
         int xOffset = (pm.getWidth()/2);
         int yOffset = (pm.getHeight()/2);
 

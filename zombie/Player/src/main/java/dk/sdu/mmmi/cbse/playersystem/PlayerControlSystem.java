@@ -11,6 +11,7 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.PlayerPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponInventoryPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponPart;
+import dk.sdu.mmmi.cbse.common.data.entitytypeparts.BulletAmmoPart;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.VisualPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
@@ -22,11 +23,11 @@ import java.util.UUID;
 @ServiceProviders(value = {
     @ServiceProvider(service = IEntityProcessingService.class)})
 public class PlayerControlSystem implements IEntityProcessingService {
-
+    
     private int cooldown = 250;
     private long shootDelay = System.currentTimeMillis();
-
     private boolean testy = true;
+    
     @Override
     public void process(GameData gameData, World world) {
 
@@ -34,17 +35,12 @@ public class PlayerControlSystem implements IEntityProcessingService {
         if (world.getMapByPart(PlayerPart.class.getSimpleName()) != null){
             for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(PlayerPart.class.getSimpleName()).entrySet()){
 
-            // entity parts on player
-            PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(entry.getKey());
-            MovingPart movingPart = (MovingPart) world.getMapByPart("MovingPart").get(entry.getKey());
-            VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entry.getKey());
-            AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entry.getKey());
-
-            animationPart.setIsAnimated(
-                (movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp())
-            );
+                // entity parts on player
+                PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(entry.getKey());
+                MovingPart movingPart = (MovingPart) world.getMapByPart("MovingPart").get(entry.getKey());
+                VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entry.getKey());
+                AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entry.getKey());
                 CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey());
-                //LifePart lifePart = (LifePart) world.getMapByPart(LifePart.class.getSimpleName()).get(entry.getKey());
 
                 // Mouse event testing
                 if (gameData.getMouse().isLeftClick() && shootDelay <= System.currentTimeMillis()){
@@ -87,6 +83,36 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 testy = false;
                 }
 
+                
+                // Animation processing
+                if (!animationPart.hasCurrentAnimationLooped()) {
+                    animationPart.setIsAnimated(true);
+                } else {
+                    animationPart.setIsAnimated(
+                        (movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp() || combatPart.isAttacking())
+                    );
+                }
+                
+                if (combatPart != null) {
+                    UUID weaponId = combatPart.getCurrentWeapon();
+                    
+                    if (world.getMapByPart(BulletAmmoPart.class.getSimpleName()).get(weaponId) != null) {
+                        visualPart.setSpriteName("PlayerGun1");
+                        if (combatPart.isAttacking()) {
+                            animationPart.setCurrentAnimation("shoot");
+                        } else if (movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp()) {
+                            if (animationPart.hasCurrentAnimationLooped()) {
+                                animationPart.setCurrentAnimation("walkGun");
+                            }
+                        }
+                    }
+                } else {
+                    visualPart.setSpriteName("PlayerIdle");
+                    if (movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp()) {
+                        animationPart.setCurrentAnimation("walk");
+                    }
+                }    
+            }
         }
     }
-}}
+}
