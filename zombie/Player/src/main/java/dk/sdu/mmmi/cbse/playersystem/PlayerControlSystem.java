@@ -1,13 +1,16 @@
 package dk.sdu.mmmi.cbse.playersystem;
 
+import dk.sdu.mmmi.cbse.common.data.Entity;
+import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.common.data.World;
-import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.LifePart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.AnimationPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.CombatPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.PlayerPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponInventoryPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponPart;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.VisualPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
@@ -23,6 +26,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
     private int cooldown = 250;
     private long shootDelay = System.currentTimeMillis();
 
+    private boolean testy = true;
     @Override
     public void process(GameData gameData, World world) {
 
@@ -30,10 +34,16 @@ public class PlayerControlSystem implements IEntityProcessingService {
         if (world.getMapByPart(PlayerPart.class.getSimpleName()) != null){
             for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(PlayerPart.class.getSimpleName()).entrySet()){
 
-                // entity parts on player
-                PositionPart positionPart = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(entry.getKey());
-                MovingPart movingPart = (MovingPart) world.getMapByPart(MovingPart.class.getSimpleName()).get(entry.getKey());
-                VisualPart visualPart = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(entry.getKey());
+            // entity parts on player
+            PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(entry.getKey());
+            MovingPart movingPart = (MovingPart) world.getMapByPart("MovingPart").get(entry.getKey());
+            VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entry.getKey());
+            AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entry.getKey());
+
+            animationPart.setIsAnimated(
+                (movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp())
+            );
+                CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey());
                 //LifePart lifePart = (LifePart) world.getMapByPart(LifePart.class.getSimpleName()).get(entry.getKey());
 
                 // Mouse event testing
@@ -62,35 +72,21 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 movingPart.setRight(gameData.getKeys().isDown(GameKeys.RIGHT));
                 movingPart.setUp(gameData.getKeys().isDown(GameKeys.UP));
                 movingPart.setDown(gameData.getKeys().isDown(GameKeys.DOWN));
+                combatPart.setAttacking(gameData.getKeys().isPressed(GameKeys.SPACE));
 
-                // update
-                updateShape(visualPart, positionPart);
-            }
+                //Weapon inventory testing. Delete
+                WeaponInventoryPart weaponInventoryPart = (WeaponInventoryPart) world.getMapByPart("WeaponInventoryPart").get(entry.getKey());
+                if(gameData.getKeys().isDown(GameKeys.SHIFT) & testy){
+                    for(int i = 0; i < 4;i++){
+                        Entity weapon = new Entity();
+
+                weaponInventoryPart.addToInventory(weapon.getUUID());
+                world.addtoEntityPartMap(new VisualPart("sword_sprite",30,30), weapon);
+                world.addtoEntityPartMap(new PositionPart(400,400,2), weapon);
+                }
+                testy = false;
+                }
+
         }
     }
-
-    private void updateShape(VisualPart entity, PositionPart position) {
-        float[] shapex = new float[4];
-        float[] shapey = new float[4];
-        PositionPart positionPart = position;
-        float x = positionPart.getX();
-        float y = positionPart.getY();
-        float radians = positionPart.getRadians();
-
-        shapex[0] = (float) (x + Math.cos(radians) * entity.getRadius());
-        shapey[0] = (float) (y + Math.sin(radians) * entity.getRadius());
-
-        shapex[1] = (float) (x + Math.cos(radians - 4 * 3.1415f / 5) * entity.getRadius());
-        shapey[1] = (float) (y + Math.sin(radians - 4 * 3.1145f / 5) * entity.getRadius());
-
-        shapex[2] = (float) (x + Math.cos(radians + 3.1415f) * entity.getRadius() * 0.5);
-        shapey[2] = (float) (y + Math.sin(radians + 3.1415f) * entity.getRadius() * 0.5);
-
-        shapex[3] = (float) (x + Math.cos(radians + 4 * 3.1415f / 5) * entity.getRadius());
-        shapey[3] = (float) (y + Math.sin(radians + 4 * 3.1415f / 5) * entity.getRadius());
-
-        entity.setShapeX(shapex);
-        entity.setShapeY(shapey);
-    }
-
-}
+}}

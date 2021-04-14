@@ -2,10 +2,13 @@ package dk.sdu.mmmi.cbse.playersystem;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
+import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.*;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import java.util.ArrayList;
+import java.util.UUID;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 
@@ -36,14 +39,27 @@ public class PlayerPlugin implements IGamePluginService {
         Entity player = new Entity();
 
         // TESTING THE HASHMAP, created entity got ID and linked all parts to ID.
-        world.addtoEntityPartMap(new MovingPart(speed, rotationSpeed),player);
+        AnimationPart animationPart = new AnimationPart(true);
+        animationPart.addAnimation("walk", "PlayerWalk", 4, 0.2f);
+        animationPart.setCurrentAnimation("walk");
+
+        WeaponInventoryPart weaponInventoryPart = new WeaponInventoryPart(2);
+
+        world.addtoEntityPartMap(new VisualPart("playerIdle", 80, 80), player);
+        world.addtoEntityPartMap(animationPart, player);
+        world.addtoEntityPartMap(new MovingPart(speed,rotationSpeed),player);
         world.addtoEntityPartMap(new PositionPart(x, y, radians),player);
         world.addtoEntityPartMap(new PlayerPart(),player);
-        world.addtoEntityPartMap(new VisualPart(10,new float[]{60f, 179f, 113f, 1f}),player);
         world.addtoEntityPartMap(new TimerPart(10),player);
         world.addtoEntityPartMap(new LifePart(100), player);
         world.addtoEntityPartMap(new AiMovementPart(5),player);
 
+        world.addtoEntityPartMap(new CombatPart(createPlayerGun(player, world).getUUID()), player);
+        world.addtoEntityPartMap(new PlayerPart(),player);
+
+        world.addtoEntityPartMap(new VisualPart("PlayerWalk1", 80, 80), player);
+        world.addtoEntityPartMap(animationPart, player);
+        world.addtoEntityPartMap(weaponInventoryPart, player);
     }
 
     @Override
@@ -54,6 +70,14 @@ public class PlayerPlugin implements IGamePluginService {
             world.removeEntityParts(entry.getKey());
         }
 
+    }
+
+    public Entity createPlayerGun(Entity owner, World world){
+        Entity playerGun = new Entity();
+        world.addtoEntityPartMap(new WeaponPart(80, 50000, 0.3f), playerGun);
+        world.addtoEntityPartMap((PositionPart)world.getMapByPart(PositionPart.class.getSimpleName()).get(owner.getUUID()),playerGun);
+        world.addtoEntityPartMap(new BulletAmmoPart(),playerGun);
+        return playerGun;
     }
 
 }

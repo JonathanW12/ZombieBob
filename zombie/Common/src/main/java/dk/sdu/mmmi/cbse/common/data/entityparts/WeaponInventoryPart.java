@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,34 +11,44 @@ import java.util.UUID;
 
 /**
  *
- * @author phili
+ * @author jonaw
  */
-public class WeaponInventoryPart implements EntityPart {
-    private ArrayList<UUID> weapons;
+public class WeaponInventoryPart implements EntityPart{
+    //inventory is supposed to contain wepons ?..
+    private ArrayList<UUID> inventory;
     private int capacity;
     
-    public WeaponInventoryPart(int capacity){
-        this.weapons = new ArrayList<UUID>();
+    public WeaponInventoryPart(int capacity) {
         this.capacity = capacity;
+        inventory = new ArrayList<UUID>();
     }
     
-    /**
-     * 
-     * @return 
-     * if inventory is full, the method will return false, else true
-     */
     public boolean addWeapon(UUID weaponId){
-        if(this.weapons.size() < capacity){
-            this.weapons.add(weaponId);
+        if(this.inventory.size() < capacity){
+            this.inventory.add(weaponId);
             return true;
         } return false;
     }
     
-    public void removeWeapon(UUID weaponId){
-        this.weapons.remove(weaponId);
+    public ArrayList<UUID> getInventory() {
+        return inventory;
     }
-    
-    public ArrayList<UUID> getWeapons(){
-        return this.weapons;
+
+    public int getCapacity() {
+        return capacity;
     }
+
+    public void addToInventory(UUID item) {
+        this.inventory.add(item);
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+   public void removeWeapon(UUID weaponId){
+        this.inventory.remove(weaponId);
+    }
+
 }
+
+ 

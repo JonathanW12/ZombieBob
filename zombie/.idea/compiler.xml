@@ -6,15 +6,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="CommonAnimation" />
         <module name="Player" />
         <module name="Movement" />
         <module name="SilentUpdate" />
         <module name="Zombie-branding" />
         <module name="BulletSystem" />
         <module name="CombatSystem" />
+        <module name="AnimationSystem" />
         <module name="Zombie-app" />
+        <module name="Hotbar" />
         <module name="Common" />
         <module name="AIMovementSystem" />
+        <module name="ProjectileSystem" />
         <module name="LootingSystem" />
         <module name="HealthSystem" />
         <module name="Core" />
@@ -23,14 +27,18 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="AIMovementSystem" target="1.8" />
+      <module name="AnimationSystem" target="1.8" />
       <module name="BulletSystem" target="1.8" />
       <module name="CombatSystem" target="1.8" />
       <module name="Common" target="1.8" />
+      <module name="CommonAnimation" target="1.8" />
       <module name="Core" target="1.8" />
       <module name="HealthSystem" target="1.8" />
+      <module name="Hotbar" target="1.8" />
       <module name="LootingSystem" target="1.8" />
       <module name="Movement" target="1.8" />
       <module name="Player" target="1.8" />
+      <module name="ProjectileSystem" target="1.8" />
       <module name="SilentUpdate" target="1.8" />
       <module name="TimerSystem" target="1.8" />
       <module name="Zombie-app" target="1.8" />

@@ -1,0 +1,12 @@
+animations.png
+size: 1244, 353
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+PlayerWalk
+  rotate: false
+  xy: 0, 0
+  size: 1244, 353
+  orig: 1244, 353
+  offset: 0, 0
+  index: -1

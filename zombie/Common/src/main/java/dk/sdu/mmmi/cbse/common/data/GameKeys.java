@@ -4,6 +4,7 @@ public class GameKeys {
 
     private static boolean[] keys;
     private static boolean[] pkeys;
+    private static boolean hasUpdated;
 
     private static final int NUM_KEYS = 8;
     public static final int UP = 0;
@@ -19,16 +20,19 @@ public class GameKeys {
     public GameKeys() {
         keys = new boolean[NUM_KEYS];
         pkeys = new boolean[NUM_KEYS];
+        hasUpdated = false;
 
     }
 
     public void update() {
         for (int i = 0; i < NUM_KEYS; i++) {
             pkeys[i] = keys[i];
+            
         }
     }
 
     public void setKey(int k, boolean b) {
+        
         keys[k] = b;
     }
 

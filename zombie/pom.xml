@@ -62,11 +62,15 @@
         <module>Common</module>
         <module>Player</module>
         <module>Movement</module>
+        <module>CommonAnimation</module>
+        <module>AnimationSystem</module>
         <module>TimerSystem</module>
         <module>HealthSystem</module>
         <module>AIMovementSystem</module>
         <module>CombatSystem</module>
         <module>BulletSystem</module>
+        <module>ProjectileSystem</module>
+        <module>Hotbar</module>
     </modules>
 
     <properties>

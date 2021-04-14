@@ -16,6 +16,9 @@ public class CombatPart implements EntityPart{
     private UUID currentWeapon;
     private boolean isAttacking = false;
 
+    public CombatPart() {;
+    }
+    
     public CombatPart(UUID currentWeapon) {
         this.currentWeapon = currentWeapon;
     }

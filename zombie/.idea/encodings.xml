@@ -3,21 +3,29 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/AIMovementSystem/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/AIMovementSystem/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/AnimationSystem/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/AnimationSystem/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BulletSystem/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/BulletSystem/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/CombatSystem/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/CombatSystem/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/CommonAnimation/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/CommonAnimation/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Core/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/HealthSystem/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/HealthSystem/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Hotbar/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Hotbar/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/LootingSystem/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/LootingSystem/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Movement/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Movement/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Player/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Player/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ProjectileSystem/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ProjectileSystem/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/SilentUpdate/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/SilentUpdate/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/TimerSystem/src/main/java" charset="UTF-8" />
