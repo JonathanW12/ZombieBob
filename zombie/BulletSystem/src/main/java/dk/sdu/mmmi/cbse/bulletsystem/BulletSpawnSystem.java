@@ -50,8 +50,8 @@ public class BulletSpawnSystem implements IEntityProcessingService{
                     System.out.println("spawning bullet");
                     Entity bullet = new Entity();
                     world.addtoEntityPartMap(new PositionPart(spawnX, spawnY, weaponPosition.getRadians()), bullet);
-                    world.addtoEntityPartMap(new ProjectilePart(80), bullet);
-                    MovingPart movingPart = new MovingPart(1000,0);
+                    world.addtoEntityPartMap(new ProjectilePart(800), bullet);
+                    MovingPart movingPart = new MovingPart(20,0);
                     movingPart.setUp(true);
                     world.addtoEntityPartMap(movingPart, bullet);
                     world.addtoEntityPartMap(new DamagePart(weaponPart.getDamage()), bullet);
