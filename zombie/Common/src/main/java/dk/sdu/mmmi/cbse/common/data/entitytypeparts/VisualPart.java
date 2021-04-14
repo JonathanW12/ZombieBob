@@ -11,11 +11,21 @@ public class VisualPart implements EntityPart {
     private String spriteName;
     private float width;
     private float height;
+    //Z position defines on what layer the sprite is drawn. 3 is default. Higher layers get drawn above.
+    private int zPosition;
     
     public VisualPart(String spriteName, float width, float height){
         this.spriteName = spriteName;
         this.width = width;
         this.height = height;
+        this.zPosition = 3;
+    }
+    
+    public VisualPart(String spriteName, float width, float height, int zPosition){
+        this.spriteName = spriteName;
+        this.width = width;
+        this.height = height;
+        this.zPosition = zPosition;
     }
 
     public float getWidth() {
