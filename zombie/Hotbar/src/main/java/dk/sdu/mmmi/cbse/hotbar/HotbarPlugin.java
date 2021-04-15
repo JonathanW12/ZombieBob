@@ -30,7 +30,7 @@ public class HotbarPlugin implements IGamePluginService {
         Entity hotbar = new Entity();
         
         world.addtoEntityPartMap(new PositionPart(x,y,radians), hotbar);
-        world.addtoEntityPartMap(new VisualPart("hotbar_sprite",1100,150),hotbar);
+        world.addtoEntityPartMap(new VisualPart("hotbar_sprite",hotbarWidth,hotbarHeight),hotbar);
     }
 
     @Override
