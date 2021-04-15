@@ -15,7 +15,8 @@ import java.util.UUID;
 public class Pathfinding {
     public void findPlayer(MovingPart movingPart, PositionPart entityPosistionPart, World world){
         Set<Map.Entry<UUID, EntityPart>> playerUUID = world.getMapByPart(PlayerPart.class.getSimpleName()).entrySet();
-        UUID uuid = (UUID) playerUUID.toArray()[0];
+        
+        UUID uuid = (UUID) world.getMapByPart(PlayerPart.class.getSimpleName()).keySet().toArray()[0];
         PositionPart playerPositionPart = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(uuid);
 
         movingPart.setUp(true);
