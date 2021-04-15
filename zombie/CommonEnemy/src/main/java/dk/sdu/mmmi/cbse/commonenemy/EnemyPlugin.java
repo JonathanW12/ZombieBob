@@ -18,10 +18,9 @@ import java.util.Map;
 @ServiceProviders(value = {
     @ServiceProvider(service = IGamePluginService.class),})
 public class EnemyPlugin implements IGamePluginService{
-    private float x;
-    private float y;
-    private World world;
-    private EnemyPlugin instance;
+
+    private static EnemyPlugin instance;
+    
     public EnemyPlugin(){
     }
 
@@ -29,20 +28,20 @@ public class EnemyPlugin implements IGamePluginService{
         
     }
     
-    public EnemyPlugin getInstance(){
+    public static EnemyPlugin getInstance(){
         if(instance == null){
-            instance = EnemyPlugin("test");  
+            instance = new EnemyPlugin("test");  
         }
         return instance;
     }
     
-    public void spawn(float x, float y){
+    public void spawn(float x, float y, World world){
         float speed = 2;
         float radians = 3.1415f / 2;
         float rotationSpeed = 3;
         
         Entity zombie = new Entity();
-        
+             
         world.addtoEntityPartMap(new VisualPart("sword_sprite",80,80), zombie);
         world.addtoEntityPartMap(new MovingPart(speed,rotationSpeed), zombie);
         world.addtoEntityPartMap(new PositionPart(x,y,radians), zombie);
@@ -53,7 +52,7 @@ public class EnemyPlugin implements IGamePluginService{
     
     @Override
     public void start(GameData gameData, World world) {
-        this.world = world;
+        
     }
     @Override
     public void stop(GameData gameData, World world) {

@@ -74,7 +74,6 @@
         <module>StandardZombie</module>
         <module>CommonEnemy</module>
         <module>SpawnerSystem</module>
-        <module>Enemy</module>
     </modules>
 
     <properties>
