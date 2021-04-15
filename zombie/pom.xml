@@ -72,11 +72,13 @@
         <module>ProjectileSystem</module>
         <module>Hotbar</module>
         <module>SpawnerSystem</module>
+        <module>Enemy</module>
     </modules>
 
     <properties>
         <netbeans.version>RELEASE112</netbeans.version>
         <brandingToken>zombie</brandingToken>
+        <brandingToken>asteroidsnetbeansmodules</brandingToken>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
