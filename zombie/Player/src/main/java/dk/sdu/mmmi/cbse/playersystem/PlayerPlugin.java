@@ -63,6 +63,7 @@ public class PlayerPlugin implements IGamePluginService {
 
         world.addtoEntityPartMap(new CombatPart(createPlayerGun(player, world).getUUID()), player);
         world.addtoEntityPartMap(new PlayerPart(),player);
+        world.addtoEntityPartMap(new ColliderPart(25), player);
         
         world.addtoEntityPartMap(new VisualPart("PlayerWalk1", 80, 80), player);
         world.addtoEntityPartMap(animationPart, player);
@@ -81,7 +82,7 @@ public class PlayerPlugin implements IGamePluginService {
     
     public Entity createPlayerGun(Entity owner, World world){
         Entity playerGun = new Entity();
-        world.addtoEntityPartMap(new WeaponPart(80, 50000, 0.3f), playerGun);
+        world.addtoEntityPartMap(new WeaponPart(80, 900, 0.3f), playerGun);
         world.addtoEntityPartMap((PositionPart)world.getMapByPart(PositionPart.class.getSimpleName()).get(owner.getUUID()),playerGun);
         world.addtoEntityPartMap(new BulletAmmoPart(),playerGun);
         return playerGun;

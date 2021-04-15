@@ -1,5 +1,7 @@
 package dk.sdu.mmmi.cbse.core.main;
 
+//import com.codeandweb.physicseditor.PhysicsShapeCache;
+
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -53,6 +55,7 @@ public class Game implements ApplicationListener {
     
     @Override
     public void create() {
+        //physicsBodies = new PhysicsShapeCache("physics.xml");
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
         

@@ -11,20 +11,37 @@ import java.util.UUID;
 /**
  *
  * @author phili
- * hele implementationen og definetionen på hvordan collisionen skal implementeres, skal afgøres af tobias,
- * men andre dele af systemet afhænger af "getCollidingEntities()", da man skal kunne reagere på en entites collision
- * HOW ITS DONE IT UP TO YOU, TOBI :)
+ * 
  */
-public class ColliderPart {
-    private ArrayList<UUID> collidingEntities;
+public class ColliderPart implements EntityPart {
+    private ArrayList<UUID> collidingEntities = new ArrayList<UUID>();
+    private float width;
+    private float height;
+    private float radius;
     
     
-    public ColliderPart(){
-        this.collidingEntities = new ArrayList<UUID>();
+    public ColliderPart(float width, float height){
+        this.width = width;
+        this.height = height;
+    }
+    public ColliderPart(float radius){
+        this.radius = radius; 
     }
     
     public ArrayList<UUID> getCollidingEntities(){
         return this.collidingEntities;
+    }
+
+    public float getWidth() {
+        return this.width; 
+    }
+    
+    public float getHeight(){
+        return this.height; 
+    }
+
+    public float getRadius() {
+        return this.radius;
     }
     
 }

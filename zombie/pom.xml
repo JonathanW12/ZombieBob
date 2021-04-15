@@ -71,6 +71,8 @@
         <module>BulletSystem</module>
         <module>ProjectileSystem</module>
         <module>Hotbar</module>
+        <module>LootingSystem</module>
+        <module>CollisionSystem</module>
     </modules>
 
     <properties>
