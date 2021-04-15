@@ -12,6 +12,8 @@
     <file url="file://$PROJECT_DIR$/Common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/CommonAnimation/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/CommonAnimation/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/CommonEnemy/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/CommonEnemy/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Core/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/HealthSystem/src/main/java" charset="UTF-8" />
@@ -28,6 +30,10 @@
     <file url="file://$PROJECT_DIR$/ProjectileSystem/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/SilentUpdate/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/SilentUpdate/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SpawnerSystem/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SpawnerSystem/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/StandardZombie/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/StandardZombie/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/TimerSystem/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/TimerSystem/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/branding/src/main/resources" charset="UTF-8" />

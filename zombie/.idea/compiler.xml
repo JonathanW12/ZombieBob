@@ -9,6 +9,7 @@
         <module name="CommonAnimation" />
         <module name="Player" />
         <module name="Movement" />
+        <module name="CommonEnemy" />
         <module name="SilentUpdate" />
         <module name="Zombie-branding" />
         <module name="BulletSystem" />
@@ -18,7 +19,9 @@
         <module name="Hotbar" />
         <module name="Common" />
         <module name="AIMovementSystem" />
+        <module name="StandardZombie" />
         <module name="ProjectileSystem" />
+        <module name="SpawnerSystem" />
         <module name="LootingSystem" />
         <module name="HealthSystem" />
         <module name="Core" />
@@ -32,6 +35,7 @@
       <module name="CombatSystem" target="1.8" />
       <module name="Common" target="1.8" />
       <module name="CommonAnimation" target="1.8" />
+      <module name="CommonEnemy" target="1.8" />
       <module name="Core" target="1.8" />
       <module name="HealthSystem" target="1.8" />
       <module name="Hotbar" target="1.8" />
@@ -40,6 +44,8 @@
       <module name="Player" target="1.8" />
       <module name="ProjectileSystem" target="1.8" />
       <module name="SilentUpdate" target="1.8" />
+      <module name="SpawnerSystem" target="1.8" />
+      <module name="StandardZombie" target="1.8" />
       <module name="TimerSystem" target="1.8" />
       <module name="Zombie-app" target="1.8" />
       <module name="Zombie-branding" target="1.8" />
