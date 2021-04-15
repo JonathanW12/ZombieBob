@@ -34,11 +34,13 @@ public class HealthProcessingSystem implements IEntityProcessingService {
                 if (world.getMapByPart(ColliderPart.class.getSimpleName()) != null){
                     ColliderPart collider = (ColliderPart)world.getMapByPart("ColliderPart").get(entry.getKey());
                     if(collider != null){
-                        for(UUID collidingEntity: collider.getCollidingEntities()){
-                            DamagePart damagePart = (DamagePart)world.getMapByPart("DamagePart").get(collidingEntity);
-                            if(damagePart != null){
-                                lifePart.setLife(lifePart.getLife() - damagePart.getDamage());
-                            }
+                        for(UUID collidingEntity: collider.getCollidingEntities()) {
+                            if (world.getMapByPart(DamagePart.class.getSimpleName()) != null) {
+                                DamagePart damagePart = (DamagePart) world.getMapByPart("DamagePart").get(collidingEntity);
+                                if (damagePart != null) {
+                                    lifePart.setLife(lifePart.getLife() - damagePart.getDamage());
+                                }
+                            } //#
                         }
                     }
                 }
