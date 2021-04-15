@@ -64,6 +64,10 @@ public class Animation {
         loopCounter = 0;
     }
     
+    public void setLoopCounter(long loopCounter) {
+        this.loopCounter = loopCounter;
+    }
+    
     public void setFrameCount(int frameCount) {
         this.frameCount = frameCount;
     }

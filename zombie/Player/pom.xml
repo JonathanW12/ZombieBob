@@ -49,5 +49,10 @@
             <version>${netbeans.version}</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>dk.sdu.mmmi.cbse</groupId>
+            <artifactId>CommonAnimation</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

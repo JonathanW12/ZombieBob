@@ -44,6 +44,7 @@ public class PlayerPlugin implements IGamePluginService {
         animationPart.addAnimation("shoot", "PlayerShootGun", 2, 0.03f);
         animationPart.addAnimation("walkGun", "PlayerWalkGun", 2, 0.2f);
         animationPart.setCurrentAnimation("walk");
+        animationPart.getCurrentAnimation().setLoopCounter(2); // Increment loop counter to avoid walk animation on start
         world.addtoEntityPartMap(animationPart, player);
       
         world.addtoEntityPartMap(new VisualPart("playerIdle", 80, 80), player);
