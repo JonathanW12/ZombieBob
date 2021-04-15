@@ -67,14 +67,14 @@ public class Game implements ApplicationListener {
 
         
         try {
-            textureAtlas = new TextureAtlas("/assets/sprites.txt");
-            animationTextureAtlas = new TextureAtlas("/assets/animations.txt");
+            textureAtlas = new TextureAtlas(Gdx.files.local("assets/sprites.txt"));
+            animationTextureAtlas = new TextureAtlas( Gdx.files.local("assets/animations.txt"));
 
             //temp way of adding hotbar
-            Texture img1 = new Texture("/assets/Hotbar_test4.png");
+            Texture img1 = new Texture(Gdx.files.local("assets/Hotbar_test4.png"));
             sprites.put("hotbar_sprite",new Sprite(img1));
             
-            Texture img2 = new Texture("/assets/Weapon_test1.png");
+            Texture img2 = new Texture(Gdx.files.local("assets/Weapon_test1.png"));
             sprites.put("sword_sprite",new Sprite(img2));
         } catch (GdxRuntimeException e) {
             textureAtlas = new TextureAtlas("../../assets/sprites.txt");
