@@ -129,33 +129,7 @@ public class Game implements ApplicationListener {
     }
     private void draw() {
         batch.begin();  
-        /*
-        for (Map.Entry<UUID, EntityPart> entry: world.getMapByPart("VisualPart").entrySet()){ 
-            PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(entry.getKey());
-            VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entry.getKey());
-            AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entry.getKey());
 
-            if (animationPart != null && animationPart.isAnimated()) {                
-                drawAnimation(
-                    animationPart,
-                    positionPart.getX(),
-                    positionPart.getY(),
-                    positionPart.getRadians(),
-                    visualPart.getWidth(),
-                    animationPart.getAnimationByName(animationPart.getCurrentAnimationName()).getFrameCount()
-                ); 
-            } else {
-                drawSprite(
-                    visualPart.getSpriteName(),
-                    positionPart.getX(),
-                    positionPart.getY(),
-                    positionPart.getRadians(),
-                    visualPart.getWidth()
-                );
-            }
-            
-        }
-    */
         sortVisualParts();
         for (int i = 0; i < zDepth; i++) {
 
