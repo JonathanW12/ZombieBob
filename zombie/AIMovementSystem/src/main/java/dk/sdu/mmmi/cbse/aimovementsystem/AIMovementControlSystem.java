@@ -52,7 +52,7 @@ public class AIMovementControlSystem implements IEntityProcessingService{
 
                 // Level 4 logic
                 if (aiMovementPart.getLevel() == 4){
-                    pathfinding.findTarget(movingPart,positionPart, gameData);
+                    pathfinding.findPlayer(movingPart,positionPart, world);
                 }
                 // Level 5 aim with mouse
                 if (aiMovementPart.getLevel() == 5){

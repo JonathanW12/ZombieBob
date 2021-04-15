@@ -39,7 +39,7 @@ public class ProjectileProcessingSystem implements IEntityProcessingService {
                  
                  if(projectilePart.getMaxTravelDistance() < projectilePart.getCurrentTravelDistance()){
                      world.removeEntityParts(entry.getKey());
-                     System.out.println("projectile destroyed");
+                     //System.out.println("projectile destroyed");
                  }
                 
              }

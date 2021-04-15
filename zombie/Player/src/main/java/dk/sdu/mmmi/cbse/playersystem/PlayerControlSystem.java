@@ -42,24 +42,24 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entry.getKey());
                 CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey());
 
+
+
                 // Mouse event testing
                 if (gameData.getMouse().isLeftClick() && shootDelay <= System.currentTimeMillis()){
                     shootDelay = System.currentTimeMillis()+cooldown;
-                    System.out.println("Left Click");
-                    //System.out.println("X: "+gameData.getMouse().getX()+" Y: "+gameData.getMouse().getY());
+                    combatPart.setAttacking(true);
+                } else {
+                    combatPart.setAttacking(false);
                 }
+
                 if (gameData.getMouse().isRightClick()){
-                    System.out.println("Right Click");
                 }
                 if (gameData.getMouse().isMiddleClick()){
-                    System.out.println("Middle Click");
                 }
                 if (gameData.getMouse().getScroll() == -1){
-                    System.out.println("Scroll Up");
                     gameData.getMouse().setScroll(0);
                 }
                 if (gameData.getMouse().getScroll() == 1){
-                    System.out.println("Scroll Down");
                     gameData.getMouse().setScroll(0);
                 }
 
@@ -68,7 +68,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 movingPart.setRight(gameData.getKeys().isDown(GameKeys.RIGHT));
                 movingPart.setUp(gameData.getKeys().isDown(GameKeys.UP));
                 movingPart.setDown(gameData.getKeys().isDown(GameKeys.DOWN));
-                combatPart.setAttacking(gameData.getKeys().isPressed(GameKeys.SPACE));
+                //combatPart.setAttacking(gameData.getKeys().isPressed(GameKeys.SPACE));
 
                 //Weapon inventory testing. Delete
                 WeaponInventoryPart weaponInventoryPart = (WeaponInventoryPart) world.getMapByPart("WeaponInventoryPart").get(entry.getKey());
