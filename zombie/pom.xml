@@ -74,6 +74,8 @@
         <module>StandardZombie</module>
         <module>CommonEnemy</module>
         <module>SpawnerSystem</module>
+        <module>LootingSystem</module>
+        <module>CollisionSystem</module>
     </modules>
 
     <properties>

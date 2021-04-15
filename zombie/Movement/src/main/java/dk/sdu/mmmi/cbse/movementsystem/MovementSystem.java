@@ -72,7 +72,6 @@ public class MovementSystem implements IPostEntityProcessingService{
 
             // for everything else
             } else {
-                System.out.println("BULLET");
                 if (left) {
                     radians += rotationSpeed * dt;
                 }

@@ -48,6 +48,7 @@ public class EnemyPlugin implements IGamePluginService{
         world.addtoEntityPartMap(new LifePart(100), zombie);
         world.addtoEntityPartMap(new AiMovementPart(4), zombie);
         world.addtoEntityPartMap(new EnemyPart(), zombie);
+        world.addtoEntityPartMap(new ColliderPart(40),zombie);
     }
     
     @Override

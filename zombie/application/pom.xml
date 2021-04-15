@@ -143,6 +143,11 @@
             <artifactId>CommonAnimation</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CollisionSystem</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
