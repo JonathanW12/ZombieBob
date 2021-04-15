@@ -71,6 +71,8 @@
         <module>BulletSystem</module>
         <module>ProjectileSystem</module>
         <module>Hotbar</module>
+        <module>StandardZombie</module>
+        <module>CommonEnemy</module>
     </modules>
 
     <properties>

@@ -26,6 +26,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
     
     private int cooldown = 250;
     private long shootDelay = System.currentTimeMillis();
+    //To be deleted: Testy
     private boolean testy = true;
     
     @Override
