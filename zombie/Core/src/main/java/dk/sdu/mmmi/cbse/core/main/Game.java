@@ -38,6 +38,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import dk.sdu.mmmi.cbse.common.data.entityparts.AnimationPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
@@ -57,7 +58,9 @@ public class Game implements ApplicationListener {
     private TextureAtlas animationTextureAtlas;
     private final HashMap<String, Sprite> sprites = new HashMap<String, Sprite>();
     private final HashMap<String, TextureRegion> animationRegions = new HashMap<String, TextureRegion>();
-
+    private final int zDepth = 5;
+    private ArrayList<ArrayList<UUID>> sortedVisualList = new ArrayList<>(zDepth);
+    
     @Override
     public void create() {
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
@@ -124,6 +127,9 @@ public class Game implements ApplicationListener {
             plugin.start(gameData, world);
             gamePlugins.add(plugin);
         }
+        for (int i = 0; i < zDepth; i++){
+            sortedVisualList.add(new ArrayList());
+        }
     }
 
     @Override
@@ -152,10 +158,23 @@ public class Game implements ApplicationListener {
         }
     }
 
+    private ArrayList<ArrayList<UUID>> sortVisualParts(){
+        for (Map.Entry<UUID, EntityPart> entry: world.getMapByPart("VisualPart").entrySet()){ 
+            VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entry.getKey());
+            int zPosition = visualPart.getZPostion();
+            sortedVisualList.get(zPosition).add(entry.getKey());
+        }
+        return sortedVisualList;
+    }
+    private void clearSortedVisualList(){
+        for (int i = 0; i < zDepth; i++){
+            sortedVisualList.get(i).clear();
+        }
+    }
     private void draw() {
-        batch.begin();
-
-        for (Map.Entry<UUID, EntityPart> entry: world.getMapByPart("VisualPart").entrySet()){
+        batch.begin();  
+        /*
+        for (Map.Entry<UUID, EntityPart> entry: world.getMapByPart("VisualPart").entrySet()){ 
             PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(entry.getKey());
             VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entry.getKey());
             AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entry.getKey());
@@ -180,8 +199,41 @@ public class Game implements ApplicationListener {
             }
 
         }
+    */
+        sortVisualParts();
+        for (int i = 0; i < zDepth; i++) {
 
+            int edgeCount = sortedVisualList.get(i).size();
+            for (int j = 0; j < edgeCount; j++) {
+                    UUID entityUUID = sortedVisualList.get(i).get(j);
+                    PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(entityUUID);
+                    VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entityUUID);
+                    AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entityUUID);
+
+                    if (animationPart != null && animationPart.isAnimated()) {                
+                        drawAnimation(
+                            animationPart,
+                            positionPart.getX(),
+                            positionPart.getY(),
+                            positionPart.getRadians(),
+                            visualPart.getWidth(),
+                            animationPart.getAnimationByName(animationPart.getCurrentAnimationName()).getFrameCount()
+                        ); 
+                    } else {
+                        drawSprite(
+                            visualPart.getSpriteName(),
+                            positionPart.getX(),
+                            positionPart.getY(),
+                            positionPart.getRadians(),
+                            visualPart.getWidth()
+                );
+            }
+
+    }
+}
+        
         batch.end();
+        clearSortedVisualList();
     }
 
     private void drawSprite(String spriteName, float x, float y, float radians, float width) {

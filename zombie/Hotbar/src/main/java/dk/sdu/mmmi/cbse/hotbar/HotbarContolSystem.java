@@ -55,7 +55,7 @@ public class HotbarContolSystem implements IPostEntityProcessingService {
                 itemIndex = weaponInventoryPart.getInventory().indexOf(id);
                         
                 world.addtoEntityPartMap(new PositionPart(itemPositionsX[itemIndex],itemPositionsY,radians), hotbarItem);
-                world.addtoEntityPartMap(new VisualPart(weaponSprite,itemPicSize,itemPicSize),hotbarItem);
+                world.addtoEntityPartMap(new VisualPart(weaponSprite,itemPicSize,itemPicSize,4),hotbarItem);
         }
             //Checking if items have been removed.
             if(excistingItems.size()!=weaponInventoryPart.getInventory().size()){

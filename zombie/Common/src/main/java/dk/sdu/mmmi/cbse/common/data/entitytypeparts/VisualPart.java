@@ -28,6 +28,10 @@ public class VisualPart implements EntityPart {
         this.zPosition = zPosition;
     }
 
+    public int getZPostion(){
+        return zPosition;
+    }
+    
     public float getWidth() {
         return width;
     }
