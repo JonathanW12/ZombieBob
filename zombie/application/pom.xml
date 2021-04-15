@@ -29,10 +29,7 @@
             <type>pom</type>
         </dependency>
         -->
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/Enemy
         <!-- NB runtime -->
         <dependency>
             <groupId>org.netbeans.modules</groupId>
@@ -91,7 +88,6 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-<<<<<<< HEAD
             <artifactId>TimerSystem</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -130,9 +126,6 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Hotbar</artifactId>
-=======
-            <artifactId>Enemy</artifactId>
->>>>>>> origin/Enemy
             <version>${project.version}</version>
         </dependency>
     </dependencies>
