@@ -82,7 +82,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
 
                 weaponInventoryPart.addToInventory(weapon.getUUID());
                 world.addtoEntityPartMap(new VisualPart("sword_sprite",30,30), weapon);
-                world.addtoEntityPartMap(new PositionPart(400,400,2), weapon);
+                world.addtoEntityPartMap(new PositionPart(100*i,400,2), weapon);
                 }
                 testy = false;
                 }
