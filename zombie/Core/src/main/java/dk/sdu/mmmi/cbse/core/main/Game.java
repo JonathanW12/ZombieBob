@@ -4,7 +4,6 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,7 +15,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import dk.sdu.mmmi.cbse.commonanimation.Animation;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.g2d.Gdx2DPixmap;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.core.managers.GameInputProcessor;
 import dk.sdu.mmmi.cbse.core.managers.MouseInputProcessor;
@@ -26,9 +25,6 @@ import dk.sdu.mmmi.cbse.common.data.entitytypeparts.VisualPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -105,7 +101,14 @@ public class Game implements ApplicationListener {
 
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
 
-        Pixmap pm = new Pixmap(Gdx.files.local("raw-assets/crosshair.png"));
+        Pixmap pm;
+        
+        try {
+            pm = new Pixmap(Gdx.files.local("raw-assets/crosshair.png"));
+        } catch (GdxRuntimeException e) {
+            pm = new Pixmap(Gdx.files.local("../../raw-assets/crosshair.png"));
+        }
+        
         int xOffset = (pm.getWidth()/2);
         int yOffset = (pm.getHeight()/2);
 

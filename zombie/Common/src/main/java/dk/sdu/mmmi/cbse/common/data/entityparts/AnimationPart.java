@@ -23,6 +23,7 @@ public class AnimationPart implements EntityPart {
     
     public void setCurrentAnimation(String currentAnimationName) {
         this.currentAnimationName = currentAnimationName;
+        animations.get(currentAnimationName).resetLoopCounter();
     }
     
     public void setIsAnimated(boolean isAnimated) {
@@ -44,6 +45,11 @@ public class AnimationPart implements EntityPart {
         } else {
             isAnimationDone = false;
         }
+    }
+    
+    public boolean hasCurrentAnimationLooped() {
+        Animation animation = animations.get(currentAnimationName);
+        return animation.getLoopCounter() > 0;
     }
     
     public void setIsAnimationDone(boolean isAnimationDone) {
