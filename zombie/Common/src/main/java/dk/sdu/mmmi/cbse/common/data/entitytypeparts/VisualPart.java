@@ -18,7 +18,7 @@ public class VisualPart implements EntityPart {
         this.spriteName = spriteName;
         this.width = width;
         this.height = height;
-        this.zPosition = 3;
+        this.zPosition = 2;
     }
     
     public VisualPart(String spriteName, float width, float height, int zPosition){
