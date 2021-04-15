@@ -71,6 +71,7 @@
         <module>BulletSystem</module>
         <module>ProjectileSystem</module>
         <module>Hotbar</module>
+        <module>SpawnerSystem</module>
     </modules>
 
     <properties>
