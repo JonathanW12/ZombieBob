@@ -1,26 +1,33 @@
 animations.png
-size: 1246, 747
+size: 1874, 696
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 PlayerShootGun
   rotate: false
-  xy: 616, 0
+  xy: 0, 0
   size: 630, 394
   orig: 630, 394
   offset: 0, 0
   index: -1
 PlayerWalk
   rotate: false
-  xy: 0, 394
+  xy: 630, 0
   size: 1244, 353
   orig: 1244, 353
   offset: 0, 0
   index: -1
 PlayerWalkGun
   rotate: false
-  xy: 0, 0
+  xy: 0, 394
   size: 616, 290
   orig: 616, 290
+  offset: 0, 0
+  index: -1
+spiderEnem
+  rotate: false
+  xy: 616, 394
+  size: 1200, 302
+  orig: 1200, 302
   offset: 0, 0
   index: -1
