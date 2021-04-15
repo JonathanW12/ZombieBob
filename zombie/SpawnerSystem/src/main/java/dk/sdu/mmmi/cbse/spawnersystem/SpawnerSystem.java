@@ -28,7 +28,6 @@ public class SpawnerSystem implements IEntityProcessingService {
         if (lastSpawnTime < currentTime - 5000) {
             lastSpawnTime = currentTime;
             enemyPlugin.spawn(400, 200, world);
-            System.out.println("SPAWN");
         }
         
         updateTime();
