@@ -56,7 +56,13 @@ public class EnemyControlSystem implements IEntityProcessingService {
             movingPart.setDown(true);
              }
           
-          
+               
+                // Animation processing
+             
+                    animationPart.setIsAnimated(
+                        (movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp())
+                    );
+                
             }
     }
      
