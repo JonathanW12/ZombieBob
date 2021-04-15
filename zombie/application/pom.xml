@@ -30,8 +30,12 @@
         </dependency>
         -->
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+>>>>>>> origin/Enemy
+=======
+
 >>>>>>> origin/Enemy
         <!-- NB runtime -->
         <dependency>
@@ -92,6 +96,9 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/Enemy
             <artifactId>TimerSystem</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -130,8 +137,11 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Hotbar</artifactId>
+<<<<<<< HEAD
 =======
             <artifactId>Enemy</artifactId>
+>>>>>>> origin/Enemy
+=======
 >>>>>>> origin/Enemy
             <version>${project.version}</version>
         </dependency>

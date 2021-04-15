@@ -71,14 +71,22 @@
         <module>BulletSystem</module>
         <module>ProjectileSystem</module>
         <module>Hotbar</module>
+<<<<<<< HEAD
         <module>SpawnerSystem</module>
         <module>Enemy</module>
+=======
+        <module>StandardZombie</module>
+        <module>CommonEnemy</module>
+>>>>>>> origin/Enemy
     </modules>
 
     <properties>
         <netbeans.version>RELEASE112</netbeans.version>
         <brandingToken>zombie</brandingToken>
+<<<<<<< HEAD
         <brandingToken>asteroidsnetbeansmodules</brandingToken>
+=======
+>>>>>>> origin/Enemy
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
