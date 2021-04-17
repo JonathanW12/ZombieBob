@@ -38,7 +38,6 @@ public class PlayerPlugin implements IGamePluginService {
 
         Entity player = new Entity();
 
-        // TESTING THE HASHMAP, created entity got ID and linked all parts to ID.
         AnimationPart animationPart = new AnimationPart(false);
         animationPart.addAnimation("walk", "PlayerWalk", 4, 0.2f);
         animationPart.addAnimation("shoot", "PlayerShootGun", 2, 0.03f);

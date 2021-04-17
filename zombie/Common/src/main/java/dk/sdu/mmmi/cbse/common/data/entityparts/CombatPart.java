@@ -5,6 +5,8 @@
  */
 package dk.sdu.mmmi.cbse.common.data.entityparts;
 
+import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityammoparts.IWeaponAmmo;
 import java.util.UUID;
 
 /**
@@ -26,7 +28,7 @@ public class CombatPart implements EntityPart{
     public void setCurrentWeapon(UUID currentWeapon) {
         this.currentWeapon = currentWeapon;
     }
-
+    
     public UUID getCurrentWeapon() {
         return currentWeapon;
     }
