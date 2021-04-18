@@ -1,27 +1,23 @@
 package dk.sdu.mmmi.cbse.playersystem;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
-import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityammoparts.IWeaponAmmo;
 import dk.sdu.mmmi.cbse.common.data.entityparts.AnimationPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.CombatPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.PlayerPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponInventoryPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponPart;
-import dk.sdu.mmmi.cbse.common.data.entitytypeparts.BulletAmmoPart;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.VisualPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
-import org.openide.util.lookup.ServiceProviders;
-
 import java.util.Map;
 import java.util.UUID;
 
-@ServiceProviders(value = {
-    @ServiceProvider(service = IEntityProcessingService.class)})
+
+@ServiceProvider(service = IEntityProcessingService.class)
 public class PlayerControlSystem implements IEntityProcessingService {
     
     private int cooldown = 250;
@@ -95,16 +91,15 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 }
                 
                 if (combatPart != null) {
-                    UUID weaponId = combatPart.getCurrentWeapon();
+                    IWeaponAmmo ammo = WeaponGenerator.getAmmoPart(combatPart.getCurrentWeapon());
+                    setAnimation(animationPart, ammo);
                     
-                    if (world.getMapByPart(BulletAmmoPart.class.getSimpleName()).get(weaponId) != null) {
-                        visualPart.setSpriteName("PlayerGun1");
-                        if (combatPart.isAttacking()) {
-                            animationPart.setCurrentAnimation("shoot");
-                        } else if (movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp()) {
-                            if (animationPart.hasCurrentAnimationLooped()) {
-                                animationPart.setCurrentAnimation("walkGun");
-                            }
+                    visualPart.setSpriteName(ammo.getIdleSpriteName());
+                    if (combatPart.isAttacking()) {
+                        animationPart.setCurrentAnimation("shoot");
+                    } else if (movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp()) {
+                        if (animationPart.hasCurrentAnimationLooped()) {
+                            animationPart.setCurrentAnimation("walkWithWeapon");
                         }
                     }
                 } else {
@@ -115,5 +110,17 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 }    
             }
         }
+    }
+    
+    private void setAnimation(AnimationPart animationPart, IWeaponAmmo currentWeaponAmmo) {
+        if (!animationPart.getAnimationByName("shoot").getTextureFileName().equals(currentWeaponAmmo.getAttackAnimationName()) || 
+            animationPart.getAnimationByName("shoot") == null) {
+                animationPart.addAnimation("shoot", currentWeaponAmmo.getAttackAnimationName(), 2, 0.03f);
+        }
+        
+        if (!animationPart.getAnimationByName("walkWithWeapon").getTextureFileName().equals(currentWeaponAmmo.getWalkAnimationName()) ||
+            animationPart.getAnimationByName("walkWithWeapon") == null) {
+                animationPart.addAnimation("walkWithWeapon", currentWeaponAmmo.getWalkAnimationName(), 2, 0.2f);
+        }   
     }
 }
