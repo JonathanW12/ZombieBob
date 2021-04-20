@@ -7,7 +7,6 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.*;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
-import dk.sdu.mmmi.cbse.commonweapon.Weapons;
 import org.openide.util.lookup.ServiceProvider;
 import java.util.Map;
 import java.util.UUID;
@@ -30,36 +29,26 @@ public class PlayerPlugin implements IGamePluginService {
 
         Entity player = new Entity();
         
-        world.addtoEntityPartMap(new PositionPart(x, y, radians), player); // Create gun depends on position
-        /*CombatPart combatPart = new CombatPart(
-            Weapons.getInstance().getWeapons().get(0).createWeapon(gameData, world, player).getUUID()
-        );*/
-        
-        CombatPart combatPart = new CombatPart();
-        
-        /*WeaponAnimationPart weaponAnimationPart = (WeaponAnimationPart) world.getMapByPart(
-            WeaponAnimationPart.class.getSimpleName()).get(combatPart.getCurrentWeapon()
-        );*/
-        
-        world.addtoEntityPartMap(createInitialAnimation(), player);
-        world.addtoEntityPartMap(combatPart, player);
+        world.addtoEntityPartMap(new PositionPart(x, y, radians), player);
         world.addtoEntityPartMap(new VisualPart("playerIdle", 80, 80), player);
         world.addtoEntityPartMap(new MovingPart(speed,rotationSpeed),player);
         world.addtoEntityPartMap(new PlayerPart(),player);
         world.addtoEntityPartMap(new LifePart(100), player);
         world.addtoEntityPartMap(new AiMovementPart(5),player);
         world.addtoEntityPartMap(new PlayerPart(),player);
-        world.addtoEntityPartMap(new WeaponInventoryPart(2), player); 
+        world.addtoEntityPartMap(new WeaponInventoryPart(2), player);
+        world.addtoEntityPartMap(new CombatPart(), player);
+        world.addtoEntityPartMap(createInitialAnimation(), player);
     }
 
     @Override
     public void stop(GameData gameData, World world) {
         for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(PlayerPart.class.getSimpleName()).entrySet()){
-            // for every player in world get UUID and remove everything for that UUID
             world.removeEntityParts(entry.getKey());
         }
     }
     
+    // Unarmed initial animation
     private AnimationPart createInitialAnimation() {
         AnimationPart animationPart = new AnimationPart(false);
         animationPart.addAnimation("walk", "PlayerWalk", 4, 0.2f);
@@ -69,14 +58,26 @@ public class PlayerPlugin implements IGamePluginService {
         return animationPart;
     }
     
+    // Armed initial animation
     private AnimationPart createInitialAnimation(WeaponAnimationPart weaponAnimationPart) {
         AnimationPart animationPart = new AnimationPart(false);
         animationPart.addAnimation("walk", "PlayerWalk", 4, 0.2f);
-        animationPart.addAnimation("shoot", weaponAnimationPart.getAttackAnimationName(), 2, 0.03f);
-        animationPart.addAnimation("walkWithWeapon", weaponAnimationPart.getWalkAnimationName(), 2, 0.2f);
+        animationPart.addAnimation(
+            "shoot", 
+            weaponAnimationPart.getAttackAnimationName(),
+            weaponAnimationPart.getAttackAnimationFrameCount(), 
+            weaponAnimationPart.getAttackAnimationFrameDuration()
+        );
+        animationPart.addAnimation(
+            "walkWithWeapon",
+            weaponAnimationPart.getWalkAnimationName(),
+            weaponAnimationPart.getWalkAnimationFrameCount(),
+            weaponAnimationPart.getWalkAnimationFrameDuration()
+        );
         animationPart.setCurrentAnimation("walk");
         animationPart.getCurrentAnimation().setLoopCounter(2); // Increment loop counter to avoid walk animation on start
         
         return animationPart;
     }
+    
 }
