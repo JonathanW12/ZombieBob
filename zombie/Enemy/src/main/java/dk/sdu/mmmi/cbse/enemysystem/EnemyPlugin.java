@@ -32,9 +32,7 @@ public class EnemyPlugin implements IGamePluginService {
 
     private void createEnemyShip(GameData gameData, World world) {
 
-        float deacceleration = 10;
-        float acceleration = 150;
-        float maxSpeed = 200;
+        float speed = 3;
         float rotationSpeed = 5;
         float x = new Random().nextFloat() * gameData.getDisplayWidth();
         float y = new Random().nextFloat() * gameData.getDisplayHeight();
@@ -49,10 +47,10 @@ public class EnemyPlugin implements IGamePluginService {
         Entity enemyShip = new Entity();
 
         // TESTING THE HASHMAP, created entity got ID and linked all parts to ID.
-        world.addtoEntityPartMap(new MovingPart(deacceleration, acceleration, maxSpeed, rotationSpeed), enemyShip);
+        world.addtoEntityPartMap(new MovingPart(speed, rotationSpeed), enemyShip);
         world.addtoEntityPartMap(new PositionPart(x, y, radians),enemyShip);
         world.addtoEntityPartMap(new EnemyPart(),enemyShip);
-        world.addtoEntityPartMap(new VisualPart(10,new float[]{60f, 179f, 113f, 1f}),enemyShip);
+        //world.addtoEntityPartMap(new VisualPart(""),enemyShip);
 
         
     }

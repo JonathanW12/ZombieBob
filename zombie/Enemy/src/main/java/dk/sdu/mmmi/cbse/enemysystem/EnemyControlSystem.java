@@ -41,44 +41,18 @@ public class EnemyControlSystem implements IEntityProcessingService {
 
             // movement
             switch(randomNumb) {       
-            case 1:
-            movingPart.setLeft(true);
-            break;
-            case 2:
-            movingPart.setRight(true);
-            break;
-            case 3:
-            movingPart.setUp(true);
-            break;
-            case 4:
-            movingPart.setDown(true);
-             }
-            // update
-            updateShape(visualPart, positionPart);
+                case 1:
+                movingPart.setLeft(true);
+                break;
+                case 2:
+                movingPart.setRight(true);
+                break;
+                case 3:
+                movingPart.setUp(true);
+                break;
+                case 4:
+                movingPart.setDown(true);
             }
+        }
     }
-     private void updateShape(VisualPart entity, PositionPart position) {
-        float[] shapex = new float[4];
-        float[] shapey = new float[4];
-        PositionPart positionPart = position;
-        float x = positionPart.getX();
-        float y = positionPart.getY();
-        float radians = positionPart.getRadians();
-
-        shapex[0] = (float) (x + Math.cos(radians) * entity.getRadius());
-        shapey[0] = (float) (y + Math.sin(radians) * entity.getRadius());
-
-        shapex[1] = (float) (x + Math.cos(radians - 4 * 3.1415f / 5) * entity.getRadius());
-        shapey[1] = (float) (y + Math.sin(radians - 4 * 3.1145f / 5) * entity.getRadius());
-
-        shapex[2] = (float) (x + Math.cos(radians + 3.1415f) * entity.getRadius() * 0.5);
-        shapey[2] = (float) (y + Math.sin(radians + 3.1415f) * entity.getRadius() * 0.5);
-
-        shapex[3] = (float) (x + Math.cos(radians + 4 * 3.1415f / 5) * entity.getRadius());
-        shapey[3] = (float) (y + Math.sin(radians + 4 * 3.1415f / 5) * entity.getRadius());
-
-        entity.setShapeX(shapex);
-        entity.setShapeY(shapey);
-    } 
-  
 }
