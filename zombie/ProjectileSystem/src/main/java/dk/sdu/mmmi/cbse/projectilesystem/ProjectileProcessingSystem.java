@@ -48,7 +48,6 @@ public class ProjectileProcessingSystem implements IEntityProcessingService {
                  ProjectilePart projectilePart = (ProjectilePart)entry.getValue();
                  MovingPart movingPart = ((MovingPart)world.getMapByPart(MovingPart.class.getSimpleName()).get(entry.getKey()));
                  float projectileTravel = (float)Math.sqrt(((double)movingPart.getDx()*movingPart.getDx()+ movingPart.getDy()*movingPart.getDy()));
-                 System.out.println("Max-Travel: " + projectilePart.getMaxTravelDistance());
                  projectilePart.setCurrentTravelDistance(projectilePart.getCurrentTravelDistance() + projectileTravel);
                  
                  if(projectilePart.getMaxTravelDistance() < projectilePart.getCurrentTravelDistance()){
