@@ -3,8 +3,10 @@ package dk.sdu.mmmi.cbse.handgun;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.LootablePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.VisualPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponAnimationPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import java.util.Random;
@@ -44,6 +46,15 @@ public class SpawnProcessor implements IEntityProcessingService {
             gunData.getFireRate(),
             1
         );
+        WeaponAnimationPart weaponAnimationPart = new WeaponAnimationPart(
+            gunData.getIdleSpriteName(),
+            gunData.getAttackAnimationName(),
+            gunData.getWalkAnimationName(),
+            gunData.getAttackAnimationFrameCount(),
+            gunData.getWalkAnimationFrameCount(),
+            gunData.getAttackAnimationFrameDuration(),
+            gunData.getWalkAnimationFrameDuration()
+        );
         VisualPart visualPart = new VisualPart(
             gunData.getVisualPartName(),
             width,
@@ -53,7 +64,11 @@ public class SpawnProcessor implements IEntityProcessingService {
         
         world.addtoEntityPartMap(weaponPart, gun);
         world.addtoEntityPartMap(visualPart, gun);
+        world.addtoEntityPartMap(weaponAnimationPart, gun);
         world.addtoEntityPartMap(positionPart, gun);
+        world.addtoEntityPartMap(new LootablePart(), gun);
+        
+        HandgunProcessor.addToProcessingList(gun);
     }
     
 }

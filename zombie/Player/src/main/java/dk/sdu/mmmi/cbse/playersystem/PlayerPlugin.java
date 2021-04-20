@@ -31,15 +31,17 @@ public class PlayerPlugin implements IGamePluginService {
         Entity player = new Entity();
         
         world.addtoEntityPartMap(new PositionPart(x, y, radians), player); // Create gun depends on position
-        CombatPart combatPart = new CombatPart(
+        /*CombatPart combatPart = new CombatPart(
             Weapons.getInstance().getWeapons().get(0).createWeapon(gameData, world, player).getUUID()
-        ); 
+        );*/
         
-        WeaponAnimationPart weaponAnimationPart = (WeaponAnimationPart) world.getMapByPart(
+        CombatPart combatPart = new CombatPart();
+        
+        /*WeaponAnimationPart weaponAnimationPart = (WeaponAnimationPart) world.getMapByPart(
             WeaponAnimationPart.class.getSimpleName()).get(combatPart.getCurrentWeapon()
-        );
+        );*/
         
-        world.addtoEntityPartMap(createInitialAnimation(weaponAnimationPart), player);
+        world.addtoEntityPartMap(createInitialAnimation(), player);
         world.addtoEntityPartMap(combatPart, player);
         world.addtoEntityPartMap(new VisualPart("playerIdle", 80, 80), player);
         world.addtoEntityPartMap(new MovingPart(speed,rotationSpeed),player);
@@ -56,6 +58,15 @@ public class PlayerPlugin implements IGamePluginService {
             // for every player in world get UUID and remove everything for that UUID
             world.removeEntityParts(entry.getKey());
         }
+    }
+    
+    private AnimationPart createInitialAnimation() {
+        AnimationPart animationPart = new AnimationPart(false);
+        animationPart.addAnimation("walk", "PlayerWalk", 4, 0.1f);
+        animationPart.setCurrentAnimation("walk");
+        animationPart.getCurrentAnimation().setLoopCounter(2); // Increment loop counter to avoid walk animation on start
+        
+        return animationPart;
     }
     
     private AnimationPart createInitialAnimation(WeaponAnimationPart weaponAnimationPart) {

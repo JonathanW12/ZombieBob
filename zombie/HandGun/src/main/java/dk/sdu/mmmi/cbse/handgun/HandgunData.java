@@ -22,7 +22,7 @@ public class HandgunData {
         attackAnimationFrameCount = 2;
         walkAnimationFrameCount = 2;
         damage = 80;
-        range = 5000f;
+        range = 800f;
         fireRate = 0.3f;
         attackAnimationFrameDuration = 0.03f;
         walkAnimationFrameDuration = 0.2f;

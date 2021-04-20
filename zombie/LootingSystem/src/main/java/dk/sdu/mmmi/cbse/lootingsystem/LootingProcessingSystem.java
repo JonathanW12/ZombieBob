@@ -1,24 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dk.sdu.mmmi.cbse.lootingsystem;
 
 import dk.sdu.mmmi.cbse.common.data.GameData;
+import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.common.data.World;
-import dk.sdu.mmmi.cbse.common.data.entityparts.CollectorPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.ColliderPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.CombatPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.ItemInventoryPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LootablePart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponInventoryPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponPart;
-import dk.sdu.mmmi.cbse.common.data.entitytypeparts.ItemPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.VisualPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponPart;
+import dk.sdu.mmmi.cbse.common.data.entitytypeparts.PlayerPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import java.util.Map;
 import java.util.UUID;
@@ -30,11 +21,41 @@ import org.openide.util.lookup.ServiceProviders;
  * @author phili
  * if entity is colliding with 
  */
-
 @ServiceProviders(value = {
     @ServiceProvider(service = IEntityProcessingService.class)})
 public class LootingProcessingSystem implements IEntityProcessingService {
 
+    @Override
+    public void process(GameData gameData, World world) {
+        boolean enterKeyPressed = gameData.getKeys().isPressed(GameKeys.ENTER);
+        
+        if (world.getMapByPart(PlayerPart.class.getSimpleName()) != null && world.getMapByPart(LootablePart.class.getSimpleName()) != null) { 
+            for (Map.Entry<UUID, EntityPart> player : world.getMapByPart(PlayerPart.class.getSimpleName()).entrySet()) {
+                PositionPart pPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(player.getKey());
+                CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(player.getKey());
+                
+                for (Map.Entry<UUID, EntityPart> item : world.getMapByPart(LootablePart.class.getSimpleName()).entrySet()) {
+                    PositionPart iPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(item.getKey());
+                    float distance = (float) Math.sqrt(
+                        Math.pow(pPos.getX() - iPos.getX(), 2) +
+                        Math.pow(pPos.getY() - iPos.getY(), 2)
+                    );
+                    
+                    if (distance < 50 && enterKeyPressed) {
+                        // Equip weapon
+                        if (world.getMapByPart(WeaponPart.class.getSimpleName()).get(item.getKey()) != null) {
+                            VisualPart visualPart = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(item.getKey());
+                            
+                            combatPart.setCurrentWeapon(item.getKey());
+                            world.addtoEntityPartMap(pPos, item.getKey());
+                            visualPart.setIsVisible(false);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /*
     @Override
     public void process(GameData gameData, World world) {
         
@@ -98,5 +119,5 @@ public class LootingProcessingSystem implements IEntityProcessingService {
                 }
             }
         }
-    }
+    }*/
 }

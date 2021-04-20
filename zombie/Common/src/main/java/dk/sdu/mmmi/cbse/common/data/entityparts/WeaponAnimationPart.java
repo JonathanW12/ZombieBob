@@ -21,9 +21,8 @@ public class WeaponAnimationPart implements EntityPart {
         this.attackAnimationFrameCount = attackAnimationFrameCount;
         this.walkAnimationFrameCount = walkAnimationFrameCount;
         this.attackAnimationFrameDuration = attackAnimationFrameDuration;
-        this.walkAnimationFrameDuration = this.walkAnimationFrameDuration;
+        this.walkAnimationFrameDuration = walkAnimationFrameDuration;
     }
-    
     
     public String getIdleSpriteName() {
         return idleSpriteName;

@@ -23,6 +23,28 @@ public class World {
         }
 
     }
+    
+    public void addtoEntityPartMap(EntityPart entityPart, UUID entityUUID){
+        String entityPartNameKey = entityPart.getClass().getSimpleName();
+
+        if (!entityPartMap.containsKey(entityPartNameKey)){
+            entityPartMap.put(entityPartNameKey, new ConcurrentHashMap<UUID, EntityPart>());
+            entityPartMap.get(entityPartNameKey).put(entityUUID, entityPart);
+
+        } else {
+            entityPartMap.get(entityPartNameKey).put(entityUUID, entityPart);
+        }
+
+    }
+    
+    public void removeFromEntityPartMap(EntityPart entityPart, UUID entityUUID) {
+        String entityPartNameKey = entityPart.getClass().getSimpleName();
+        
+        if (entityPartMap.containsKey(entityPartNameKey)) { 
+            entityPartMap.remove(entityPartNameKey, entityUUID);
+        }
+    }
+    
     public void getMapForSpecificPart(){
 
     }

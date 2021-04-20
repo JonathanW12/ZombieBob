@@ -225,7 +225,7 @@ public class Game implements ApplicationListener {
                             visualPart.getWidth(),
                             animationPart.getAnimationByName(animationPart.getCurrentAnimationName()).getFrameCount()
                         ); 
-                    } else {
+                    } else if (visualPart.getIsVisible()) { 
                         drawSprite(
                             visualPart.getSpriteName(),
                             positionPart.getX(),

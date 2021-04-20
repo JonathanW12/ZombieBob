@@ -36,21 +36,17 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 MovingPart movingPart = (MovingPart) world.getMapByPart("MovingPart").get(entry.getKey());
                 VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entry.getKey());
                 AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entry.getKey());
-                CombatPart combatPart = null;
-                
-                if (world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey()) != null) {
-                    combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey());
-                }
+                CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey());
+
+
 
                 // Mouse event testing
-                if (combatPart != null) {
-                    if (gameData.getMouse().isLeftClick() && shootDelay <= System.currentTimeMillis()){
-                        shootDelay = System.currentTimeMillis()+cooldown;
-                        combatPart.setAttacking(true);
-                    } else {
-                        combatPart.setAttacking(false);
-                    }
-                }      
+                if (gameData.getMouse().isLeftClick() && shootDelay <= System.currentTimeMillis()){
+                    shootDelay = System.currentTimeMillis()+cooldown;
+                    combatPart.setAttacking(true);
+                } else {
+                    combatPart.setAttacking(false);
+                }
 
                 if (gameData.getMouse().isRightClick()){
                 }
@@ -93,7 +89,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                     );
                 }
                 
-                if (combatPart != null) {
+                if (combatPart != null && combatPart.getCurrentWeapon() != null) {
                     WeaponAnimationPart weaponAnimationPart = (WeaponAnimationPart) world.getMapByPart(
                         WeaponAnimationPart.class.getSimpleName()).get(combatPart.getCurrentWeapon()
                     );
@@ -109,7 +105,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                         }
                     }
                 } else {
-                    visualPart.setSpriteName("PlayerIdle");
+                    visualPart.setSpriteName("playerIdle");
                     if (movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp()) {
                         animationPart.setCurrentAnimation("walk");
                     }
@@ -119,8 +115,9 @@ public class PlayerControlSystem implements IEntityProcessingService {
     }
     
     private void setAnimation(AnimationPart animationPart, WeaponAnimationPart weaponAnimation) {
-        if (!animationPart.getAnimationByName("shoot").getTextureFileName().equals(weaponAnimation.getAttackAnimationName()) || 
-            animationPart.getAnimationByName("shoot") == null) {
+        if (animationPart.getAnimationByName("shoot") == null ||
+            !animationPart.getAnimationByName("shoot").getTextureFileName().equals(weaponAnimation.getAttackAnimationName())
+        ) {
                 animationPart.addAnimation(
                     "shoot",
                     weaponAnimation.getAttackAnimationName(),
@@ -129,8 +126,9 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 );
         }
         
-        if (!animationPart.getAnimationByName("walkWithWeapon").getTextureFileName().equals(weaponAnimation.getWalkAnimationName()) ||
-            animationPart.getAnimationByName("walkWithWeapon") == null) {
+        if (animationPart.getAnimationByName("walkWithWeapon") == null || 
+                !animationPart.getAnimationByName("walkWithWeapon").getTextureFileName().equals(weaponAnimation.getWalkAnimationName())
+            ) {
                 animationPart.addAnimation(
                     "walkWithWeapon",
                     weaponAnimation.getWalkAnimationName(),
