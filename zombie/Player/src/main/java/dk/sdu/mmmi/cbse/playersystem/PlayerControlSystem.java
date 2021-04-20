@@ -36,17 +36,21 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 MovingPart movingPart = (MovingPart) world.getMapByPart("MovingPart").get(entry.getKey());
                 VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entry.getKey());
                 AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entry.getKey());
-                CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey());
-
-
+                CombatPart combatPart = null;
+                
+                if (world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey()) != null) {
+                    combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey());
+                }
 
                 // Mouse event testing
-                if (gameData.getMouse().isLeftClick() && shootDelay <= System.currentTimeMillis()){
-                    shootDelay = System.currentTimeMillis()+cooldown;
-                    combatPart.setAttacking(true);
-                } else {
-                    combatPart.setAttacking(false);
-                }
+                if (combatPart != null) {
+                    if (gameData.getMouse().isLeftClick() && shootDelay <= System.currentTimeMillis()){
+                        shootDelay = System.currentTimeMillis()+cooldown;
+                        combatPart.setAttacking(true);
+                    } else {
+                        combatPart.setAttacking(false);
+                    }
+                }      
 
                 if (gameData.getMouse().isRightClick()){
                 }
