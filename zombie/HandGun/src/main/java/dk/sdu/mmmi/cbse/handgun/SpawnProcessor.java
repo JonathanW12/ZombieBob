@@ -6,8 +6,6 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.LootablePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.VisualPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponAnimationPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import java.util.Random;
 import org.openide.util.lookup.ServiceProvider;
@@ -15,7 +13,6 @@ import org.openide.util.lookup.ServiceProvider;
 @ServiceProvider(service = IEntityProcessingService.class)
 public class SpawnProcessor implements IEntityProcessingService {
     
-    private final HandgunData gunData = HandgunData.getInstance();
     private final Random randomGenerator = new Random();
     private final long spawnInterval = 5000;
     private long currentTime = System.currentTimeMillis();
@@ -32,39 +29,17 @@ public class SpawnProcessor implements IEntityProcessingService {
     }
     
     private void spawnGun(GameData gameData, World world) {
-        Entity gun = new Entity();
+        Entity gun = HandgunCreator.scaffoldGun(world);
         
-        float width = 30;
-        float height = 30;
+        VisualPart visualPart = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(gun.getUUID());
+        visualPart.setIsVisible(true);
+        
         float spawnX = randomGenerator.nextFloat() * gameData.getDisplayWidth();
         float spawnY = randomGenerator.nextFloat() * gameData.getDisplayHeight();
         float radians = 3.1415f / 2;
         
-        WeaponPart weaponPart = new WeaponPart(
-            gunData.getDamage(),
-            gunData.getRange(),
-            gunData.getFireRate(),
-            1
-        );
-        WeaponAnimationPart weaponAnimationPart = new WeaponAnimationPart(
-            gunData.getIdleSpriteName(),
-            gunData.getAttackAnimationName(),
-            gunData.getWalkAnimationName(),
-            gunData.getAttackAnimationFrameCount(),
-            gunData.getWalkAnimationFrameCount(),
-            gunData.getAttackAnimationFrameDuration(),
-            gunData.getWalkAnimationFrameDuration()
-        );
-        VisualPart visualPart = new VisualPart(
-            gunData.getVisualPartName(),
-            width,
-            height
-        );
         PositionPart positionPart = new PositionPart(spawnX, spawnY, radians);
-        
-        world.addtoEntityPartMap(weaponPart, gun);
-        world.addtoEntityPartMap(visualPart, gun);
-        world.addtoEntityPartMap(weaponAnimationPart, gun);
+
         world.addtoEntityPartMap(positionPart, gun);
         world.addtoEntityPartMap(new LootablePart(), gun);
         
