@@ -4,7 +4,6 @@ import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.common.data.World;
-import dk.sdu.mmmi.cbse.common.data.entityammoparts.IWeaponAmmo;
 import dk.sdu.mmmi.cbse.common.data.entityparts.AnimationPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.CombatPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
@@ -94,7 +93,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                     WeaponAnimationPart weaponAnimationPart = (WeaponAnimationPart) world.getMapByPart(
                         WeaponAnimationPart.class.getSimpleName()).get(combatPart.getCurrentWeapon()
                     );
-                    IWeaponAmmo ammo = WeaponGenerator.getAmmoPart(combatPart.getCurrentWeapon());
+
                     setAnimation(animationPart, weaponAnimationPart);
                     
                     visualPart.setSpriteName(weaponAnimationPart.getIdleSpriteName());

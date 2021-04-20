@@ -68,7 +68,6 @@
         <module>HealthSystem</module>
         <module>AIMovementSystem</module>
         <module>CombatSystem</module>
-        <module>BulletSystem</module>
         <module>ProjectileSystem</module>
         <module>Hotbar</module>
         <module>StandardZombie</module>
