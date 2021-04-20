@@ -13,7 +13,7 @@ public class ProjectilePart implements EntityPart{
     private float maxTravelDistance;
 
     public ProjectilePart(float maxTravelDistance) {
-        this.maxTravelDistance = maxTravelDistance * 60;
+        this.maxTravelDistance = maxTravelDistance;
     }
 
     public float getCurrentTravelDistance() {

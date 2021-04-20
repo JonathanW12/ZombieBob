@@ -62,7 +62,7 @@ public class PlayerPlugin implements IGamePluginService {
     
     private AnimationPart createInitialAnimation() {
         AnimationPart animationPart = new AnimationPart(false);
-        animationPart.addAnimation("walk", "PlayerWalk", 4, 0.1f);
+        animationPart.addAnimation("walk", "PlayerWalk", 4, 0.2f);
         animationPart.setCurrentAnimation("walk");
         animationPart.getCurrentAnimation().setLoopCounter(2); // Increment loop counter to avoid walk animation on start
         
