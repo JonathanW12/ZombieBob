@@ -9,7 +9,7 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.CombatPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.PlayerPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponInventoryPart;
-import dk.sdu.mmmi.cbse.common.data.entitytypeparts.VisualPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.VisualPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
 import java.util.Map;

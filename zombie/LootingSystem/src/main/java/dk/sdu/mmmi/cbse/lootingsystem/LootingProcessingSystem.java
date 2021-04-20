@@ -18,7 +18,7 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponInventoryPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponPart;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.ItemPart;
-import dk.sdu.mmmi.cbse.common.data.entitytypeparts.VisualPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.VisualPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import java.util.Map;
 import java.util.UUID;

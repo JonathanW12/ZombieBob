@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.cbse.common.data.entitytypeparts;
+package dk.sdu.mmmi.cbse.common.data.entityparts;
 
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
 
