@@ -13,6 +13,7 @@ import org.openide.util.lookup.ServiceProvider;
 @ServiceProvider(service = IEntityProcessingService.class)
 public class SpawnProcessor implements IEntityProcessingService {
     
+    private final HandgunData gunData = HandgunData.getInstance();
     private final Random randomGenerator = new Random();
     private final long spawnInterval = 5000;
     private long currentTime = System.currentTimeMillis();
@@ -31,12 +32,23 @@ public class SpawnProcessor implements IEntityProcessingService {
     private void spawnGun(GameData gameData, World world) {
         Entity gun = new Entity();
         
+        float width = 30;
+        float height = 30;
         float spawnX = randomGenerator.nextFloat() * gameData.getDisplayWidth();
         float spawnY = randomGenerator.nextFloat() * gameData.getDisplayHeight();
         float radians = 3.1415f / 2;
         
-        WeaponPart weaponPart = new WeaponPart(80, 50000, 0.3f, 1);
-        VisualPart visualPart = new VisualPart("projectile", 30, 30);
+        WeaponPart weaponPart = new WeaponPart(
+            gunData.getDamage(),
+            gunData.getRange(),
+            gunData.getFireRate(),
+            1
+        );
+        VisualPart visualPart = new VisualPart(
+            gunData.getVisualPartName(),
+            width,
+            height
+        );
         PositionPart positionPart = new PositionPart(spawnX, spawnY, radians);
         
         world.addtoEntityPartMap(weaponPart, gun);

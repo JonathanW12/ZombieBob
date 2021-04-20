@@ -35,10 +35,10 @@ public class HandgunProcessor implements IEntityProcessingService {
                 
                 Entity bullet = new Entity();
                 
-                world.addtoEntityPartMap(new PositionPart(spawnX, spawnY, weaponPosition.getRadians()), bullet);
-                world.addtoEntityPartMap(new ProjectilePart(weaponPart.getRange()), bullet);
                 MovingPart movingPart = new MovingPart(20, 1000);
                 world.addtoEntityPartMap(movingPart, bullet);
+                world.addtoEntityPartMap(new PositionPart(spawnX, spawnY, weaponPosition.getRadians()), bullet);
+                world.addtoEntityPartMap(new ProjectilePart(weaponPart.getRange()), bullet);
                 world.addtoEntityPartMap(new ColliderPart(5), bullet);
                 world.addtoEntityPartMap(new DamagePart(weaponPart.getDamage()), bullet);
                 world.addtoEntityPartMap(new LifePart(1), bullet);

@@ -11,19 +11,26 @@ import org.openide.util.lookup.ServiceProvider;
 
 @ServiceProvider(service = IWeaponCreatorService.class)
 public class HandgunCreator implements IWeaponCreatorService {  
+    
+    private final HandgunData gunData = HandgunData.getInstance();
    
     public Entity createWeapon(GameData gameData, World world, Entity owner) {
         Entity gun = new Entity();
         
-        WeaponPart weaponPart = new WeaponPart(80, 50000, 0.3f, 1);
+        WeaponPart weaponPart = new WeaponPart(
+            gunData.getDamage(),
+            gunData.getRange(),
+            gunData.getFireRate(),
+            1
+        );
         WeaponAnimationPart weaponAnimationPart = new WeaponAnimationPart(
-            "PlayerGun1",
-            "PlayerShootGun",
-            "PlayerWalkGun",
-            2,
-            2,
-            0.03f,
-            0.2f
+            gunData.getIdleSpriteName(),
+            gunData.getAttackAnimationName(),
+            gunData.getWalkAnimationName(),
+            gunData.getAttackAnimationFrameCount(),
+            gunData.getWalkAnimationFrameCount(),
+            gunData.getAttackAnimationFrameDuration(),
+            gunData.getWalkAnimationFrameDuration()
         );
         PositionPart positionPart = (PositionPart) world.getMapByPart(
             PositionPart.class.getSimpleName()).get(owner.getUUID()

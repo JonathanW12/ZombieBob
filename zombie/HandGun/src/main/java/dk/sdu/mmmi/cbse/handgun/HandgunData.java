@@ -7,6 +7,9 @@ public class HandgunData {
     private final String walkAnimationName;
     private final int attackAnimationFrameCount;
     private final int walkAnimationFrameCount;
+    private final int damage;
+    private final float range;
+    private final float fireRate;
     private final float attackAnimationFrameDuration;
     private final float walkAnimationFrameDuration;
     private static HandgunData instance;
@@ -18,6 +21,9 @@ public class HandgunData {
         walkAnimationName = "PlayerWalkGun";
         attackAnimationFrameCount = 2;
         walkAnimationFrameCount = 2;
+        damage = 80;
+        range = 5000f;
+        fireRate = 0.3f;
         attackAnimationFrameDuration = 0.03f;
         walkAnimationFrameDuration = 0.2f;
     }
@@ -52,6 +58,18 @@ public class HandgunData {
     
     public int getWalkAnimationFrameCount() {
         return  walkAnimationFrameCount;
+    }
+    
+    public int getDamage() {
+        return damage;
+    }
+    
+    public float getRange() {
+        return range;
+    }
+    
+    public float getFireRate() {
+        return fireRate;
     }
     
     public float getAttackAnimationFrameDuration() {
