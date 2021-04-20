@@ -11,7 +11,6 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.EnemyPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponInventoryPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponPart;
-import dk.sdu.mmmi.cbse.common.data.entitytypeparts.BulletAmmoPart;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.VisualPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;

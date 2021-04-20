@@ -22,7 +22,7 @@ public class WeaponGenerator {
         Entity gun = new Entity();
         BulletAmmoPart ammoPart = new BulletAmmoPart();
         
-        world.addtoEntityPartMap(new WeaponPart(80, 50000, 0.3f), gun);
+        world.addtoEntityPartMap(new WeaponPart(80, 50000, 0.3f, 1), gun);
         world.addtoEntityPartMap((PositionPart)world.getMapByPart(PositionPart.class.getSimpleName()).get(owner.getUUID()), gun);
         world.addtoEntityPartMap(ammoPart, gun);
         

@@ -76,6 +76,8 @@
         <module>SpawnerSystem</module>
         <module>LootingSystem</module>
         <module>CollisionSystem</module>
+        <module>CommonWeapon</module>
+        <module>HandGun</module>
     </modules>
 
     <properties>

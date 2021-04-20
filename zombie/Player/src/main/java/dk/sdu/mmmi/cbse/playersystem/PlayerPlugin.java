@@ -7,6 +7,7 @@ import dk.sdu.mmmi.cbse.common.data.entityammoparts.IWeaponAmmo;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.*;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import dk.sdu.mmmi.cbse.commonweapon.Weapons;
 import org.openide.util.lookup.ServiceProvider;
 import java.util.Map;
 import java.util.UUID;
@@ -30,12 +31,15 @@ public class PlayerPlugin implements IGamePluginService {
         Entity player = new Entity();
         
         world.addtoEntityPartMap(new PositionPart(x, y, radians), player); // Create gun depends on position
-        CombatPart combatPart = new CombatPart(WeaponGenerator.createGun(player, world).getUUID());
+        CombatPart combatPart = new CombatPart(
+            Weapons.getInstance().getWeapons().get(0).createWeapon(gameData, world, player).getUUID()
+        ); 
         
+        WeaponAnimationPart weaponAnimationPart = (WeaponAnimationPart) world.getMapByPart(
+            WeaponAnimationPart.class.getSimpleName()).get(combatPart.getCurrentWeapon()
+        );
         
-        IWeaponAmmo ammo = WeaponGenerator.getAmmoPart(combatPart.getCurrentWeapon());
-        
-        world.addtoEntityPartMap(createInitialAnimation(ammo), player);
+        world.addtoEntityPartMap(createInitialAnimation(weaponAnimationPart), player);
         world.addtoEntityPartMap(combatPart, player);
         world.addtoEntityPartMap(new VisualPart("playerIdle", 80, 80), player);
         world.addtoEntityPartMap(new MovingPart(speed,rotationSpeed),player);
@@ -54,11 +58,11 @@ public class PlayerPlugin implements IGamePluginService {
         }
     }
     
-    private AnimationPart createInitialAnimation(IWeaponAmmo currentWeaponAmmo) {
+    private AnimationPart createInitialAnimation(WeaponAnimationPart weaponAnimationPart) {
         AnimationPart animationPart = new AnimationPart(false);
         animationPart.addAnimation("walk", "PlayerWalk", 4, 0.2f);
-        animationPart.addAnimation("shoot", currentWeaponAmmo.getAttackAnimationName(), 2, 0.03f);
-        animationPart.addAnimation("walkWithWeapon", currentWeaponAmmo.getWalkAnimationName(), 2, 0.2f);
+        animationPart.addAnimation("shoot", weaponAnimationPart.getAttackAnimationName(), 2, 0.03f);
+        animationPart.addAnimation("walkWithWeapon", weaponAnimationPart.getWalkAnimationName(), 2, 0.2f);
         animationPart.setCurrentAnimation("walk");
         animationPart.getCurrentAnimation().setLoopCounter(2); // Increment loop counter to avoid walk animation on start
         

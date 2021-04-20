@@ -6,7 +6,7 @@
         <artifactId>Zombie-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>Player</artifactId>
+    <artifactId>CommonWeapon</artifactId>
     <packaging>nbm</packaging>
     <build>
         <plugins>
@@ -14,12 +14,6 @@
                 <groupId>org.apache.netbeans.utilities</groupId>
                 <artifactId>nbm-maven-plugin</artifactId>
                 <extensions>true</extensions>
-                <configuration>
-                    <useOSGiDependencies>true</useOSGiDependencies>
-                    <publicPackages>
-                        <publicPackage>dk.sdu.mmmi.cbse.playersystem</publicPackage>
-                    </publicPackages>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -28,6 +22,16 @@
                     <archive>
                         <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
                     </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>nbm-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <publicPackages>
+                        <publicPackage>dk.sdu.mmmi.cbse.commonweapon</publicPackage>
+                    </publicPackages>
                 </configuration>
             </plugin>
         </plugins>
@@ -39,24 +43,14 @@
             <version>${netbeans.version}</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>Common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-util-lookup</artifactId>
-            <version>${netbeans.version}</version>
+            <version>RELEASE82</version>
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>dk.sdu.mmmi.cbse</groupId>
-            <artifactId>CommonAnimation</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>CommonWeapon</artifactId>
+            <artifactId>Common</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
