@@ -5,7 +5,14 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/LootingSystem/pom.xml" />
+        <option value="$PROJECT_DIR$/Enemy/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/CommonWeapon/pom.xml" />
+        <option value="$PROJECT_DIR$/HandGun/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />

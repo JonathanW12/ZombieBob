@@ -22,6 +22,7 @@
         <module name="StandardZombie" />
         <module name="ProjectileSystem" />
         <module name="SpawnerSystem" />
+        <module name="Enemy" />
         <module name="LootingSystem" />
         <module name="CollisionSystem" />
         <module name="HealthSystem" />
@@ -39,6 +40,7 @@
       <module name="CommonAnimation" target="1.8" />
       <module name="CommonEnemy" target="1.8" />
       <module name="Core" target="1.8" />
+      <module name="Enemy" target="1.8" />
       <module name="HealthSystem" target="1.8" />
       <module name="Hotbar" target="1.8" />
       <module name="LootingSystem" target="1.8" />

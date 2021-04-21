@@ -46,9 +46,6 @@ public class CollisionDetectionProcessor implements IEntityProcessingService {
                                 collider1.getCollidingEntities().add(entry2.getKey());
                             }
                         }
-
-                    } else if (collider1.getWidth() != 0 && collider1.getHeight() != 0) {
-
                     }
                 
                 }else if(collider1.getWidth() != 0 && collider1.getHeight() != 0){
