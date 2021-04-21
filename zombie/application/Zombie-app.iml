@@ -73,9 +73,6 @@
     <orderEntry type="library" name="Maven: org.junit.jupiter:junit-jupiter-params:5.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.junit.platform:junit-platform-engine:1.3.1" level="project" />
-    <orderEntry type="library" name="Maven: dk.sdu.mmmi.cbse:CommonWeapon:1.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" name="Maven: dk.sdu.mmmi.cbse:HandGun:1.0-SNAPSHOT" level="project" />
-    <orderEntry type="module" module-name="LootingSystem" />
     <orderEntry type="module" module-name="CommonWeapon" />
     <orderEntry type="module" module-name="HandGun" />
     <orderEntry type="module" module-name="LootingSystem" />
