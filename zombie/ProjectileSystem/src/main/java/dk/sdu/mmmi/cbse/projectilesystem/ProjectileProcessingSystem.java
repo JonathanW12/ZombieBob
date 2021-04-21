@@ -16,6 +16,8 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.ProjectilePart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import java.util.Map;
 import java.util.UUID;
+
+import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 
@@ -31,16 +33,20 @@ public class ProjectileProcessingSystem implements IEntityProcessingService {
     public void process(GameData gameData, World world) {
          if(world.getMapByPart(ProjectilePart.class.getSimpleName())!= null){
              for(Map.Entry<UUID,EntityPart> entry : world.getMapByPart(ProjectilePart.class.getSimpleName()).entrySet()){
+
+                 /*
                  ColliderPart collider = (ColliderPart)world.getMapByPart("ColliderPart").get(entry.getKey());
                  if(collider != null){
                      if(!collider.getCollidingEntities().isEmpty()){
                          LifePart lifepart = (LifePart)world.getMapByPart("LifePart").get(entry.getKey());
                          if(lifepart != null){
                              lifepart.setDead(true);
-                             System.out.println("projectile is has collided");
+                             System.out.println("projectile has collided");
                          }
                      }
                  }
+
+                  */
                  
                  
                  //PositionPart projectilePosition = ((PositionPart)world.getMapByPart(PositionPart.class.getSimpleName()).get(entry.getKey()));
