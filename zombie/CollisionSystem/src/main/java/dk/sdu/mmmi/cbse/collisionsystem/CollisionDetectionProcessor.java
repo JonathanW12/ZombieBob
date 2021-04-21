@@ -27,6 +27,7 @@ public class CollisionDetectionProcessor implements IEntityProcessingService {
 
     @Override
     public void process(GameData gameData, World world) {
+        /*
         for (Map.Entry<UUID, EntityPart> entry: world.getMapByPart(ColliderPart.class.getSimpleName()).entrySet()) {
             
             ColliderPart collider1 = ((ColliderPart)entry.getValue());
@@ -59,6 +60,7 @@ public class CollisionDetectionProcessor implements IEntityProcessingService {
                 }
             }
         }
+*/
     }
 }
 
