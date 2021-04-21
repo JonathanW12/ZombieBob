@@ -48,7 +48,6 @@ public class CollisionDetectionProcessor implements IPostEntityProcessingService
                                 float distance = (float) Math.sqrt(Math.pow(collider1Pos.getX() - collider2Pos.getX(), 2) + Math.pow(collider1Pos.getY() - collider2Pos.getY(), 2));
                                 if (distance < collider1.getRadius() + collider2.getRadius()) {
                                     collider1.getCollidingEntities().add(entry2.getKey());
-                                    collider2.getCollidingEntities().add(entry.getKey());
                                 }
                             }
                         }
