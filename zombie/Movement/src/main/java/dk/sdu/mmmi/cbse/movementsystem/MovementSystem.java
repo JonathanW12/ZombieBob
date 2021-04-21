@@ -5,7 +5,6 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.ProjectilePart;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.PlayerPart;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
@@ -93,27 +92,23 @@ public class MovementSystem implements IPostEntityProcessingService{
             // set position
             x += dx;
             y += dy;
-
-            if (world.getMapByPart(ProjectilePart.class.getSimpleName()) != null){
-                if (world.getMapByPart(ProjectilePart.class.getSimpleName()).get(entry.getKey()) == null){
-                    if (x > gameData.getDisplayWidth()) {
-                        x = 0;
-                    } else if (x < 0) {
-                        x = gameData.getDisplayWidth();
-                    }
-
-                    if (y > gameData.getDisplayHeight()) {
-                        y = 0;
-                    } else if (y < 0) {
-                        y = gameData.getDisplayHeight();
-                    }
-                }
+            
+            if (x > gameData.getDisplayWidth()) {
+                x = 0;
+            } else if (x < 0) {
+                x = gameData.getDisplayWidth();
             }
 
-                positionPart.setX(x);
-                positionPart.setY(y);
-
-                positionPart.setRadians(radians);
+            if (y > gameData.getDisplayHeight()) {
+                y = 0;
+            } else if (y < 0) {
+                y = gameData.getDisplayHeight();
             }
+
+            positionPart.setX(x);
+            positionPart.setY(y);
+
+            positionPart.setRadians(radians);
         }
     }
+}

@@ -23,7 +23,7 @@ import dk.sdu.mmmi.cbse.core.managers.GameInputProcessor;
 import dk.sdu.mmmi.cbse.core.managers.MouseInputProcessor;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
-import dk.sdu.mmmi.cbse.common.data.entitytypeparts.VisualPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.VisualPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
@@ -225,7 +225,7 @@ public class Game implements ApplicationListener {
                             visualPart.getWidth(),
                             animationPart.getAnimationByName(animationPart.getCurrentAnimationName()).getFrameCount()
                         ); 
-                    } else {
+                    } else if (visualPart.getIsVisible()) { 
                         drawSprite(
                             visualPart.getSpriteName(),
                             positionPart.getX(),

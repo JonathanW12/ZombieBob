@@ -106,11 +106,6 @@
             <artifactId>CombatSystem</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>BulletSystem</artifactId>
-            <version>${project.version}</version>
-        </dependency>
 
 
         <dependency>
@@ -146,6 +141,21 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>CollisionSystem</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CommonWeapon</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>HandGun</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>LootingSystem</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

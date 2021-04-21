@@ -4,13 +4,12 @@ import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.common.data.World;
-import dk.sdu.mmmi.cbse.common.data.entityammoparts.IWeaponAmmo;
 import dk.sdu.mmmi.cbse.common.data.entityparts.AnimationPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.CombatPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.PlayerPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponInventoryPart;
-import dk.sdu.mmmi.cbse.common.data.entitytypeparts.VisualPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.VisualPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
 import java.util.Map;
@@ -90,11 +89,14 @@ public class PlayerControlSystem implements IEntityProcessingService {
                     );
                 }
                 
-                if (combatPart != null) {
-                    IWeaponAmmo ammo = WeaponGenerator.getAmmoPart(combatPart.getCurrentWeapon());
-                    setAnimation(animationPart, ammo);
+                if (combatPart != null && combatPart.getCurrentWeapon() != null) {
+                    WeaponAnimationPart weaponAnimationPart = (WeaponAnimationPart) world.getMapByPart(
+                        WeaponAnimationPart.class.getSimpleName()).get(combatPart.getCurrentWeapon()
+                    );
+
+                    setAnimation(animationPart, weaponAnimationPart);
                     
-                    visualPart.setSpriteName(ammo.getIdleSpriteName());
+                    visualPart.setSpriteName(weaponAnimationPart.getIdleSpriteName());
                     if (combatPart.isAttacking()) {
                         animationPart.setCurrentAnimation("shoot");
                     } else if (movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp()) {
@@ -103,7 +105,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                         }
                     }
                 } else {
-                    visualPart.setSpriteName("PlayerIdle");
+                    visualPart.setSpriteName("playerIdle");
                     if (movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp()) {
                         animationPart.setCurrentAnimation("walk");
                     }
@@ -112,15 +114,27 @@ public class PlayerControlSystem implements IEntityProcessingService {
         }
     }
     
-    private void setAnimation(AnimationPart animationPart, IWeaponAmmo currentWeaponAmmo) {
-        if (!animationPart.getAnimationByName("shoot").getTextureFileName().equals(currentWeaponAmmo.getAttackAnimationName()) || 
-            animationPart.getAnimationByName("shoot") == null) {
-                animationPart.addAnimation("shoot", currentWeaponAmmo.getAttackAnimationName(), 2, 0.03f);
+    private void setAnimation(AnimationPart animationPart, WeaponAnimationPart weaponAnimation) {
+        if (animationPart.getAnimationByName("shoot") == null ||
+            !animationPart.getAnimationByName("shoot").getTextureFileName().equals(weaponAnimation.getAttackAnimationName())
+        ) {
+                animationPart.addAnimation(
+                    "shoot",
+                    weaponAnimation.getAttackAnimationName(),
+                    weaponAnimation.getAttackAnimationFrameCount(),
+                    weaponAnimation.getAttackAnimationFrameDuration()
+                );
         }
         
-        if (!animationPart.getAnimationByName("walkWithWeapon").getTextureFileName().equals(currentWeaponAmmo.getWalkAnimationName()) ||
-            animationPart.getAnimationByName("walkWithWeapon") == null) {
-                animationPart.addAnimation("walkWithWeapon", currentWeaponAmmo.getWalkAnimationName(), 2, 0.2f);
+        if (animationPart.getAnimationByName("walkWithWeapon") == null || 
+                !animationPart.getAnimationByName("walkWithWeapon").getTextureFileName().equals(weaponAnimation.getWalkAnimationName())
+            ) {
+                animationPart.addAnimation(
+                    "walkWithWeapon",
+                    weaponAnimation.getWalkAnimationName(),
+                    weaponAnimation.getWalkAnimationFrameCount(),
+                    weaponAnimation.getWalkAnimationFrameDuration()
+                );
         }   
     }
 }
