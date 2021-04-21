@@ -12,7 +12,6 @@
         <module name="CommonEnemy" />
         <module name="SilentUpdate" />
         <module name="Zombie-branding" />
-        <module name="BulletSystem" />
         <module name="CombatSystem" />
         <module name="AnimationSystem" />
         <module name="Zombie-app" />
@@ -20,9 +19,11 @@
         <module name="Common" />
         <module name="AIMovementSystem" />
         <module name="StandardZombie" />
+        <module name="HandGun" />
         <module name="ProjectileSystem" />
         <module name="SpawnerSystem" />
         <module name="Enemy" />
+        <module name="CommonWeapon" />
         <module name="LootingSystem" />
         <module name="CollisionSystem" />
         <module name="HealthSystem" />
@@ -39,8 +40,10 @@
       <module name="Common" target="1.8" />
       <module name="CommonAnimation" target="1.8" />
       <module name="CommonEnemy" target="1.8" />
+      <module name="CommonWeapon" target="1.8" />
       <module name="Core" target="1.8" />
       <module name="Enemy" target="1.8" />
+      <module name="HandGun" target="1.8" />
       <module name="HealthSystem" target="1.8" />
       <module name="Hotbar" target="1.8" />
       <module name="LootingSystem" target="1.8" />

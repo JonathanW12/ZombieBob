@@ -19,5 +19,6 @@
     <orderEntry type="library" name="Maven: org.netbeans.api:org-openide-util-lookup:RELEASE112" level="project" />
     <orderEntry type="module" module-name="CommonAnimation" />
     <orderEntry type="library" name="Maven: dk.sdu.mmmi.cbse:CommonWeapon:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="CommonWeapon" />
   </component>
 </module>
