@@ -7,16 +7,25 @@ public class AnimationPart implements EntityPart {
     private HashMap<String, Animation> animations;
     private String currentAnimationName;
     private boolean isAnimated;
-    private boolean isInterruptable;
     private boolean isAnimationDone;
    
-    public AnimationPart(boolean isInterruptable) {
-        this.isInterruptable = isInterruptable;
+    public AnimationPart() {
         animations = new HashMap<>();
     }
     
-    public void addAnimation(String animationName, String textureFileName, int frameCount, float frameDuration) {
-        Animation animation = new Animation(textureFileName, frameCount, frameDuration);
+    public void addAnimation(
+        String animationName,
+        String textureFileName,
+        int frameCount,
+        float frameDuration,
+        boolean isInterruptbile
+    ) {
+        Animation animation = new Animation(
+            textureFileName,
+            frameCount,
+            frameDuration,
+            isInterruptbile
+        );
        
         animations.put(animationName, animation);
     }
@@ -29,7 +38,7 @@ public class AnimationPart implements EntityPart {
     public void setIsAnimated(boolean isAnimated) {
         Animation animation = animations.get(currentAnimationName);
         
-        if (!isInterruptable) {   
+        if (!animation.getIsInterruptible()) {   
             if (!isAnimated && animation.getCurrentFrame() < (animation.getFrameCount() - 1)) {
                 this.isAnimated = true;
             } else {
@@ -50,6 +59,11 @@ public class AnimationPart implements EntityPart {
     public boolean hasCurrentAnimationLooped() {
         Animation animation = animations.get(currentAnimationName);
         return animation.getLoopCounter() > 0;
+    }
+    
+    public boolean isCurrentAnimationInterruptible() {
+        Animation animation = animations.get(currentAnimationName);
+        return animation.getIsInterruptible();
     }
     
     public void setIsAnimationDone(boolean isAnimationDone) {

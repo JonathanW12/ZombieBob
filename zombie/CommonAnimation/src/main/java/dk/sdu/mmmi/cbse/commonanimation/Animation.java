@@ -7,12 +7,14 @@ public class Animation {
     private float frameDuration;
     private float currentFrameDuration;
     private boolean isFrameExpired;
+    private boolean isInterruptible;
     private long loopCounter;
     
-    public Animation(String textureFileName, int frameCount, float frameDuration) {
+    public Animation(String textureFileName, int frameCount, float frameDuration, boolean isInterruptible) {
         this.textureFileName = textureFileName;
         this.frameCount = frameCount;
         this.frameDuration = frameDuration;
+        this.isInterruptible = isInterruptible;
         currentFrame = frameCount - 1;
         currentFrameDuration = 0;
         isFrameExpired = false;
@@ -47,6 +49,10 @@ public class Animation {
         return isFrameExpired;
     }
     
+    public boolean getIsInterruptible() {
+        return isInterruptible;
+    }
+    
     public void setFrameDuration(float frameDuration) {
         this.frameDuration = frameDuration;
     }
@@ -74,6 +80,10 @@ public class Animation {
     
     public void setCurrentFrame(int currentFrame) {
         this.currentFrame = currentFrame;
+    }
+    
+    public void setIsInterruptible(boolean isInterruptible) {
+        this.isInterruptible = isInterruptible;
     }
     
     public void nextFrame() {
