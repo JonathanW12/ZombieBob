@@ -2,8 +2,10 @@ package dk.sdu.mmmi.cbse.map;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.ColliderPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.VisualPart;
+import dk.sdu.mmmi.cbse.common.data.entitytypeparts.StructurePart;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
@@ -56,6 +58,8 @@ public class MapPlugin implements IGamePluginService{
             
             world.addtoEntityPartMap(new PositionPart(xPos,y,wallRadians), wall);
             world.addtoEntityPartMap(new VisualPart("wall_sprite",wallWidth,wallWidth,1),wall);
+            world.addtoEntityPartMap(new ColliderPart(wallWidth/2),wall);
+            world.addtoEntityPartMap(new StructurePart(), wall);
         }
     }
     private void createWallUp(World world,float x, float y, float length){
@@ -67,6 +71,8 @@ public class MapPlugin implements IGamePluginService{
             
             world.addtoEntityPartMap(new PositionPart(x,yPos,wallRadians), wall);
             world.addtoEntityPartMap(new VisualPart("wall_sprite",wallWidth,wallWidth,1),wall);
+            world.addtoEntityPartMap(new ColliderPart(wallWidth/2),wall);
+            world.addtoEntityPartMap(new StructurePart(), wall);
         }
     }
     @Override
