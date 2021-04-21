@@ -1,5 +1,5 @@
 sprites.png
-size: 1436, 732
+size: 941, 1378
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -12,56 +12,56 @@ crosshair
   index: -1
 PlayerGun1
   rotate: false
-  xy: 732, 0
+  xy: 311, 585
   size: 315, 285
   orig: 315, 285
   offset: 0, 0
   index: -1
 PlayerGun2
   rotate: false
-  xy: 311, 332
+  xy: 0, 978
   size: 405, 299
   orig: 405, 299
   offset: 0, 0
   index: -1
 playerIdle
   rotate: false
-  xy: 171, 0
+  xy: 253, 232
   size: 308, 190
   orig: 308, 190
   offset: 0, 0
   index: -1
 PlayerShoot1
   rotate: false
-  xy: 716, 332
+  xy: 626, 585
   size: 315, 393
   orig: 315, 393
   offset: 0, 0
   index: -1
 PlayerShoot2
   rotate: false
-  xy: 1031, 332
+  xy: 405, 978
   size: 405, 400
   orig: 405, 400
   offset: 0, 0
   index: -1
 PlayerSword
   rotate: false
-  xy: 479, 0
+  xy: 0, 232
   size: 253, 325
   orig: 253, 325
   offset: 0, 0
   index: -1
 PlayerWalk1
   rotate: false
-  xy: 0, 332
+  xy: 561, 232
   size: 311, 353
   orig: 311, 353
   offset: 0, 0
   index: -1
 PlayerWalk2
   rotate: false
-  xy: 1047, 0
+  xy: 0, 585
   size: 311, 332
   orig: 311, 332
   offset: 0, 0
@@ -71,5 +71,26 @@ projectile
   xy: 16, 0
   size: 155, 232
   orig: 155, 232
+  offset: 0, 0
+  index: -1
+spiderIdle
+  rotate: false
+  xy: 171, 0
+  size: 250, 173
+  orig: 250, 173
+  offset: 0, 0
+  index: -1
+spiderLegsDown
+  rotate: false
+  xy: 421, 0
+  size: 250, 190
+  orig: 250, 190
+  offset: 0, 0
+  index: -1
+spiderLegsUp
+  rotate: false
+  xy: 671, 0
+  size: 250, 175
+  orig: 250, 175
   offset: 0, 0
   index: -1
