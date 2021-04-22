@@ -53,7 +53,6 @@ public class PlayerControlSystem implements IEntityProcessingService {
                     //Inventory testing. to be deleted
                     if(weaponInventoryPart.getInventory().size()>0){
                     UUID removeWeaponId = weaponInventoryPart.getInventory().get(0);
-                    System.out.println(removeWeaponId);
                     weaponInventoryPart.removeWeapon(removeWeaponId);
                     }
                 }
@@ -73,7 +72,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 movingPart.setDown(gameData.getKeys().isDown(GameKeys.DOWN));
                 //combatPart.setAttacking(gameData.getKeys().isPressed(GameKeys.SPACE));
                 
-                collectorPart.setCollecting(gameData.getKeys().isPressed(GameKeys.E));
+                collectorPart.setCollecting(gameData.getKeys().isPressed(GameKeys.ENTER));
 
                 //Weapon inventory testing. Delete
 

@@ -88,7 +88,6 @@ public class LootingProcessingSystem implements IEntityProcessingService {
                             //check if the item is a weapon before trying to add it wot weaponInventory
                             if(world.getMapByPart("WeaponPart").get(item.getKey())!=null){
                             
-                                System.out.println(weaponInventory.getInventory().size());
                                 //check for capacity in inventory
                                 if(weaponInventory.getCapacity() <= weaponInventory.getInventory().size()){
                                 
