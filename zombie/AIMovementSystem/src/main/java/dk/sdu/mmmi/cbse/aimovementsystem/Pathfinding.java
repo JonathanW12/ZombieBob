@@ -16,11 +16,13 @@ public class Pathfinding {
     public void findPlayer(MovingPart movingPart, PositionPart entityPosistionPart, World world){
         Set<Map.Entry<UUID, EntityPart>> playerUUID = world.getMapByPart(PlayerPart.class.getSimpleName()).entrySet();
         
-        UUID uuid = (UUID) world.getMapByPart(PlayerPart.class.getSimpleName()).keySet().toArray()[0];
-        PositionPart playerPositionPart = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(uuid);
-
-        movingPart.setUp(true);
-        entityPosistionPart.setRadians((float) Math.atan2(playerPositionPart.getY()-entityPosistionPart.getY(), playerPositionPart.getX()-entityPosistionPart.getX()));
+        if (world.getMapByPart(PlayerPart.class.getSimpleName()).keySet().toArray().length > 0) {
+            UUID uuid = (UUID) world.getMapByPart(PlayerPart.class.getSimpleName()).keySet().toArray()[0];
+            PositionPart playerPositionPart = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(uuid);
+            
+            movingPart.setUp(true);
+            entityPosistionPart.setRadians((float) Math.atan2(playerPositionPart.getY()-entityPosistionPart.getY(), playerPositionPart.getX()-entityPosistionPart.getX()));
+        } 
     }
 
     public void findMouse(PositionPart entityPosistionPart, GameData gameData){

@@ -13,7 +13,7 @@ import dk.sdu.mmmi.cbse.commonenemy.EnemyPlugin;
 import org.openide.util.Lookup;
 import org.openide.util.lookup.ServiceProvider;
 
-import java.util.UUID;
+
 
 /**
  *
@@ -22,13 +22,13 @@ import java.util.UUID;
 
 @ServiceProvider(service = IEntityProcessingService.class)
 public class SpawnerSystem implements IEntityProcessingService {
-    
+
     private long currentTime = System.currentTimeMillis();
     private long lastSpawnTime = currentTime;
     private SpawnerLocation location = new SpawnerLocation();
     private SpawnerEntities spawnEntities = new SpawnerEntities();
     private int level = 1;
-    
+
     @Override
     public void process(GameData gameData, World world) {
         if (lastSpawnTime < currentTime - 7000) {
@@ -43,7 +43,6 @@ public class SpawnerSystem implements IEntityProcessingService {
         }
         
         updateTime();
-
     }
     
     private void updateTime() {
