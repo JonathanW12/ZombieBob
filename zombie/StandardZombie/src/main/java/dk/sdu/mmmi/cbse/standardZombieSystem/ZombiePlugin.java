@@ -37,7 +37,7 @@ public class ZombiePlugin implements IGamePluginService{
         
         WeaponPart weaponPart = new WeaponPart(
             30,
-            40,
+            50,
             1f,
             1
         );

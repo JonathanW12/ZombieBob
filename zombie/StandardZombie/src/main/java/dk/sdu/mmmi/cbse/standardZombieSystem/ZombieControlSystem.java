@@ -88,7 +88,7 @@ public class ZombieControlSystem implements IEntityProcessingService {
                     Math.pow(zombiePos.getY() - playerPos.getY(), 2)
                 );
                 
-                if (distance <= 40 && weaponPart.getTimeSinceLastTrigger() > weaponPart.getFireRate()) {
+                if (distance <= weaponPart.getRange() && weaponPart.getTimeSinceLastTrigger() > weaponPart.getFireRate()) {
                     combatPart.setAttacking(true);
                     lifePart.setIsHit(true);
                 } 
