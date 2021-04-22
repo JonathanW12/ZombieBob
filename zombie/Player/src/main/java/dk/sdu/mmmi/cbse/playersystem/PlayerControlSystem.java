@@ -18,12 +18,9 @@ import java.util.UUID;
 
 @ServiceProvider(service = IEntityProcessingService.class)
 public class PlayerControlSystem implements IEntityProcessingService {
-    
-    private int cooldown = 250;
-    private long shootDelay = System.currentTimeMillis();
-    //To be deleted: Testy
-    private boolean testy = true;
-    
+
+    private WeaponPart weaponPart;
+
     @Override
     public void process(GameData gameData, World world) {
 
@@ -38,16 +35,14 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entry.getKey());
                 CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey());
                 WeaponInventoryPart weaponInventoryPart = (WeaponInventoryPart) world.getMapByPart("WeaponInventoryPart").get(entry.getKey());
-                CollectorPart collectorPart = (CollectorPart) world.getMapByPart(CollectorPart.class.getSimpleName()).get(entry.getKey()); 
+                CollectorPart collectorPart = (CollectorPart) world.getMapByPart(CollectorPart.class.getSimpleName()).get(entry.getKey());
 
-
-                // Mouse event testing
-                if (gameData.getMouse().isLeftClick() && shootDelay <= System.currentTimeMillis()){
-                    shootDelay = System.currentTimeMillis()+cooldown;
-                    combatPart.setAttacking(true);
-                } else {
-                    combatPart.setAttacking(false);
+                combatPart.setAttacking(gameData.getMouse().isLeftClick());
+                if (world.getMapByPart(WeaponPart.class.getSimpleName()) != null && combatPart.getCurrentWeapon() != null){
+                    weaponPart = (WeaponPart) world.getMapByPart(WeaponPart.class.getSimpleName()).get(combatPart.getCurrentWeapon());
                 }
+
+
 
                 if (gameData.getMouse().isRightClick()){
                     //Inventory testing. to be deleted
@@ -56,6 +51,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                     weaponInventoryPart.removeWeapon(removeWeaponId);
                     }
                 }
+
                 if (gameData.getMouse().isMiddleClick()){
                 }
                 if (gameData.getMouse().getScroll() == -1){
@@ -74,26 +70,13 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 
                 collectorPart.setCollecting(gameData.getKeys().isPressed(GameKeys.E));
 
-                //Weapon inventory testing. Delete
-
-                if(gameData.getKeys().isDown(GameKeys.SHIFT) & testy){
-                    for(int i = 0; i < 2;i++){
-                        Entity weapon = new Entity();
-
-                weaponInventoryPart.addToInventory(weapon.getUUID());
-                world.addtoEntityPartMap(new VisualPart("sword_sprite",30,30), weapon);
-                world.addtoEntityPartMap(new PositionPart(100*i,400,2), weapon);
-                }
-                testy = false;
-                }
-
                 
                 // Animation processing
                 if (!animationPart.isCurrentAnimationInterruptible() && !animationPart.hasCurrentAnimationLooped()) {
                     animationPart.setIsAnimated(true);
                 } else {
                     animationPart.setIsAnimated(
-                        (movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp() || combatPart.isAttacking())
+                        (movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp() || (weaponPart != null && weaponPart.isIsAttacking()))
                     );
                 }
                 
@@ -105,7 +88,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                     setAnimation(animationPart, weaponAnimationPart);
                     
                     visualPart.setSpriteName(weaponAnimationPart.getIdleSpriteName());
-                    if (combatPart.isAttacking()) {
+                    if ( weaponPart.isIsAttacking() ) {
                         animationPart.setCurrentAnimation("shoot");
                     } else if (movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp()) {
                         if (animationPart.hasCurrentAnimationLooped()) {
