@@ -15,4 +15,7 @@ public class SpawnerEntities {
     public void createGun(GameData gameData, World world){
         Lookup.getDefault().lookup(IWeaponCreatorService.class).spawnGun(gameData, world);
     }
+    public void createSpider(int health, Position position, World world){
+        Lookup.getDefault().lookup(IEnemyCreatorService.class).createBoss(health, position, world);
+    }
 }

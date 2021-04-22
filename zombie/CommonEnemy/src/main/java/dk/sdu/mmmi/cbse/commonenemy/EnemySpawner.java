@@ -121,10 +121,10 @@ public class EnemySpawner implements IEnemyCreatorService {
                 "spiderIdle",
                 "spiderWalk",
                 "spiderWalk",
-                2,
-                1,
+                4,
+                4,
                 0.3f,
-                50f
+                0.3f
         );
 
         world.addtoEntityPartMap(weaponPart, zombieAttack);

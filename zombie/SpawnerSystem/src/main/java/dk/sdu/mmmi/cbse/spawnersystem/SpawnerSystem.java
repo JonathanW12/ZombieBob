@@ -36,6 +36,7 @@ public class SpawnerSystem implements IEntityProcessingService {
 
             if (level == 1){
                 spawnEntities.createGun(gameData,world);
+                spawnEntities.createSpider(200, location.topMid(gameData),world);
             }
 
             waveControl(level, gameData, world);
