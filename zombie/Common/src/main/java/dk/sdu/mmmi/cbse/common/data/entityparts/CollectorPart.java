@@ -11,7 +11,7 @@ package dk.sdu.mmmi.cbse.common.data.entityparts;
  * 
  * add part, if owning entity should be able to collect and gather weapons
  */
-public class CollectorPart {
+public class CollectorPart implements EntityPart {
     private boolean isCollecting;
     
     public CollectorPart(){

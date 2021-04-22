@@ -38,6 +38,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entry.getKey());
                 CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey());
                 WeaponInventoryPart weaponInventoryPart = (WeaponInventoryPart) world.getMapByPart("WeaponInventoryPart").get(entry.getKey());
+                CollectorPart collectorPart = (CollectorPart) world.getMapByPart(CollectorPart.class.getSimpleName()).get(entry.getKey()); 
 
 
                 // Mouse event testing
@@ -71,6 +72,8 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 movingPart.setUp(gameData.getKeys().isDown(GameKeys.UP));
                 movingPart.setDown(gameData.getKeys().isDown(GameKeys.DOWN));
                 //combatPart.setAttacking(gameData.getKeys().isPressed(GameKeys.SPACE));
+                
+                collectorPart.setCollecting(gameData.getKeys().isPressed(GameKeys.E));
 
                 //Weapon inventory testing. Delete
 
