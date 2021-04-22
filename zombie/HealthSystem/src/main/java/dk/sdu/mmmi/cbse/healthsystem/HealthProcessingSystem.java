@@ -54,22 +54,18 @@ public class HealthProcessingSystem implements IEntityProcessingService {
 
                             if (damagePart != null) {
                                 if (lifePartCollidingEntity != null) {
-                                    System.out.println("Damage");
                                     lifePartCollidingEntity.setLife(lifePartCollidingEntity.getLife() - damagePart.getDamage());
-                                    System.out.println(lifePartCollidingEntity.getLife() );
                                 }
                                 // Removing bullet after impact
                                 world.removeEntityParts(entry.getKey());
                             }
 
                             if (lifePartCollidingEntity != null && lifePartCollidingEntity.getLife() <= 0) {
-                                System.out.println(lifePartCollidingEntity.getLife() );
                                 lifePartCollidingEntity.setDead(true);
                             }
 
                             // If dead remove
                             if (lifePartCollidingEntity != null && lifePartCollidingEntity.isDead()) {
-                                System.out.println(lifePartCollidingEntity.getLife() );
                                 world.removeEntityParts(collidingEntity);
                             }
                         }

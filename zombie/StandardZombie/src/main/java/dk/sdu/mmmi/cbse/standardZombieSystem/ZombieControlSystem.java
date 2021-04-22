@@ -68,7 +68,7 @@ public class ZombieControlSystem implements IEntityProcessingService {
             }
         }
         
-        spawnZombies(gameData, world);
+        //spawnZombies(gameData, world);
     }
     
     private void attackPlayer(GameData gameData, World world, UUID zombieID) {
