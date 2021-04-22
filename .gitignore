@@ -14,6 +14,9 @@ local.properties
 .loadpath
 .recommenders
 
+# Netbeans actions
+**/nbactions.xml
+
 # External tool builders
 .externalToolBuilders/
 
@@ -315,3 +318,4 @@ gradle-app.setting
 **/build/
 
 # End of https://www.toptal.com/developers/gitignore/api/java,netbeans,intellij,vscode,maven,gradle,eclipse,osx,windows,linux
+zombie/.idea/misc.xml
