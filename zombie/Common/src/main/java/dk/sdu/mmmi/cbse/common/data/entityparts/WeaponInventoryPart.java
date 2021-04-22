@@ -26,7 +26,6 @@ public class WeaponInventoryPart implements EntityPart{
     public boolean addWeapon(UUID weaponId){
         if(this.inventory.size() < capacity){
             this.inventory.add(weaponId);
-            System.out.println("Added at index "+inventory.toString());
             return true;
         } return false;
     }
