@@ -14,23 +14,24 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponInventoryPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponPart;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.PlayerPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
+
 import java.util.Map;
 import java.util.UUID;
+
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 
 /**
- *
  * @author phili
- * if entity is colliding with 
+ * if entity is colliding with
  */
 @ServiceProviders(value = {
-    @ServiceProvider(service = IEntityProcessingService.class)})
+        @ServiceProvider(service = IEntityProcessingService.class)})
 public class LootingProcessingSystem implements IEntityProcessingService {
     
     @Override
     public void process(GameData gameData, World world) {
-        
+
         //Check wether any entities in the world has a collectorPart ie. the ability to loot items
         if(world.getMapByPart(CollectorPart.class.getSimpleName()) !=null){
         for(Map.Entry<UUID,EntityPart> entry : world.getMapByPart(CollectorPart.class.getSimpleName()).entrySet()){

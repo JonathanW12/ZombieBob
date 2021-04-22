@@ -75,7 +75,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 collectorPart.setCollecting(gameData.getKeys().isPressed(GameKeys.ENTER));
     
                 // Animation processing
-                if (!animationPart.hasCurrentAnimationLooped()) {
+                if (!animationPart.isCurrentAnimationInterruptible() && !animationPart.hasCurrentAnimationLooped()) {
                     animationPart.setIsAnimated(true);
                 } else {
                     animationPart.setIsAnimated(
@@ -116,7 +116,8 @@ public class PlayerControlSystem implements IEntityProcessingService {
                     "shoot",
                     weaponAnimation.getAttackAnimationName(),
                     weaponAnimation.getAttackAnimationFrameCount(),
-                    weaponAnimation.getAttackAnimationFrameDuration()
+                    weaponAnimation.getAttackAnimationFrameDuration(),
+                    false // Animation can't be interrupted
                 );
         }
         
@@ -127,7 +128,8 @@ public class PlayerControlSystem implements IEntityProcessingService {
                     "walkWithWeapon",
                     weaponAnimation.getWalkAnimationName(),
                     weaponAnimation.getWalkAnimationFrameCount(),
-                    weaponAnimation.getWalkAnimationFrameDuration()
+                    weaponAnimation.getWalkAnimationFrameDuration(),
+                    true // Animation can be interrupted
                 );
         }   
     }

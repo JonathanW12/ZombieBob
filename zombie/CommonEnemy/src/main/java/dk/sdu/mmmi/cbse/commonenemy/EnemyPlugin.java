@@ -42,7 +42,7 @@ public class EnemyPlugin implements IGamePluginService{
         
         Entity zombie = new Entity();
              
-        world.addtoEntityPartMap(new VisualPart("sword_sprite",80,80), zombie);
+        world.addtoEntityPartMap(new VisualPart("sword_sprite", 80, 80), zombie);
         world.addtoEntityPartMap(new MovingPart(speed,rotationSpeed), zombie);
         world.addtoEntityPartMap(new PositionPart(x,y,radians), zombie);
         world.addtoEntityPartMap(new LifePart(100), zombie);
@@ -55,6 +55,7 @@ public class EnemyPlugin implements IGamePluginService{
     public void start(GameData gameData, World world) {
         
     }
+    
     @Override
     public void stop(GameData gameData, World world) {
         for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(EnemyPart.class.getSimpleName()).entrySet()){

@@ -33,7 +33,7 @@ public class PlayerPlugin implements IGamePluginService {
         world.addtoEntityPartMap(new VisualPart("playerIdle", 80, 80,3), player);
         world.addtoEntityPartMap(new MovingPart(speed,rotationSpeed),player);
         world.addtoEntityPartMap(new PlayerPart(),player);
-        world.addtoEntityPartMap(new LifePart(100), player);
+        world.addtoEntityPartMap(new LifePart(5), player);
         world.addtoEntityPartMap(new AiMovementPart(5),player);
         world.addtoEntityPartMap(new PlayerPart(),player);
         world.addtoEntityPartMap(new WeaponInventoryPart(4), player);
@@ -51,32 +51,50 @@ public class PlayerPlugin implements IGamePluginService {
     
     // Unarmed initial animation
     private AnimationPart createInitialAnimation() {
-        AnimationPart animationPart = new AnimationPart(false);
-        animationPart.addAnimation("walk", "PlayerWalk", 4, 0.2f);
+        AnimationPart animationPart = new AnimationPart();
+        animationPart.addAnimation(
+            "walk", // Set animation Id
+            "PlayerWalk", // Animation asset name
+            4, // Frame count
+            0.15f, // Frame duration
+            true // Animation can be interrupted
+        );
         animationPart.setCurrentAnimation("walk");
-        animationPart.getCurrentAnimation().setLoopCounter(2); // Increment loop counter to avoid walk animation on start
+        
+        // Increment loop counter to avoid walk animation on start
+        animationPart.getCurrentAnimation().setLoopCounter(2);
         
         return animationPart;
     }
     
     // Armed initial animation
     private AnimationPart createInitialAnimation(WeaponAnimationPart weaponAnimationPart) {
-        AnimationPart animationPart = new AnimationPart(false);
-        animationPart.addAnimation("walk", "PlayerWalk", 4, 0.2f);
+        AnimationPart animationPart = new AnimationPart();
+        animationPart.addAnimation(
+            "walk", // Set animation Id
+            "PlayerWalk", // Animation asset name
+            4, // Frame count
+            0.15f, // Frame duration
+            true // Animation can be interrupted
+        );
         animationPart.addAnimation(
             "shoot", 
             weaponAnimationPart.getAttackAnimationName(),
             weaponAnimationPart.getAttackAnimationFrameCount(), 
-            weaponAnimationPart.getAttackAnimationFrameDuration()
+            weaponAnimationPart.getAttackAnimationFrameDuration(),
+            false // Animation can't be interrupted
         );
         animationPart.addAnimation(
             "walkWithWeapon",
             weaponAnimationPart.getWalkAnimationName(),
             weaponAnimationPart.getWalkAnimationFrameCount(),
-            weaponAnimationPart.getWalkAnimationFrameDuration()
+            weaponAnimationPart.getWalkAnimationFrameDuration(),
+            true // Animation can be interrupted
         );
         animationPart.setCurrentAnimation("walk");
-        animationPart.getCurrentAnimation().setLoopCounter(2); // Increment loop counter to avoid walk animation on start
+        
+        // Increment loop counter to avoid walk animation on start
+        animationPart.getCurrentAnimation().setLoopCounter(2); 
         
         return animationPart;
     }

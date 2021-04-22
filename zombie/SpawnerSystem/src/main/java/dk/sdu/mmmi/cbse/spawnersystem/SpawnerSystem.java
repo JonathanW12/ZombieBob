@@ -13,7 +13,7 @@ import dk.sdu.mmmi.cbse.commonenemy.EnemyPlugin;
 import org.openide.util.Lookup;
 import org.openide.util.lookup.ServiceProvider;
 
-import java.util.UUID;
+
 
 /**
  *
@@ -22,24 +22,55 @@ import java.util.UUID;
 
 @ServiceProvider(service = IEntityProcessingService.class)
 public class SpawnerSystem implements IEntityProcessingService {
-    
-    private EnemyPlugin enemyPlugin = EnemyPlugin.getInstance();
+
     private long currentTime = System.currentTimeMillis();
     private long lastSpawnTime = currentTime;
-    
+    private SpawnerLocation location = new SpawnerLocation();
+    private SpawnerEntities spawnEntities = new SpawnerEntities();
+    private int level = 1;
+
     @Override
     public void process(GameData gameData, World world) {
-        if (lastSpawnTime < currentTime - 5000) {
+        if (lastSpawnTime < currentTime - 7000) {
             lastSpawnTime = currentTime;
-            //enemyPlugin.spawn(400, 200, world);
-            Lookup.getDefault().lookup(IEnemyCreatorService.class).createEnemy(world);
+
+            if (level == 1){
+                spawnEntities.createGun(gameData,world);
+            }
+
+            waveControl(level, gameData, world);
+            level++;
         }
         
         updateTime();
-
     }
     
     private void updateTime() {
         currentTime = System.currentTimeMillis();
+    }
+
+    public void waveControl(int level, GameData gameData, World world){
+        double defaultHealth = 100;
+        double increment = 0.10 *level;
+        double currentIncrease = 1;
+        System.out.println("Level: "+level);
+        int max = 4;
+        if (level <= max){
+            currentIncrease =+ increment;
+            System.out.println("Health: "+(int)(defaultHealth*(1+currentIncrease)));
+            for (int i = 0; i < level; i++) {
+                spawnEntities.createZombie((int)(defaultHealth*(1+currentIncrease)), location.random(gameData),world);
+
+            }
+
+        }
+        if (level > max){
+            currentIncrease =+ increment;
+            System.out.println("Health: "+(int)(defaultHealth*(1+currentIncrease)));
+            for (int i = 0; i < max; i++) {
+                spawnEntities.createZombie((int)(defaultHealth*(1+currentIncrease)), location.random(gameData),world);
+            }
+
+        }
     }
 }
