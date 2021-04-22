@@ -73,21 +73,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 //combatPart.setAttacking(gameData.getKeys().isPressed(GameKeys.SPACE));
                 
                 collectorPart.setCollecting(gameData.getKeys().isPressed(GameKeys.ENTER));
-
-                //Weapon inventory testing. Delete
-
-                if(gameData.getKeys().isDown(GameKeys.SHIFT) & testy){
-                    for(int i = 0; i < 2;i++){
-                        Entity weapon = new Entity();
-
-                weaponInventoryPart.addToInventory(weapon.getUUID());
-                world.addtoEntityPartMap(new VisualPart("sword_sprite",30,30), weapon);
-                world.addtoEntityPartMap(new PositionPart(100*i,400,2), weapon);
-                }
-                testy = false;
-                }
-
-                
+    
                 // Animation processing
                 if (!animationPart.hasCurrentAnimationLooped()) {
                     animationPart.setIsAnimated(true);
