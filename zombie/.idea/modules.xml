@@ -16,6 +16,7 @@
       <module fileurl="file://$PROJECT_DIR$/HealthSystem/HealthSystem.iml" filepath="$PROJECT_DIR$/HealthSystem/HealthSystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/Hotbar/Hotbar.iml" filepath="$PROJECT_DIR$/Hotbar/Hotbar.iml" />
       <module fileurl="file://$PROJECT_DIR$/LootingSystem/LootingSystem.iml" filepath="$PROJECT_DIR$/LootingSystem/LootingSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Map/Map.iml" filepath="$PROJECT_DIR$/Map/Map.iml" />
       <module fileurl="file://$PROJECT_DIR$/Movement/Movement.iml" filepath="$PROJECT_DIR$/Movement/Movement.iml" />
       <module fileurl="file://$PROJECT_DIR$/Player/Player.iml" filepath="$PROJECT_DIR$/Player/Player.iml" />
       <module fileurl="file://$PROJECT_DIR$/ProjectileSystem/ProjectileSystem.iml" filepath="$PROJECT_DIR$/ProjectileSystem/ProjectileSystem.iml" />

@@ -17,24 +17,29 @@ import java.util.UUID;
 
 public class HealthProcessingSystem implements IEntityProcessingService {
 
+    private LifePart lifePartOfDmger;
+    private LifePart lifePartCollidingEntity;
+    private DamagePart damagePart;
+
+
     @Override
     public void process(GameData gameData, World world) {
 
         // Check if hashmap exists
-        if (world.getMapByPart(LifePart.class.getSimpleName()) != null) {
+        if (world.getMapByPart(DamagePart.class.getSimpleName()) != null) {
 
-            // Loops through all LifeParts in hashmap
-            for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart(LifePart.class.getSimpleName()).entrySet()) {
+            // Loops through all DamageParts in hashmap
+            for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart(DamagePart.class.getSimpleName()).entrySet()) {
 
-                // Check if LifePart is connected with DamagePart
-                if (world.getMapByPart(DamagePart.class.getSimpleName()) != null ){
-                    if (world.getMapByPart(DamagePart.class.getSimpleName()).get(entry.getKey()) != null){
-                        continue;
-                    }
-                }
 
                 // setting specific lifeParts
-                LifePart lifePart = (LifePart) world.getMapByPart(LifePart.class.getSimpleName()).get(entry.getKey());
+                if (world.getMapByPart(LifePart.class.getSimpleName()) != null) {
+                    lifePartOfDmger = (LifePart) world.getMapByPart(LifePart.class.getSimpleName()).get(entry.getKey());
+                }
+
+                if (world.getMapByPart(DamagePart.class.getSimpleName()) != null) {
+                    damagePart = (DamagePart) world.getMapByPart(DamagePart.class.getSimpleName()).get(entry.getKey());
+                }
 
                 // Check if hashmap with colliderParts exists
                 if (world.getMapByPart(ColliderPart.class.getSimpleName()) != null) {
@@ -43,28 +48,29 @@ public class HealthProcessingSystem implements IEntityProcessingService {
                     // check if colliderPart exists with specific UUID
                     if (collider != null) {
 
-                        // WE know collider is not a bullet
                         for (UUID collidingEntity : collider.getCollidingEntities()) {
 
-                            // Check if hashmap with damagaPart exists
-                            if (world.getMapByPart(DamagePart.class.getSimpleName()) != null) {
-                                DamagePart damagePart = (DamagePart) world.getMapByPart(DamagePart.class.getSimpleName()).get(collidingEntity);
-                                // Check if damagePart exists on collidingEntity
-                                if (damagePart != null) {
-                                    // ITS A PROJECTILE
-                                    lifePart.setLife(lifePart.getLife() - damagePart.getDamage());
-                                    // Removing bullet after impact
-                                    world.removeEntityParts(collidingEntity);
+                            lifePartCollidingEntity = (LifePart) world.getMapByPart(LifePart.class.getSimpleName()).get(collidingEntity);
+
+                            if (damagePart != null) {
+                                if (lifePartCollidingEntity != null) {
+                                    System.out.println("Damage");
+                                    lifePartCollidingEntity.setLife(lifePartCollidingEntity.getLife() - damagePart.getDamage());
+                                    System.out.println(lifePartCollidingEntity.getLife() );
                                 }
+                                // Removing bullet after impact
+                                world.removeEntityParts(entry.getKey());
                             }
-                            // If health is 0 dead true
-                            if (lifePart.getLife() <= 0) {
-                                lifePart.setDead(true);
+
+                            if (lifePartCollidingEntity != null && lifePartCollidingEntity.getLife() <= 0) {
+                                System.out.println(lifePartCollidingEntity.getLife() );
+                                lifePartCollidingEntity.setDead(true);
                             }
 
                             // If dead remove
-                            if (lifePart.isDead()) {
-                                world.removeEntityParts(entry.getKey());
+                            if (lifePartCollidingEntity != null && lifePartCollidingEntity.isDead()) {
+                                System.out.println(lifePartCollidingEntity.getLife() );
+                                world.removeEntityParts(collidingEntity);
                             }
                         }
                     }

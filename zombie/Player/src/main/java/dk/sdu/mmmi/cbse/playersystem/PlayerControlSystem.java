@@ -37,7 +37,8 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entry.getKey());
                 AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entry.getKey());
                 CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey());
-
+                WeaponInventoryPart weaponInventoryPart = (WeaponInventoryPart) world.getMapByPart("WeaponInventoryPart").get(entry.getKey());
+                CollectorPart collectorPart = (CollectorPart) world.getMapByPart(CollectorPart.class.getSimpleName()).get(entry.getKey()); 
 
 
                 // Mouse event testing
@@ -49,6 +50,11 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 }
 
                 if (gameData.getMouse().isRightClick()){
+                    //Inventory testing. to be deleted
+                    if(weaponInventoryPart.getInventory().size()>0){
+                    UUID removeWeaponId = weaponInventoryPart.getInventory().get(0);
+                    weaponInventoryPart.removeWeapon(removeWeaponId);
+                    }
                 }
                 if (gameData.getMouse().isMiddleClick()){
                 }
@@ -65,11 +71,13 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 movingPart.setUp(gameData.getKeys().isDown(GameKeys.UP));
                 movingPart.setDown(gameData.getKeys().isDown(GameKeys.DOWN));
                 //combatPart.setAttacking(gameData.getKeys().isPressed(GameKeys.SPACE));
+                
+                collectorPart.setCollecting(gameData.getKeys().isPressed(GameKeys.ENTER));
 
                 //Weapon inventory testing. Delete
-                WeaponInventoryPart weaponInventoryPart = (WeaponInventoryPart) world.getMapByPart("WeaponInventoryPart").get(entry.getKey());
+
                 if(gameData.getKeys().isDown(GameKeys.SHIFT) & testy){
-                    for(int i = 0; i < 4;i++){
+                    for(int i = 0; i < 2;i++){
                         Entity weapon = new Entity();
 
                 weaponInventoryPart.addToInventory(weapon.getUUID());
