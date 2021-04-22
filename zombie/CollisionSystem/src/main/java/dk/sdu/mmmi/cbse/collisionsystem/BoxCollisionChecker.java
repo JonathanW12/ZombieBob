@@ -24,7 +24,7 @@ public class BoxCollisionChecker {
             //check for division by;
             float normX;
             try{
-                normX = -1/vec.y;
+                normX = - vec.y;
             } catch(ArithmeticException e){
                 normX = -1;
             }
@@ -35,15 +35,9 @@ public class BoxCollisionChecker {
             float[] maxNmin2 = getMaxAndMinProjections(shape2.getCornerVertices(), normX, normY);
            
             
-            if((maxNmin1[1] > maxNmin2[1] && maxNmin1[1] < maxNmin2[0]) || 
-               (maxNmin1[0] > maxNmin2[1] && maxNmin1[0] < maxNmin2[0]) ||
-               (maxNmin2[1] > maxNmin1[1] && maxNmin2[0] < maxNmin1[0]) )
-                        {
-                System.out.println("found shadow collision");
-                
-            } else {
+            if(!(maxNmin2[0]>=maxNmin1[1] && maxNmin1[0] >= maxNmin2[1])){
                 return false;
-            }
+            };
         }
         return true;
     }
@@ -53,7 +47,7 @@ public class BoxCollisionChecker {
             maxNmin[0] = Float.MIN_VALUE;
             maxNmin[1] = Float.MAX_VALUE;
             for(Point corner: corners){
-                float projection = Math.abs((corner.x*normX) + (corner.y*normY));
+                float projection = (corner.x*normX) + (corner.y*normY);
                 
                 if(projection > maxNmin[0]){
                     maxNmin[0] = projection;
@@ -61,7 +55,7 @@ public class BoxCollisionChecker {
                 if(projection < maxNmin[1]){
                     maxNmin[1] = projection; 
                 }
-            } 
+            }
             return maxNmin;
     }
     

@@ -54,10 +54,10 @@ public class BoxCollisionCheckerTest {
     @Test
     public void testGivenCollidingBoxesReturnTrue() {
         collider1 = new ColliderPart(10, 10);
-        position1 = new PositionPart(100,100, 0);
+        position1 = new PositionPart(100,100, (float)Math.PI);
         
         collider2 = new ColliderPart(10, 10);
-        position2 = new PositionPart(105,105, 0);
+        position2 = new PositionPart(105,105, (float)Math.PI);
         
         
         System.out.println("areColliding");
