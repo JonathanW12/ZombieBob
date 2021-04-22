@@ -3,10 +3,7 @@ package dk.sdu.mmmi.cbse.handgun;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
-import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.VisualPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponAnimationPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.services.IWeaponCreatorService;
 import org.openide.util.lookup.ServiceProvider;
 
@@ -29,6 +26,24 @@ public class HandgunCreator implements IWeaponCreatorService {
         world.addtoEntityPartMap(positionPart, gun);
         
         return gun;
+    }
+    @Override
+    public void spawnGun(GameData gameData, World world) {
+        Entity gun = HandgunCreator.scaffoldGun(world);
+
+        VisualPart visualPart = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(gun.getUUID());
+        visualPart.setIsVisible(true);
+
+        float spawnX = gameData.getDisplayWidth()/2;
+        float spawnY = gameData.getDisplayHeight()/2;
+        float radians = 3.1415f / 2;
+
+        PositionPart positionPart = new PositionPart(spawnX, spawnY, radians);
+
+        world.addtoEntityPartMap(positionPart, gun);
+        world.addtoEntityPartMap(new LootablePart(), gun);
+
+        HandgunProcessor.addToProcessingList(gun);
     }
     
     protected static Entity scaffoldGun(World world) {

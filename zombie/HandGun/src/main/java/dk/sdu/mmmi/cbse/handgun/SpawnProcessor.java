@@ -20,12 +20,15 @@ public class SpawnProcessor implements IEntityProcessingService {
     
     @Override
     public void process(GameData gameData, World world) {
+        /*
         currentTime = System.currentTimeMillis();
         
         if (currentTime > lastSpawnTime + spawnInterval) {
             spawnGun(gameData, world);
             lastSpawnTime = currentTime;
         }
+
+         */
     }
     
     private void spawnGun(GameData gameData, World world) {
