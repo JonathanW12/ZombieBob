@@ -20,6 +20,7 @@ public class ZombieControlSystem implements IEntityProcessingService {
     private final long spawnDelay = 5000;
     private long currentTime = System.currentTimeMillis();
     private long lastSpawnTime = currentTime;
+    private WeaponAnimationPart weaponAnimationPart;
 
     @Override
     public void process(GameData gameData, World world) {
@@ -45,7 +46,7 @@ public class ZombieControlSystem implements IEntityProcessingService {
 
                 
                 if (combatPart != null && combatPart.getCurrentWeapon() != null) {
-                    WeaponAnimationPart weaponAnimationPart = (WeaponAnimationPart) world.getMapByPart(
+                    weaponAnimationPart = (WeaponAnimationPart) world.getMapByPart(
                         WeaponAnimationPart.class.getSimpleName()).get(combatPart.getCurrentWeapon()
                     );
 
@@ -60,7 +61,7 @@ public class ZombieControlSystem implements IEntityProcessingService {
                         }
                     }
                 } else {
-                    visualPart.setSpriteName("enemyIdle");
+                    visualPart.setSpriteName(weaponAnimationPart.getIdleSpriteName());
                     if (movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp()) {
                         animationPart.setCurrentAnimation("walk");
                     }

@@ -8,5 +8,5 @@ import java.util.UUID;
 
 public interface IEnemyCreatorService {
     public void createEnemy(int Health, Position position, World world);
-    public void createBoss();
+    public void createBoss(int Health, Position position, World world);
 }
