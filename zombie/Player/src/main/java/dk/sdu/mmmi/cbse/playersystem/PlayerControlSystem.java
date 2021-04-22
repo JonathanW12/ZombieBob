@@ -72,7 +72,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 movingPart.setDown(gameData.getKeys().isDown(GameKeys.DOWN));
                 //combatPart.setAttacking(gameData.getKeys().isPressed(GameKeys.SPACE));
                 
-                collectorPart.setCollecting(gameData.getKeys().isPressed(GameKeys.ENTER));
+                collectorPart.setCollecting(gameData.getKeys().isPressed(GameKeys.E));
 
                 //Weapon inventory testing. Delete
 

@@ -31,7 +31,6 @@ public class HealthProcessingSystem implements IEntityProcessingService {
             // Loops through all DamageParts in hashmap
             for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart(DamagePart.class.getSimpleName()).entrySet()) {
 
-
                 // setting specific lifeParts
                 if (world.getMapByPart(LifePart.class.getSimpleName()) != null) {
                     lifePartOfDmger = (LifePart) world.getMapByPart(LifePart.class.getSimpleName()).get(entry.getKey());
