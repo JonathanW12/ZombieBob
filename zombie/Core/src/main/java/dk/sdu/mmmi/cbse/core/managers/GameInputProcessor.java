@@ -38,6 +38,9 @@ public class GameInputProcessor extends InputAdapter {
         if (k == Keys.SPACE) {
             gameData.getKeys().setKey(GameKeys.SPACE, true);
         }
+        if (k == Keys.E) {
+            gameData.getKeys().setKey(GameKeys.E, true);
+        }
         if (k == Keys.SHIFT_LEFT || k == Keys.SHIFT_RIGHT) {
             gameData.getKeys().setKey(GameKeys.SHIFT, true);
         }
