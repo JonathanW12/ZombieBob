@@ -37,7 +37,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entry.getKey());
                 AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entry.getKey());
                 CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey());
-
+                WeaponInventoryPart weaponInventoryPart = (WeaponInventoryPart) world.getMapByPart("WeaponInventoryPart").get(entry.getKey());
 
 
                 // Mouse event testing
@@ -49,6 +49,12 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 }
 
                 if (gameData.getMouse().isRightClick()){
+                    //Inventory testing. to be deleted
+                    if(weaponInventoryPart.getInventory().size()>0){
+                    UUID removeWeaponId = weaponInventoryPart.getInventory().get(0);
+                    System.out.println(removeWeaponId);
+                    weaponInventoryPart.removeWeapon(removeWeaponId);
+                    }
                 }
                 if (gameData.getMouse().isMiddleClick()){
                 }
@@ -67,9 +73,9 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 //combatPart.setAttacking(gameData.getKeys().isPressed(GameKeys.SPACE));
 
                 //Weapon inventory testing. Delete
-                WeaponInventoryPart weaponInventoryPart = (WeaponInventoryPart) world.getMapByPart("WeaponInventoryPart").get(entry.getKey());
+
                 if(gameData.getKeys().isDown(GameKeys.SHIFT) & testy){
-                    for(int i = 0; i < 4;i++){
+                    for(int i = 0; i < 2;i++){
                         Entity weapon = new Entity();
 
                 weaponInventoryPart.addToInventory(weapon.getUUID());

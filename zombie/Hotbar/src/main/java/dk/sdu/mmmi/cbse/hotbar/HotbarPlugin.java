@@ -13,7 +13,7 @@ import org.openide.util.lookup.ServiceProviders;
     @ServiceProvider(service = IGamePluginService.class),})
 public class HotbarPlugin implements IGamePluginService {
     private float hotbarHeight = 150;
-    private float hotbarWidth = 1100;
+    private float hotbarWidth = 1101;
 
     @Override
     public void start(GameData gameData, World world) {
