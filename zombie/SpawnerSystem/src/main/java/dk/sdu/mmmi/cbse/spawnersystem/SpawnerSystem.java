@@ -7,9 +7,13 @@ package dk.sdu.mmmi.cbse.spawnersystem;
 
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.services.IEnemyCreatorService;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.commonenemy.EnemyPlugin;
+import org.openide.util.Lookup;
 import org.openide.util.lookup.ServiceProvider;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,10 +31,12 @@ public class SpawnerSystem implements IEntityProcessingService {
     public void process(GameData gameData, World world) {
         if (lastSpawnTime < currentTime - 5000) {
             lastSpawnTime = currentTime;
-            enemyPlugin.spawn(400, 200, world);
+            //enemyPlugin.spawn(400, 200, world);
+            Lookup.getDefault().lookup(IEnemyCreatorService.class).createEnemy(world);
         }
         
         updateTime();
+
     }
     
     private void updateTime() {

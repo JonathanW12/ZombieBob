@@ -30,7 +30,7 @@ public class PlayerPlugin implements IGamePluginService {
         Entity player = new Entity();
         
         world.addtoEntityPartMap(new PositionPart(x, y, radians), player);
-        world.addtoEntityPartMap(new VisualPart("playerIdle", 80, 80), player);
+        world.addtoEntityPartMap(new VisualPart("playerIdle", 80, 80,3), player);
         world.addtoEntityPartMap(new MovingPart(speed,rotationSpeed),player);
         world.addtoEntityPartMap(new PlayerPart(),player);
         world.addtoEntityPartMap(new LifePart(100), player);

@@ -13,6 +13,8 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import java.util.Map;
 import java.util.UUID;
+
+import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 
@@ -61,7 +63,9 @@ public class CollisionDetectionProcessor implements IEntityProcessingService {
                 }
             }
         }
-    }
-}
 
+    
+    }
+    
+}
 

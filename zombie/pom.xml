@@ -77,6 +77,7 @@
         <module>CollisionSystem</module>
         <module>CommonWeapon</module>
         <module>HandGun</module>
+        <module>Map</module>
     </modules>
 
     <properties>

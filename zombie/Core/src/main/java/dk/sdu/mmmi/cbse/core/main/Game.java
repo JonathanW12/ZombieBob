@@ -78,6 +78,12 @@ public class Game implements ApplicationListener {
             
             Texture img2 = new Texture(Gdx.files.local("assets/Weapon_test1.png"));
             sprites.put("sword_sprite",new Sprite(img2));
+            
+            Texture img3 = new Texture(Gdx.files.local("assets/Background_Test1.png"));
+            sprites.put("background_sprite",new Sprite(img3));
+            
+            Texture img4 = new Texture(Gdx.files.local("assets/Wall_Test2.png"));
+            sprites.put("wall_sprite",new Sprite(img4));
         } catch (GdxRuntimeException e) {
             textureAtlas = new TextureAtlas("../../assets/sprites.txt");
             animationTextureAtlas = new TextureAtlas("../../assets/animations.txt");
@@ -88,6 +94,12 @@ public class Game implements ApplicationListener {
 
             Texture img2 = new Texture("../../assets/Weapon_test1.png");
             sprites.put("sword_sprite",new Sprite(img2));
+            
+            Texture img3 = new Texture("../../assets/Background_Test1.png");
+            sprites.put("background_sprite",new Sprite(img3));
+            
+            Texture img4 = new Texture("../../assets/Wall_Test2.png");
+            sprites.put("wall_sprite",new Sprite(img4));
         }
         
 

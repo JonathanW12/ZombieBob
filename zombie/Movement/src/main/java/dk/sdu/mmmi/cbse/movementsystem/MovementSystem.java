@@ -2,9 +2,7 @@ package dk.sdu.mmmi.cbse.movementsystem;
 
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
-import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.PlayerPart;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
@@ -92,18 +90,51 @@ public class MovementSystem implements IPostEntityProcessingService{
             // set position
             x += dx;
             y += dy;
-            
-            if (x > gameData.getDisplayWidth()) {
-                x = 0;
-            } else if (x < 0) {
-                x = gameData.getDisplayWidth();
+
+            ProjectilePart projectilePart = null;
+
+            if (world.getMapByPart(ProjectilePart.class.getSimpleName()) != null){
+                projectilePart = (ProjectilePart) world.getMapByPart(ProjectilePart.class.getSimpleName()).get(entry.getKey());
             }
 
-            if (y > gameData.getDisplayHeight()) {
-                y = 0;
-            } else if (y < 0) {
-                y = gameData.getDisplayHeight();
+            if (projectilePart == null){
+                /*
+                if (x > gameData.getDisplayWidth()) {
+                    x = 0;
+                } else if (x < 0) {
+                    x = gameData.getDisplayWidth();
+                }
+
+                if (y > gameData.getDisplayHeight()) {
+                    y = 0;
+                } else if (y < 0) {
+                    y = gameData.getDisplayHeight();
+                }
+
+                 */
+
+                if (x > gameData.getDisplayWidth()) {
+                    x = gameData.getDisplayWidth();
+                } else if (x < 0) {
+                    x = 0;
+                }
+
+                if (y > 650) {
+                    y = 650;
+                } else if (y < 0) {
+                    y = 0;
+                }
+            } else {
+                LifePart lifePart = (LifePart) world.getMapByPart(LifePart.class.getSimpleName()).get(entry.getKey());
+                if (x > gameData.getDisplayWidth() || x == 0){
+                    lifePart.setDead(true);
+                }
+                if (y > 650 || y == 0) {
+                    lifePart.setDead(true);
+                }
             }
+
+
 
             positionPart.setX(x);
             positionPart.setY(y);
