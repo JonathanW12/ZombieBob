@@ -77,6 +77,7 @@ public class PlayerPlugin implements IGamePluginService {
             0.15f, // Frame duration
             true // Animation can be interrupted
         );
+        
         animationPart.addAnimation(
             "shoot", 
             weaponAnimationPart.getAttackAnimationName(),
@@ -84,12 +85,20 @@ public class PlayerPlugin implements IGamePluginService {
             weaponAnimationPart.getAttackAnimationFrameDuration(),
             false // Animation can't be interrupted
         );
+
         animationPart.addAnimation(
             "walkWithWeapon",
             weaponAnimationPart.getWalkAnimationName(),
             weaponAnimationPart.getWalkAnimationFrameCount(),
             weaponAnimationPart.getWalkAnimationFrameDuration(),
             true // Animation can be interrupted
+        );
+         animationPart.addAnimation(
+            "sword", 
+            weaponAnimationPart.getAttackAnimationName(),
+            weaponAnimationPart.getAttackAnimationFrameCount(), 
+            weaponAnimationPart.getAttackAnimationFrameDuration(),
+            false // Animation can't be interrupted
         );
         animationPart.setCurrentAnimation("walk");
         

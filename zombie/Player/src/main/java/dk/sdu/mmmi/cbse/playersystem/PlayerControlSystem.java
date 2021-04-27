@@ -89,11 +89,11 @@ public class PlayerControlSystem implements IEntityProcessingService {
                     
                     visualPart.setSpriteName(weaponAnimationPart.getIdleSpriteName());
                     if ( weaponPart.isIsAttacking() ) {
-                        animationPart.setCurrentAnimation("shoot");
+                        animationPart.setCurrentAnimation("sword");
                     } else if (movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp()) {
                         if (animationPart.hasCurrentAnimationLooped()) {
                             animationPart.setCurrentAnimation("walkWithWeapon");
-                        }
+                        } 
                     }
                 } else {
                     visualPart.setSpriteName("playerIdle");
@@ -106,6 +106,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
     }
     
     private void setAnimation(AnimationPart animationPart, WeaponAnimationPart weaponAnimation) {
+      
         if (animationPart.getAnimationByName("shoot") == null ||
             !animationPart.getAnimationByName("shoot").getTextureFileName().equals(weaponAnimation.getAttackAnimationName())
         ) {
@@ -117,6 +118,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                     false // Animation can't be interrupted
                 );
         }
+
         
         if (animationPart.getAnimationByName("walkWithWeapon") == null || 
                 !animationPart.getAnimationByName("walkWithWeapon").getTextureFileName().equals(weaponAnimation.getWalkAnimationName())
@@ -128,6 +130,17 @@ public class PlayerControlSystem implements IEntityProcessingService {
                     weaponAnimation.getWalkAnimationFrameDuration(),
                     true // Animation can be interrupted
                 );
-        }   
+        }  
+               if (animationPart.getAnimationByName("sword") == null ||
+            !animationPart.getAnimationByName("sword").getTextureFileName().equals(weaponAnimation.getAttackAnimationName())
+        ) {
+                animationPart.addAnimation(
+                    "sword",
+                    weaponAnimation.getAttackAnimationName(),
+                    weaponAnimation.getAttackAnimationFrameCount(),
+                    weaponAnimation.getAttackAnimationFrameDuration(),
+                    false // Animation can't be interrupted
+                );
+        } 
     }
 }

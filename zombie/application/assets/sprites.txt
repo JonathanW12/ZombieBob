@@ -47,7 +47,7 @@ PlayerGun2
   index: -1
 playerIdle
   rotate: false
-  xy: 516, 0
+  xy: 550, 0
   size: 308, 190
   orig: 308, 190
   offset: 0, 0
@@ -113,5 +113,12 @@ spiderLegsUp
   xy: 266, 0
   size: 250, 175
   orig: 250, 175
+  offset: 0, 0
+  index: -1
+Sword
+  rotate: false
+  xy: 516, 0
+  size: 34, 183
+  orig: 34, 183
   offset: 0, 0
   index: -1

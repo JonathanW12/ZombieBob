@@ -150,11 +150,6 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>HandGun</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>LootingSystem</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -166,6 +161,16 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Map</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Sword</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>HandGun</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
