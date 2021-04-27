@@ -5,11 +5,15 @@
  */
 package dk.sdu.mmmi.cbse.spawnersystem;
 
+import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.TextPart;
 import dk.sdu.mmmi.cbse.common.services.IEnemyCreatorService;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.commonenemy.EnemyPlugin;
+import java.util.UUID;
 import org.openide.util.Lookup;
 import org.openide.util.lookup.ServiceProvider;
 
@@ -27,6 +31,7 @@ public class SpawnerSystem implements IEntityProcessingService {
     private long lastSpawnTime = currentTime;
     private SpawnerLocation location = new SpawnerLocation();
     private SpawnerEntities spawnEntities = new SpawnerEntities();
+    private UUID levelInformationEntityID;
     private int level = 1;
 
     @Override
@@ -42,7 +47,7 @@ public class SpawnerSystem implements IEntityProcessingService {
             waveControl(level, gameData, world);
             level++;
         }
-        
+        displayLevelInformation(world);
         updateTime();
     }
     
@@ -54,11 +59,9 @@ public class SpawnerSystem implements IEntityProcessingService {
         double defaultHealth = 100;
         double increment = 0.10 *level;
         double currentIncrease = 1;
-        System.out.println("Level: "+level);
         int max = 4;
         if (level <= max){
             currentIncrease =+ increment;
-            System.out.println("Health: "+(int)(defaultHealth*(1+currentIncrease)));
             for (int i = 0; i < level; i++) {
                 spawnEntities.createZombie((int)(defaultHealth*(1+currentIncrease)), location.random(gameData),world);
 
@@ -73,5 +76,19 @@ public class SpawnerSystem implements IEntityProcessingService {
             }
 
         }
+    }
+    private void displayLevelInformation(World world) {
+        if(levelInformationEntityID == null){
+        Entity levelInformation = new Entity();
+        levelInformationEntityID = levelInformation.getUUID();
+        
+        
+        world.addtoEntityPartMap(new PositionPart(600,750,2f), levelInformation);
+        world.addtoEntityPartMap(new TextPart(null,4), levelInformation);
+        }
+        TextPart textPart = (TextPart) world.getMapByPart("TextPart").get(levelInformationEntityID);
+        String levelMessage = ("Level: " + level);
+        
+        textPart.setMessage(levelMessage);
     }
 }

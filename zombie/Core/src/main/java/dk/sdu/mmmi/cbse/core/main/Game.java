@@ -17,6 +17,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import dk.sdu.mmmi.cbse.commonanimation.Animation;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Gdx2DPixmap;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.core.managers.GameInputProcessor;
@@ -36,6 +37,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import dk.sdu.mmmi.cbse.common.data.entityparts.AnimationPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.TextPart;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 import org.openide.util.Lookup;
@@ -58,6 +60,7 @@ public class Game implements ApplicationListener {
     private final HashMap<String, TextureRegion> animationRegions = new HashMap<String, TextureRegion>();
     private final int zDepth = 5;
     private ArrayList<ArrayList<UUID>> sortedVisualList = new ArrayList<>(zDepth);
+    private BitmapFont font;
     
     @Override
     public void create() {
@@ -66,14 +69,14 @@ public class Game implements ApplicationListener {
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
         
         batch = new SpriteBatch();
-
+        font = new BitmapFont();
         
         try {
             textureAtlas = new TextureAtlas(Gdx.files.local("assets/sprites.txt"));
             animationTextureAtlas = new TextureAtlas( Gdx.files.local("assets/animations.txt"));
 
             //temp way of adding hotbar
-            Texture img1 = new Texture(Gdx.files.local("assets/Hotbar_test4.png"));
+            Texture img1 = new Texture(Gdx.files.local("assets/Hotbar_official.png"));
             sprites.put("hotbar_sprite",new Sprite(img1));
             
             Texture img2 = new Texture(Gdx.files.local("assets/Weapon_test1.png"));
@@ -89,7 +92,7 @@ public class Game implements ApplicationListener {
             animationTextureAtlas = new TextureAtlas("../../assets/animations.txt");
 
             //temp way of adding hotbar
-            Texture img1 = new Texture("../../assets/Hotbar_test4.png");
+            Texture img1 = new Texture("../../assets/Hotbar_official.png");
             sprites.put("hotbar_sprite",new Sprite(img1));
 
             Texture img2 = new Texture("../../assets/Weapon_test1.png");
@@ -191,33 +194,6 @@ public class Game implements ApplicationListener {
     }
     private void draw() {
         batch.begin();  
-        /*
-        for (Map.Entry<UUID, EntityPart> entry: world.getMapByPart("VisualPart").entrySet()){ 
-            PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(entry.getKey());
-            VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entry.getKey());
-            AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entry.getKey());
-
-            if (animationPart != null && animationPart.isAnimated()) {
-                drawAnimation(
-                    animationPart,
-                    positionPart.getX(),
-                    positionPart.getY(),
-                    positionPart.getRadians(),
-                    visualPart.getWidth(),
-                    animationPart.getAnimationByName(animationPart.getCurrentAnimationName()).getFrameCount()
-                );
-            } else {
-                drawSprite(
-                    visualPart.getSpriteName(),
-                    positionPart.getX(),
-                    positionPart.getY(),
-                    positionPart.getRadians(),
-                    visualPart.getWidth()
-                );
-            }
-
-        }
-    */
         sortVisualParts();
         for (int i = 0; i < zDepth; i++) {
 
@@ -249,11 +225,21 @@ public class Game implements ApplicationListener {
 
     }
 }
-        
+        drawFonts();
         batch.end();
         clearSortedVisualList();
     }
 
+    private void drawFonts(){
+        if(world.getMapByPart("TextPart") != null){
+        for (Map.Entry<UUID, EntityPart> entry: world.getMapByPart("TextPart").entrySet()){
+            PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(entry.getKey());
+            TextPart textPart = (TextPart) world.getMapByPart("TextPart").get(entry.getKey());
+            font.draw(batch, textPart.getMessage(),positionPart.getX(),positionPart.getY());
+        }
+        }
+    }
+    
     private void drawSprite(String spriteName, float x, float y, float radians, float width) {
         Sprite sprite = sprites.get(spriteName);
         float originalWidth = sprite.getWidth();

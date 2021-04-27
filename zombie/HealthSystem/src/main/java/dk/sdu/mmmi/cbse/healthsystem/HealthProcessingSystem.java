@@ -1,5 +1,6 @@
 package dk.sdu.mmmi.cbse.healthsystem;
 
+import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
@@ -20,8 +21,9 @@ public class HealthProcessingSystem implements IEntityProcessingService {
     private LifePart lifePartOfDmger;
     private LifePart lifePartCollidingEntity;
     private DamagePart damagePart;
-
-
+    //scuff method for counting dead zombies
+    private int zombiesKilled = 0;
+    private UUID killInformationEntityID;
     @Override
     public void process(GameData gameData, World world) {
 
@@ -66,12 +68,29 @@ public class HealthProcessingSystem implements IEntityProcessingService {
                             // If dead remove
                             if (lifePartCollidingEntity != null && lifePartCollidingEntity.isDead()) {
                                 world.removeEntityParts(collidingEntity);
+                                //TO BE CHANGED.
+                                zombiesKilled++;
                             }
                         }
                     }
                 }
             }
         }
+        displayKillInformation(world);
+    }
+        private void displayKillInformation(World world) {
+        if(killInformationEntityID == null){
+        Entity killInformation = new Entity();
+        killInformationEntityID = killInformation.getUUID();
+        
+        
+        world.addtoEntityPartMap(new PositionPart(600,700,2f), killInformation);
+        world.addtoEntityPartMap(new TextPart(null,4), killInformation);
+        }
+        TextPart textPart = (TextPart) world.getMapByPart("TextPart").get(killInformationEntityID);
+        String killMessage = ("Zombies Slain: " + zombiesKilled);
+        
+        textPart.setMessage(killMessage);
     }
 }
     

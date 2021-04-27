@@ -1,10 +1,12 @@
 package dk.sdu.mmmi.cbse.hotbar;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.TextPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponInventoryPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.VisualPart;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
@@ -25,13 +27,13 @@ public class HotbarContolSystem implements IPostEntityProcessingService {
     float itemPositionsY = 725;
     int currentItem;
     int itemIndex;
+    UUID levelInformationEntityID;
     ArrayList<UUID> itemsToBeRemoved = new ArrayList<UUID>();
     //This hashMap: Keys are weapon IDs in the players inventory and values are weapon IDs in the hotbar
     HashMap<UUID,UUID> excistingItems2 = new HashMap<UUID,UUID>();
+    
     @Override
     public void process(GameData gameData, World world) {
-        UUID weaponID;
-        String weaponSprite;
     for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart("PlayerPart").entrySet()){
         WeaponInventoryPart weaponInventoryPart = (WeaponInventoryPart) world.getMapByPart("WeaponInventoryPart").get(entry.getKey());
         if(weaponInventoryPart.getInventory()!=null){
@@ -67,8 +69,34 @@ public class HotbarContolSystem implements IPostEntityProcessingService {
                 world.addtoEntityPartMap(new VisualPart(weaponSprite,itemPicSize,itemPicSize,4),hotbarItem);
                 excistingItems2.put(id, hotbarItem.getUUID());
         }
+    }
+        displayPlayerHp();
+    }
+}
+    private void reorganizeHotbarItemPositions(World world, WeaponInventoryPart weaponInventoryPart){
+        for(Map.Entry weaponId : excistingItems2.entrySet()){
+            PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(weaponId.getValue());
+
+            itemIndex = weaponInventoryPart.getInventory().indexOf(weaponId.getKey());
+            positionPart.setX(itemPositionsX[itemIndex]);
         }
     }
     }
+    }
+    private void removeItemsNoLongerInInventory(World world, WeaponInventoryPart weaponInventoryPart){
+        for(Map.Entry weaponId : excistingItems2.entrySet()){
+        if(!weaponInventoryPart.getInventory().contains(weaponId.getKey())){
+            //Removing player item from hotbar list
+            itemsToBeRemoved.add((UUID) weaponId.getKey());
+            //Removing hotbar item from world
+            world.removeEntityParts((UUID) weaponId.getValue());
+        }
+        }
+        //Removing player item from hotbar list
+        itemsToBeRemoved.forEach(id -> excistingItems2.remove(id));
+        itemsToBeRemoved.clear();
+    }
+    private void displayPlayerHp(){
+        
     }
 }
