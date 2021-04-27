@@ -36,38 +36,13 @@ public class HotbarContolSystem implements IPostEntityProcessingService {
     public void process(GameData gameData, World world) {
     for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart("PlayerPart").entrySet()){
         WeaponInventoryPart weaponInventoryPart = (WeaponInventoryPart) world.getMapByPart("WeaponInventoryPart").get(entry.getKey());
-        if(weaponInventoryPart.getInventory()!=null){
-            
-        //Checking if hotbar contains items that are not in playerinventory
+        if(weaponInventoryPart.getInventory()!=null){ 
         if(!excistingItems2.isEmpty()){
-        for(Map.Entry weaponId : excistingItems2.entrySet()){
-            if(!weaponInventoryPart.getInventory().contains(weaponId.getKey())){
-                //Removing player item from hotbar list
-                itemsToBeRemoved.add((UUID) weaponId.getKey());
-                //Removing hotbar item from world
-                world.removeEntityParts((UUID) weaponId.getValue());
-            }
+            removeItemsNoLongerInInventory(world,weaponInventoryPart);
+            reorganizeHotbarItemPositions(world, weaponInventoryPart);
         }
-        //Removing player item from hotbar list
-        itemsToBeRemoved.forEach(id -> excistingItems2.remove(id));
-        itemsToBeRemoved.clear();
-        }
-        
-        //Checking if playerInventory contains an item that is not in the hotbar
         for(UUID id : weaponInventoryPart.getInventory()){
-            //Adding new Entity items to the hotbar
-            if(!excistingItems2.containsKey(id)){
-                weaponID = id;
-                VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(weaponID);
-                weaponSprite = visualPart.getSpriteName();
-            
-                Entity hotbarItem = new Entity();
-                //return the position in the inventory the item should be placed
-                itemIndex = weaponInventoryPart.getInventory().indexOf(id);
-                        
-                world.addtoEntityPartMap(new PositionPart(itemPositionsX[itemIndex],itemPositionsY,radians), hotbarItem);
-                world.addtoEntityPartMap(new VisualPart(weaponSprite,itemPicSize,itemPicSize,4),hotbarItem);
-                excistingItems2.put(id, hotbarItem.getUUID());
+            addNewItemsToHotbar(world,id,weaponInventoryPart);
         }
     }
         displayPlayerHp();
@@ -81,6 +56,17 @@ public class HotbarContolSystem implements IPostEntityProcessingService {
             positionPart.setX(itemPositionsX[itemIndex]);
         }
     }
+    private void addNewItemsToHotbar(World world, UUID playerWeaponID, WeaponInventoryPart weaponInventoryPart){
+        if(!excistingItems2.containsKey(playerWeaponID)){
+            VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(playerWeaponID);
+
+            Entity hotbarItem = new Entity();
+            //return the position in the inventory the item should be placed
+            itemIndex = weaponInventoryPart.getInventory().indexOf(playerWeaponID);
+
+            world.addtoEntityPartMap(new PositionPart(itemPositionsX[itemIndex],itemPositionsY,radians), hotbarItem);
+            world.addtoEntityPartMap(new VisualPart(visualPart.getSpriteName(),itemPicSize,itemPicSize,4),hotbarItem);
+            excistingItems2.put(playerWeaponID, hotbarItem.getUUID());
     }
     }
     private void removeItemsNoLongerInInventory(World world, WeaponInventoryPart weaponInventoryPart){
