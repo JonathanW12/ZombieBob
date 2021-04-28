@@ -23,8 +23,8 @@ public class PlayerPlugin implements IGamePluginService {
 
         float speed = 3;
         float rotationSpeed = 5;
-        float x = gameData.getDisplayWidth() / 2;
-        float y = gameData.getDisplayHeight() / 2;
+        float x = gameData.getDisplayWidth() / 2 + 10;
+        float y = gameData.getDisplayHeight() / 2 + 10;
         float radians = 3.1415f / 2;
 
         Entity player = new Entity();
@@ -39,7 +39,14 @@ public class PlayerPlugin implements IGamePluginService {
         world.addtoEntityPartMap(new WeaponInventoryPart(4), player);
         world.addtoEntityPartMap(new CombatPart(), player);
         world.addtoEntityPartMap(new CollectorPart(), player);
-        world.addtoEntityPartMap(new ColliderPart(30), player);
+        ColliderPart collider = new ColliderPart();
+        collider.addShapePoint(25,(float)Math.PI/6);
+        collider.addShapePoint(40,(float)Math.PI/2);
+        collider.addShapePoint(25,5*(float)Math.PI/6);
+        collider.addShapePoint(25,(float)(Math.PI+Math.PI/6));
+        collider.addShapePoint(40,(float)(Math.PI+Math.PI/2));
+        collider.addShapePoint(25,(float)(Math.PI+5*Math.PI/6));
+        world.addtoEntityPartMap(collider, player);
         world.addtoEntityPartMap(createInitialAnimation(), player);
     }
 

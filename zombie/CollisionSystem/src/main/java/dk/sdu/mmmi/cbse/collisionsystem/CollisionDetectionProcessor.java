@@ -59,31 +59,16 @@ public class CollisionDetectionProcessor implements IEntityProcessingService {
                             
                         
                     //collider1 should not check collision on itself, or on colliders that already processed
-                        if(entry.getKey() != entry2.getKey() /*&& !collider1.getCollidingEntities().contains(entry2.getKey()) && collider2.getCollidingEntities().contains(entry.getKey())*/){
-                                
-                                
+                        if(entry.getKey() != entry2.getKey() && !collider2.getCollidingEntities().contains(entry.getKey()) && !collider1.getCollidingEntities().contains(entry2.getKey())){
                             if(collider1.getRadius()!= 0 && collider2.getRadius()!=0){
+                                
                                 float distance = (float)Math.sqrt(Math.pow(collider1Pos.getX() - collider2Pos.getX(),2) + Math.pow(collider1Pos.getY() - collider2Pos.getY(),2));
                                 if(distance < collider1.getRadius() + collider2.getRadius()){
+                                    if(boxCollisionChecker.areColliding(collider1, collider1Pos, collider2, collider2Pos)){
                                     collider1.getCollidingEntities().add(entry2.getKey());
                                     collider2.getCollidingEntities().add(entry.getKey());
+                                    }
                                 }
-                            }
-                            else if(collider1.getHeight()!=0 && collider2.getHeight()!=0){
-                                if(boxCollisionChecker.areColliding(collider1, collider1Pos, collider2, collider2Pos)){
-                                    collider1.getCollidingEntities().add(entry2.getKey());
-                                    collider2.getCollidingEntities().add(entry.getKey());
-                                }
-                            }
-                            else if(collider1.getHeight()!=0 && collider2.getRadius()!=0){
-                                if(boxCollisionChecker.areColliding2(collider1, collider1Pos, collider2, collider2Pos)){
-                                    //System.out.println("is colliding with poly");
-                                    collider1.getCollidingEntities().add(entry2.getKey());
-                                    collider2.getCollidingEntities().add(entry.getKey());
-                                }
-//                                if(boxCollisionChecker.areColliding2(collider1, collider1Pos, collider2, collider2Pos)){
-//                                    System.out.println("yeah");
-//                                }
                             }
                         }
                     }

@@ -36,6 +36,7 @@ import java.util.Map;
 import java.util.UUID;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.common.data.entityparts.AnimationPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import java.util.ArrayList;
@@ -254,7 +255,10 @@ public class Game implements ApplicationListener {
         
         batch.end();
         clearSortedVisualList();
+        
+        if(gameData.getKeys().isDown(GameKeys.SPACE)){
         drawHitboxes();
+        }
         
     }
     
@@ -271,19 +275,15 @@ public class Game implements ApplicationListener {
             sr.begin(ShapeRenderer.ShapeType.Line);
             
             
-            if(((ColliderPart)entry.getValue()).getHeight() != 0){
+            if(((ColliderPart)entry.getValue()).getRadius() != 0){
                 
-                
-                
-            ColliderPart.Shape shape = ((ColliderPart)entry.getValue()).getShape(position);
-            for (int i = 0, j = shape.getCornerVertices().size() - 1;
-                    i < shape.getCornerVertices().size();
+                ArrayList<ColliderPart.Vector2> corners = ((ColliderPart)entry.getValue()).getCornerVecs(position);
+                for (int i = 0, j = corners.size() - 1;
+                    i < corners.size();
                     j = i++) {
 
-                sr.line(shape.getCornerVertices().get(i).x, shape.getCornerVertices().get(i).y, shape.getCornerVertices().get(j).x, shape.getCornerVertices().get(j).y);
-            }} else if(((ColliderPart)entry.getValue()).getRadius() != 0){
-                sr.circle(position.getX(), position.getY(), ((ColliderPart)entry.getValue()).getRadius());
-            }
+                sr.line(corners.get(i).x, corners.get(i).y, corners.get(j).x, corners.get(j).y);
+            }}
                 
             sr.end();
         }
