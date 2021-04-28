@@ -115,7 +115,7 @@ public class Game implements ApplicationListener {
         cam = new OrthographicCamera(gameData.getDisplayWidth(), gameData.getDisplayHeight());
         cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
-        viewport = new ExtendViewport(1100, 800, cam);
+        viewport = new ExtendViewport(1140, 840, cam);
 
         InputProcessor keyInputProcessor = new GameInputProcessor(gameData);
         InputProcessor mouseInputProcessor = new MouseInputProcessor(gameData,cam);

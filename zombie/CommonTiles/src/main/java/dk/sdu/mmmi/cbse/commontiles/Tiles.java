@@ -31,10 +31,10 @@ public class Tiles {
         int verticalTiles = (int) (gameData.getDisplayHeight() / tileHeight);
         int horizontalTiles = (int) (gameData.getDisplayWidth() / tileWidth);
         
-        tiles = new Tile[verticalTiles + 1][horizontalTiles + 1];
+        tiles = new Tile[verticalTiles][horizontalTiles];
         
-        for (int i = 0; i <= verticalTiles; i++) {
-            for (int j = 0; j <= horizontalTiles; j++) {
+        for (int i = 0; i < verticalTiles; i++) {
+            for (int j = 0; j < horizontalTiles; j++) {
                 tiles[i][j] = new Tile(
                     j * tileWidth,
                     i * tileHeight,

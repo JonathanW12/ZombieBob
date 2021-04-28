@@ -33,7 +33,10 @@ public class MapPlugin implements IGamePluginService{
         
         createBackground(gameData,world);
         
-        createHoriziontalWallSection(0, 0, horizontalTiles);
+        createHoriziontalWallSection(0, 0, horizontalTiles); // Bottom Wall
+        createHoriziontalWallSection(0, verticalTiles - 3, horizontalTiles); // Top Wall
+        createVerticalWallSection(1, 0, verticalTiles - 4); // Left Wall
+        createVerticalWallSection(1, horizontalTiles - 1, verticalTiles - 4); // Right Wall
         
 
         /*
@@ -70,13 +73,13 @@ public class MapPlugin implements IGamePluginService{
     }
     
     private void createHoriziontalWallSection(int startHorizontalIndex, int verticalIndex, float width) {
-        for (int i = startHorizontalIndex; i < width; i++) {
+        for (int i = startHorizontalIndex; i < startHorizontalIndex + width; i++) {
             placeWall(tiles[verticalIndex][i]);
         }
     }
     
     private void createVerticalWallSection(int startVerticalIndex, int horizontalIndex, float height) {
-        for (int i = startVerticalIndex; i < height; i++) {
+        for (int i = startVerticalIndex; i < startVerticalIndex + height; i++) {
             placeWall(tiles[i][horizontalIndex]);
         }
     }
