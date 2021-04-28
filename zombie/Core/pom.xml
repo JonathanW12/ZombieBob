@@ -104,6 +104,11 @@
          <scope>system</scope>
          <version>1.0</version>
          <systemPath>${basedir}\src\lib\ldapjdk.jar</systemPath>-->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CommonTiles</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <properties>
         <libGDX.version>1.5.0</libGDX.version>
