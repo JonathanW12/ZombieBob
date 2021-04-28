@@ -43,7 +43,7 @@ public class Tile {
         return isWalkable;
     }
     
-    public void setWalkable(boolean isWalkable) {
+    public void setIsWalkable(boolean isWalkable) {
         this.isWalkable = isWalkable;
     }
     

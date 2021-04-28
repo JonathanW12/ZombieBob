@@ -44,4 +44,13 @@ public class Tiles {
             }
         }
     }
+    
+    public float getTileWidth() {
+        return tileWidth;
+    }
+    
+    public float getTileHeight() {
+        return tileHeight;
+    }
+    
 }
