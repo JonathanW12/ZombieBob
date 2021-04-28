@@ -55,7 +55,7 @@ public class CollisionDetectionProcessor implements IEntityProcessingService {
                             }
                             else if(collider1.getHeight()!=0 && collider2.getHeight()!=0){
                                 if(boxCollisionChecker.areColliding(collider1, collider1Pos, collider2, collider2Pos)){
-                                    System.out.println("boxes are colliding");
+                                    // System.out.println("boxes are colliding");
                                 }
                             }
                         }
