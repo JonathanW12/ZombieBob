@@ -38,23 +38,13 @@ public class MapPlugin implements IGamePluginService{
         createVerticalWallSection(1, 0, verticalTiles - 4); // Left Wall
         createVerticalWallSection(1, horizontalTiles - 1, verticalTiles - 4); // Right Wall
         
+        // L-Obstacle
+        createHoriziontalWallSection(3, 3, 2);
+        createVerticalWallSection(3, 3, 4);
+        
+        // Vertical obstacle
+        createVerticalWallSection(3, horizontalTiles - 4, 6);
 
-        /*
-        //Creating Boundary walls. Note that the "top" of the map is at 650px due to the hotbar
-        //The walls start 30 px in to make the width of the game match the height
-        createWallRight(world,0,650,1100);
-        createWallRight(world,0,0,1100);
-        createWallUp(world,0,0,650);
-        createWallUp(world,1100,0,650);
-        
-        //Creating a few obstacles
-        createWallRight(world,200,200,300);
-        createWallUp(world,500,200,200);
-        
-        createWallRight(world,800,550,150);
-        createWallUp(world,950,200,350);
-        
-        createWallRight(world,100,450,150);*/
     }
     
     private void placeWall(Tile tile) {
