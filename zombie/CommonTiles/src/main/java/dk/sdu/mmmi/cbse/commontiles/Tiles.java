@@ -53,4 +53,20 @@ public class Tiles {
         return tileHeight;
     }
     
+    public Tile getTileByPosition(float x, float y) {
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[i].length; j ++) {
+                Tile tile = tiles[i][j];
+                if (
+                    ((x >= tile.getX()) && (x < tile.getX() + tile.getWidth())) &&
+                    ((y >= tile.getY()) && (y < tile.getY() + tile.getHeight()))
+                ) {
+                    return tile;
+                }
+            }
+        }
+        
+        return null;
+    }
+    
 }
