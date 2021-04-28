@@ -87,7 +87,7 @@ public class SpawnerSystem implements IEntityProcessingService {
         world.addtoEntityPartMap(new TextPart(null,4), levelInformation);
         }
         TextPart textPart = (TextPart) world.getMapByPart("TextPart").get(levelInformationEntityID);
-        String levelMessage = ("Level: " + level);
+        String levelMessage = ("Level: " + (level-1));
         
         textPart.setMessage(levelMessage);
     }
