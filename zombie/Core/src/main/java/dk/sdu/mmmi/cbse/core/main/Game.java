@@ -14,7 +14,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import dk.sdu.mmmi.cbse.common.data.entitytypeparts.PlayerPart;
 import dk.sdu.mmmi.cbse.commonanimation.Animation;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -112,7 +114,7 @@ public class Game implements ApplicationListener {
         cam = new OrthographicCamera(gameData.getDisplayWidth(), gameData.getDisplayHeight());
         cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
-        viewport = new ExtendViewport(1100, 800, cam);
+        viewport = new ExtendViewport(gameData.getDisplayHeight()/2, gameData.getDisplayHeight()/2, cam);
 
         InputProcessor keyInputProcessor = new GameInputProcessor(gameData);
         InputProcessor mouseInputProcessor = new MouseInputProcessor(gameData,cam);
@@ -155,6 +157,16 @@ public class Game implements ApplicationListener {
 
     @Override
     public void render() {
+
+        if (world.getMapByPart(PlayerPart.class.getSimpleName()).keySet().toArray().length > 0) {
+            UUID uuid = (UUID) world.getMapByPart(PlayerPart.class.getSimpleName()).keySet().toArray()[0];
+            PositionPart playerPositionPart = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(uuid);
+            cam.unproject(new Vector3(playerPositionPart.getX(), playerPositionPart.getY(), 0));
+            cam.position.set(playerPositionPart.getX(), playerPositionPart.getY(), 0);
+            cam.update();
+            batch.setProjectionMatrix(cam.combined);
+        }
+
         // clear screen to black
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -193,7 +205,8 @@ public class Game implements ApplicationListener {
         }
     }
     private void draw() {
-        batch.begin();  
+        batch.begin(); 
+
         sortVisualParts();
         for (int i = 0; i < zDepth; i++) {
 

@@ -45,7 +45,7 @@ public class MapPlugin implements IGamePluginService{
         Entity background = new Entity();
         
         world.addtoEntityPartMap(new PositionPart(x,y,wallRadians), background);
-        world.addtoEntityPartMap(new VisualPart("background_sprite",gameWidth,gameHeight,0),background);
+        world.addtoEntityPartMap(new VisualPart("background_sprite",gameData.getDisplayWidth()+gameData.getDisplayWidth()/2,gameData.getDisplayHeight()+gameData.getDisplayWidth()/2,0),background);
     }
     
     private void createWallRight(World world, float x, float y, float length){
