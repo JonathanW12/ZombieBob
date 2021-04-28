@@ -6,6 +6,7 @@
 package dk.sdu.mmmi.cbse.collisionsystem;
 
 import dk.sdu.mmmi.cbse.common.data.entityparts.ColliderPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.ColliderPart.Point;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import java.util.ArrayList;
 
@@ -16,23 +17,28 @@ import java.util.ArrayList;
 public class BoxCollisionChecker {
     
     public boolean areColliding(ColliderPart collider1, PositionPart position1, ColliderPart collider2, PositionPart position2){
-        Shape shape1 = new Shape(collider1, position1);
-        Shape shape2 = new Shape(collider2, position2);
         
         //create a shadow for each side vector
-        for(Point vec: shape1.getSideVertices()){
+        for(ColliderPart.Point vec: collider1.getShape(position1).getSideVertices()){
             //check for division by;
-            float normX;
-            try{
-                normX = - vec.y;
-            } catch(ArithmeticException e){
-                normX = -1;
-            }
-            
+            float normX = - vec.y;
             float normY = vec.x;
             
-            float[] maxNmin1 = getMaxAndMinProjections(shape1.getCornerVertices(), normX, normY);
-            float[] maxNmin2 = getMaxAndMinProjections(shape2.getCornerVertices(), normX, normY);
+            float[] maxNmin1 = getMaxAndMinProjections(collider1.getShape(position1).getCornerVertices(), normX, normY);
+            float[] maxNmin2 = getMaxAndMinProjections(collider2.getShape(position2).getCornerVertices(), normX, normY);
+           
+            
+            if(!(maxNmin2[0]>=maxNmin1[1] && maxNmin1[0] >= maxNmin2[1])){
+                return false;
+            };
+        }
+        for(ColliderPart.Point vec: collider2.getShape(position2).getSideVertices()){
+            //check for division by;
+            float normX = - vec.y;
+            float normY = vec.x;
+            
+            float[] maxNmin1 = getMaxAndMinProjections(collider2.getShape(position2).getCornerVertices(), normX, normY);
+            float[] maxNmin2 = getMaxAndMinProjections(collider1.getShape(position1).getCornerVertices(), normX, normY);
            
             
             if(!(maxNmin2[0]>=maxNmin1[1] && maxNmin1[0] >= maxNmin2[1])){
@@ -40,6 +46,104 @@ public class BoxCollisionChecker {
             };
         }
         return true;
+    }
+    
+    
+    public boolean areColliding2(ColliderPart collider1, PositionPart position1, ColliderPart collider2, PositionPart position2){
+        
+//        ArrayList<Point> corners = collider1.getShape(position1).getCornerVertices();
+//        ArrayList<Float> lengths = new ArrayList<>();
+//        for(int i = 0; i < corners.size(); i++){
+//            float vx = corners.get(i).x - position2.getX();
+//            float vy = corners.get(i).y - position2.getY();
+//            float len = (float)Math.sqrt(Math.pow(vx,2)+ Math.pow(vy,2));
+//            if(len < collider2.getRadius()){
+//                return true;
+//            }
+//            lengths.add(len);
+//        }
+        float[] maxNmin1;
+        float[] maxNmin2 = new float[2];
+        
+        //create a shadow for each side vector
+        for(ColliderPart.Point vec: collider1.getShape(position1).getSideVertices()){
+            //check for division by;
+            float normX = - vec.y;
+            float normY = vec.x;
+            
+            float maxProjection = ((position2.getX() + collider2.getRadius())*normX) + ((position2.getY()+collider2.getRadius())*normY);
+            float minProjection = ((position2.getX() - collider2.getRadius())*normX) + ((position2.getY() - collider2.getRadius())*normY);
+            maxNmin1 = getMaxAndMinProjections(collider1.getShape(position1).getCornerVertices(), normX, normY);
+            maxNmin2[0] = maxProjection;
+            maxNmin2[1] = minProjection;
+            
+           
+            
+            if(!(maxNmin2[0]>=maxNmin1[1] && maxNmin1[0] >= maxNmin2[1])){
+                return false;
+            };
+        }
+        
+        float normX = position2.getX() - position1.getX();
+        float normY = position2.getY() - position1.getY();
+        //System.out.println("2max: " + maxNmin2[0] + ", 2min: " + maxNmin2[1]);
+        System.out.println("2max: " + maxNmin2[0] + ", 2min: " + maxNmin2[1]);
+        return true;
+    }
+    
+    public boolean circleCollidingWithPoly(ColliderPart collider1, PositionPart position1, ColliderPart collider2, PositionPart position2){
+        
+        //create a shadow for each side vector
+        
+        float cx = position2.getX();
+        float cy = position2.getY();
+        
+        ArrayList<Point> corners = collider1.getShape(position1).getCornerVertices();
+        ArrayList<Float> lengths = new ArrayList<>();
+        for(int i = 0; i < corners.size(); i++){
+            float vx = corners.get(i).x - position2.getX();
+            float vy = corners.get(i).y - position2.getY();
+            float len = (float)Math.sqrt(Math.pow(vx,2)+ Math.pow(vy,2));
+            //System.out.println("len: "+ len + " radius: " + collider2.getRadius());
+            if(len < collider2.getRadius()){
+                return true;
+            }
+            lengths.add(len);
+        }
+        for(int i = 0; i < corners.size(); i++){
+            //point 1
+            float x1 = corners.get(i).x;
+            float y1 = corners.get(i).y;
+            
+            //point 2
+            float x2 = corners.get((i + 1) % corners.size()).x;
+            float y2 = corners.get((i + 1) % corners.size()).y;
+            
+            float dot = ( ((cx-x1)*(x2-x1)) + ((cy-y1)*(y2-y1)) ) / (float)Math.pow(lengths.get(i),2);
+            
+            float closestX = x1 + (dot * (x2-x1));
+            float closestY = y1 + (dot * (y2-y1));
+            
+            float buffer = 0.2f;
+            
+            float p2pLen = (float)Math.sqrt(Math.pow(x1-x2,2)+ Math.pow(y1-y2,2));
+            
+            boolean onSegment = lengths.get(i) + lengths.get((i+1)%corners.size()) >= p2pLen - buffer &&
+                                lengths.get(i) + lengths.get((i+1)%corners.size()) <= p2pLen + buffer;
+            if (!onSegment){
+                //continue;
+            }
+            
+            float distX = closestX - cx;
+            float distY = closestY - cy;
+            float distance = (float)Math.sqrt( (distX*distX) + (distY*distY) );
+            
+            if(distance <= collider2.getRadius()){
+                return true;
+            }
+        }
+        return false;
+        
     }
     //index 0 is max projection and index 1 is min projection
     public float[] getMaxAndMinProjections(ArrayList<Point> corners, float normX, float normY){
@@ -58,51 +162,4 @@ public class BoxCollisionChecker {
             }
             return maxNmin;
     }
-    
-    public static class Shape{
-        private ArrayList<Point> cornerVecs = new ArrayList<>();
-        private ArrayList<Point> sideVecs = new ArrayList<>();
-        
-        protected Shape(ColliderPart collider, PositionPart position){
-            float a = collider.getHeight()/2;
-            float b = collider.getWidth()/2;
-            float c = (float)Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
-            float B = (float)Math.acos(a/c);
-            this.cornerVecs.add(new Point((position.getRadians()) -  B, c, position));
-            this.cornerVecs.add(new Point((position.getRadians())  + B, c, position));
-            this.cornerVecs.add(new Point((position.getRadians()) - B + (float)Math.PI, c, position));
-            this.cornerVecs.add(new Point((position.getRadians()) + B + (float)Math.PI, c, position));
-            
-            
-            //måske man bare kan få fat i en vector med en get metode istedet for, at en array skal fyldes op hver gang..
-            for(int i = 0; i < 4; i++ ){
-                this.sideVecs.add(new Point(
-                        cornerVecs.get(i).x - this.cornerVecs.get((i + 1) % 3).x,
-                        cornerVecs.get(i).y - this.cornerVecs.get((i + 1) % 3).y));
-            }
-        }
-        public ArrayList<Point> getSideVertices(){
-            return this.sideVecs;
-        }
-        
-        public ArrayList<Point> getCornerVertices(){
-            return this.cornerVecs;
-        }
-        
-    }
-    
-    static class Point{
-        float x;
-        float y;
-        
-        protected Point(float angle, float hypotenuse, PositionPart position){
-            this.x = Math.round(position.getX() + hypotenuse * (float)Math.cos(angle));
-            this.y = Math.round(position.getY() + hypotenuse * (float)Math.sin(angle));
-        }
-        protected Point(float x, float y){
-            this.x = x;
-            this.y = y;
-        }
-    }
-    
 }

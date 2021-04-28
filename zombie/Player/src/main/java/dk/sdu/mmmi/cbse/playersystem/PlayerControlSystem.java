@@ -36,11 +36,16 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey());
                 WeaponInventoryPart weaponInventoryPart = (WeaponInventoryPart) world.getMapByPart("WeaponInventoryPart").get(entry.getKey());
                 CollectorPart collectorPart = (CollectorPart) world.getMapByPart(CollectorPart.class.getSimpleName()).get(entry.getKey());
-
+                ColliderPart colliderPart = (ColliderPart) world.getMapByPart(ColliderPart.class.getSimpleName()).get(entry.getKey());
+                
                 combatPart.setAttacking(gameData.getMouse().isLeftClick());
                 if (world.getMapByPart(WeaponPart.class.getSimpleName()) != null && combatPart.getCurrentWeapon() != null){
                     weaponPart = (WeaponPart) world.getMapByPart(WeaponPart.class.getSimpleName()).get(combatPart.getCurrentWeapon());
                 }
+                    System.out.println(colliderPart.getCollidingEntities().toString());
+                
+                
+                
 
 
 

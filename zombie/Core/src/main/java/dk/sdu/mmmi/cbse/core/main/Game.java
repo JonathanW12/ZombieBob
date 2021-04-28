@@ -18,12 +18,14 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import dk.sdu.mmmi.cbse.commonanimation.Animation;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.Gdx2DPixmap;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.core.managers.GameInputProcessor;
 import dk.sdu.mmmi.cbse.core.managers.MouseInputProcessor;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.VisualPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.ColliderPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
@@ -252,6 +254,42 @@ public class Game implements ApplicationListener {
         
         batch.end();
         clearSortedVisualList();
+        drawHitboxes();
+        
+    }
+    
+    private void drawHitboxes(){
+        ShapeRenderer sr = new ShapeRenderer();
+        if(world.getMapByPart(ColliderPart.class.getSimpleName())!= null){
+        for(Map.Entry<UUID, EntityPart> entry : world.getMapByPart(ColliderPart.class.getSimpleName()).entrySet()) {
+            
+            if(world.getMapByPart(PositionPart.class.getSimpleName())!= null){
+            PositionPart position = (PositionPart)world.getMapByPart(PositionPart.class.getSimpleName()).get(entry.getKey());
+            if(position != null){
+
+            sr.setColor(1, 1, 1, 1);
+            sr.begin(ShapeRenderer.ShapeType.Line);
+            
+            
+            if(((ColliderPart)entry.getValue()).getHeight() != 0){
+                
+                
+                
+            ColliderPart.Shape shape = ((ColliderPart)entry.getValue()).getShape(position);
+            for (int i = 0, j = shape.getCornerVertices().size() - 1;
+                    i < shape.getCornerVertices().size();
+                    j = i++) {
+
+                sr.line(shape.getCornerVertices().get(i).x, shape.getCornerVertices().get(i).y, shape.getCornerVertices().get(j).x, shape.getCornerVertices().get(j).y);
+            }} else if(((ColliderPart)entry.getValue()).getRadius() != 0){
+                sr.circle(position.getX(), position.getY(), ((ColliderPart)entry.getValue()).getRadius());
+            }
+                
+            sr.end();
+        }
+        }
+        }
+        }
     }
 
     private void drawSprite(String spriteName, float x, float y, float radians, float width) {

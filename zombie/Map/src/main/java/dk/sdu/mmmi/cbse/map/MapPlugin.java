@@ -58,7 +58,7 @@ public class MapPlugin implements IGamePluginService{
             
             world.addtoEntityPartMap(new PositionPart(xPos,y,wallRadians), wall);
             world.addtoEntityPartMap(new VisualPart("wall_sprite",wallWidth,wallWidth,1),wall);
-            world.addtoEntityPartMap(new ColliderPart(wallWidth/2),wall);
+            world.addtoEntityPartMap(new ColliderPart(wallWidth, wallWidth),wall);
             world.addtoEntityPartMap(new StructurePart(), wall);
         }
     }
@@ -71,7 +71,7 @@ public class MapPlugin implements IGamePluginService{
             
             world.addtoEntityPartMap(new PositionPart(x,yPos,wallRadians), wall);
             world.addtoEntityPartMap(new VisualPart("wall_sprite",wallWidth,wallWidth,1),wall);
-            world.addtoEntityPartMap(new ColliderPart(wallWidth/2),wall);
+            world.addtoEntityPartMap(new ColliderPart(wallWidth, wallWidth),wall);
             world.addtoEntityPartMap(new StructurePart(), wall);
         }
     }
