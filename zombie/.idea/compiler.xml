@@ -16,6 +16,7 @@
         <module name="CommonWeapon" />
         <module name="Enemy" />
         <module name="CollisionSystem" />
+        <module name="Rifle" />
         <module name="Core" />
         <module name="TimerSystem" />
         <module name="CommonAnimation" />
@@ -61,6 +62,7 @@
       <module name="Movement" target="1.8" />
       <module name="Player" target="1.8" />
       <module name="ProjectileSystem" target="1.8" />
+      <module name="Rifle" target="1.8" />
       <module name="RigidPhysicsSystem" target="1.8" />
       <module name="SilentUpdate" target="1.8" />
       <module name="StandardZombie" target="1.8" />

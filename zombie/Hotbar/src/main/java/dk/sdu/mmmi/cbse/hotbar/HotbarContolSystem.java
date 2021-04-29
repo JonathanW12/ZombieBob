@@ -141,12 +141,12 @@ public class HotbarContolSystem implements IEntityProcessingService {
 
         TextPart textPart = (TextPart) world.getMapByPart("TextPart").get(levelInformationEntityID);
         String levelMessage;
-        if (level-1 < 1) {
+        if (level < 1) {
             levelMessage = ("Level: " + "Starting Soon");
-        } else if (level>2 && ((level-1)%5) == 0){
-            levelMessage = ("Level: " + (level - 1)+ " - BOSS -");
+        } else if (level>2 && ((level)%5) == 0){
+            levelMessage = ("Level: " + (level)+ " - BOSS -");
         } else {
-            levelMessage = ("Level: " + (level - 1));
+            levelMessage = ("Level: " + (level));
         }
         PositionPart textPosition = (PositionPart) world.getMapByPart("PositionPart").get(levelInformationEntityID);
         textPosition.setPosition(hotbarPositionX+10, hotbarPositionY+13);

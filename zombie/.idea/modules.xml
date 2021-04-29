@@ -24,6 +24,7 @@
       <module fileurl="file://$PROJECT_DIR$/Movement/Movement.iml" filepath="$PROJECT_DIR$/Movement/Movement.iml" />
       <module fileurl="file://$PROJECT_DIR$/Player/Player.iml" filepath="$PROJECT_DIR$/Player/Player.iml" />
       <module fileurl="file://$PROJECT_DIR$/ProjectileSystem/ProjectileSystem.iml" filepath="$PROJECT_DIR$/ProjectileSystem/ProjectileSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Rifle/Rifle.iml" filepath="$PROJECT_DIR$/Rifle/Rifle.iml" />
       <module fileurl="file://$PROJECT_DIR$/RigidPhysicsSystem/RigidPhysicsSystem.iml" filepath="$PROJECT_DIR$/RigidPhysicsSystem/RigidPhysicsSystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/SilentUpdate/SilentUpdate.iml" filepath="$PROJECT_DIR$/SilentUpdate/SilentUpdate.iml" />
       <module fileurl="file://$PROJECT_DIR$/StandardZombie/StandardZombie.iml" filepath="$PROJECT_DIR$/StandardZombie/StandardZombie.iml" />
