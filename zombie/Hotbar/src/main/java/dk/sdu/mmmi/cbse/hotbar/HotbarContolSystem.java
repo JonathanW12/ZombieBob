@@ -9,6 +9,9 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.TextPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponInventoryPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.VisualPart;
+import dk.sdu.mmmi.cbse.common.data.entitytypeparts.HotbarPart;
+import dk.sdu.mmmi.cbse.common.data.entitytypeparts.PlayerPart;
+import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,10 +21,10 @@ import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 
 @ServiceProviders(value = {
-    @ServiceProvider(service = IPostEntityProcessingService.class)})
-public class HotbarContolSystem implements IPostEntityProcessingService {
+    @ServiceProvider(service = IEntityProcessingService.class)})
+public class HotbarContolSystem implements IEntityProcessingService {
     float radians = 3.1415f / 2;
-    int itemPicSize = 92;
+    int itemPicSize = 30;
     //positions match the spaces on the hotbar sprite
     float[] itemPositionsX = new float[]{125,250,375,500};
     float itemPositionsY = 725;
@@ -36,7 +39,22 @@ public class HotbarContolSystem implements IPostEntityProcessingService {
     public void process(GameData gameData, World world) {
     for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart("PlayerPart").entrySet()){
         WeaponInventoryPart weaponInventoryPart = (WeaponInventoryPart) world.getMapByPart("WeaponInventoryPart").get(entry.getKey());
-        if(weaponInventoryPart.getInventory()!=null){ 
+        PositionPart playerPositionPart = (PositionPart) world.getMapByPart("PositionPart").get(entry.getKey());
+        if (world.getMapByPart(HotbarPart.class.getSimpleName()).keySet().toArray().length > 0) {
+            UUID uuid = (UUID) world.getMapByPart(HotbarPart.class.getSimpleName()).keySet().toArray()[0];
+            PositionPart hotbarPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(uuid);
+            VisualPart hotbarVis = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(uuid);
+
+
+
+            hotbarPos.setPosition(playerPositionPart.getX(),(playerPositionPart.getY()-gameData.getDisplayHeight()/2)+hotbarVis.getHeight()*2 );
+            itemPositionsY = hotbarPos.getY()+15;
+            for (int i = 0; i < 4; i++) {
+                itemPositionsX[i] = hotbarPos.getX()-250+75*(i+1);
+            }
+
+        }
+            if(weaponInventoryPart.getInventory()!=null){
         if(!excistingItems2.isEmpty()){
             removeItemsNoLongerInInventory(world,weaponInventoryPart);
             reorganizeHotbarItemPositions(world, weaponInventoryPart);
@@ -54,6 +72,7 @@ public class HotbarContolSystem implements IPostEntityProcessingService {
 
             itemIndex = weaponInventoryPart.getInventory().indexOf(weaponId.getKey());
             positionPart.setX(itemPositionsX[itemIndex]);
+            positionPart.setY(itemPositionsY);
         }
     }
     private void addNewItemsToHotbar(World world, UUID playerWeaponID, WeaponInventoryPart weaponInventoryPart){
