@@ -38,16 +38,11 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 WeaponInventoryPart weaponInventoryPart = (WeaponInventoryPart) world.getMapByPart("WeaponInventoryPart").get(entry.getKey());
                 CollectorPart collectorPart = (CollectorPart) world.getMapByPart(CollectorPart.class.getSimpleName()).get(entry.getKey());
                 ColliderPart colliderPart = (ColliderPart) world.getMapByPart(ColliderPart.class.getSimpleName()).get(entry.getKey());
-                
+
                 combatPart.setAttacking(gameData.getMouse().isLeftClick());
                 if (world.getMapByPart(WeaponPart.class.getSimpleName()) != null && combatPart.getCurrentWeapon() != null){
                     weaponPart = (WeaponPart) world.getMapByPart(WeaponPart.class.getSimpleName()).get(combatPart.getCurrentWeapon());
                 }
-                
-                
-                
-
-
 
                 if (gameData.getMouse().isRightClick()){
                     //Inventory testing. to be deleted
@@ -56,7 +51,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                     weaponInventoryPart.removeWeapon(removeWeaponId);
                     }
                 }
-
+                bananaTest(world,gameData,weaponInventoryPart);
                 if (gameData.getMouse().isMiddleClick()){
                 }
                 if (gameData.getMouse().getScroll() == -1){
@@ -74,22 +69,22 @@ public class PlayerControlSystem implements IEntityProcessingService {
 
 
                 if (gameData.getKeys().isPressed(GameKeys.NUM_1)){
-                    if (weaponInventoryPart.getInventory().get(0) != null){
+                    if (weaponInventoryPart.getInventory().size()> 0){
                         combatPart.setCurrentWeapon(weaponInventoryPart.getInventory().get(0));
                     }
                 }
                 if (gameData.getKeys().isPressed(GameKeys.NUM_2)){
-                    if (weaponInventoryPart.getInventory().get(1) != null){
+                    if (weaponInventoryPart.getInventory().size()> 1){
                         combatPart.setCurrentWeapon(weaponInventoryPart.getInventory().get(1));
                     }
                 }
                 if (gameData.getKeys().isPressed(GameKeys.NUM_3)){
-                    if (weaponInventoryPart.getInventory().get(2) != null){
+                    if (weaponInventoryPart.getInventory().size()> 2){
                         combatPart.setCurrentWeapon(weaponInventoryPart.getInventory().get(2));
                     }
                 }
                 if (gameData.getKeys().isPressed(GameKeys.NUM_4)){
-                    if (weaponInventoryPart.getInventory().get(3) != null){
+                    if (weaponInventoryPart.getInventory().size()> 3){
                         combatPart.setCurrentWeapon(weaponInventoryPart.getInventory().get(3));
                     }
                 }
@@ -129,6 +124,18 @@ public class PlayerControlSystem implements IEntityProcessingService {
                         animationPart.setCurrentAnimation("walk");
                     }
                 }    
+            }
+        }
+    }
+    
+    private void bananaTest(World world,GameData gameData, WeaponInventoryPart weaponInventoryPart){
+        if(gameData.getKeys().isPressed(GameKeys.SHIFT)){
+            for (int i = 0; i < 4; i++){
+                Entity itemTest = new Entity();
+                
+                world.addtoEntityPartMap(new PositionPart(1,2,3), itemTest);
+                world.addtoEntityPartMap(new VisualPart("sword_sprite",2,3), itemTest);
+                weaponInventoryPart.addWeapon(itemTest.getUUID());
             }
         }
     }
