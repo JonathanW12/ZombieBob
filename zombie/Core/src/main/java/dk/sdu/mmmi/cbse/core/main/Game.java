@@ -136,7 +136,7 @@ public class Game implements ApplicationListener {
         cam = new OrthographicCamera(gameData.getDisplayWidth(), gameData.getDisplayHeight());
         cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
-        viewport = new ExtendViewport(gameData.getDisplayHeight() / 2, gameData.getDisplayHeight() / 2, cam);
+        viewport = new ExtendViewport(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2, cam);
 
         InputProcessor keyInputProcessor = new GameInputProcessor(gameData);
         InputProcessor mouseInputProcessor = new MouseInputProcessor(gameData, cam);
@@ -209,6 +209,11 @@ public class Game implements ApplicationListener {
         // Post Update
         for (IPostEntityProcessingService postEntityProcessorService : getPostEntityProcessingServices()) {
             postEntityProcessorService.process(gameData, world);
+        }
+        
+        // Quit if escape is clicked
+        if (gameData.getKeys().isPressed(GameKeys.ESCAPE)) {
+            Gdx.app.exit();
         }
     }
 
