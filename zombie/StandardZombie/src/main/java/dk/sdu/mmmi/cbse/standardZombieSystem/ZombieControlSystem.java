@@ -96,7 +96,7 @@ public class ZombieControlSystem implements IEntityProcessingService {
             }
         }
     }
-    
+    /*
     private void spawnZombies(GameData gameData, World world) {
         currentTime = System.currentTimeMillis();
         if (currentTime > lastSpawnTime + spawnDelay) {
@@ -107,6 +107,8 @@ public class ZombieControlSystem implements IEntityProcessingService {
             lastSpawnTime = currentTime;
         }
     }
+
+     */
     
     private void setAnimation(AnimationPart animationPart, WeaponAnimationPart weaponAnimation) {
         if (animationPart.getAnimationByName("hit") == null ||

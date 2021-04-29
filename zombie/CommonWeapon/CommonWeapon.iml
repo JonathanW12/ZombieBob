@@ -18,5 +18,6 @@
     <orderEntry type="library" name="Maven: org.netbeans.api:org-openide-util:RELEASE112" level="project" />
     <orderEntry type="library" name="Maven: org.netbeans.api:org-openide-util-ui:RELEASE112" level="project" />
     <orderEntry type="module" module-name="CommonAnimation" />
+    <orderEntry type="module" module-name="CommonLevel" />
   </component>
 </module>
