@@ -3,18 +3,22 @@ package dk.sdu.mmmi.cbse.commontiles;
 import java.util.UUID;
 
 public class Tile {
-    private float width;
-    private float height;
-    private float x;
-    private float y;
-    private UUID uuid;
+    private final int row;
+    private final int col;
+    private final float width;
+    private final float height;
+    private final float x;
+    private final float y;
+    private final UUID uuid;
     private boolean isWalkable;
     
-    public Tile(float x, float y, float width, float height) {
-        this.x = x;
-        this.y = y;
+    public Tile(int col, int row, float width, float height) {
+        this.col = col;
+        this.row = row;
         this.width = width;
         this.height = height;
+        x = col * width;
+        y = row * height;
         uuid = UUID.randomUUID();
         isWalkable = true;
     }
@@ -45,6 +49,14 @@ public class Tile {
     
     public void setIsWalkable(boolean isWalkable) {
         this.isWalkable = isWalkable;
+    }
+    
+    public int getRow() {
+        return row;
+    }
+    
+    public int getCol() {
+        return col;
     }
     
 }

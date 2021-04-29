@@ -34,7 +34,7 @@ public class AIMovementControlSystem implements IEntityProcessingService{
                 AiMovementPart aiMovementPart = (AiMovementPart) world.getMapByPart(AiMovementPart.class.getSimpleName()).get(entry.getKey());
                 MovingPart movingPart = (MovingPart) world.getMapByPart(MovingPart.class.getSimpleName()).get(entry.getKey());
                 PositionPart positionPart = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(entry.getKey());
-
+                /*
                 // Level 1 logic
                 if (aiMovementPart.getLevel() == 1){
                     simpleMovement.forward(movingPart);
@@ -54,6 +54,8 @@ public class AIMovementControlSystem implements IEntityProcessingService{
                 if (aiMovementPart.getLevel() == 4){
                     pathfinding.findPlayer(movingPart,positionPart, world);
                 }
+                */
+                
                 // Level 5 aim with mouse
                 if (aiMovementPart.getLevel() == 5){
                     pathfinding.findMouse(positionPart, gameData);

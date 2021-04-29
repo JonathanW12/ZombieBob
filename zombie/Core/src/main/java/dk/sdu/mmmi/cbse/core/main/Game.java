@@ -36,12 +36,15 @@ import java.util.Map;
 import java.util.UUID;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import dk.sdu.mmmi.cbse.astar.Astar;
+import dk.sdu.mmmi.cbse.astar.Node;
 import dk.sdu.mmmi.cbse.common.data.entityparts.AnimationPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.TextPart;
 import dk.sdu.mmmi.cbse.commontiles.Tiles;
 import dk.sdu.mmmi.cbse.commontiles.Tile;
 import java.util.ArrayList;
+import java.util.Queue;
 import java.util.concurrent.CopyOnWriteArrayList;
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
@@ -232,6 +235,7 @@ public class Game implements ApplicationListener {
         batch.end();
         clearSortedVisualList();
         drawTiles();
+        drawPath();
     }
 
     private void drawFonts(){
@@ -270,6 +274,29 @@ public class Game implements ApplicationListener {
         }
         
         shapeRenderer.end();
+    }
+    
+    private void drawPath() {
+        ShapeRenderer shapeRenderer = new ShapeRenderer();
+        List<Node> path = Astar.getPath();
+        
+        if (path != null) {
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        
+            shapeRenderer.setColor(1, 1, 1, 1);
+            int count = 0;
+            
+            for (Node node: path) {
+                if (node.equals(path.get(path.size() - 1))) {
+                    shapeRenderer.setColor(0, 1, 0, 1);
+                }
+                shapeRenderer.rect(node.getX(), node.getY(), 10, 10);
+                count++;
+            }
+
+            shapeRenderer.end();
+        }
+        
     }
     
     private void drawSprite(String spriteName, float x, float y, float radians, float width) {

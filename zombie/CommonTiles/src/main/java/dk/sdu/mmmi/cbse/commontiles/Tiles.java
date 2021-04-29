@@ -4,7 +4,7 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 
 public class Tiles {
     
-    private Tile[][] tiles;
+    private static Tile[][] tiles;
     private static Tiles instance;
     private float tileWidth;
     private float tileHeight;
@@ -23,7 +23,7 @@ public class Tiles {
         return instance;
     }
     
-    public Tile[][] getTiles() {
+    public static Tile[][] getTiles() {
         return tiles;
     }
     
@@ -36,8 +36,8 @@ public class Tiles {
         for (int i = 0; i < verticalTiles; i++) {
             for (int j = 0; j < horizontalTiles; j++) {
                 tiles[i][j] = new Tile(
-                    j * tileWidth,
-                    i * tileHeight,
+                    j,
+                    i,
                     tileWidth,
                     tileHeight
                 );
@@ -67,6 +67,28 @@ public class Tiles {
         }
         
         return null;
+    }
+    
+    public static Tile getTileByRowAndCol(int row, int col) {
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[i].length; j ++) { 
+                Tile tile = tiles[i][j];
+                
+                if (tile.getRow() == row && tile.getCol() == col) {
+                    return tile;
+                }
+            }
+        }
+        
+        return null;
+    }
+    
+    public int getTileRow(Tile tile) {
+        return tile.getRow();
+    }
+    
+    public int getTileCol(Tile tile) {
+        return tile.getCol();
     }
     
 }

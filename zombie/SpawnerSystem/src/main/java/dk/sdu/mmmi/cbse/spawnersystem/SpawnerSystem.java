@@ -63,7 +63,7 @@ public class SpawnerSystem implements IEntityProcessingService {
         if (level <= max){
             currentIncrease =+ increment;
             for (int i = 0; i < level; i++) {
-                spawnEntities.createZombie((int)(defaultHealth*(1+currentIncrease)), location.random(gameData),world);
+                //spawnEntities.createZombie((int)(defaultHealth*(1+currentIncrease)), location.random(gameData),world);
 
             }
 
@@ -72,7 +72,7 @@ public class SpawnerSystem implements IEntityProcessingService {
             currentIncrease =+ increment;
             System.out.println("Health: "+(int)(defaultHealth*(1+currentIncrease)));
             for (int i = 0; i < max; i++) {
-                spawnEntities.createZombie((int)(defaultHealth*(1+currentIncrease)), location.random(gameData),world);
+                //spawnEntities.createZombie((int)(defaultHealth*(1+currentIncrease)), location.random(gameData),world);
             }
 
         }
