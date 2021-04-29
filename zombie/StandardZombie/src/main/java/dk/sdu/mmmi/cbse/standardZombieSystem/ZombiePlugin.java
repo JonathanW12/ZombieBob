@@ -37,7 +37,7 @@ public class ZombiePlugin implements IGamePluginService{
         
         WeaponPart weaponPart = new WeaponPart(
             30,
-            50,
+            200,
             1f,
             1
         );
@@ -64,7 +64,7 @@ public class ZombiePlugin implements IGamePluginService{
         world.addtoEntityPartMap(new EnemyPart(), zombie);
         world.addtoEntityPartMap(new LifePart(100), zombie);
         world.addtoEntityPartMap(new AiMovementPart(4), zombie);
-        world.addtoEntityPartMap(new ColliderPart(40),zombie);
+        world.addtoEntityPartMap(new ColliderPart(40,40),zombie);
         world.addtoEntityPartMap(combatPart, zombie);
         world.addtoEntityPartMap(createInitialAnimation(weaponAnimationPart), zombie);
     }

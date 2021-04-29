@@ -70,7 +70,7 @@ public class EnemySpawner implements IEnemyCreatorService {
         world.addtoEntityPartMap(new EnemyPart(), zombie);
         world.addtoEntityPartMap(new LifePart(health), zombie);
         world.addtoEntityPartMap(new AiMovementPart(4), zombie);
-        world.addtoEntityPartMap(new ColliderPart(40),zombie);
+        world.addtoEntityPartMap(new ColliderPart(40,40),zombie);
         world.addtoEntityPartMap(combatPart, zombie);
         world.addtoEntityPartMap(createInitialAnimationEnemy(weaponAnimationPart), zombie);
     }
@@ -140,7 +140,7 @@ public class EnemySpawner implements IEnemyCreatorService {
         world.addtoEntityPartMap(new EnemyPart(), zombie);
         world.addtoEntityPartMap(new LifePart(health), zombie);
         world.addtoEntityPartMap(new AiMovementPart(4), zombie);
-        world.addtoEntityPartMap(new ColliderPart(40),zombie);
+        world.addtoEntityPartMap(new ColliderPart(40,40),zombie);
         world.addtoEntityPartMap(combatPart, zombie);
         world.addtoEntityPartMap(createInitialAnimationSpider(weaponAnimationPart), zombie);
     }

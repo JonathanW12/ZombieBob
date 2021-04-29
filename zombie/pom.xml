@@ -78,6 +78,7 @@
         <module>CommonWeapon</module>
         <module>HandGun</module>
         <module>Map</module>
+        <module>RigidPhysicsSystem</module>
     </modules>
 
     <properties>

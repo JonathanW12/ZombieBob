@@ -8,8 +8,7 @@ package dk.sdu.mmmi.cbse.common.data.entityparts;
 
 /**
  *PositionPart describes the position of an entity.
- */
-public class PositionPart implements EntityPart {
+ */public class PositionPart implements EntityPart {
 
     private float x;
     private float y;

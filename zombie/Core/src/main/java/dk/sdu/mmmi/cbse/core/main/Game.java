@@ -19,12 +19,14 @@ import dk.sdu.mmmi.cbse.commonanimation.Animation;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Gdx2DPixmap;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.core.managers.GameInputProcessor;
 import dk.sdu.mmmi.cbse.core.managers.MouseInputProcessor;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.VisualPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.ColliderPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
@@ -35,6 +37,7 @@ import java.util.Map;
 import java.util.UUID;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.common.data.entityparts.AnimationPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.TextPart;
@@ -228,6 +231,41 @@ public class Game implements ApplicationListener {
         drawFonts();
         batch.end();
         clearSortedVisualList();
+        
+        if(gameData.getKeys().isDown(GameKeys.SPACE)){
+        drawHitboxes();
+        }
+        
+    }
+    
+    private void drawHitboxes(){
+        ShapeRenderer sr = new ShapeRenderer();
+        if(world.getMapByPart(ColliderPart.class.getSimpleName())!= null){
+        for(Map.Entry<UUID, EntityPart> entry : world.getMapByPart(ColliderPart.class.getSimpleName()).entrySet()) {
+            
+            if(world.getMapByPart(PositionPart.class.getSimpleName())!= null){
+            PositionPart position = (PositionPart)world.getMapByPart(PositionPart.class.getSimpleName()).get(entry.getKey());
+            if(position != null){
+
+            sr.setColor(1, 1, 1, 1);
+            sr.begin(ShapeRenderer.ShapeType.Line);
+            
+            
+            if(((ColliderPart)entry.getValue()).getRadius() != 0){
+                
+                ArrayList<ColliderPart.Vector2> corners = ((ColliderPart)entry.getValue()).getCornerVecs(position);
+                for (int i = 0, j = corners.size() - 1;
+                    i < corners.size();
+                    j = i++) {
+
+                sr.line(corners.get(i).x, corners.get(i).y, corners.get(j).x, corners.get(j).y);
+            }}
+                
+            sr.end();
+        }
+        }
+        }
+        }
     }
 
     private void drawFonts(){
