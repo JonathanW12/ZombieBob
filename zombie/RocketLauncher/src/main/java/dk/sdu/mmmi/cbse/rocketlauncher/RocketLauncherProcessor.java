@@ -28,7 +28,13 @@ public class RocketLauncherProcessor implements IEntityProcessingService {
 
                 MovingPart movingPart = new MovingPart(12, 1000);
                 world.addtoEntityPartMap(movingPart, bullet);
-                world.addtoEntityPartMap(new PositionPart(spawnX, spawnY, weaponPosition.getRadians()), bullet);
+                
+                float leftOffset = -27;
+                
+                float spawnXoff = spawnX + leftOffset* (float)Math.cos(Math.PI/2 + weaponPosition.getRadians());
+                float spawnYoff = spawnY + leftOffset* (float)Math.sin(Math.PI/2 + weaponPosition.getRadians());
+                
+                world.addtoEntityPartMap(new PositionPart(spawnXoff, spawnYoff, weaponPosition.getRadians()), bullet);
                 world.addtoEntityPartMap(new ProjectilePart(weaponPart.getRange()), bullet);
                 world.addtoEntityPartMap(new ColliderPart(10,10), bullet);
                 world.addtoEntityPartMap(new DamagePart(weaponPart.getDamage()), bullet);
