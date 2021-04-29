@@ -72,12 +72,14 @@
         <module>Hotbar</module>
         <module>StandardZombie</module>
         <module>CommonEnemy</module>
-        <module>SpawnerSystem</module>
+        <module>CommonLocations</module>
         <module>LootingSystem</module>
         <module>CollisionSystem</module>
         <module>CommonWeapon</module>
         <module>HandGun</module>
         <module>Map</module>
+        <module>CommonLevel</module>
+        <module>Level</module>
         <module>RigidPhysicsSystem</module>
         <module>CommonTiles</module>
     </modules>

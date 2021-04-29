@@ -23,7 +23,7 @@ public class HealthProcessingSystem implements IEntityProcessingService {
     private DamagePart damagePart;
     //scuff method for counting dead zombies
     private int zombiesKilled = 0;
-    private UUID killInformationEntityID;
+
     @Override
     public void process(GameData gameData, World world) {
 
@@ -69,28 +69,15 @@ public class HealthProcessingSystem implements IEntityProcessingService {
                             if (lifePartCollidingEntity != null && lifePartCollidingEntity.isDead()) {
                                 world.removeEntityParts(collidingEntity);
                                 //TO BE CHANGED.
-                                zombiesKilled++;
+                                gameData.getLevelInformation().setEnemiesKilled(zombiesKilled++);
+
                             }
                         }
                     }
                 }
             }
         }
-        displayKillInformation(world);
     }
-        private void displayKillInformation(World world) {
-        if(killInformationEntityID == null){
-        Entity killInformation = new Entity();
-        killInformationEntityID = killInformation.getUUID();
-        
-        
-        world.addtoEntityPartMap(new PositionPart(600,700,2f), killInformation);
-        world.addtoEntityPartMap(new TextPart(null,4), killInformation);
-        }
-        TextPart textPart = (TextPart) world.getMapByPart("TextPart").get(killInformationEntityID);
-        String killMessage = ("Zombies Slain: " + zombiesKilled);
-        
-        textPart.setMessage(killMessage);
-    }
+
 }
     

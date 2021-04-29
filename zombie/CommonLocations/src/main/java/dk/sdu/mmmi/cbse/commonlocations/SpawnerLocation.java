@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.cbse.spawnersystem;
+package dk.sdu.mmmi.cbse.commonlocations;
 
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.Position;

@@ -173,7 +173,24 @@
             <artifactId>SpawnerSystem</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CommonLevel</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Level</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CommonLocations</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
     </dependencies>
+
 
     <build>
         <plugins>

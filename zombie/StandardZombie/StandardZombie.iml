@@ -16,7 +16,9 @@
     <orderEntry type="library" name="Maven: org.netbeans.api:org-openide-modules:RELEASE112" level="project" />
     <orderEntry type="library" name="Maven: org.netbeans.api:org-openide-util:RELEASE112" level="project" />
     <orderEntry type="library" name="Maven: org.netbeans.api:org-openide-util-ui:RELEASE112" level="project" />
-    <orderEntry type="module" module-name="CommonAnimation" />
+    <orderEntry type="module" module-name="CommonLevel" />
     <orderEntry type="library" name="Maven: org.netbeans.api:org-openide-util-lookup:RELEASE112" level="project" />
+    <orderEntry type="module" module-name="CommonAnimation" />
+    <orderEntry type="module" module-name="CommonLocations" />
   </component>
 </module>

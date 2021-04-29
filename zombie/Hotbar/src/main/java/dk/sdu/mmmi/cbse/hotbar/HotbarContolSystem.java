@@ -30,7 +30,14 @@ public class HotbarContolSystem implements IEntityProcessingService {
     float itemPositionsY = 725;
     int currentItem;
     int itemIndex;
-    UUID levelInformationEntityID;
+
+    // Information Variables
+    private UUID levelInformationEntityID = null;
+    private UUID killInformationEntityID;
+    private int level;
+    private int zombiesKilled = 0;
+
+
     ArrayList<UUID> itemsToBeRemoved = new ArrayList<UUID>();
     //This hashMap: Keys are weapon IDs in the players inventory and values are weapon IDs in the hotbar
     HashMap<UUID,UUID> excistingItems2 = new HashMap<UUID,UUID>();
@@ -64,6 +71,11 @@ public class HotbarContolSystem implements IEntityProcessingService {
         }
     }
         displayPlayerHp();
+
+        // update Levelinformation and Enemies killed information on Hotbar
+        displayLevelInformation(gameData,world);
+        displayKillInformation(gameData, world);
+
     }
 }
     private void reorganizeHotbarItemPositions(World world, WeaponInventoryPart weaponInventoryPart){
@@ -103,5 +115,44 @@ public class HotbarContolSystem implements IEntityProcessingService {
     }
     private void displayPlayerHp(){
         
+    }
+
+    private void displayLevelInformation(GameData gameData,World world) {
+        if (levelInformationEntityID == null) {
+            Entity levelInformation = new Entity();
+            levelInformationEntityID = levelInformation.getUUID();
+
+            world.addtoEntityPartMap(new PositionPart(600, 750, 2f), levelInformation);
+            world.addtoEntityPartMap(new TextPart(null, 4), levelInformation);
+        }
+
+        level = gameData.getLevelInformation().getCurrentLevel();
+
+        TextPart textPart = (TextPart) world.getMapByPart("TextPart").get(levelInformationEntityID);
+        String levelMessage;
+        if (level-1 < 1) {
+            levelMessage = ("Level: " + "Starting Soon");
+        } else if (level>2 && ((level-1)%5) == 0){
+            levelMessage = ("Level: " + (level - 1)+ " - BOSS -");
+        } else {
+            levelMessage = ("Level: " + (level - 1));
+        }
+
+        textPart.setMessage(levelMessage);
+    }
+
+    private void displayKillInformation(GameData gameData, World world) {
+        if(killInformationEntityID == null){
+            Entity killInformation = new Entity();
+            killInformationEntityID = killInformation.getUUID();
+            world.addtoEntityPartMap(new PositionPart(600,700,2f), killInformation);
+            world.addtoEntityPartMap(new TextPart(null,4), killInformation);
+        }
+
+        zombiesKilled = gameData.getLevelInformation().getEnemiesKilled();
+
+        TextPart textPart = (TextPart) world.getMapByPart("TextPart").get(killInformationEntityID);
+        String killMessage = ("Zombies Slain: " + zombiesKilled);
+        textPart.setMessage(killMessage);
     }
 }
