@@ -62,6 +62,7 @@
     <orderEntry type="module" module-name="AnimationSystem" />
     <orderEntry type="module" module-name="ProjectileSystem" />
     <orderEntry type="module" module-name="Hotbar" />
+    <orderEntry type="library" name="Maven: dk.sdu.mmmi.cbse:SpawnerSystem:1.0-SNAPSHOT" level="project" />
     <orderEntry type="module" module-name="CommonEnemy" />
     <orderEntry type="module" module-name="CommonAnimation" />
     <orderEntry type="module" module-name="CollisionSystem" />
@@ -76,6 +77,8 @@
     <orderEntry type="module" module-name="CommonWeapon" />
     <orderEntry type="module" module-name="HandGun" />
     <orderEntry type="module" module-name="LootingSystem" />
+    <orderEntry type="module" module-name="StandardZombie" />
+    <orderEntry type="module" module-name="CommonLocations" />
     <orderEntry type="module" module-name="Map" />
     <orderEntry type="module" module-name="RigidPhysicsSystem" />
     <orderEntry type="module" module-name="StandardZombie" />

@@ -14,7 +14,6 @@
       <module fileurl="file://$PROJECT_DIR$/CommonTiles/CommonTiles.iml" filepath="$PROJECT_DIR$/CommonTiles/CommonTiles.iml" />
       <module fileurl="file://$PROJECT_DIR$/CommonWeapon/CommonWeapon.iml" filepath="$PROJECT_DIR$/CommonWeapon/CommonWeapon.iml" />
       <module fileurl="file://$PROJECT_DIR$/Core/Core.iml" filepath="$PROJECT_DIR$/Core/Core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Enemy/Enemy.iml" filepath="$PROJECT_DIR$/Enemy/Enemy.iml" />
       <module fileurl="file://$PROJECT_DIR$/HandGun/HandGun.iml" filepath="$PROJECT_DIR$/HandGun/HandGun.iml" />
       <module fileurl="file://$PROJECT_DIR$/HealthSystem/HealthSystem.iml" filepath="$PROJECT_DIR$/HealthSystem/HealthSystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/Hotbar/Hotbar.iml" filepath="$PROJECT_DIR$/Hotbar/Hotbar.iml" />
