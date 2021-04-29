@@ -91,50 +91,6 @@ public class MovementSystem implements IPostEntityProcessingService{
             x += dx;
             y += dy;
 
-            ProjectilePart projectilePart = null;
-
-            if (world.getMapByPart(ProjectilePart.class.getSimpleName()) != null){
-                projectilePart = (ProjectilePart) world.getMapByPart(ProjectilePart.class.getSimpleName()).get(entry.getKey());
-            }
-
-            if (projectilePart == null){
-                /*
-                if (x > gameData.getDisplayWidth()) {
-                    x = 0;
-                } else if (x < 0) {
-                    x = gameData.getDisplayWidth();
-                }
-
-                if (y > gameData.getDisplayHeight()) {
-                    y = 0;
-                } else if (y < 0) {
-                    y = gameData.getDisplayHeight();
-                }
-
-                 */
-
-                if (x > gameData.getDisplayWidth()) {
-                    x = gameData.getDisplayWidth();
-                } else if (x < 0) {
-                    x = 0;
-                }
-
-                if (y > 650) {
-                    y = 650;
-                } else if (y < 0) {
-                    y = 0;
-                }
-            } else {
-                LifePart lifePart = (LifePart) world.getMapByPart(LifePart.class.getSimpleName()).get(entry.getKey());
-                if (x > gameData.getDisplayWidth() || x == 0){
-                    lifePart.setDead(true);
-                }
-                if (y > 650 || y == 0) {
-                    lifePart.setDead(true);
-                }
-            }
-
-
 
             positionPart.setX(x);
             positionPart.setY(y);
