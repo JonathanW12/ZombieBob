@@ -48,24 +48,27 @@ public class Astar implements IEntityProcessingService {
                     MovingPart movingPart = (MovingPart) world.getMapByPart(MovingPart.class.getSimpleName()).get(entry.getKey());
                     currentNode = getCurrentNode(gameData, positionPart);
                     goalNode = getGoalNode(gameData, world);
-
-                    // If player is in same tile, switch to simple AI
-                    if (currentNode.equals(goalNode)) {
-                        chasePlayerInTile(positionPart, movingPart, world);
-                    } else {
-                        findPlayerPath(gameData, world, entry.getKey());                   
-                        if (path.size() > 0) {
-                            Node node = path.get(path.size() - 1);
-                            float newDirection = (float) Math.atan2(
-                                node.getY() - positionPart.getY(),
-                                node.getX() - positionPart.getX()
-                            );
-                            positionPart.setRadians(newDirection);
-                            movingPart.setUp(true);
+                    
+                    // Handle nodes being null
+                    if (currentNode != null && goalNode != null) {
+                        // If player is in same tile, switch to simple AI
+                        if (currentNode.equals(goalNode)) {
+                            chasePlayerInTile(positionPart, movingPart, world);
                         } else {
-                            movingPart.setUp(false);
+                            findPlayerPath(gameData, world, entry.getKey());                   
+                            if (path.size() > 0) {
+                                Node node = path.get(path.size() - 1);
+                                float newDirection = (float) Math.atan2(
+                                    node.getY() - positionPart.getY(),
+                                    node.getX() - positionPart.getX()
+                                );
+                                positionPart.setRadians(newDirection);
+                                movingPart.setUp(true);
+                            } else {
+                                movingPart.setUp(false);
+                            }
                         }
-                    }
+                    }  
                 }                
             }
         }
@@ -130,10 +133,14 @@ public class Astar implements IEntityProcessingService {
     
     private Node getCurrentNode(GameData gameData, PositionPart positionPart) {
         Tile goalTile = Tiles.getInstance(gameData).getTileByPosition(positionPart.getX(), positionPart.getY());
-        int row = goalTile.getRow();
-        int col = goalTile.getCol();
+        if (goalTile != null) {
+            int row = goalTile.getRow();
+            int col = goalTile.getCol();
+
+            return nodeGenerator.getNode(row, col);
+        }
         
-        return nodeGenerator.getNode(row, col);
+        return null;
     }
     
     private Node getGoalNode(GameData gameData, World world) {
@@ -147,10 +154,12 @@ public class Astar implements IEntityProcessingService {
             playerUUID = (UUID) world.getMapByPart(PlayerPart.class.getSimpleName()).keySet().toArray()[0];
             positionPart = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(playerUUID);
             goalTile = Tiles.getInstance(gameData).getTileByPosition(positionPart.getX(), positionPart.getY());
-            row = goalTile.getRow();
-            col = goalTile.getCol();
+            if (goalTile != null) {
+                row = goalTile.getRow();
+                col = goalTile.getCol();
 
-            return nodeGenerator.getNode(row, col);
+                return nodeGenerator.getNode(row, col);
+            }
         }
         
         return null;
