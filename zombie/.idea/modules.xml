@@ -11,6 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/CommonEnemy/CommonEnemy.iml" filepath="$PROJECT_DIR$/CommonEnemy/CommonEnemy.iml" />
       <module fileurl="file://$PROJECT_DIR$/CommonLevel/CommonLevel.iml" filepath="$PROJECT_DIR$/CommonLevel/CommonLevel.iml" />
       <module fileurl="file://$PROJECT_DIR$/CommonLocations/CommonLocations.iml" filepath="$PROJECT_DIR$/CommonLocations/CommonLocations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CommonTiles/CommonTiles.iml" filepath="$PROJECT_DIR$/CommonTiles/CommonTiles.iml" />
       <module fileurl="file://$PROJECT_DIR$/CommonWeapon/CommonWeapon.iml" filepath="$PROJECT_DIR$/CommonWeapon/CommonWeapon.iml" />
       <module fileurl="file://$PROJECT_DIR$/Core/Core.iml" filepath="$PROJECT_DIR$/Core/Core.iml" />
       <module fileurl="file://$PROJECT_DIR$/Enemy/Enemy.iml" filepath="$PROJECT_DIR$/Enemy/Enemy.iml" />
@@ -23,7 +24,10 @@
       <module fileurl="file://$PROJECT_DIR$/Movement/Movement.iml" filepath="$PROJECT_DIR$/Movement/Movement.iml" />
       <module fileurl="file://$PROJECT_DIR$/Player/Player.iml" filepath="$PROJECT_DIR$/Player/Player.iml" />
       <module fileurl="file://$PROJECT_DIR$/ProjectileSystem/ProjectileSystem.iml" filepath="$PROJECT_DIR$/ProjectileSystem/ProjectileSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RigidPhysicsSystem/RigidPhysicsSystem.iml" filepath="$PROJECT_DIR$/RigidPhysicsSystem/RigidPhysicsSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RocketLauncher/RocketLauncher.iml" filepath="$PROJECT_DIR$/RocketLauncher/RocketLauncher.iml" />
       <module fileurl="file://$PROJECT_DIR$/SilentUpdate/SilentUpdate.iml" filepath="$PROJECT_DIR$/SilentUpdate/SilentUpdate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpiderBoss/SpiderBoss.iml" filepath="$PROJECT_DIR$/SpiderBoss/SpiderBoss.iml" />
       <module fileurl="file://$PROJECT_DIR$/StandardZombie/StandardZombie.iml" filepath="$PROJECT_DIR$/StandardZombie/StandardZombie.iml" />
       <module fileurl="file://$PROJECT_DIR$/TimerSystem/TimerSystem.iml" filepath="$PROJECT_DIR$/TimerSystem/TimerSystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/application/Zombie-app.iml" filepath="$PROJECT_DIR$/application/Zombie-app.iml" />

@@ -82,6 +82,8 @@
         <module>Level</module>
         <module>RigidPhysicsSystem</module>
         <module>CommonTiles</module>
+        <module>SpiderBoss</module>
+        <module>RocketLauncher</module>
     </modules>
 
     <properties>

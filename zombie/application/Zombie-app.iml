@@ -53,6 +53,7 @@
     <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx-box2d-platform:natives-desktop:1.5.0" level="project" />
     <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx-freetype:1.5.0" level="project" />
     <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx-freetype-platform:natives-desktop:1.5.0" level="project" />
+    <orderEntry type="module" module-name="CommonTiles" />
     <orderEntry type="module" module-name="Movement" />
     <orderEntry type="module" module-name="TimerSystem" />
     <orderEntry type="module" module-name="HealthSystem" />
@@ -61,7 +62,6 @@
     <orderEntry type="module" module-name="AnimationSystem" />
     <orderEntry type="module" module-name="ProjectileSystem" />
     <orderEntry type="module" module-name="Hotbar" />
-    <orderEntry type="library" name="Maven: dk.sdu.mmmi.cbse:SpawnerSystem:1.0-SNAPSHOT" level="project" />
     <orderEntry type="module" module-name="CommonEnemy" />
     <orderEntry type="module" module-name="CommonAnimation" />
     <orderEntry type="module" module-name="CollisionSystem" />
@@ -76,10 +76,12 @@
     <orderEntry type="module" module-name="CommonWeapon" />
     <orderEntry type="module" module-name="HandGun" />
     <orderEntry type="module" module-name="LootingSystem" />
-    <orderEntry type="module" module-name="StandardZombie" />
-    <orderEntry type="module" module-name="CommonLocations" />
     <orderEntry type="module" module-name="Map" />
+    <orderEntry type="module" module-name="RigidPhysicsSystem" />
+    <orderEntry type="module" module-name="StandardZombie" />
     <orderEntry type="module" module-name="CommonLevel" />
     <orderEntry type="module" module-name="Level" />
+    <orderEntry type="module" module-name="CommonLocations" />
+    <orderEntry type="module" module-name="SpiderBoss" />
   </component>
 </module>

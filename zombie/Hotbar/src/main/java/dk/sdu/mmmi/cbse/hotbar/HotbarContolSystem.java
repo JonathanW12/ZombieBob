@@ -121,7 +121,6 @@ public class HotbarContolSystem implements IEntityProcessingService {
         if (levelInformationEntityID == null) {
             Entity levelInformation = new Entity();
             levelInformationEntityID = levelInformation.getUUID();
-
             world.addtoEntityPartMap(new PositionPart(600, 750, 2f), levelInformation);
             world.addtoEntityPartMap(new TextPart(null, 4), levelInformation);
         }
@@ -130,12 +129,12 @@ public class HotbarContolSystem implements IEntityProcessingService {
 
         TextPart textPart = (TextPart) world.getMapByPart("TextPart").get(levelInformationEntityID);
         String levelMessage;
-        if (level-1 < 1) {
-            levelMessage = ("Level: " + "Starting Soon");
-        } else if (level>2 && ((level-1)%5) == 0){
-            levelMessage = ("Level: " + (level - 1)+ " - BOSS -");
+        if (level < 1) {
+            levelMessage = ("Prepare to fight!");
+        } else if (level>0 && ((level)%5) == 0){
+            levelMessage = ("Level: " + (level)+ " - BOSS -");
         } else {
-            levelMessage = ("Level: " + (level - 1));
+            levelMessage = ("Level: " + (level));
         }
 
         textPart.setMessage(levelMessage);
@@ -152,7 +151,7 @@ public class HotbarContolSystem implements IEntityProcessingService {
         zombiesKilled = gameData.getLevelInformation().getEnemiesKilled();
 
         TextPart textPart = (TextPart) world.getMapByPart("TextPart").get(killInformationEntityID);
-        String killMessage = ("Zombies Slain: " + zombiesKilled);
+        String killMessage = ("Enemies Slain: " + zombiesKilled);
         textPart.setMessage(killMessage);
     }
 }

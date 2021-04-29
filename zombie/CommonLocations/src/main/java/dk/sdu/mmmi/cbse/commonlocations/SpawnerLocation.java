@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class SpawnerLocation {
     private int topBarOffset = 250;
-    private int wallOffset = 50;
+    private int wallOffset = 65;
 
     private Position position = new Position();
 
@@ -60,9 +60,9 @@ public class SpawnerLocation {
     }
     public Position random(GameData gameData){
         Random r = new Random();
-        int low = 0;
-        int highX = gameData.getDisplayWidth();
-        int highY = gameData.getDisplayHeight()-topBarOffset;
+        int low = wallOffset;
+        int highX = gameData.getDisplayWidth()-wallOffset;
+        int highY = gameData.getDisplayHeight()-wallOffset;
         int resultX = r.nextInt(highX-low) + low;
         int resultY = r.nextInt(highY-low)+ low;
 

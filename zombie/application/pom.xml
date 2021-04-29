@@ -170,11 +170,6 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>SpawnerSystem</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>CommonLevel</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -186,6 +181,11 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>CommonLocations</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>SpiderBoss</artifactId>
             <version>${project.version}</version>
         </dependency>
 
