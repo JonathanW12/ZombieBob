@@ -42,7 +42,6 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 if (world.getMapByPart(WeaponPart.class.getSimpleName()) != null && combatPart.getCurrentWeapon() != null){
                     weaponPart = (WeaponPart) world.getMapByPart(WeaponPart.class.getSimpleName()).get(combatPart.getCurrentWeapon());
                 }
-                System.out.println(colliderPart.getCollidingEntities().toString());
                 
                 
                 
