@@ -41,7 +41,10 @@ import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.common.data.entityparts.AnimationPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.TextPart;
+import dk.sdu.mmmi.cbse.commontiles.Tiles;
+import dk.sdu.mmmi.cbse.commontiles.Tile;
 import java.util.ArrayList;
+import java.util.Queue;
 import java.util.concurrent.CopyOnWriteArrayList;
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
@@ -115,7 +118,7 @@ public class Game implements ApplicationListener {
         cam = new OrthographicCamera(gameData.getDisplayWidth(), gameData.getDisplayHeight());
         cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
-        viewport = new ExtendViewport(1100, 800, cam);
+        viewport = new ExtendViewport(1140, 840, cam);
 
         InputProcessor keyInputProcessor = new GameInputProcessor(gameData);
         InputProcessor mouseInputProcessor = new MouseInputProcessor(gameData,cam);
@@ -234,7 +237,9 @@ public class Game implements ApplicationListener {
         
         if(gameData.getKeys().isDown(GameKeys.SPACE)){
         drawHitboxes();
+        drawTiles();
         }
+        
         
     }
     
@@ -276,6 +281,34 @@ public class Game implements ApplicationListener {
             font.draw(batch, textPart.getMessage(),positionPart.getX(),positionPart.getY());
         }
         }
+    }
+    
+    private void drawTiles() {
+        ShapeRenderer shapeRenderer = new ShapeRenderer();
+        Tile[][] tiles = Tiles.getInstance(gameData).getTiles();
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        
+        shapeRenderer.setColor(1, 1, 1, 1);
+        
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[i].length; j++) {
+                shapeRenderer.line(
+                    tiles[i][j].getX(),
+                    tiles[i][j].getY(),
+                    tiles[i][j].getX() + tiles[i][j].getWidth(),
+                    tiles[i][j].getY()
+                );
+                
+                shapeRenderer.line(
+                    tiles[i][j].getX(),
+                    tiles[i][j].getY(),
+                    tiles[i][j].getX(),
+                    tiles[i][j].getY()  + tiles[i][j].getHeight()
+                );
+            }
+        }
+        
+        shapeRenderer.end();
     }
     
     private void drawSprite(String spriteName, float x, float y, float radians, float width) {

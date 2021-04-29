@@ -7,35 +7,71 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.VisualPart;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.StructurePart;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import dk.sdu.mmmi.cbse.commontiles.Tile;
+import dk.sdu.mmmi.cbse.commontiles.Tiles;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 
 @ServiceProviders(value = {
     @ServiceProvider(service = IGamePluginService.class),})
 public class MapPlugin implements IGamePluginService{
-    private final float gameHeight = 800;
-    private final float gameWidth = 1100;
-    private final float wallWidth = 50;
+    private float gameHeight;
+    private float gameWidth;
+    private final float wallWidth = 60;
     private final float wallRadians = 3.1415f / 2;
+    private World world;
+    private Tile[][] tiles;
     
     @Override
     public void start(GameData gameData, World world) {
+        gameHeight = gameData.getDisplayHeight();
+        gameWidth = gameData.getDisplayWidth();
+        this.world = world;
+        tiles = Tiles.getInstance(gameData).getTiles();
+        int verticalTiles = tiles.length;
+        int horizontalTiles = tiles[0].length;
+        
         createBackground(gameData,world);
-        //Creating Boundary walls. Note that the "top" of the map is at 650px due to the hotbar
-        //The walls start 30 px in to make the width of the game match the height
-        createWallRight(world,0,650,1100);
-        createWallRight(world,0,0,1100);
-        createWallUp(world,0,0,650);
-        createWallUp(world,1100,0,650);
         
-        //Creating a few obstacles
-        createWallRight(world,200,200,300);
-        createWallUp(world,500,200,200);
+        createHoriziontalWallSection(0, 0, horizontalTiles); // Bottom Wall
+        createHoriziontalWallSection(0, verticalTiles - 3, horizontalTiles); // Top Wall
+        createVerticalWallSection(1, 0, verticalTiles - 4); // Left Wall
+        createVerticalWallSection(1, horizontalTiles - 1, verticalTiles - 4); // Right Wall
         
-        createWallRight(world,800,550,150);
-        createWallUp(world,950,200,350);
+        // L-Obstacle
+        createHoriziontalWallSection(3, 3, 2);
+        createVerticalWallSection(3, 3, 4);
         
-        createWallRight(world,100,450,150);
+        // Vertical obstacle
+        createVerticalWallSection(3, horizontalTiles - 4, 6);
+
+    }
+    
+    private void placeWall(Tile tile) {
+        Entity wall = new Entity();
+            
+        world.addtoEntityPartMap(new PositionPart(
+            tile.getX() + tile.getWidth() / 2,
+            tile.getY() + tile.getHeight() / 2,
+            wallRadians
+        ), wall);
+        world.addtoEntityPartMap(new VisualPart("wall_sprite", tile.getWidth(), tile.getHeight(), 1), wall);
+        world.addtoEntityPartMap(new ColliderPart(tile.getWidth(), tile.getHeight()), wall);
+        world.addtoEntityPartMap(new StructurePart(), wall);
+        
+        tile.setIsWalkable(false);
+    }
+    
+    private void createHoriziontalWallSection(int startHorizontalIndex, int verticalIndex, float width) {
+        for (int i = startHorizontalIndex; i < startHorizontalIndex + width; i++) {
+            placeWall(tiles[verticalIndex][i]);
+        }
+    }
+    
+    private void createVerticalWallSection(int startVerticalIndex, int horizontalIndex, float height) {
+        for (int i = startVerticalIndex; i < startVerticalIndex + height; i++) {
+            placeWall(tiles[i][horizontalIndex]);
+        }
     }
     
     private void createBackground(GameData gameData, World world){

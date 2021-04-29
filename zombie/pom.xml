@@ -79,6 +79,7 @@
         <module>HandGun</module>
         <module>Map</module>
         <module>RigidPhysicsSystem</module>
+        <module>CommonTiles</module>
     </modules>
 
     <properties>
