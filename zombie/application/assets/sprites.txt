@@ -19,21 +19,21 @@ crosshair
   index: -1
 enemyBite
   rotate: false
-  xy: 1074, 0
+  xy: 1106, 0
   size: 206, 192
   orig: 206, 192
   offset: 0, 0
   index: -1
 enemyHit
   rotate: false
-  xy: 1641, 0
+  xy: 1673, 0
   size: 208, 243
   orig: 208, 243
   offset: 0, 0
   index: -1
 enemyIdle
   rotate: false
-  xy: 1280, 0
+  xy: 1312, 0
   size: 206, 200
   orig: 206, 200
   offset: 0, 0
@@ -61,7 +61,7 @@ PlayerGun2
   index: -1
 playerIdle
   rotate: false
-  xy: 516, 0
+  xy: 548, 0
   size: 308, 190
   orig: 308, 190
   offset: 0, 0
@@ -110,9 +110,16 @@ PlayerWalk2
   index: -1
 projectile
   rotate: false
-  xy: 1486, 0
+  xy: 1518, 0
   size: 155, 232
   orig: 155, 232
+  offset: 0, 0
+  index: -1
+RifleAmmo
+  rotate: false
+  xy: 16, 0
+  size: 32, 132
+  orig: 32, 132
   offset: 0, 0
   index: -1
 Rocket
@@ -124,21 +131,21 @@ Rocket
   index: -1
 spiderIdle
   rotate: false
-  xy: 16, 0
+  xy: 48, 0
   size: 250, 173
   orig: 250, 173
   offset: 0, 0
   index: -1
 spiderLegsDown
   rotate: false
-  xy: 824, 0
+  xy: 856, 0
   size: 250, 190
   orig: 250, 190
   offset: 0, 0
   index: -1
 spiderLegsUp
   rotate: false
-  xy: 266, 0
+  xy: 298, 0
   size: 250, 175
   orig: 250, 175
   offset: 0, 0
