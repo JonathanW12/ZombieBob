@@ -78,7 +78,7 @@ public class Game implements ApplicationListener {
         
         batch = new SpriteBatch();
         font = new BitmapFont();
-        
+
         try {
             textureAtlas = new TextureAtlas(Gdx.files.local("assets/sprites.txt"));
             animationTextureAtlas = new TextureAtlas( Gdx.files.local("assets/animations.txt"));
@@ -238,7 +238,9 @@ public class Game implements ApplicationListener {
                             positionPart.getX(),
                             positionPart.getY(),
                             positionPart.getRadians(),
-                            visualPart.getWidth()
+                            visualPart.getWidth(),
+                            visualPart.getResizable(),
+                            visualPart.getHeight()
                 );
             }
 
@@ -324,12 +326,17 @@ public class Game implements ApplicationListener {
         shapeRenderer.end();
     }
     
-    private void drawSprite(String spriteName, float x, float y, float radians, float width) {
+    private void drawSprite(String spriteName, float x, float y, float radians, float width,boolean resizable,float height) {
         Sprite sprite = sprites.get(spriteName);
         float originalWidth = sprite.getWidth();
         float originalHeight = sprite.getHeight();
-        float newHeight = (originalHeight / originalWidth) * width;
-
+        float newHeight;
+        if(resizable == true ){
+            newHeight = (originalHeight / originalWidth) * width;
+        }
+        else{
+            newHeight = height;
+        }
 
         sprite.setBounds(x, y, width, newHeight);
         sprite.setOriginCenter();
