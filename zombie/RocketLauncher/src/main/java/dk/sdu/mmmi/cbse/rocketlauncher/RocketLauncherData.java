@@ -15,16 +15,16 @@ public class RocketLauncherData {
     private static RocketLauncherData instance;
 
     private RocketLauncherData() {
-        visualPartName = "projectile";
-        idleSpriteName = "PlayerGun1";
-        attackAnimationName = "PlayerShootGun";
-        walkAnimationName = "PlayerWalkGun";
-        attackAnimationFrameCount = 2;
+        visualPartName = "Rocket";
+        idleSpriteName = "playerbazooka";
+        attackAnimationName = "PlayerShootBazooka";
+        walkAnimationName = "PlayerWalkBazooka";
+        attackAnimationFrameCount = 1;
         walkAnimationFrameCount = 2;
-        damage = 80;
-        range = 800f;
-        fireRate = 0.3f;
-        attackAnimationFrameDuration = 0.02f;
+        damage = 200;
+        range = 500f;
+        fireRate = 0.7f;
+        attackAnimationFrameDuration = 0.5f;
         walkAnimationFrameDuration = 0.2f;
     }
 

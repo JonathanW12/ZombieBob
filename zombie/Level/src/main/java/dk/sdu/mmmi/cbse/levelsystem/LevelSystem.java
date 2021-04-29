@@ -20,8 +20,6 @@ public class LevelSystem implements IEntityProcessingService {
         if (lastSpawnTime < currentTime - roundDelay) {
             lastSpawnTime = currentTime;
 
-            System.out.println("LEVEL "+ level);
-
             // Every 5yh round will have double time
             if (level > 0 && level%5 == 0){
                 roundDelay = 14000;
@@ -33,9 +31,6 @@ public class LevelSystem implements IEntityProcessingService {
             level++;
 
         }
-
-
-        // displayLevelInformation(world);
         updateTime();
 
     }

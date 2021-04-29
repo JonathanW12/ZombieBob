@@ -26,9 +26,6 @@ public class SpawnProcessor implements IEntityProcessingService {
         level = gameData.getLevelInformation().getCurrentLevel();
 
         if (level > min && level == previousLevel){
-            System.out.println("LEVEL "+ level);
-            System.out.println("PREVIOUSLEVEL "+ previousLevel);
-            // Incrementing enemy count until certain level
 
             if (level%5 != 0){
                 if (level > min && level <= max) {

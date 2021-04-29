@@ -7,12 +7,10 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.services.IWeaponCreatorService;
 import org.openide.util.lookup.ServiceProvider;
 
-@ServiceProvider(service = IWeaponCreatorService.class)
-public class HandgunCreator implements IWeaponCreatorService {
+public class HandgunCreator{
     
     private static final HandgunData gunData = HandgunData.getInstance();
 
-    @Override
     public void spawnGun(GameData gameData, World world) {
         Entity gun = HandgunCreator.scaffoldGun(world);
 
@@ -62,7 +60,7 @@ public class HandgunCreator implements IWeaponCreatorService {
         world.addtoEntityPartMap(weaponAnimationPart, gun);
         world.addtoEntityPartMap(visualPart, gun);
         
-        HandgunProcessor.addToProcessingList(gun);
+        // HandgunProcessor.addToProcessingList(gun);
         
         return gun;
     }

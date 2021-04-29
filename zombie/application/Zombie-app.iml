@@ -83,5 +83,6 @@
     <orderEntry type="module" module-name="Level" />
     <orderEntry type="module" module-name="CommonLocations" />
     <orderEntry type="module" module-name="SpiderBoss" />
+    <orderEntry type="module" module-name="RocketLauncher" />
   </component>
 </module>
