@@ -82,6 +82,5 @@
     <orderEntry type="module" module-name="CommonLevel" />
     <orderEntry type="module" module-name="Level" />
     <orderEntry type="module" module-name="CommonLocations" />
-    <orderEntry type="module" module-name="SpiderBoss" />
   </component>
 </module>

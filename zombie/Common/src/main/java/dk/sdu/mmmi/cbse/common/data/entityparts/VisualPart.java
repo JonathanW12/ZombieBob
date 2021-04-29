@@ -14,13 +14,15 @@ public class VisualPart implements EntityPart {
     //Z position defines on what layer the sprite is drawn. 3 is default. Higher layers get drawn above.
     private int zPosition;
     private boolean isVisible;
+    private boolean resizable;
     
     public VisualPart(String spriteName, float width, float height){
         this.spriteName = spriteName;
         this.width = width;
         this.height = height;
         this.zPosition = 2;
-        isVisible = true;
+        this.isVisible = true;
+        this.resizable = true;
     }
     
     public VisualPart(String spriteName, float width, float height, int zPosition){
@@ -28,7 +30,8 @@ public class VisualPart implements EntityPart {
         this.width = width;
         this.height = height;
         this.zPosition = zPosition;
-        isVisible = true;
+        this.isVisible = true;
+        this.resizable = true;
     }
 
     public int getZPostion(){
@@ -65,5 +68,11 @@ public class VisualPart implements EntityPart {
     
     public void setIsVisible(boolean isVisible) {
         this.isVisible = isVisible;
+    }
+    public void setResizable(boolean isResizable){
+        this.resizable = isResizable;
+    }
+    public boolean getResizable(){
+        return this.resizable;
     }
 }

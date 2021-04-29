@@ -37,16 +37,11 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 WeaponInventoryPart weaponInventoryPart = (WeaponInventoryPart) world.getMapByPart("WeaponInventoryPart").get(entry.getKey());
                 CollectorPart collectorPart = (CollectorPart) world.getMapByPart(CollectorPart.class.getSimpleName()).get(entry.getKey());
                 ColliderPart colliderPart = (ColliderPart) world.getMapByPart(ColliderPart.class.getSimpleName()).get(entry.getKey());
-                
+
                 combatPart.setAttacking(gameData.getMouse().isLeftClick());
                 if (world.getMapByPart(WeaponPart.class.getSimpleName()) != null && combatPart.getCurrentWeapon() != null){
                     weaponPart = (WeaponPart) world.getMapByPart(WeaponPart.class.getSimpleName()).get(combatPart.getCurrentWeapon());
                 }
-                
-                
-                
-
-
 
                 if (gameData.getMouse().isRightClick()){
                     //Inventory testing. to be deleted
@@ -55,7 +50,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                     weaponInventoryPart.removeWeapon(removeWeaponId);
                     }
                 }
-
+                bananaTest(world,gameData,weaponInventoryPart);
                 if (gameData.getMouse().isMiddleClick()){
                 }
                 if (gameData.getMouse().getScroll() == -1){
@@ -105,6 +100,18 @@ public class PlayerControlSystem implements IEntityProcessingService {
                         animationPart.setCurrentAnimation("walk");
                     }
                 }    
+            }
+        }
+    }
+    
+    private void bananaTest(World world,GameData gameData, WeaponInventoryPart weaponInventoryPart){
+        if(gameData.getKeys().isPressed(GameKeys.SHIFT)){
+            for (int i = 0; i < 4; i++){
+                Entity itemTest = new Entity();
+                
+                world.addtoEntityPartMap(new PositionPart(1,2,3), itemTest);
+                world.addtoEntityPartMap(new VisualPart("sword_sprite",2,3), itemTest);
+                weaponInventoryPart.addWeapon(itemTest.getUUID());
             }
         }
     }

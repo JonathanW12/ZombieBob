@@ -34,13 +34,13 @@ public class MapPlugin implements IGamePluginService{
         createBackground(gameData,world);
         
         createHoriziontalWallSection(0, 0, horizontalTiles); // Bottom Wall
-        createHoriziontalWallSection(0, verticalTiles - 3, horizontalTiles); // Top Wall
-        createVerticalWallSection(1, 0, verticalTiles - 4); // Left Wall
-        createVerticalWallSection(1, horizontalTiles - 1, verticalTiles - 4); // Right Wall
+        createHoriziontalWallSection(0, verticalTiles-1, horizontalTiles); // Top Wall
+        createVerticalWallSection(1, 0, verticalTiles - 2); // Left Wall
+        createVerticalWallSection(1, horizontalTiles - 1, verticalTiles - 2); // Right Wall
         
         // L-Obstacle
-        createHoriziontalWallSection(3, 3, 2);
-        createVerticalWallSection(3, 3, 4);
+        createHoriziontalWallSection(6, 4, 3);
+        createVerticalWallSection(4, 5, 5);
         
         // Vertical obstacle
         createVerticalWallSection(3, horizontalTiles - 4, 6);

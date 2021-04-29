@@ -12,8 +12,8 @@ import org.openide.util.lookup.ServiceProviders;
 @ServiceProviders(value = {
     @ServiceProvider(service = IGamePluginService.class),})
 public class HotbarPlugin implements IGamePluginService {
-    private float hotbarHeight = 150;
-    private float hotbarWidth = 500;
+    private float hotbarHeight = 59;
+    private float hotbarWidth = 430;
 
     @Override
     public void start(GameData gameData, World world) {
@@ -32,6 +32,8 @@ public class HotbarPlugin implements IGamePluginService {
         world.addtoEntityPartMap(new PositionPart(x,y,radians), hotbar);
         world.addtoEntityPartMap(new HotbarPart(),hotbar);
         world.addtoEntityPartMap(new VisualPart("hotbar_sprite",hotbarWidth,hotbarHeight,3),hotbar);
+        VisualPart visualPart = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(hotbar.getUUID());
+        visualPart.setResizable(false);
     }
 
     @Override

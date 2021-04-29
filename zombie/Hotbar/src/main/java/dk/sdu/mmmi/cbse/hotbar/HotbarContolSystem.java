@@ -24,15 +24,15 @@ import org.openide.util.lookup.ServiceProviders;
     @ServiceProvider(service = IEntityProcessingService.class)})
 public class HotbarContolSystem implements IEntityProcessingService {
     float radians = 3.1415f / 2;
-    int itemPicSize = 30;
+    int itemPicSize = 38;
     //positions match the spaces on the hotbar sprite
-    float[] itemPositionsX = new float[]{125,250,375,500};
-    float itemPositionsY = 725;
+    float[] itemPositionsX = new float[4];
+    float hotbarPositionY;
+    private float hotbarPositionX;
     int currentItem;
     int itemIndex;
-
     // Information Variables
-    private UUID levelInformationEntityID = null;
+    private UUID levelInformationEntityID;
     private UUID killInformationEntityID;
     private int level;
     private int zombiesKilled = 0;
@@ -47,21 +47,8 @@ public class HotbarContolSystem implements IEntityProcessingService {
     for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart("PlayerPart").entrySet()){
         WeaponInventoryPart weaponInventoryPart = (WeaponInventoryPart) world.getMapByPart("WeaponInventoryPart").get(entry.getKey());
         PositionPart playerPositionPart = (PositionPart) world.getMapByPart("PositionPart").get(entry.getKey());
-        if (world.getMapByPart(HotbarPart.class.getSimpleName()).keySet().toArray().length > 0) {
-            UUID uuid = (UUID) world.getMapByPart(HotbarPart.class.getSimpleName()).keySet().toArray()[0];
-            PositionPart hotbarPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(uuid);
-            VisualPart hotbarVis = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(uuid);
-
-
-
-            hotbarPos.setPosition(playerPositionPart.getX(),(playerPositionPart.getY()-gameData.getDisplayHeight()/2)+hotbarVis.getHeight()*2 );
-            itemPositionsY = hotbarPos.getY()+15;
-            for (int i = 0; i < 4; i++) {
-                itemPositionsX[i] = hotbarPos.getX()-250+75*(i+1);
-            }
-
-        }
-            if(weaponInventoryPart.getInventory()!=null){
+        updateHotbarPositionWithItems(world,gameData,playerPositionPart);
+        if(weaponInventoryPart.getInventory()!=null){
         if(!excistingItems2.isEmpty()){
             removeItemsNoLongerInInventory(world,weaponInventoryPart);
             reorganizeHotbarItemPositions(world, weaponInventoryPart);
@@ -75,16 +62,37 @@ public class HotbarContolSystem implements IEntityProcessingService {
         // update Levelinformation and Enemies killed information on Hotbar
         displayLevelInformation(gameData,world);
         displayKillInformation(gameData, world);
-
+        updateInformationPositions(world,gameData,playerPositionPart);
     }
 }
+
+    private void updateInformationPositions(World world, GameData gameData, PositionPart playerPositionPart) {
+        PositionPart levelPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(levelInformationEntityID);
+        PositionPart killPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(killInformationEntityID);
+        
+    }
+    private void updateHotbarPositionWithItems(World world, GameData gameData, PositionPart playerPositionPart){
+        if (world.getMapByPart(HotbarPart.class.getSimpleName()).keySet().toArray().length > 0) {
+            UUID uuid = (UUID) world.getMapByPart(HotbarPart.class.getSimpleName()).keySet().toArray()[0];
+            PositionPart hotbarPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(uuid);
+            VisualPart hotbarVis = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(uuid);
+            hotbarPositionY = (playerPositionPart.getY()-gameData.getDisplayHeight()/4)+hotbarVis.getHeight()/2;
+            hotbarPositionX = playerPositionPart.getX();
+            hotbarPos.setPosition(playerPositionPart.getX(),hotbarPositionY );
+            for (int i = 0; i < 4; i++) {
+                float startpos = 30;
+                float pictureSpace = 11;
+                itemPositionsX[i] = hotbarPos.getX()-hotbarVis.getWidth()/2+startpos+itemPicSize/2+(pictureSpace+itemPicSize)*(i);
+            }
+        }
+    }
     private void reorganizeHotbarItemPositions(World world, WeaponInventoryPart weaponInventoryPart){
         for(Map.Entry weaponId : excistingItems2.entrySet()){
             PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(weaponId.getValue());
 
             itemIndex = weaponInventoryPart.getInventory().indexOf(weaponId.getKey());
             positionPart.setX(itemPositionsX[itemIndex]);
-            positionPart.setY(itemPositionsY);
+            positionPart.setY(hotbarPositionY);
         }
     }
     private void addNewItemsToHotbar(World world, UUID playerWeaponID, WeaponInventoryPart weaponInventoryPart){
@@ -95,9 +103,12 @@ public class HotbarContolSystem implements IEntityProcessingService {
             //return the position in the inventory the item should be placed
             itemIndex = weaponInventoryPart.getInventory().indexOf(playerWeaponID);
 
-            world.addtoEntityPartMap(new PositionPart(itemPositionsX[itemIndex],itemPositionsY,radians), hotbarItem);
-            world.addtoEntityPartMap(new VisualPart(visualPart.getSpriteName(),itemPicSize,itemPicSize,4),hotbarItem);
-            excistingItems2.put(playerWeaponID, hotbarItem.getUUID());
+                world.addtoEntityPartMap(new PositionPart(itemPositionsX[itemIndex], hotbarPositionY, radians), hotbarItem);
+                world.addtoEntityPartMap(new VisualPart(visualPart.getSpriteName(), itemPicSize, itemPicSize, 4), hotbarItem);
+                VisualPart visualItem = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(hotbarItem.getUUID());
+                visualItem.setResizable(false);
+                excistingItems2.put(playerWeaponID, hotbarItem.getUUID());
+
     }
     }
     private void removeItemsNoLongerInInventory(World world, WeaponInventoryPart weaponInventoryPart){
@@ -121,6 +132,7 @@ public class HotbarContolSystem implements IEntityProcessingService {
         if (levelInformationEntityID == null) {
             Entity levelInformation = new Entity();
             levelInformationEntityID = levelInformation.getUUID();
+
             world.addtoEntityPartMap(new PositionPart(600, 750, 2f), levelInformation);
             world.addtoEntityPartMap(new TextPart(null, 4), levelInformation);
         }
@@ -129,14 +141,15 @@ public class HotbarContolSystem implements IEntityProcessingService {
 
         TextPart textPart = (TextPart) world.getMapByPart("TextPart").get(levelInformationEntityID);
         String levelMessage;
-        if (level < 1) {
-            levelMessage = ("Prepare to fight!");
-        } else if (level>0 && ((level)%5) == 0){
-            levelMessage = ("Level: " + (level)+ " - BOSS -");
+        if (level-1 < 1) {
+            levelMessage = ("Level: " + "Starting Soon");
+        } else if (level>2 && ((level-1)%5) == 0){
+            levelMessage = ("Level: " + (level - 1)+ " - BOSS -");
         } else {
-            levelMessage = ("Level: " + (level));
+            levelMessage = ("Level: " + (level - 1));
         }
-
+        PositionPart textPosition = (PositionPart) world.getMapByPart("PositionPart").get(levelInformationEntityID);
+        textPosition.setPosition(hotbarPositionX+10, hotbarPositionY+13);
         textPart.setMessage(levelMessage);
     }
 
@@ -151,7 +164,9 @@ public class HotbarContolSystem implements IEntityProcessingService {
         zombiesKilled = gameData.getLevelInformation().getEnemiesKilled();
 
         TextPart textPart = (TextPart) world.getMapByPart("TextPart").get(killInformationEntityID);
-        String killMessage = ("Enemies Slain: " + zombiesKilled);
+        PositionPart textPosition = (PositionPart) world.getMapByPart("PositionPart").get(killInformationEntityID);
+        textPosition.setPosition(hotbarPositionX+10, hotbarPositionY-2);
+        String killMessage = ("Zombies Slain: " + zombiesKilled);
         textPart.setMessage(killMessage);
     }
 }

@@ -16,7 +16,7 @@ public class Installer extends ModuleInstall {
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "ZombieBoB 0.4.1";
         cfg.width = 1920;
-        cfg.height = 1080;
+        cfg.height = 960;
         cfg.useGL30 = false;
         cfg.resizable = false;
 
