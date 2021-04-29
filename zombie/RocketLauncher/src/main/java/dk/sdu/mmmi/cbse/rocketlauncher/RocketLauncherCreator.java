@@ -16,7 +16,7 @@ public class RocketLauncherCreator {
         VisualPart visualPart = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(rocketLauncher.getUUID());
         visualPart.setIsVisible(true);
 
-        float spawnX = gameData.getDisplayWidth()/2;
+        float spawnX = gameData.getDisplayWidth()/3;
         float spawnY = gameData.getDisplayHeight()/2;
         float radians = 3.1415f / 2;
 
@@ -59,7 +59,7 @@ public class RocketLauncherCreator {
         world.addtoEntityPartMap(weaponAnimationPart, rocketLauncher);
         world.addtoEntityPartMap(visualPart, rocketLauncher);
 
-        RocketLauncherProcessor.addToProcessingList(rocketLauncher);
+        // RocketLauncherProcessor.addToProcessingList(rocketLauncher);
 
         return rocketLauncher;
     }

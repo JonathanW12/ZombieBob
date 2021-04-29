@@ -38,10 +38,12 @@ public class CombatProcessingSystem implements IEntityProcessingService {
                     if(weaponPart.getTimeSinceLastTrigger() > weaponPart.getFireRate()){
                         weaponPart.setIsAttacking(true);
                         weaponPart.setTimeSinceLastTrigger(0);
+                    } else {
+                        weaponPart.setIsAttacking(false);
                     }
                     
                 } else {
-                    //System.out.println("no weaponPart equipped as currentWeapon");
+                    weaponPart.setIsAttacking(false);
                 }
             }
         }

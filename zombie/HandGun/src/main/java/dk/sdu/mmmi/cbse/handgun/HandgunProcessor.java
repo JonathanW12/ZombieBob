@@ -27,8 +27,6 @@ public class HandgunProcessor implements IEntityProcessingService {
             PositionPart weaponPosition = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(gun.getUUID());
             
             if (weaponPart.isIsAttacking()) {
-                weaponPart.setIsAttacking(false);
-                
                 float spawnDistanceFromAttacker = 50f;
                 float spawnX = weaponPosition.getX() + spawnDistanceFromAttacker * (float) Math.cos(weaponPosition.getRadians());
                 float spawnY = weaponPosition.getY() + spawnDistanceFromAttacker * (float) Math.sin(weaponPosition.getRadians());

@@ -1,5 +1,6 @@
 package dk.sdu.mmmi.cbse.playersystem;
 
+import com.badlogic.gdx.Input;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.GameKeys;
@@ -65,6 +66,29 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 movingPart.setRight(gameData.getKeys().isDown(GameKeys.RIGHT));
                 movingPart.setUp(gameData.getKeys().isDown(GameKeys.UP));
                 movingPart.setDown(gameData.getKeys().isDown(GameKeys.DOWN));
+
+
+                if (gameData.getKeys().isPressed(GameKeys.NUM_1)){
+                    if (weaponInventoryPart.getInventory().size()> 0){
+                        combatPart.setCurrentWeapon(weaponInventoryPart.getInventory().get(0));
+                    }
+                }
+                if (gameData.getKeys().isPressed(GameKeys.NUM_2)){
+                    if (weaponInventoryPart.getInventory().size()> 1){
+                        combatPart.setCurrentWeapon(weaponInventoryPart.getInventory().get(1));
+                    }
+                }
+                if (gameData.getKeys().isPressed(GameKeys.NUM_3)){
+                    if (weaponInventoryPart.getInventory().size()> 2){
+                        combatPart.setCurrentWeapon(weaponInventoryPart.getInventory().get(2));
+                    }
+                }
+                if (gameData.getKeys().isPressed(GameKeys.NUM_4)){
+                    if (weaponInventoryPart.getInventory().size()> 3){
+                        combatPart.setCurrentWeapon(weaponInventoryPart.getInventory().get(3));
+                    }
+                }
+
                 //combatPart.setAttacking(gameData.getKeys().isPressed(GameKeys.SPACE));
                 
                 collectorPart.setCollecting(gameData.getKeys().isPressed(GameKeys.E));

@@ -1,6 +1,6 @@
-package dk.sdu.mmmi.cbse.rocketlauncher;
+package dk.sdu.mmmi.cbse.rifle;
 
-public class RocketLauncherData {
+public class RifleData {
     private final String visualPartName;
     private final String idleSpriteName;
     private final String attackAnimationName;
@@ -12,25 +12,25 @@ public class RocketLauncherData {
     private final float fireRate;
     private final float attackAnimationFrameDuration;
     private final float walkAnimationFrameDuration;
-    private static RocketLauncherData instance;
+    private static RifleData instance;
 
-    private RocketLauncherData() {
-        visualPartName = "Rocket";
-        idleSpriteName = "playerbazooka";
-        attackAnimationName = "PlayerShootBazooka";
-        walkAnimationName = "PlayerWalkBazooka";
+    private RifleData() {
+        visualPartName = "Ammobox";
+        idleSpriteName = "PlayerUzi";
+        attackAnimationName = "PlayerShootRifle";
+        walkAnimationName = "PlayerWalkRifle";
         attackAnimationFrameCount = 1;
         walkAnimationFrameCount = 2;
-        damage = 200;
-        range = 500f;
-        fireRate = 0.8f;
-        attackAnimationFrameDuration = 0.1f;
+        damage = 100;
+        range = 600f;
+        fireRate = 0.15f;
+        attackAnimationFrameDuration = 0.03f;
         walkAnimationFrameDuration = 0.2f;
     }
 
-    public static RocketLauncherData getInstance() {
+    public static RifleData getInstance() {
         if (instance == null) {
-            instance = new RocketLauncherData();
+            instance = new RifleData();
         }
 
         return instance;
@@ -79,5 +79,4 @@ public class RocketLauncherData {
     public float getWalkAnimationFrameDuration() {
         return walkAnimationFrameDuration;
     }
-
 }

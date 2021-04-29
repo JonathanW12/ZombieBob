@@ -188,6 +188,16 @@
             <artifactId>SpiderBoss</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>RocketLauncher</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Rifle</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
     </dependencies>
 

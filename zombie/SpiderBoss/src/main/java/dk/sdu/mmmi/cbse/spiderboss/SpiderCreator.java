@@ -40,13 +40,18 @@ public class SpiderCreator {
         combatPart.setCurrentWeapon(zombieAttack.getUUID());
 
         // Create zombie
+        ColliderPart colliderPart = new ColliderPart();
+        for(int i = 0; i < 8; i++) {
+            colliderPart.addShapePoint(25, (float) (i * Math.PI / 4));
+        }
+
         world.addtoEntityPartMap(new PositionPart(position.getX(), position.getY(), radians), zombie);
-        world.addtoEntityPartMap(new VisualPart("spiderIdle", 120, 120), zombie);
+        world.addtoEntityPartMap(new VisualPart("spiderIdle", 100, 100), zombie);
         world.addtoEntityPartMap(new MovingPart(speed, rotationSpeed), zombie);
         world.addtoEntityPartMap(new EnemyPart(), zombie);
         world.addtoEntityPartMap(new LifePart(health), zombie);
         world.addtoEntityPartMap(new AiMovementPart(4), zombie);
-        world.addtoEntityPartMap(new ColliderPart(120,120),zombie);
+        world.addtoEntityPartMap(colliderPart,zombie);
         world.addtoEntityPartMap(combatPart, zombie);
         world.addtoEntityPartMap(createInitialAnimationSpider(weaponAnimationPart), zombie);
     }

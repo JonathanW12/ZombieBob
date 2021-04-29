@@ -6,7 +6,7 @@ public class GameKeys {
     private static boolean[] pkeys;
     private static boolean hasUpdated;
 
-    private static final int NUM_KEYS = 9;
+    private static final int NUM_KEYS = 13;
     public static final int UP = 0;
     public static final int LEFT = 1;
     public static final int DOWN = 2;
@@ -16,6 +16,11 @@ public class GameKeys {
     public static final int SPACE = 6;
     public static final int SHIFT = 7;
     public static final int E = 8;
+    public static final int NUM_1 = 9;
+    public static final int NUM_2 = 10;
+    public static final int NUM_3 = 11;
+    public static final int NUM_4 = 12;
+
 
 
     public GameKeys() {

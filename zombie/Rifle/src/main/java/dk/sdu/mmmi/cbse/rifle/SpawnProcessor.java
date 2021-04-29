@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.cbse.rocketlauncher;
+package dk.sdu.mmmi.cbse.rifle;
 
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
@@ -9,13 +9,13 @@ import org.openide.util.lookup.ServiceProvider;
 public class SpawnProcessor implements IEntityProcessingService{
 
     private boolean spawnedWeapon = false;
-    private RocketLauncherCreator rocketLauncherCreator = new RocketLauncherCreator();
+    private RifleCreator rifleCreator = new RifleCreator();
 
     @Override
     public void process(GameData gameData, World world) {
 
         if (gameData.getLevelInformation().getCurrentLevel() == 0 && !spawnedWeapon){
-            rocketLauncherCreator.spawnRocketLauncher(gameData,world);
+            rifleCreator.spawnRifleData(gameData,world);
             spawnedWeapon = true;
         }
 
