@@ -1,7 +1,5 @@
 package dk.sdu.mmmi.cbse.map;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.utils.GdxRuntimeException;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
@@ -18,29 +16,27 @@ import org.openide.util.lookup.ServiceProviders;
 @ServiceProviders(value = {
     @ServiceProvider(service = IGamePluginService.class),})
 public class MapPlugin implements IGamePluginService{
-    private float gameHeight;
-    private float gameWidth;
-    private final float wallWidth = 60;
     private final float wallRadians = 3.1415f / 2;
     private World world;
     private Tile[][] tiles;
     
     @Override
     public void start(GameData gameData, World world) {
-        gameHeight = gameData.getDisplayHeight();
-        gameWidth = gameData.getDisplayWidth();
         this.world = world;
-        tiles = Tiles.getInstance(gameData).getTiles();
-        int verticalTiles = tiles.length;
-        int horizontalTiles = tiles[0].length;
-        
+        tiles = Tiles.getInstance(gameData).getTiles();    
         createBackground(gameData,world);
-        
         generateMapFromFile("map1");
     }
     
     private void generateMapFromFile(String mapName) {
-        FileHandle filehandle = new FileHandle("../../maps/" + mapName + ".txt");
+        FileHandle filehandle;
+        String osName = System.getProperty("os.name");
+        if (osName.startsWith("Windows")) {
+            filehandle = new FileHandle("../../maps/" + mapName + ".txt");
+        } else {
+            filehandle = new FileHandle("./maps/" + mapName + ".txt");
+        }
+         
         
         if (filehandle.exists()) {
             String text = filehandle.readString();
