@@ -24,10 +24,12 @@
         <module name="CommonLevel" />
         <module name="CombatSystem" />
         <module name="Hotbar" />
+        <module name="CommonTiles" />
         <module name="Common" />
         <module name="StandardZombie" />
         <module name="HandGun" />
         <module name="ProjectileSystem" />
+        <module name="RigidPhysicsSystem" />
         <module name="LootingSystem" />
         <module name="Level" />
         <module name="Map" />
@@ -45,6 +47,7 @@
       <module name="CommonEnemy" target="1.8" />
       <module name="CommonLevel" target="1.8" />
       <module name="CommonLocations" target="1.8" />
+      <module name="CommonTiles" target="1.8" />
       <module name="CommonWeapon" target="1.8" />
       <module name="Core" target="1.8" />
       <module name="Enemy" target="1.8" />
@@ -54,9 +57,11 @@
       <module name="Level" target="1.8" />
       <module name="LootingSystem" target="1.8" />
       <module name="Map" target="1.8" />
+      <module name="MiniMap" target="1.8" />
       <module name="Movement" target="1.8" />
       <module name="Player" target="1.8" />
       <module name="ProjectileSystem" target="1.8" />
+      <module name="RigidPhysicsSystem" target="1.8" />
       <module name="SilentUpdate" target="1.8" />
       <module name="StandardZombie" target="1.8" />
       <module name="TimerSystem" target="1.8" />

@@ -38,9 +38,6 @@ public class WeaponInventoryPart implements EntityPart{
         return capacity;
     }
 
-    public void addToInventory(UUID item) {
-        this.inventory.add(item);
-    }
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;

@@ -103,11 +103,12 @@ public class HotbarContolSystem implements IEntityProcessingService {
             //return the position in the inventory the item should be placed
             itemIndex = weaponInventoryPart.getInventory().indexOf(playerWeaponID);
 
-            world.addtoEntityPartMap(new PositionPart(itemPositionsX[itemIndex],hotbarPositionY,radians), hotbarItem);
-            world.addtoEntityPartMap(new VisualPart(visualPart.getSpriteName(),itemPicSize,itemPicSize,4),hotbarItem);
-            VisualPart visualItem = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(hotbarItem.getUUID());
-            visualItem.setResizable(false);
-            excistingItems2.put(playerWeaponID, hotbarItem.getUUID());
+                world.addtoEntityPartMap(new PositionPart(itemPositionsX[itemIndex], hotbarPositionY, radians), hotbarItem);
+                world.addtoEntityPartMap(new VisualPart(visualPart.getSpriteName(), itemPicSize, itemPicSize, 4), hotbarItem);
+                VisualPart visualItem = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(hotbarItem.getUUID());
+                visualItem.setResizable(false);
+                excistingItems2.put(playerWeaponID, hotbarItem.getUUID());
+
     }
     }
     private void removeItemsNoLongerInInventory(World world, WeaponInventoryPart weaponInventoryPart){
@@ -148,7 +149,7 @@ public class HotbarContolSystem implements IEntityProcessingService {
             levelMessage = ("Level: " + (level - 1));
         }
         PositionPart textPosition = (PositionPart) world.getMapByPart("PositionPart").get(levelInformationEntityID);
-        textPosition.setPosition(hotbarPositionX+20, hotbarPositionY+15);
+        textPosition.setPosition(hotbarPositionX+10, hotbarPositionY+13);
         textPart.setMessage(levelMessage);
     }
 
@@ -164,7 +165,7 @@ public class HotbarContolSystem implements IEntityProcessingService {
 
         TextPart textPart = (TextPart) world.getMapByPart("TextPart").get(killInformationEntityID);
         PositionPart textPosition = (PositionPart) world.getMapByPart("PositionPart").get(killInformationEntityID);
-        textPosition.setPosition(hotbarPositionX+20, hotbarPositionY);
+        textPosition.setPosition(hotbarPositionX+10, hotbarPositionY-2);
         String killMessage = ("Zombies Slain: " + zombiesKilled);
         textPart.setMessage(killMessage);
     }

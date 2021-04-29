@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.PlayerPart;
@@ -32,11 +33,13 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.ColliderPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import dk.sdu.mmmi.cbse.common.data.GameKeys;
@@ -45,9 +48,11 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.TextPart;
 import dk.sdu.mmmi.cbse.commontiles.Tiles;
 import dk.sdu.mmmi.cbse.commontiles.Tile;
+
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.concurrent.CopyOnWriteArrayList;
+
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
@@ -69,50 +74,61 @@ public class Game implements ApplicationListener {
     private final int zDepth = 5;
     private ArrayList<ArrayList<UUID>> sortedVisualList = new ArrayList<>(zDepth);
     private BitmapFont font;
-    
+
     @Override
     public void create() {
         //physicsBodies = new PhysicsShapeCache("physics.xml");
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
-        
+
+
         batch = new SpriteBatch();
-        font = new BitmapFont();
+        FreeTypeFontGenerator fontGenerator;
+
 
         try {
+            fontGenerator = new FreeTypeFontGenerator(Gdx.files.local("font/Roboto-Light.ttf"));
+
             textureAtlas = new TextureAtlas(Gdx.files.local("assets/sprites.txt"));
-            animationTextureAtlas = new TextureAtlas( Gdx.files.local("assets/animations.txt"));
+            animationTextureAtlas = new TextureAtlas(Gdx.files.local("assets/animations.txt"));
 
             //temp way of adding hotbar
             Texture img1 = new Texture(Gdx.files.local("assets/Hotbar_official.png"));
-            sprites.put("hotbar_sprite",new Sprite(img1));
-            
+            sprites.put("hotbar_sprite", new Sprite(img1));
+
             Texture img2 = new Texture(Gdx.files.local("assets/Weapon_test1.png"));
-            sprites.put("sword_sprite",new Sprite(img2));
-            
+            sprites.put("sword_sprite", new Sprite(img2));
+
             Texture img3 = new Texture(Gdx.files.local("assets/Background_Test1.png"));
-            sprites.put("background_sprite",new Sprite(img3));
-            
+            sprites.put("background_sprite", new Sprite(img3));
+
             Texture img4 = new Texture(Gdx.files.local("assets/Wall_Test2.png"));
-            sprites.put("wall_sprite",new Sprite(img4));
+            sprites.put("wall_sprite", new Sprite(img4));
         } catch (GdxRuntimeException e) {
+            fontGenerator = new FreeTypeFontGenerator(Gdx.files.local("../../font/Roboto-Light.ttf"));
+
             textureAtlas = new TextureAtlas("../../assets/sprites.txt");
             animationTextureAtlas = new TextureAtlas("../../assets/animations.txt");
 
             //temp way of adding hotbar
             Texture img1 = new Texture("../../assets/Hotbar_official.png");
-            sprites.put("hotbar_sprite",new Sprite(img1));
+            sprites.put("hotbar_sprite", new Sprite(img1));
 
             Texture img2 = new Texture("../../assets/Weapon_test1.png");
-            sprites.put("sword_sprite",new Sprite(img2));
-            
+            sprites.put("sword_sprite", new Sprite(img2));
+
             Texture img3 = new Texture("../../assets/Background_Test1.png");
-            sprites.put("background_sprite",new Sprite(img3));
-            
+            sprites.put("background_sprite", new Sprite(img3));
+
             Texture img4 = new Texture("../../assets/Wall_Test2.png");
-            sprites.put("wall_sprite",new Sprite(img4));
+            sprites.put("wall_sprite", new Sprite(img4));
         }
-        
+
+
+        font = fontGenerator.generateFont(30);
+        font.setScale(.5f);
+        //font = new BitmapFont();
+        fontGenerator.dispose();
 
         addSprites();
         addAnimations();
@@ -120,27 +136,26 @@ public class Game implements ApplicationListener {
         cam = new OrthographicCamera(gameData.getDisplayWidth(), gameData.getDisplayHeight());
         cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
         cam.update();
-        viewport = new ExtendViewport(gameData.getDisplayHeight()/2, gameData.getDisplayHeight()/2, cam);
+        viewport = new ExtendViewport(gameData.getDisplayHeight() / 2, gameData.getDisplayHeight() / 2, cam);
 
         InputProcessor keyInputProcessor = new GameInputProcessor(gameData);
-        InputProcessor mouseInputProcessor = new MouseInputProcessor(gameData,cam);
+        InputProcessor mouseInputProcessor = new MouseInputProcessor(gameData, cam);
 
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
 
         Pixmap pm;
-        
+
         try {
             pm = new Pixmap(Gdx.files.local("raw-assets/crosshair.png"));
         } catch (GdxRuntimeException e) {
             pm = new Pixmap(Gdx.files.local("../../raw-assets/crosshair.png"));
         }
-        
-        int xOffset = (pm.getWidth()/2);
-        int yOffset = (pm.getHeight()/2);
+
+        int xOffset = (pm.getWidth() / 2);
+        int yOffset = (pm.getHeight() / 2);
 
         Gdx.input.setCursorImage(pm, xOffset, yOffset);
         pm.dispose();
-
 
 
         inputMultiplexer.addProcessor(keyInputProcessor);
@@ -156,7 +171,7 @@ public class Game implements ApplicationListener {
             plugin.start(gameData, world);
             gamePlugins.add(plugin);
         }
-        for (int i = 0; i < zDepth; i++){
+        for (int i = 0; i < zDepth; i++) {
             sortedVisualList.add(new ArrayList());
         }
     }
@@ -197,43 +212,45 @@ public class Game implements ApplicationListener {
         }
     }
 
-    private ArrayList<ArrayList<UUID>> sortVisualParts(){
-        for (Map.Entry<UUID, EntityPart> entry: world.getMapByPart("VisualPart").entrySet()){ 
+    private ArrayList<ArrayList<UUID>> sortVisualParts() {
+        for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart("VisualPart").entrySet()) {
             VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entry.getKey());
             int zPosition = visualPart.getZPostion();
             sortedVisualList.get(zPosition).add(entry.getKey());
         }
         return sortedVisualList;
     }
-    private void clearSortedVisualList(){
-        for (int i = 0; i < zDepth; i++){
+
+    private void clearSortedVisualList() {
+        for (int i = 0; i < zDepth; i++) {
             sortedVisualList.get(i).clear();
         }
     }
+
     private void draw() {
-        batch.begin(); 
+        batch.begin();
 
         sortVisualParts();
         for (int i = 0; i < zDepth; i++) {
 
             int edgeCount = sortedVisualList.get(i).size();
             for (int j = 0; j < edgeCount; j++) {
-                    UUID entityUUID = sortedVisualList.get(i).get(j);
-                    PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(entityUUID);
-                    VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entityUUID);
-                    AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entityUUID);
+                UUID entityUUID = sortedVisualList.get(i).get(j);
+                PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(entityUUID);
+                VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entityUUID);
+                AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entityUUID);
 
-                    if (animationPart != null && animationPart.isAnimated()) {                
-                        drawAnimation(
+                if (animationPart != null && animationPart.isAnimated()) {
+                    drawAnimation(
                             animationPart,
                             positionPart.getX(),
                             positionPart.getY(),
                             positionPart.getRadians(),
                             visualPart.getWidth(),
                             animationPart.getAnimationByName(animationPart.getCurrentAnimationName()).getFrameCount()
-                        ); 
-                    } else if (visualPart.getIsVisible()) { 
-                        drawSprite(
+                    );
+                } else if (visualPart.getIsVisible()) {
+                    drawSprite(
                             visualPart.getSpriteName(),
                             positionPart.getX(),
                             positionPart.getY(),
@@ -241,100 +258,100 @@ public class Game implements ApplicationListener {
                             visualPart.getWidth(),
                             visualPart.getResizable(),
                             visualPart.getHeight()
-                );
-            }
+                    );
+                }
 
-    }
-}
+            }
+        }
         drawFonts();
         batch.end();
         clearSortedVisualList();
-        
-        if(gameData.getKeys().isDown(GameKeys.SPACE)){
-        drawHitboxes();
-        drawTiles();
+
+        if (gameData.getKeys().isDown(GameKeys.SPACE)) {
+            drawHitboxes();
+            drawTiles();
         }
-        
-        
+
+
     }
-    
-    private void drawHitboxes(){
+
+    private void drawHitboxes() {
         ShapeRenderer sr = new ShapeRenderer();
-        if(world.getMapByPart(ColliderPart.class.getSimpleName())!= null){
-        for(Map.Entry<UUID, EntityPart> entry : world.getMapByPart(ColliderPart.class.getSimpleName()).entrySet()) {
-            
-            if(world.getMapByPart(PositionPart.class.getSimpleName())!= null){
-            PositionPart position = (PositionPart)world.getMapByPart(PositionPart.class.getSimpleName()).get(entry.getKey());
-            if(position != null){
+        if (world.getMapByPart(ColliderPart.class.getSimpleName()) != null) {
+            for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart(ColliderPart.class.getSimpleName()).entrySet()) {
 
-            sr.setColor(1, 1, 1, 1);
-            sr.begin(ShapeRenderer.ShapeType.Line);
-            
-            
-            if(((ColliderPart)entry.getValue()).getRadius() != 0){
-                
-                ArrayList<ColliderPart.Vector2> corners = ((ColliderPart)entry.getValue()).getCornerVecs(position);
-                for (int i = 0, j = corners.size() - 1;
-                    i < corners.size();
-                    j = i++) {
+                if (world.getMapByPart(PositionPart.class.getSimpleName()) != null) {
+                    PositionPart position = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(entry.getKey());
+                    if (position != null) {
 
-                sr.line(corners.get(i).x, corners.get(i).y, corners.get(j).x, corners.get(j).y);
-            }}
-                
-            sr.end();
-        }
-        }
-        }
+                        sr.setColor(1, 1, 1, 1);
+                        sr.begin(ShapeRenderer.ShapeType.Line);
+
+
+                        if (((ColliderPart) entry.getValue()).getRadius() != 0) {
+
+                            ArrayList<ColliderPart.Vector2> corners = ((ColliderPart) entry.getValue()).getCornerVecs(position);
+                            for (int i = 0, j = corners.size() - 1;
+                                 i < corners.size();
+                                 j = i++) {
+
+                                sr.line(corners.get(i).x, corners.get(i).y, corners.get(j).x, corners.get(j).y);
+                            }
+                        }
+
+                        sr.end();
+                    }
+                }
+            }
         }
     }
 
-    private void drawFonts(){
-        if(world.getMapByPart("TextPart") != null){
-        for (Map.Entry<UUID, EntityPart> entry: world.getMapByPart("TextPart").entrySet()){
-            PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(entry.getKey());
-            TextPart textPart = (TextPart) world.getMapByPart("TextPart").get(entry.getKey());
-            font.draw(batch, textPart.getMessage(),positionPart.getX(),positionPart.getY());
-        }
+    private void drawFonts() {
+        if (world.getMapByPart("TextPart") != null) {
+            for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart("TextPart").entrySet()) {
+                PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(entry.getKey());
+                TextPart textPart = (TextPart) world.getMapByPart("TextPart").get(entry.getKey());
+                font.draw(batch, textPart.getMessage(), positionPart.getX(), positionPart.getY());
+            }
         }
     }
-    
+
     private void drawTiles() {
         ShapeRenderer shapeRenderer = new ShapeRenderer();
         Tile[][] tiles = Tiles.getInstance(gameData).getTiles();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        
+
         shapeRenderer.setColor(1, 1, 1, 1);
-        
+
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j++) {
                 shapeRenderer.line(
-                    tiles[i][j].getX(),
-                    tiles[i][j].getY(),
-                    tiles[i][j].getX() + tiles[i][j].getWidth(),
-                    tiles[i][j].getY()
+                        tiles[i][j].getX(),
+                        tiles[i][j].getY(),
+                        tiles[i][j].getX() + tiles[i][j].getWidth(),
+                        tiles[i][j].getY()
                 );
-                
+
                 shapeRenderer.line(
-                    tiles[i][j].getX(),
-                    tiles[i][j].getY(),
-                    tiles[i][j].getX(),
-                    tiles[i][j].getY()  + tiles[i][j].getHeight()
+                        tiles[i][j].getX(),
+                        tiles[i][j].getY(),
+                        tiles[i][j].getX(),
+                        tiles[i][j].getY() + tiles[i][j].getHeight()
                 );
             }
         }
-        
+
         shapeRenderer.end();
     }
-    
-    private void drawSprite(String spriteName, float x, float y, float radians, float width,boolean resizable,float height) {
+
+    private void drawSprite(String spriteName, float x, float y, float radians, float width, boolean resizable, float height) {
         Sprite sprite = sprites.get(spriteName);
         float originalWidth = sprite.getWidth();
         float originalHeight = sprite.getHeight();
         float newHeight;
-        if(resizable == true ){
+        if (resizable == true) {
             newHeight = (originalHeight / originalWidth) * width;
-        }
-        else{
+        } else {
             newHeight = height;
         }
 
@@ -353,11 +370,11 @@ public class Game implements ApplicationListener {
 
         for (int i = 0; i < frameCount; i++) {
             subRegions[i] = new TextureRegion(
-                region,
-                (i * (region.getRegionWidth() / frameCount)),
-                0,
-                region.getRegionWidth() / frameCount,
-                region.getRegionHeight()
+                    region,
+                    (i * (region.getRegionWidth() / frameCount)),
+                    0,
+                    region.getRegionWidth() / frameCount,
+                    region.getRegionHeight()
             );
         }
 

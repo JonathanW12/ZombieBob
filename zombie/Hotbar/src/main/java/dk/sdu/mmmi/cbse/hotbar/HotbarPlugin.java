@@ -12,7 +12,7 @@ import org.openide.util.lookup.ServiceProviders;
 @ServiceProviders(value = {
     @ServiceProvider(service = IGamePluginService.class),})
 public class HotbarPlugin implements IGamePluginService {
-    private float hotbarHeight = 60;
+    private float hotbarHeight = 59;
     private float hotbarWidth = 430;
 
     @Override

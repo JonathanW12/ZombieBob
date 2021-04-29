@@ -111,7 +111,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 
                 world.addtoEntityPartMap(new PositionPart(1,2,3), itemTest);
                 world.addtoEntityPartMap(new VisualPart("sword_sprite",2,3), itemTest);
-                weaponInventoryPart.addToInventory(itemTest.getUUID());
+                weaponInventoryPart.addWeapon(itemTest.getUUID());
             }
         }
     }
