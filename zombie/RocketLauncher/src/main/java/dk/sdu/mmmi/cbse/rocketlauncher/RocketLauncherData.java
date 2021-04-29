@@ -23,8 +23,8 @@ public class RocketLauncherData {
         walkAnimationFrameCount = 2;
         damage = 200;
         range = 500f;
-        fireRate = 0.7f;
-        attackAnimationFrameDuration = 0.5f;
+        fireRate = 0.8f;
+        attackAnimationFrameDuration = 0.1f;
         walkAnimationFrameDuration = 0.2f;
     }
 

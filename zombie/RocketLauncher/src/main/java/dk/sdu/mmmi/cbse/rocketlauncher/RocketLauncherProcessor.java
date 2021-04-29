@@ -19,10 +19,7 @@ public class RocketLauncherProcessor implements IEntityProcessingService {
         for (Entity rocketLauncher: rocketLaunchers) {
             WeaponPart weaponPart = (WeaponPart) world.getMapByPart(WeaponPart.class.getSimpleName()).get(rocketLauncher.getUUID());
             PositionPart weaponPosition = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(rocketLauncher.getUUID());
-
             if (weaponPart.isIsAttacking()) {
-                weaponPart.setIsAttacking(false);
-
                 float spawnDistanceFromAttacker = 50f;
                 float spawnX = weaponPosition.getX() + spawnDistanceFromAttacker * (float) Math.cos(weaponPosition.getRadians());
                 float spawnY = weaponPosition.getY() + spawnDistanceFromAttacker * (float) Math.sin(weaponPosition.getRadians());
