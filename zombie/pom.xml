@@ -84,6 +84,7 @@
         <module>CommonTiles</module>
         <module>SpiderBoss</module>
         <module>RocketLauncher</module>
+        <module>Rifle</module>
     </modules>
 
     <properties>
