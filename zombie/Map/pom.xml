@@ -28,6 +28,12 @@
     </build>
     <dependencies>
         <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx</artifactId>
+            <version>${libGDX.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-api-annotations-common</artifactId>
             <version>RELEASE90</version>
@@ -44,4 +50,7 @@
             <version>${project.version}</version>
         </dependency>
     </dependencies>
+    <properties>
+        <libGDX.version>1.5.0</libGDX.version>
+    </properties>
 </project>

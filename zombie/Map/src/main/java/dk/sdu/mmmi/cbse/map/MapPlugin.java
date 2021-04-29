@@ -1,4 +1,7 @@
 package dk.sdu.mmmi.cbse.map;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
@@ -33,18 +36,26 @@ public class MapPlugin implements IGamePluginService{
         
         createBackground(gameData,world);
         
-        createHoriziontalWallSection(0, 0, horizontalTiles); // Bottom Wall
-        createHoriziontalWallSection(0, verticalTiles-1, horizontalTiles); // Top Wall
-        createVerticalWallSection(1, 0, verticalTiles - 2); // Left Wall
-        createVerticalWallSection(1, horizontalTiles - 1, verticalTiles - 2); // Right Wall
+        generateMapFromFile("map1");
+    }
+    
+    private void generateMapFromFile(String mapName) {
+        FileHandle filehandle = new FileHandle("../../maps/" + mapName + ".txt");
         
-        // L-Obstacle
-        createHoriziontalWallSection(6, 4, 3);
-        createVerticalWallSection(4, 5, 5);
-        
-        // Vertical obstacle
-        createVerticalWallSection(3, horizontalTiles - 4, 6);
-
+        if (filehandle.exists()) {
+            String text = filehandle.readString();
+            String[] lines = text.split("\\r?\\n");
+            System.out.println(lines.length );
+            for (int i = 0; i < lines.length; i++) {
+                String[] cells = lines[i].split("");
+                
+                for (int j = 0; j < cells.length; j++) {
+                    if (cells[j].equals("1")) {
+                        placeWall(tiles[i][j]);
+                    }
+                }
+            }
+        }
     }
     
     private void placeWall(Tile tile) {
@@ -83,34 +94,7 @@ public class MapPlugin implements IGamePluginService{
         world.addtoEntityPartMap(new PositionPart(x,y,wallRadians), background);
         world.addtoEntityPartMap(new VisualPart("background_sprite",gameData.getDisplayWidth()+gameData.getDisplayWidth()/2,gameData.getDisplayHeight()+gameData.getDisplayWidth()/2,0),background);
     }
-    
-    private void createWallRight(World world, float x, float y, float length){
-        //Drawing wall blocks as many times as nescesarry
-        int brickLength = (int) (length/wallWidth);
-        for(int i = 0; i <= brickLength;i++){
-            float xPos = x + wallWidth*i;
-            
-            Entity wall = new Entity();
-            
-            world.addtoEntityPartMap(new PositionPart(xPos,y,wallRadians), wall);
-            world.addtoEntityPartMap(new VisualPart("wall_sprite",wallWidth,wallWidth,1),wall);
-            world.addtoEntityPartMap(new ColliderPart(wallWidth, wallWidth),wall);
-            world.addtoEntityPartMap(new StructurePart(), wall);
-        }
-    }
-    private void createWallUp(World world,float x, float y, float length){
-        int brickLength = (int) (length/wallWidth);
-        for(int i = 0; i <= brickLength;i++){
-            float yPos = y + wallWidth*i;
-            
-            Entity wall = new Entity();
-            
-            world.addtoEntityPartMap(new PositionPart(x,yPos,wallRadians), wall);
-            world.addtoEntityPartMap(new VisualPart("wall_sprite",wallWidth,wallWidth,1),wall);
-            world.addtoEntityPartMap(new ColliderPart(wallWidth, wallWidth),wall);
-            world.addtoEntityPartMap(new StructurePart(), wall);
-        }
-    }
+   
     @Override
     public void stop(GameData gameData, World world) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
