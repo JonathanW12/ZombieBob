@@ -1,5 +1,5 @@
 sprites.png
-size: 928, 1474
+size: 1005, 1503
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -31,6 +31,13 @@ enemyIdle
   orig: 206, 200
   offset: 0, 0
   index: -1
+playerbazooka
+  rotate: false
+  xy: 720, 1100
+  size: 252, 403
+  orig: 252, 403
+  offset: 0, 0
+  index: -1
 PlayerGun1
   rotate: false
   xy: 208, 422
@@ -54,14 +61,14 @@ playerIdle
   index: -1
 PlayerShoot1
   rotate: false
-  xy: 0, 1074
+  xy: 0, 1100
   size: 315, 393
   orig: 315, 393
   offset: 0, 0
   index: -1
 PlayerShoot2
   rotate: false
-  xy: 315, 1074
+  xy: 315, 1100
   size: 405, 400
   orig: 405, 400
   offset: 0, 0
@@ -92,6 +99,13 @@ projectile
   xy: 662, 190
   size: 155, 232
   orig: 155, 232
+  offset: 0, 0
+  index: -1
+Rocket
+  rotate: false
+  xy: 875, 721
+  size: 130, 379
+  orig: 130, 379
   offset: 0, 0
   index: -1
 spiderIdle
