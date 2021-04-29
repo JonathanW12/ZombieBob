@@ -10,11 +10,13 @@ import org.openide.util.lookup.ServiceProvider;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @ServiceProvider(service = IEntityProcessingService.class)
 public class RifleProcessor implements IEntityProcessingService {
 
     private static List<Entity> rifles = new ArrayList<>();
+    private Random rand = new Random();
 
     public void process(GameData gameData, World world) {
         for (Entity rifle: rifles) {
@@ -29,12 +31,12 @@ public class RifleProcessor implements IEntityProcessingService {
 
                 MovingPart movingPart = new MovingPart(12, 1000);
                 world.addtoEntityPartMap(movingPart, bullet);
-                world.addtoEntityPartMap(new PositionPart(spawnX, spawnY, weaponPosition.getRadians()), bullet);
+                world.addtoEntityPartMap(new PositionPart(spawnX, spawnY, weaponPosition.getRadians()+((rand.nextFloat()/2)-0.25f)), bullet);
                 world.addtoEntityPartMap(new ProjectilePart(weaponPart.getRange()), bullet);
-                world.addtoEntityPartMap(new ColliderPart(5,5), bullet);
+                world.addtoEntityPartMap(new ColliderPart(2,2), bullet);
                 world.addtoEntityPartMap(new DamagePart(weaponPart.getDamage()), bullet);
                 world.addtoEntityPartMap(new LifePart(1), bullet);
-                world.addtoEntityPartMap(new VisualPart("projectile", 10, 10), bullet);
+                world.addtoEntityPartMap(new VisualPart("RifleAmmo", 4, 4), bullet);
 
                 movingPart.setUp(true);
             }

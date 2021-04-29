@@ -14,7 +14,7 @@ public class SpawnProcessor implements IEntityProcessingService{
     private int previousLevel = 1;
     private double defaultBoss = 800;
     private double difficulty = 0.10;
-    private double increment = difficulty * level;
+    //private double increment = difficulty * level;
     private double currentIncrease;
     private int min = 0;
     private int max = 2;
@@ -27,7 +27,7 @@ public class SpawnProcessor implements IEntityProcessingService{
 
         if (level > 0 && !spawned){
             if (level%5 == 0){
-                currentIncrease = +increment;
+                currentIncrease = difficulty * level;
                 spiderCreator.createSpiderBoss(
                         (int) (defaultBoss * (1 + currentIncrease)),
                         location.random(gameData), world);
