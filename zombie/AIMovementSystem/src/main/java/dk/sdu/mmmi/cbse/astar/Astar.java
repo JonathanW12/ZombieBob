@@ -11,7 +11,6 @@ import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.commontiles.Tile;
 import dk.sdu.mmmi.cbse.commontiles.Tiles;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -111,7 +110,7 @@ public class Astar implements IEntityProcessingService {
                         openSet.add(neighbor);
                     } 
                    
-                    neighbor.setG(lowestNode.getG() + calculateH(neighbor, lowestNode));
+                    neighbor.setG(lowestNode.getG() + 1);
                     neighbor.setH(calculateH(neighbor, getGoalNode(gameData, world)));
                     neighbor.setF(neighbor.getG() + neighbor.getH());
                     neighbor.setParent(lowestNode);
@@ -122,13 +121,11 @@ public class Astar implements IEntityProcessingService {
     
     private float calculateH(Node a, Node b) {
         return (float) (
-            Math.abs(a.getX() - b.getX()) +
-            Math.abs(a.getY() - b.getY())
+            Math.sqrt(
+                Math.pow(a.getX() - b.getX(), 2) +
+                Math.pow(a.getY() - b.getY(), 2)
+            )
         );
-    }
-    
-    public static List<Node> getPath() {
-        return path;
     }
     
     private Node getCurrentNode(GameData gameData, PositionPart positionPart) {

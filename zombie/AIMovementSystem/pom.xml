@@ -35,11 +35,7 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>nbm-maven-plugin</artifactId>
                 <extensions>true</extensions>
-                <configuration>
-                    <publicPackages>
-                        <publicPackage>dk.sdu.mmmi.cbse.astar</publicPackage>
-                    </publicPackages>
-                </configuration>
+                <configuration></configuration>
             </plugin>
         </plugins>
     </build>

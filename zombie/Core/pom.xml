@@ -109,11 +109,6 @@
             <artifactId>CommonTiles</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>AIMovementSystem</artifactId>
-            <version>${project.version}</version>
-        </dependency>
     </dependencies>
     <properties>
         <libGDX.version>1.5.0</libGDX.version>
