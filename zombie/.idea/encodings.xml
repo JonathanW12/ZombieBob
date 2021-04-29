@@ -2,7 +2,6 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/AIMovementSystem/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/AIMovementSystem/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/AnimationSystem/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/AnimationSystem/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/CollisionSystem/src/main/java" charset="UTF-8" />
@@ -18,6 +17,8 @@
     <file url="file://$PROJECT_DIR$/CommonLevel/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/CommonLocations/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/CommonLocations/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/CommonTiles/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/CommonTiles/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/CommonWeapon/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/CommonWeapon/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Core/src/main/java" charset="UTF-8" />
@@ -27,7 +28,6 @@
     <file url="file://$PROJECT_DIR$/HandGun/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/HandGun/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/HealthSystem/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/HealthSystem/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Hotbar/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Hotbar/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Level/src/main/java" charset="UTF-8" />
@@ -42,12 +42,13 @@
     <file url="file://$PROJECT_DIR$/Player/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ProjectileSystem/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ProjectileSystem/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/RigidPhysicsSystem/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/RigidPhysicsSystem/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/SilentUpdate/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/SilentUpdate/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/StandardZombie/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/StandardZombie/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/TimerSystem/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/TimerSystem/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/branding/src/main/resources" charset="UTF-8" />
   </component>
 </project>

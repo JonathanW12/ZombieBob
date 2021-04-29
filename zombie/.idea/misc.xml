@@ -6,6 +6,7 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/Enemy/pom.xml" />
         <option value="$PROJECT_DIR$/Map/pom.xml" />
+        <option value="$PROJECT_DIR$/RigidPhysicsSystem/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
