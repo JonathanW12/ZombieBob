@@ -12,6 +12,7 @@ public class HandgunData {
     private final float fireRate;
     private final float attackAnimationFrameDuration;
     private final float walkAnimationFrameDuration;
+    private final String shootingSoundFileName;
     private static HandgunData instance;
     
     private HandgunData() {
@@ -26,6 +27,7 @@ public class HandgunData {
         fireRate = 0.3f;
         attackAnimationFrameDuration = 0.02f;
         walkAnimationFrameDuration = 0.2f;
+        shootingSoundFileName = "gun-shooting.wav";
     }
     
     public static HandgunData getInstance() {
@@ -78,6 +80,10 @@ public class HandgunData {
     
     public float getWalkAnimationFrameDuration() {
         return walkAnimationFrameDuration;
+    }
+    
+    public String getShootingSoundFileName() {
+        return shootingSoundFileName;
     }
     
 }

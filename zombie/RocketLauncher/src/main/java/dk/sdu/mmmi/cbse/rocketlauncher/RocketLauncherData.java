@@ -12,6 +12,7 @@ public class RocketLauncherData {
     private final float fireRate;
     private final float attackAnimationFrameDuration;
     private final float walkAnimationFrameDuration;
+    private final String shootingSoundFileName;
     private static RocketLauncherData instance;
 
     private RocketLauncherData() {
@@ -26,6 +27,7 @@ public class RocketLauncherData {
         fireRate = 0.8f;
         attackAnimationFrameDuration = 0.1f;
         walkAnimationFrameDuration = 0.2f;
+        shootingSoundFileName = "rocket-shooting.wav";
     }
 
     public static RocketLauncherData getInstance() {
@@ -79,5 +81,9 @@ public class RocketLauncherData {
     public float getWalkAnimationFrameDuration() {
         return walkAnimationFrameDuration;
     }
-
+    
+    public String getShootingSoundFileName() {
+        return shootingSoundFileName;
+    }
+    
 }

@@ -198,7 +198,6 @@
             <artifactId>Rifle</artifactId>
             <version>${project.version}</version>
         </dependency>
-
     </dependencies>
 
 

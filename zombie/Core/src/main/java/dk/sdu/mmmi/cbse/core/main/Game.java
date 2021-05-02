@@ -6,6 +6,8 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -44,6 +46,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.common.data.entityparts.AnimationPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.AudioPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.TextPart;
 import dk.sdu.mmmi.cbse.commontiles.Tiles;
@@ -211,10 +214,40 @@ public class Game implements ApplicationListener {
             postEntityProcessorService.process(gameData, world);
         }
         
+        // Process audio
+        processAudio();
+        
         // Quit if escape is clicked
         if (gameData.getKeys().isPressed(GameKeys.ESCAPE)) {
             Gdx.app.exit();
         }
+    }
+    
+    private void processAudio() {
+        if (world.getMapByPart(AudioPart.class.getSimpleName()) != null) {
+            for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart(AudioPart.class.getSimpleName()).entrySet()) { 
+                AudioPart audioPart = (AudioPart) entry.getValue();
+
+                if (audioPart.getIsPlaying()) {
+                    Sound sound = getSound(audioPart.getFileName());
+                    audioPart.setIsPlaying(false);
+                    long soundId = sound.play(0.1f);
+                    sound.setLooping(soundId, false);
+                }
+            }
+        }
+    }
+    
+    private Sound getSound(String fileName) {
+        Sound sound;
+
+        try {
+            sound = Gdx.audio.newSound(Gdx.files.local("audio/" + fileName));
+        } catch (GdxRuntimeException e) {
+            sound = Gdx.audio.newSound(Gdx.files.local("../../audio/" + fileName));
+        }
+        
+        return sound;
     }
 
     private ArrayList<ArrayList<UUID>> sortVisualParts() {

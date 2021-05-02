@@ -12,6 +12,7 @@ public class RifleData {
     private final float fireRate;
     private final float attackAnimationFrameDuration;
     private final float walkAnimationFrameDuration;
+    private final String shootingSoundFileName;
     private static RifleData instance;
 
     private RifleData() {
@@ -26,6 +27,7 @@ public class RifleData {
         fireRate = 0.15f;
         attackAnimationFrameDuration = 0.03f;
         walkAnimationFrameDuration = 0.2f;
+        shootingSoundFileName = "rifle-shooting.ogg";
     }
 
     public static RifleData getInstance() {
@@ -78,5 +80,9 @@ public class RifleData {
 
     public float getWalkAnimationFrameDuration() {
         return walkAnimationFrameDuration;
+    } 
+    
+    public String getShootingSoundFileName() {
+        return shootingSoundFileName;
     }
 }

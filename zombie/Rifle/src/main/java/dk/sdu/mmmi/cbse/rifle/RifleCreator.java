@@ -54,10 +54,14 @@ public class RifleCreator {
                 width,
                 height
         );
+        AudioPart audioPart = new AudioPart(
+            rifleData.getShootingSoundFileName()
+        );
 
         world.addtoEntityPartMap(weaponPart, rifle);
         world.addtoEntityPartMap(weaponAnimationPart, rifle);
         world.addtoEntityPartMap(visualPart, rifle);
+        world.addtoEntityPartMap(audioPart, rifle);
 
         return rifle;
     }
