@@ -87,8 +87,8 @@ public class Node implements Comparable<Node>{
         return parent;
     }
     
-    public boolean getIsObstacle(Node node) {
-        Tile tile = Tiles.getTileByRowAndCol(node.getTileRow(), node.getTileCol());
+    public boolean getIsObstacle() {
+        Tile tile = Tiles.getTileByRowAndCol(getTileRow(), getTileCol());
         
         return !tile.getIsWalkable();
     }
