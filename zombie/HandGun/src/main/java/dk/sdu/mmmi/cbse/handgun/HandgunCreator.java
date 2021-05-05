@@ -4,27 +4,29 @@ import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
+import dk.sdu.mmmi.cbse.common.data.Position;
+import java.util.UUID;
 
 public class HandgunCreator {
     
     private static final HandgunData gunData = HandgunData.getInstance();
 
-    public void spawnGun(GameData gameData, World world) {
+    public UUID spawnGun(Position position, GameData gameData, World world) {
         Entity gun = HandgunCreator.scaffoldGun(world);
 
         VisualPart visualPart = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(gun.getUUID());
         visualPart.setIsVisible(true);
+        
+        float spawnX = position.getX();
+        float spawnY = position.getY();
+        float radians = 3.14159f / 2;
 
-        float spawnX = gameData.getDisplayWidth()/2;
-        float spawnY = gameData.getDisplayHeight()/2;
-        float radians = 3.1415f / 2;
-
-        PositionPart positionPart = new PositionPart(spawnX, spawnY, radians);
-
-        world.addtoEntityPartMap(positionPart, gun);
+        world.addtoEntityPartMap(new PositionPart(spawnX, spawnY, radians), gun);
         world.addtoEntityPartMap(new LootablePart(), gun);
 
         HandgunProcessor.addToProcessingList(gun);
+        
+        return gun.getUUID();
     }
 
     protected static Entity scaffoldGun(World world) {

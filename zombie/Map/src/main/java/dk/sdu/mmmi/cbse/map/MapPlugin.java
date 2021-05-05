@@ -5,6 +5,7 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.ColliderPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.SpawnerPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.VisualPart;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.StructurePart;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
@@ -25,10 +26,10 @@ public class MapPlugin implements IGamePluginService{
         this.world = world;
         tiles = Tiles.getInstance(gameData).getTiles();    
         createBackground(gameData,world);
-        generateMapFromFile("map1");
+        generateMapFromFile("map1", world);
     }
     
-    private void generateMapFromFile(String mapName) {
+    private void generateMapFromFile(String mapName, World world) {
         FileHandle filehandle;
         String osName = System.getProperty("os.name");
         if (osName.startsWith("Windows")) {
@@ -41,13 +42,27 @@ public class MapPlugin implements IGamePluginService{
         if (filehandle.exists()) {
             String text = filehandle.readString();
             String[] lines = text.split("\\r?\\n");
-            System.out.println(lines.length );
+            int lineCount = lines.length - 1;
+            
             for (int i = 0; i < lines.length; i++) {
                 String[] cells = lines[i].split("");
-                
                 for (int j = 0; j < cells.length; j++) {
+                    Tile tile = tiles[lineCount - i][j];
+                    
                     if (cells[j].equals("1")) {
-                        placeWall(tiles[i][j]);
+                        placeWall(tile);
+                    } else if (cells[j].equals("2")) {
+                        placeEnemySpawn(tile);
+                        world.addEnemySpawnPosition(
+                            (int) (tile.getX() + tile.getWidth() / 2),
+                            (int) (tile.getY() + tile.getHeight() / 2)
+                        );
+                    } else if (cells[j].equals("3")) {
+                        placeItemSpawn(tile);
+                        world.addItemSpawnPosition(
+                            (int) (tile.getX() + tile.getWidth() / 2),
+                            (int) (tile.getY() + tile.getHeight() / 2)
+                        );
                     }
                 }
             }
@@ -62,23 +77,50 @@ public class MapPlugin implements IGamePluginService{
             tile.getY() + tile.getHeight() / 2,
             wallRadians
         ), wall);
-        world.addtoEntityPartMap(new VisualPart("wall_sprite", tile.getWidth(), tile.getHeight(), 1), wall);
+        world.addtoEntityPartMap(new VisualPart(
+            "wall_sprite",
+            tile.getWidth(),
+            tile.getHeight(),
+            1
+        ), wall);
         world.addtoEntityPartMap(new ColliderPart(tile.getWidth(), tile.getHeight()), wall);
         world.addtoEntityPartMap(new StructurePart(), wall);
         
         tile.setIsWalkable(false);
     }
     
-    private void createHoriziontalWallSection(int startHorizontalIndex, int verticalIndex, float width) {
-        for (int i = startHorizontalIndex; i < startHorizontalIndex + width; i++) {
-            placeWall(tiles[verticalIndex][i]);
-        }
+    private void placeEnemySpawn(Tile tile) {
+        Entity enemySpawn = new Entity();
+        
+        world.addtoEntityPartMap(new PositionPart(
+            tile.getX() + tile.getWidth() / 2,
+            tile.getY() + tile.getHeight() / 2,
+            3.14159f / 2
+        ), enemySpawn);
+        world.addtoEntityPartMap(new VisualPart(
+            "enemySpawn",
+            tile.getWidth(),
+            tile.getHeight(),
+            1
+        ), enemySpawn);
     }
     
-    private void createVerticalWallSection(int startVerticalIndex, int horizontalIndex, float height) {
-        for (int i = startVerticalIndex; i < startVerticalIndex + height; i++) {
-            placeWall(tiles[i][horizontalIndex]);
-        }
+    private void placeItemSpawn(Tile tile) {
+        Entity itemSpawn = new Entity();
+        
+        world.addtoEntityPartMap(new PositionPart(
+            tile.getX() + tile.getWidth() / 2,
+            tile.getY() + tile.getHeight() / 2,
+            3.14159f / 2
+        ), itemSpawn);
+        world.addtoEntityPartMap(new VisualPart(
+            "itemSpawn",
+            tile.getWidth(),
+            tile.getHeight(),
+            1
+        ), itemSpawn);
+        
+        world.addtoEntityPartMap(new SpawnerPart(), itemSpawn);
     }
     
     private void createBackground(GameData gameData, World world){
