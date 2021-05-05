@@ -1,26 +1,18 @@
 package dk.sdu.mmmi.cbse.hotbar;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector3;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
-import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.TextPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.WeaponInventoryPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.VisualPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.HotbarPart;
-import dk.sdu.mmmi.cbse.common.data.entitytypeparts.PlayerPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
-import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
+import org.openide.util.lookup.ServiceProvider;
+import org.openide.util.lookup.ServiceProviders;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import org.openide.util.lookup.ServiceProvider;
-import org.openide.util.lookup.ServiceProviders;
 
 
 @ServiceProviders(value = {
@@ -79,12 +71,13 @@ public class HotbarContolSystem implements IEntityProcessingService {
             UUID uuid = (UUID) world.getMapByPart(HotbarPart.class.getSimpleName()).keySet().toArray()[0];
             PositionPart hotbarPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(uuid);
             VisualPart hotbarVis = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(uuid);
-            OrthographicCamera came = gameData.getCam();
-            Vector3 pos = came.position;
-            System.out.println(pos.y);
-          //  hotbarPositionY = (cam.position.y-gameData.getDisplayHeight()/4)+hotbarVis.getHeight()/2;
-          //  hotbarPositionX = cam.position.x;
-          //  hotbarPos.setPosition(cam.position.x,hotbarPositionY );
+            float camX = gameData.getCamPosX();
+            float camY = gameData.getCamPosY();
+
+            hotbarPositionY = (camY-gameData.getDisplayHeight()/4)+hotbarVis.getHeight()/2;
+            hotbarPositionX = camX;
+            hotbarPos.setPosition(hotbarPositionX,hotbarPositionY );
+
             for (int i = 0; i < 4; i++) {
                 float startpos = 30;
                 float pictureSpace = 11;

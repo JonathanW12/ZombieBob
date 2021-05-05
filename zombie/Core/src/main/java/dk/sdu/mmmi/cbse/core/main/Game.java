@@ -46,7 +46,7 @@ public class Game implements ApplicationListener {
             gameData.getDisplayHeight() / 2
         );
         cam.update();
-        gameData.setCam(cam);
+
         viewport = new ExtendViewport(
             gameData.getDisplayWidth() / 2,
             gameData.getDisplayHeight() / 2, 
@@ -70,6 +70,9 @@ public class Game implements ApplicationListener {
     }
 
     private void update() {
+        gameData.setCamPosX(cam.position.x);
+        gameData.setCamPosY(cam.position.y);
+
         // Update
         for (IEntityProcessingService entityProcessorService : gameLookup.getEntityProcessingServices()) {
             entityProcessorService.process(gameData, world);
@@ -87,6 +90,10 @@ public class Game implements ApplicationListener {
         if (gameData.getKeys().isPressed(GameKeys.ESCAPE)) {
             Gdx.app.exit();
         }
+
+
+
+
     }
 
     @Override

@@ -16,15 +16,27 @@ public class GameData {
     private final MouseMovement mouse = new MouseMovement();
     private List<Event> events = new CopyOnWriteArrayList<>();
     private static LevelInformation levelInformation;
-    private OrthographicCamera cam;
+    private float camPosX;
+    private float camPosY;
 
-    public OrthographicCamera getCam() {
-        return this.cam;
+    public float getCamPosX() {
+        return camPosX;
     }
 
-    public void setCam(OrthographicCamera cam) {
-        this.cam = cam;
+    public void setCamPosX(float camPosX) {
+        this.camPosX = camPosX;
     }
+
+    public float getCamPosY() {
+        return camPosY;
+    }
+
+    public void setCamPosY(float camPosY) {
+        this.camPosY = camPosY;
+    }
+
+
+
 
 
 
