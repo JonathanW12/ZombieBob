@@ -45,7 +45,7 @@ public class Astar implements IEntityProcessingService {
                 AiMovementPart aiPart = (AiMovementPart) entry.getValue();
                 long currentTime = System.currentTimeMillis();
                 
-                if (aiPart.getLevel() < 5 && currentTime > aiPart.getLastUpdate() + aiPart.getDelay()) {
+                if (aiPart.getLevel() < 5 && (currentTime > aiPart.getLastUpdate() + aiPart.getDelay()) && entry.getKey() != playerUUID) {
                     aiPart.resetDelay();
                     PositionPart positionPart = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(entry.getKey());
                     MovingPart movingPart = (MovingPart) world.getMapByPart(MovingPart.class.getSimpleName()).get(entry.getKey());
@@ -135,11 +135,10 @@ public class Astar implements IEntityProcessingService {
     }
     
     private Node getCurrentNode(GameData gameData, PositionPart positionPart) {
-        Tile goalTile = Tiles.getInstance(gameData).getTileByPosition(positionPart.getX(), positionPart.getY());
-        if (goalTile != null) {
-            int row = goalTile.getRow();
-            int col = goalTile.getCol();
-
+        int row = (int) (positionPart.getY() / Tiles.getTileHeight());
+        int col = (int) (positionPart.getX() / Tiles.getTileWidth());
+        Tile currentTile = Tiles.getInstance(gameData).getTileByRowAndCol(row, col);
+        if (currentTile != null) {
             return nodeGenerator.getNode(row, col);
         }
         
@@ -156,11 +155,11 @@ public class Astar implements IEntityProcessingService {
         if (world.getMapByPart(PlayerPart.class.getSimpleName()) != null) {
             playerUUID = (UUID) world.getMapByPart(PlayerPart.class.getSimpleName()).keySet().toArray()[0];
             positionPart = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(playerUUID);
-            goalTile = Tiles.getInstance(gameData).getTileByPosition(positionPart.getX(), positionPart.getY());
+            
+            row = (int) (positionPart.getY() / Tiles.getTileHeight());
+            col = (int) (positionPart.getX() / Tiles.getTileWidth());
+            goalTile = Tiles.getInstance(gameData).getTileByRowAndCol(row, col);
             if (goalTile != null) {
-                row = goalTile.getRow();
-                col = goalTile.getCol();
-
                 return nodeGenerator.getNode(row, col);
             }
         }

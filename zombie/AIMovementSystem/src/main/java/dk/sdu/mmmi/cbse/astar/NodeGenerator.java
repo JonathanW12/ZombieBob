@@ -3,14 +3,17 @@ package dk.sdu.mmmi.cbse.astar;
 import dk.sdu.mmmi.cbse.commontiles.Tile;
 import dk.sdu.mmmi.cbse.commontiles.Tiles;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class NodeGenerator {
     
     private List<Node> nodes;
+    private HashMap<String, Node> nodeByPos;
     
     public NodeGenerator() {
         nodes = new ArrayList<>();
+        nodeByPos = new HashMap<>();
     }
     
     public void createNodes() {
@@ -37,13 +40,28 @@ public class NodeGenerator {
     }
     
     public Node getNode(int tileRow, int tileCol) {
-        for (Node node: nodes) {
-            if (node.getTileRow() == tileRow && node.getTileCol() == tileCol) {
-                return node;
+        if (nodeByPos.isEmpty()) {
+            addNodesToMap();
+        } else {
+            String pos = "row" + tileRow + "-col" + tileCol;
+            return nodeByPos.get(pos);
+        }
+      
+        return null;
+    }
+    
+    private void addNodesToMap() {
+        Tile[][] tiles = Tiles.getTiles();
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[i].length; j ++) { 
+                for (Node node: nodes) {
+                    if (node.getTileRow() == i && node.getTileCol() == j) {
+                        String pos = "row" + i + "-col" + j;
+                        nodeByPos.put(pos, node);
+                    }
+                }
             }
         }
-        
-        return null;
     }
     
     private void addNeighbors(Node node) {

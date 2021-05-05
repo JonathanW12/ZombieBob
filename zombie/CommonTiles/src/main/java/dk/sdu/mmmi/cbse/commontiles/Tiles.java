@@ -1,17 +1,22 @@
 package dk.sdu.mmmi.cbse.commontiles;
 
 import dk.sdu.mmmi.cbse.common.data.GameData;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Tiles {
     
     private static Tile[][] tiles;
     private static Tiles instance;
-    private float tileWidth;
-    private float tileHeight;
+    private static float tileWidth;
+    private static float tileHeight;
+    private static HashMap<String, Tile> tileByRowAndCol;
     
     private Tiles(GameData gameData) {
         tileWidth = 60;
         tileHeight = 60;
+        tileByRowAndCol = new HashMap<>();
         initializeTiles(gameData);
     }
     
@@ -35,52 +40,46 @@ public class Tiles {
         
         for (int i = 0; i < verticalTiles; i++) {
             for (int j = 0; j < horizontalTiles; j++) {
-                tiles[i][j] = new Tile(
+                String pos = "row" + i + "-col" + j;
+                Tile tile = new Tile(
                     j,
                     i,
                     tileWidth,
                     tileHeight
                 );
+                tiles[i][j] = tile;
+                tileByRowAndCol.put(pos, tile);
             }
         }
     }
     
-    public float getTileWidth() {
+    public static float getTileWidth() {
         return tileWidth;
     }
     
-    public float getTileHeight() {
+    public static float getTileHeight() {
         return tileHeight;
     }
     
-    public Tile getTileByPosition(float x, float y) {
-        for (int i = 0; i < tiles.length; i++) {
-            for (int j = 0; j < tiles[i].length; j ++) {
-                Tile tile = tiles[i][j];
-                if (
-                    ((x >= tile.getX()) && (x < tile.getX() + tile.getWidth())) &&
-                    ((y >= tile.getY()) && (y < tile.getY() + tile.getHeight()))
-                ) {
-                    return tile;
-                }
-            }
+    public static Tile getTileByRowAndCol(int row, int col) {
+        if (tileByRowAndCol.isEmpty()) {
+            addTilesToMap();
+        } else {
+            String pos = "row" + row + "-col" + col;
+            return tileByRowAndCol.get(pos);
         }
         
         return null;
     }
     
-    public static Tile getTileByRowAndCol(int row, int col) {
+    private static void addTilesToMap() {
         for (int i = 0; i < tiles.length; i++) {
             for (int j = 0; j < tiles[i].length; j ++) { 
                 Tile tile = tiles[i][j];
-                
-                if (tile.getRow() == row && tile.getCol() == col) {
-                    return tile;
-                }
+                String pos = "row" + i + "-col" + j;
+                tileByRowAndCol.put(pos, tile);
             }
         }
-        
-        return null;
     }
     
     public int getTileRow(Tile tile) {
