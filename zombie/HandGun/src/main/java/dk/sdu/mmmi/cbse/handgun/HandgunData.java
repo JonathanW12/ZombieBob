@@ -16,7 +16,7 @@ public class HandgunData {
     private static HandgunData instance;
     
     private HandgunData() {
-        visualPartName = "projectile";
+        visualPartName = "HotBarGun";
         idleSpriteName = "PlayerGun1";
         attackAnimationName = "PlayerShootGun";
         walkAnimationName = "PlayerWalkGun";
