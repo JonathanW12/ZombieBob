@@ -35,7 +35,8 @@ public class Game implements ApplicationListener {
            
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
-        
+
+
         cam = new OrthographicCamera(
             gameData.getDisplayWidth(),
             gameData.getDisplayHeight()
@@ -45,7 +46,7 @@ public class Game implements ApplicationListener {
             gameData.getDisplayHeight() / 2
         );
         cam.update();
-        
+        gameData.setCam(cam);
         viewport = new ExtendViewport(
             gameData.getDisplayWidth() / 2,
             gameData.getDisplayHeight() / 2, 
@@ -62,7 +63,7 @@ public class Game implements ApplicationListener {
 
     @Override
     public void render() {
-        renderProcessor.processRendering();
+        renderProcessor.processRendering(gameData);
         update();
         renderProcessor.draw();
         gameData.getKeys().update();

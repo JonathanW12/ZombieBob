@@ -1,6 +1,8 @@
 package dk.sdu.mmmi.cbse.hotbar;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector3;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
@@ -19,6 +21,7 @@ import java.util.Map;
 import java.util.UUID;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
+
 
 @ServiceProviders(value = {
     @ServiceProvider(service = IEntityProcessingService.class)})
@@ -76,9 +79,12 @@ public class HotbarContolSystem implements IEntityProcessingService {
             UUID uuid = (UUID) world.getMapByPart(HotbarPart.class.getSimpleName()).keySet().toArray()[0];
             PositionPart hotbarPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(uuid);
             VisualPart hotbarVis = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(uuid);
-            hotbarPositionY = (playerPositionPart.getY()-gameData.getDisplayHeight()/4)+hotbarVis.getHeight()/2;
-            hotbarPositionX = playerPositionPart.getX();
-            hotbarPos.setPosition(playerPositionPart.getX(),hotbarPositionY );
+            OrthographicCamera came = gameData.getCam();
+            Vector3 pos = came.position;
+            System.out.println(pos.y);
+          //  hotbarPositionY = (cam.position.y-gameData.getDisplayHeight()/4)+hotbarVis.getHeight()/2;
+          //  hotbarPositionX = cam.position.x;
+          //  hotbarPos.setPosition(cam.position.x,hotbarPositionY );
             for (int i = 0; i < 4; i++) {
                 float startpos = 30;
                 float pictureSpace = 11;

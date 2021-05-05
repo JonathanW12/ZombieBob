@@ -108,14 +108,21 @@ public class RenderProcessor {
         addAnimations();
     }
     
-    public void processRendering() {
+    public void processRendering(GameData gameData) {
+        float lerp = 0.97f;
+        Vector3 position = cam.position;
         if (world.getMapByPart(PlayerPart.class.getSimpleName()).keySet().toArray().length > 0) {
             UUID uuid = (UUID) world.getMapByPart(PlayerPart.class.getSimpleName()).keySet().toArray()[0];
             PositionPart playerPositionPart = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(uuid);
             cam.unproject(new Vector3(playerPositionPart.getX(), playerPositionPart.getY(), 0));
-            cam.position.set(playerPositionPart.getX(), playerPositionPart.getY(), 0);
+            //cam.position.set(playerPositionPart.getX(), playerPositionPart.getY(), 0);
+            position.x += (playerPositionPart.getX() - position.x) * lerp * gameData.getDelta();
+            position.y += (playerPositionPart.getY() - position.y) * lerp * gameData.getDelta();
             cam.update();
+            
             batch.setProjectionMatrix(cam.combined);
+
+
         }
 
         // clear screen to black
