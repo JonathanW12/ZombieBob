@@ -43,7 +43,10 @@ public class Astar implements IEntityProcessingService {
 
             for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(AiMovementPart.class.getSimpleName()).entrySet()) {
                 AiMovementPart aiPart = (AiMovementPart) entry.getValue();
-                if (aiPart.getLevel() < 5) {
+                long currentTime = System.currentTimeMillis();
+                
+                if (aiPart.getLevel() < 5 && currentTime > aiPart.getLastUpdate() + aiPart.getDelay()) {
+                    aiPart.resetDelay();
                     PositionPart positionPart = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(entry.getKey());
                     MovingPart movingPart = (MovingPart) world.getMapByPart(MovingPart.class.getSimpleName()).get(entry.getKey());
                     currentNode = getCurrentNode(gameData, positionPart);
