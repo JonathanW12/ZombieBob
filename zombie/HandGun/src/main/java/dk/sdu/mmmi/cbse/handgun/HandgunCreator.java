@@ -4,10 +4,8 @@ import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
-import dk.sdu.mmmi.cbse.common.services.IWeaponCreatorService;
-import org.openide.util.lookup.ServiceProvider;
 
-public class HandgunCreator{
+public class HandgunCreator {
     
     private static final HandgunData gunData = HandgunData.getInstance();
 
@@ -55,15 +53,19 @@ public class HandgunCreator{
             width,
             height
         );
+        AudioPart audioPart = new AudioPart(
+            gunData.getShootingSoundFileName()
+        );
         
         world.addtoEntityPartMap(weaponPart, gun);
         world.addtoEntityPartMap(weaponAnimationPart, gun);
         world.addtoEntityPartMap(visualPart, gun);
+        world.addtoEntityPartMap(audioPart, gun);
         
         // HandgunProcessor.addToProcessingList(gun);
         
         return gun;
     }
 
-
+    
 }

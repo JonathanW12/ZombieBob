@@ -112,6 +112,8 @@ public class PlayerControlSystem implements IEntityProcessingService {
                     
                     visualPart.setSpriteName(weaponAnimationPart.getIdleSpriteName());
                     if ( weaponPart.isIsAttacking() ) {
+                        AudioPart audioPart = (AudioPart) world.getMapByPart(AudioPart.class.getSimpleName()).get(combatPart.getCurrentWeapon());
+                        audioPart.setIsPlaying(true);
                         animationPart.setCurrentAnimation("shoot");
                     } else if (movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp()) {
                         if (animationPart.hasCurrentAnimationLooped()) {

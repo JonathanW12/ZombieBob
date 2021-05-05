@@ -85,6 +85,7 @@
         <module>SpiderBoss</module>
         <module>RocketLauncher</module>
         <module>Rifle</module>
+        <module>AudioSystem</module>
     </modules>
 
     <properties>

@@ -54,10 +54,14 @@ public class RocketLauncherCreator {
                 width,
                 height
         );
+        AudioPart audioPart = new AudioPart(
+            rocketLauncherData.getShootingSoundFileName()
+        );
 
         world.addtoEntityPartMap(weaponPart, rocketLauncher);
         world.addtoEntityPartMap(weaponAnimationPart, rocketLauncher);
         world.addtoEntityPartMap(visualPart, rocketLauncher);
+        world.addtoEntityPartMap(audioPart, rocketLauncher);
 
         // RocketLauncherProcessor.addToProcessingList(rocketLauncher);
 

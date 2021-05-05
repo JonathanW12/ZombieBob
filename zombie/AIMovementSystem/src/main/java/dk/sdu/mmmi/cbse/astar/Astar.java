@@ -108,7 +108,7 @@ public class Astar implements IEntityProcessingService {
             closedSet.add(lowestNode);
             
             for (Node neighbor: lowestNode.getNeighbors()) {
-                if (!closedSet.contains(neighbor) && !neighbor.getIsObstacle(neighbor)) {            
+                if (!closedSet.contains(neighbor) && !neighbor.getIsObstacle()) {            
                     if (!openSet.contains(neighbor)) {
                         openSet.add(neighbor);
                     } 

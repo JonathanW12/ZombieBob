@@ -38,6 +38,10 @@ public class ZombieCreator {
 
         CombatPart combatPart = new CombatPart();
         combatPart.setCurrentWeapon(zombieAttack.getUUID());
+        
+        // Configure zombie audio
+        AudioPart audioPart = new AudioPart("zombie-growl.ogg");
+        audioPart.playRandomly(5000L, 15000L);
 
         // Create zombie
         world.addtoEntityPartMap(new PositionPart(position.getX(), position.getY(), radians), zombie);
@@ -47,6 +51,7 @@ public class ZombieCreator {
         world.addtoEntityPartMap(new LifePart(health), zombie);
         world.addtoEntityPartMap(new AiMovementPart(4), zombie);
         world.addtoEntityPartMap(new ColliderPart(40,40),zombie);
+        world.addtoEntityPartMap(audioPart, zombie);
         world.addtoEntityPartMap(combatPart, zombie);
         world.addtoEntityPartMap(createInitialAnimationEnemy(weaponAnimationPart), zombie);
     }
