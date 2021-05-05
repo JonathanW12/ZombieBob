@@ -85,5 +85,6 @@
     <orderEntry type="library" name="Maven: dk.sdu.mmmi.cbse:SpiderBoss:1.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: dk.sdu.mmmi.cbse:RocketLauncher:1.0-SNAPSHOT" level="project" />
     <orderEntry type="module" module-name="Rifle" />
+    <orderEntry type="module" module-name="AudioSystem" />
   </component>
 </module>

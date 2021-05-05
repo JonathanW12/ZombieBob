@@ -17,6 +17,7 @@ public class MouseInputProcessor implements InputProcessor {
         this.cam = cam;
     }
 
+
     @Override
     public boolean keyDown(int i) {
         return false;
@@ -87,4 +88,5 @@ public class MouseInputProcessor implements InputProcessor {
 
         return false;
     }
+
 }
