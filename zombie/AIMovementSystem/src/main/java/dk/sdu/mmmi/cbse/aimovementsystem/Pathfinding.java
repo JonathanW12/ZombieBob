@@ -26,6 +26,6 @@ public class Pathfinding {
     }
 
     public void findMouse(PositionPart entityPosistionPart, GameData gameData){
-        entityPosistionPart.setRadians((float) Math.atan2(gameData.getMouse().getY()-entityPosistionPart.getY(), gameData.getMouse().getX()-entityPosistionPart.getX()));
+       // entityPosistionPart.setRadians((float) Math.atan2(gameData.getMouse().getY()-entityPosistionPart.getY(), gameData.getMouse().getX()-entityPosistionPart.getX()));
     }
 }

@@ -44,6 +44,9 @@ public class PlayerControlSystem implements IEntityProcessingService {
                     weaponPart = (WeaponPart) world.getMapByPart(WeaponPart.class.getSimpleName()).get(combatPart.getCurrentWeapon());
                 }
 
+                // Update player direction
+                updateDirection(positionPart, gameData);
+
                 if (gameData.getMouse().isRightClick()){
                     //Inventory testing. to be deleted
                     if(weaponInventoryPart.getInventory().size()>0){
@@ -166,5 +169,9 @@ public class PlayerControlSystem implements IEntityProcessingService {
                     true // Animation can be interrupted
                 );
         }   
+    }
+    private void updateDirection(PositionPart positionPart, GameData gameData){
+        positionPart.setRadians((float) Math.atan2(gameData.getMouse().getY()-positionPart.getY(), gameData.getMouse().getX()-positionPart.getX()));
+
     }
 }
