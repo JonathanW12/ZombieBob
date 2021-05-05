@@ -16,7 +16,7 @@ public class RocketLauncherData {
     private static RocketLauncherData instance;
 
     private RocketLauncherData() {
-        visualPartName = "Rocket";
+        visualPartName = "HotBarBazooka";
         idleSpriteName = "playerbazooka";
         attackAnimationName = "PlayerShootBazooka";
         walkAnimationName = "PlayerWalkBazooka";

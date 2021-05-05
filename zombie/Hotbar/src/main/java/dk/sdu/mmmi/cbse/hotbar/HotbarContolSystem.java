@@ -105,6 +105,7 @@ public class HotbarContolSystem implements IEntityProcessingService {
 
                 world.addtoEntityPartMap(new PositionPart(itemPositionsX[itemIndex], hotbarPositionY, radians), hotbarItem);
                 world.addtoEntityPartMap(new VisualPart(visualPart.getSpriteName(), itemPicSize, itemPicSize, 4), hotbarItem);
+
                 VisualPart visualItem = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(hotbarItem.getUUID());
                 visualItem.setResizable(false);
                 excistingItems2.put(playerWeaponID, hotbarItem.getUUID());

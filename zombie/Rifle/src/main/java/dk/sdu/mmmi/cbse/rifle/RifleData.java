@@ -16,7 +16,7 @@ public class RifleData {
     private static RifleData instance;
 
     private RifleData() {
-        visualPartName = "Ammobox";
+        visualPartName = "HotBarRifle";
         idleSpriteName = "PlayerUzi";
         attackAnimationName = "PlayerShootRifle";
         walkAnimationName = "PlayerWalkRifle";

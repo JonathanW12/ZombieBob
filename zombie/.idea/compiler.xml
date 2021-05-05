@@ -12,6 +12,7 @@
         <module name="Zombie-branding" />
         <module name="AnimationSystem" />
         <module name="Zombie-app" />
+        <module name="AudioSystem" />
         <module name="AIMovementSystem" />
         <module name="CommonWeapon" />
         <module name="Enemy" />
@@ -26,6 +27,7 @@
         <module name="CombatSystem" />
         <module name="Hotbar" />
         <module name="CommonTiles" />
+        <module name="RocketLauncher" />
         <module name="Common" />
         <module name="StandardZombie" />
         <module name="HandGun" />
@@ -40,6 +42,7 @@
     <bytecodeTargetLevel>
       <module name="AIMovementSystem" target="1.8" />
       <module name="AnimationSystem" target="1.8" />
+      <module name="AudioSystem" target="1.8" />
       <module name="BulletSystem" target="1.8" />
       <module name="CollisionSystem" target="1.8" />
       <module name="CombatSystem" target="1.8" />
@@ -64,6 +67,7 @@
       <module name="ProjectileSystem" target="1.8" />
       <module name="Rifle" target="1.8" />
       <module name="RigidPhysicsSystem" target="1.8" />
+      <module name="RocketLauncher" target="1.8" />
       <module name="SilentUpdate" target="1.8" />
       <module name="StandardZombie" target="1.8" />
       <module name="TimerSystem" target="1.8" />

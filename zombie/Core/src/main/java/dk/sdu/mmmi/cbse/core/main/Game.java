@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.graphics.Pixmap;
 import dk.sdu.mmmi.cbse.common.data.GameData;
@@ -27,6 +28,7 @@ public class Game implements ApplicationListener {
     private AudioProcessor audioProcessor;
     private RenderProcessor renderProcessor;
     private GameLookup gameLookup;
+    private Vector3 mousePosition = new Vector3();
     
     @Override
     public void create() {
@@ -81,15 +83,19 @@ public class Game implements ApplicationListener {
         
         // Process audio
         audioProcessor.processAudio();
-        
         // Quit if escape is clicked
         if (gameData.getKeys().isPressed(GameKeys.ESCAPE)) {
             Gdx.app.exit();
         }
+
+        // Update mousePosition every gameloop even if no event is fired
+        mousePosition = cam.unproject(new Vector3(mousePosition.set(Gdx.input.getX(),Gdx.input.getY(),0)));
+        gameData.getMouse().setMousePosition(mousePosition.x,mousePosition.y);
     }
 
     @Override
     public void pause() {
+
     }
 
     @Override
