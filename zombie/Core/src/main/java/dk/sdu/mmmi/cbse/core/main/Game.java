@@ -17,6 +17,8 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.core.coreprocessors.AudioProcessor;
 import dk.sdu.mmmi.cbse.core.coreprocessors.RenderProcessor;
+import dk.sdu.mmmi.cbse.core.pausemenu.PauseMenu;
+import org.openide.util.Exceptions;
 
 public class Game implements ApplicationListener {
 
@@ -26,13 +28,16 @@ public class Game implements ApplicationListener {
     private World world;
     private AudioProcessor audioProcessor;
     private RenderProcessor renderProcessor;
+    private PauseMenu pauseMenu;
     private GameLookup gameLookup;
+    private GameState gameState;
     
     @Override
     public void create() {
         gameData = new GameData();
         world = new World();
-           
+        gameState = GameState.RUNNING;
+        
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
         
@@ -55,16 +60,24 @@ public class Game implements ApplicationListener {
         audioProcessor = new AudioProcessor(world);
         renderProcessor = new RenderProcessor(gameData, world, cam);
         gameLookup = new GameLookup(gameData, world);
-        
+        pauseMenu = new PauseMenu(gameData, world, cam);
         setupCursorImage();
         setupInputProcessors();
     }
 
     @Override
     public void render() {
-        renderProcessor.processRendering();
-        update();
-        renderProcessor.draw();
+        escapeKeyHandler();
+        switch (gameState){
+            case RUNNING:
+                renderProcessor.processRendering();
+                update();
+                renderProcessor.draw();
+                break;
+            case PAUSED:
+                pauseMenu.draw();
+                break;
+        }
         gameData.getKeys().update();
     }
 
@@ -80,14 +93,22 @@ public class Game implements ApplicationListener {
         }
         
         // Process audio
-        audioProcessor.processAudio();
-        
-        // Quit if escape is clicked
+        audioProcessor.processAudio(); 
+
+    }
+    private void escapeKeyHandler(){
         if (gameData.getKeys().isPressed(GameKeys.ESCAPE)) {
-            Gdx.app.exit();
+            switch(gameState){
+                case RUNNING:
+                    gameState = GameState.PAUSED;
+                    break;
+                case PAUSED:
+                    gameState = GameState.RUNNING;
+                    break;
+            }
+            
         }
     }
-
     @Override
     public void pause() {
     }
