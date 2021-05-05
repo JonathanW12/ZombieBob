@@ -6,15 +6,18 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.AudioPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 public class AudioProcessor {
     
     private final World world;
+    private final HashMap<String, Sound> sounds;
     
     public AudioProcessor(World world) {
         this.world = world;
+        sounds = new HashMap<>();
     }
     
     public void processAudio() {
@@ -33,15 +36,27 @@ public class AudioProcessor {
     }
     
     private Sound getSound(String fileName) {
-        Sound sound;
         
-        try {
-            sound = Gdx.audio.newSound(Gdx.files.local("audio/" + fileName));
-        } catch (GdxRuntimeException e) {
-            sound = Gdx.audio.newSound(Gdx.files.local("../../audio/" + fileName));
+        if (sounds.get(fileName) == null) {
+            Sound sound;
+            
+            try {
+                sound = Gdx.audio.newSound(Gdx.files.local("audio/" + fileName));
+            } catch (GdxRuntimeException e) {
+                sound = Gdx.audio.newSound(Gdx.files.local("../../audio/" + fileName));
+            }
+            
+            sounds.put(fileName, sound);
+            return sound;
+        } else {
+            return sounds.get(fileName);
         }
-        
-        return sound;
     }
     
+    
+    public void dispose() {
+        for (Map.Entry<String, Sound> sound: sounds.entrySet()) {
+            sound.getValue().dispose();
+        }
+    }
 }

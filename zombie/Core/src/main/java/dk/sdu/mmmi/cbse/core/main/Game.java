@@ -111,6 +111,7 @@ public class Game implements ApplicationListener {
     @Override
     public void dispose() {
         renderProcessor.dispose();
+        audioProcessor.dispose();
     }
     
     private void setupCursorImage() {
