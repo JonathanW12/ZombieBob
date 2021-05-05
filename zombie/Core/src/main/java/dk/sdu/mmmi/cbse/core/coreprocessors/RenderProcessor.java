@@ -190,7 +190,7 @@ public class RenderProcessor {
 
         if (gameData.getKeys().isDown(GameKeys.SPACE)) {
             drawHitboxes();
-            drawTiles();
+            //drawTiles();
         }
     }
 
