@@ -213,7 +213,7 @@ public class RenderProcessor {
                                  i < corners.size();
                                  j = i++) {
 
-                                shapeRenderer.line(corners.get(i).x, corners.get(i).y, corners.get(j).x, corners.get(j).y);
+                                shapeRenderer.line(corners.get(i).x/4, corners.get(i).y/4, corners.get(j).x/4, corners.get(j).y/4);
                             }
                         }
 
