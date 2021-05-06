@@ -1,6 +1,8 @@
 package dk.sdu.mmmi.cbse.core.pausemenu;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -18,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import java.io.File;
 
 public class PauseMenu {
     private Stage stage;
@@ -26,20 +29,19 @@ public class PauseMenu {
     private TextureAtlas buttonAtlas;
     private TextButtonStyle textButtonStyle;
     private TextButton exitButton;
+    private Application app;
     
     private ShapeRenderer shapeRenderer;
     public PauseMenu(GameData gameData, World world, OrthographicCamera cam){
         stage = new Stage();
         font = new BitmapFont();
+        //buttonAtlas = new TextureAtlas(Gdx.files.local("../../skin/uiskin.atlas"));
+        skin = new Skin(Gdx.files.local("../../skin/uiskin.json"));
+
         exitButton = new TextButton("Exit button",skin,"small");
         exitButton.setSize(200, 100);
         exitButton.setPosition(500,1000);
-        try {
-            skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-        } catch (GdxRuntimeException e) {
-            skin = new Skin(Gdx.files.internal("../../skin/uiskin.json"));
-        }
-        
+
         stage.addActor(exitButton);
         shapeRenderer = new ShapeRenderer();
         /*
