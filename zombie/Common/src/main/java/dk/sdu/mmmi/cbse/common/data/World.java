@@ -1,7 +1,8 @@
 package dk.sdu.mmmi.cbse.common.data;
 
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
-import dk.sdu.mmmi.cbse.common.data.entitytypeparts.PlayerPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.LootablePart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -10,6 +11,13 @@ public class World {
 
     private final Map<String, Entity> entityMap = new ConcurrentHashMap<>();
     private Map<String, Map<UUID,EntityPart>> entityPartMap = new ConcurrentHashMap<>();
+    private List<Position> enemySpawnerPositions;
+    private List<ItemSpawn> itemSpawns;
+    
+    public World() {
+        enemySpawnerPositions = new ArrayList<>();
+        itemSpawns = new ArrayList<>();
+    }
     
     public void addtoEntityPartMap(EntityPart entityPart, Entity entity){
         String entityPartNameKey = entityPart.getClass().getSimpleName();
@@ -83,9 +91,40 @@ public class World {
         }
         return r;
     }
+    
+    public ItemSpawn getItemSpawnByCurrentItem(UUID currentItem) {
+        for (ItemSpawn spawn: itemSpawns) {
+            if (currentItem.equals(spawn.getCurrentItem())) {
+                return spawn;
+            }
+        }
+        
+        return null;
+    }
 
     public Entity getEntity(String ID) {
         return entityMap.get(ID);
+    }
+    
+    public List<Position> getEnemySpawnPositions() {
+        return enemySpawnerPositions;
+    }
+    
+    public List<ItemSpawn> getItemSpawns() {
+        return itemSpawns;
+    }
+    
+    public void addEnemySpawnPosition(int x, int y) {
+        Position position = new Position(x, y);
+        enemySpawnerPositions.add(position);
+    }
+    
+    public void addItemSpawnPosition(int x, int y) {
+        ItemSpawn itemSpawn = new ItemSpawn();
+        Position position = new Position(x, y);
+        
+        itemSpawn.setPosition(position);
+        itemSpawns.add(itemSpawn);
     }
 
 }

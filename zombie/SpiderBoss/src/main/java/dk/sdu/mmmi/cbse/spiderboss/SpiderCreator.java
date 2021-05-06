@@ -1,15 +1,15 @@
 package dk.sdu.mmmi.cbse.spiderboss;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
-import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.EnemyPart;
 
 public class SpiderCreator {
     public void createSpiderBoss(int health, Position position, World world) {
         float speed = 2;
-        float radians = 3.1415f / 2;
+        float radians = 3.14159f / 2;
         float rotationSpeed = 3;
 
         Entity zombie = new Entity();

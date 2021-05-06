@@ -2,8 +2,10 @@ package dk.sdu.mmmi.cbse.spiderboss;
 
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
-import dk.sdu.mmmi.cbse.commonlocations.SpawnerLocation;
+import java.util.List;
+import java.util.Random;
 import org.openide.util.lookup.ServiceProvider;
 
 @ServiceProvider(service = IEntityProcessingService.class)
@@ -11,26 +13,40 @@ public class SpawnProcessor implements IEntityProcessingService{
 
     private SpiderCreator spiderCreator = new SpiderCreator();
     private int level;
-    private int previousLevel = 1;
-    private double defaultBoss = 800;
-    private double difficulty = 0.10;
+    private int previousLevel;
+    private double defaultBoss;
+    private double difficulty;
     //private double increment = difficulty * level;
     private double currentIncrease;
-    private int min = 0;
-    private int max = 2;
-    private SpawnerLocation location = new SpawnerLocation();
-    private boolean spawned = false;
+    private int min;
+    private int max;
+    private boolean spawned;
+    private Random randomGenerator;
+    private List<Position> spawnPositions;
+    
+    public SpawnProcessor() {
+        previousLevel = 1;
+        defaultBoss = 800;
+        difficulty = 0.10;
+        min = 0;
+        max = 2;
+        spawned = false;
+        randomGenerator = new Random();
+    }
 
     @Override
     public void process(GameData gameData, World world) {
         level = gameData.getLevelInformation().getCurrentLevel();
 
-        if (level > 0 && !spawned){
+        if (level > 0 && !spawned) {
+            spawnPositions = world.getEnemySpawnPositions();
+            
             if (level%5 == 0){
+                Position spawnPosition = spawnPositions.get(randomGenerator.nextInt(spawnPositions.size()));
                 currentIncrease = difficulty * level;
                 spiderCreator.createSpiderBoss(
                         (int) (defaultBoss * (1 + currentIncrease)),
-                        location.random(gameData), world);
+                        spawnPosition, world);
                 spawned = true;
             }
         }

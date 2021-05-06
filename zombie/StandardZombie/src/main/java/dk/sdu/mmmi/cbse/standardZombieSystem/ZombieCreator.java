@@ -1,16 +1,18 @@
 package dk.sdu.mmmi.cbse.standardZombieSystem;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
-import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.EnemyPart;
+import dk.sdu.mmmi.cbse.common.data.Position;
 
 public class ZombieCreator {
     public void createZombie(int health, Position position, World world){
         float speed = 2;
-        float radians = 3.1415f / 2;
         float rotationSpeed = 3;
+        float spawnX = position.getX();
+        float spawnY = position.getY();
+        float radians = 3.14159f / 2;
 
         Entity zombie = new Entity();
 
@@ -44,7 +46,7 @@ public class ZombieCreator {
         audioPart.playRandomly(5000L, 15000L);
 
         // Create zombie
-        world.addtoEntityPartMap(new PositionPart(position.getX(), position.getY(), radians), zombie);
+        world.addtoEntityPartMap(new PositionPart(spawnX, spawnY, radians), zombie);
         world.addtoEntityPartMap(new VisualPart("enemyIdle", 80, 80), zombie);
         world.addtoEntityPartMap(new MovingPart(speed, rotationSpeed), zombie);
         world.addtoEntityPartMap(new EnemyPart(), zombie);
