@@ -4,8 +4,10 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
+
 import java.util.List;
 import java.util.Random;
+
 import org.openide.util.lookup.ServiceProvider;
 
 @ServiceProvider(service = IEntityProcessingService.class)
@@ -22,7 +24,7 @@ public class SpawnProcessor implements IEntityProcessingService {
     private int max;
     private Random randomGenerator;
     private List<Position> spawnPositions;
-    
+
     public SpawnProcessor() {
         previousLevel = 1;
         defaultHealth = 100;
@@ -37,10 +39,14 @@ public class SpawnProcessor implements IEntityProcessingService {
 
         level = gameData.getLevelInformation().getCurrentLevel();
 
-        if (level > min && level == previousLevel){
+        if (level > min && level == previousLevel) {
             spawnPositions = world.getEnemySpawnPositions();
 
-            if (level%5 != 0){
+            if (level % 10 == 0){
+                difficulty = difficulty*2;
+            }
+
+            if (level % 5 != 0) {
                 if (level > min && level <= max) {
                     currentIncrease = difficulty * level;
                     for (int i = 0; i < level; i++) {

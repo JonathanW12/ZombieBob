@@ -40,6 +40,10 @@ public class SpawnProcessor implements IEntityProcessingService{
 
         if (level > 0 && !spawned) {
             spawnPositions = world.getEnemySpawnPositions();
+
+            if (level % 10 == 0){
+                difficulty = difficulty*2;
+            }
             
             if (level%5 == 0){
                 Position spawnPosition = spawnPositions.get(randomGenerator.nextInt(spawnPositions.size()));
