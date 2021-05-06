@@ -1,11 +1,11 @@
 sprites.png
-size: 1724, 1745
+size: 1761, 1711
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 Ammobox
   rotate: false
-  xy: 600, 928
+  xy: 852, 894
   size: 909, 817
   orig: 909, 817
   offset: 0, 0
@@ -19,147 +19,154 @@ crosshair
   index: -1
 enemyBite
   rotate: false
-  xy: 1256, 0
+  xy: 1373, 0
   size: 206, 192
   orig: 206, 192
   offset: 0, 0
   index: -1
 enemyHit
   rotate: false
-  xy: 155, 200
+  xy: 361, 192
   size: 208, 243
   orig: 208, 243
   offset: 0, 0
   index: -1
 enemyIdle
   rotate: false
-  xy: 1462, 0
+  xy: 0, 192
   size: 206, 200
   orig: 206, 200
   offset: 0, 0
   index: -1
 enemySpawn
   rotate: false
-  xy: 0, 928
+  xy: 252, 894
   size: 600, 600
   orig: 600, 600
   offset: 0, 0
   index: -1
+floorTexture
+  rotate: false
+  xy: 16, 0
+  size: 117, 117
+  orig: 117, 117
+  offset: 0, 0
+  index: -1
 itemSpawn
   rotate: false
-  xy: 48, 0
+  xy: 165, 0
   size: 150, 148
   orig: 150, 148
   offset: 0, 0
   index: -1
 playerbazooka
   rotate: false
-  xy: 1472, 525
+  xy: 0, 894
   size: 252, 403
   orig: 252, 403
   offset: 0, 0
   index: -1
 PlayerGun1
   rotate: false
-  xy: 363, 200
+  xy: 569, 192
   size: 315, 285
   orig: 315, 285
   offset: 0, 0
   index: -1
 PlayerGun2
   rotate: false
-  xy: 678, 200
+  xy: 884, 192
   size: 405, 299
   orig: 405, 299
   offset: 0, 0
   index: -1
 playerIdle
   rotate: false
-  xy: 698, 0
+  xy: 815, 0
   size: 308, 190
   orig: 308, 190
   offset: 0, 0
   index: -1
 PlayerShoot1
   rotate: false
-  xy: 752, 525
+  xy: 1005, 494
   size: 315, 393
   orig: 315, 393
   offset: 0, 0
   index: -1
 PlayerShoot2
   rotate: false
-  xy: 1067, 525
+  xy: 1320, 494
   size: 405, 400
   orig: 405, 400
   offset: 0, 0
   index: -1
 PlayerSword
   rotate: false
-  xy: 1335, 200
+  xy: 0, 494
   size: 253, 325
   orig: 253, 325
   offset: 0, 0
   index: -1
 PlayerUzi
   rotate: false
-  xy: 1083, 200
+  xy: 1289, 192
   size: 252, 302
   orig: 252, 302
   offset: 0, 0
   index: -1
 PlayerWalk1
   rotate: false
-  xy: 311, 525
+  xy: 564, 494
   size: 311, 353
   orig: 311, 353
   offset: 0, 0
   index: -1
 PlayerWalk2
   rotate: false
-  xy: 0, 525
+  xy: 253, 494
   size: 311, 332
   orig: 311, 332
   offset: 0, 0
   index: -1
 projectile
   rotate: false
-  xy: 0, 200
+  xy: 206, 192
   size: 155, 232
   orig: 155, 232
   offset: 0, 0
   index: -1
 RifleAmmo
   rotate: false
-  xy: 16, 0
+  xy: 133, 0
   size: 32, 132
   orig: 32, 132
   offset: 0, 0
   index: -1
 Rocket
   rotate: false
-  xy: 622, 525
+  xy: 875, 494
   size: 130, 379
   orig: 130, 379
   offset: 0, 0
   index: -1
 spiderIdle
   rotate: false
-  xy: 198, 0
+  xy: 315, 0
   size: 250, 173
   orig: 250, 173
   offset: 0, 0
   index: -1
 spiderLegsDown
   rotate: false
-  xy: 1006, 0
+  xy: 1123, 0
   size: 250, 190
   orig: 250, 190
   offset: 0, 0
   index: -1
 spiderLegsUp
   rotate: false
-  xy: 448, 0
+  xy: 565, 0
   size: 250, 175
   orig: 250, 175
   offset: 0, 0

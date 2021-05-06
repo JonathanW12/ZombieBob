@@ -17,7 +17,7 @@ import org.openide.util.lookup.ServiceProviders;
 @ServiceProviders(value = {
     @ServiceProvider(service = IGamePluginService.class),})
 public class MapPlugin implements IGamePluginService{
-    private final float wallRadians = 3.1415f / 2;
+    private final float standardRadians = 3.1415f / 2;
     private World world;
     private Tile[][] tiles;
     
@@ -49,15 +49,19 @@ public class MapPlugin implements IGamePluginService{
                 for (int j = 0; j < cells.length; j++) {
                     Tile tile = tiles[lineCount - i][j];
                     
-                    if (cells[j].equals("1")) {
+                    if (cells[j].equals("0")) {
+                        placeFloor(tile);
+                    } else if (cells[j].equals("1")) {
                         placeWall(tile);
                     } else if (cells[j].equals("2")) {
+                        placeFloor(tile);
                         placeEnemySpawn(tile);
                         world.addEnemySpawnPosition(
                             (int) (tile.getX() + tile.getWidth() / 2),
                             (int) (tile.getY() + tile.getHeight() / 2)
                         );
                     } else if (cells[j].equals("3")) {
+                        placeFloor(tile);
                         placeItemSpawn(tile);
                         world.addItemSpawnPosition(
                             (int) (tile.getX() + tile.getWidth() / 2),
@@ -69,13 +73,29 @@ public class MapPlugin implements IGamePluginService{
         }
     }
     
+    private void placeFloor(Tile tile) {
+        Entity floor = new Entity();
+            
+        world.addtoEntityPartMap(new PositionPart(
+            tile.getX() + tile.getWidth() / 2,
+            tile.getY() + tile.getHeight() / 2,
+            standardRadians
+        ), floor);
+        world.addtoEntityPartMap(new VisualPart(
+            "floorTexture",
+            tile.getWidth(),
+            tile.getHeight(),
+            1
+        ), floor);
+    }
+    
     private void placeWall(Tile tile) {
         Entity wall = new Entity();
             
         world.addtoEntityPartMap(new PositionPart(
             tile.getX() + tile.getWidth() / 2,
             tile.getY() + tile.getHeight() / 2,
-            wallRadians
+            standardRadians
         ), wall);
         world.addtoEntityPartMap(new VisualPart(
             "wall_sprite",
@@ -101,7 +121,7 @@ public class MapPlugin implements IGamePluginService{
             "enemySpawn",
             tile.getWidth(),
             tile.getHeight(),
-            1
+            2
         ), enemySpawn);
     }
     
@@ -117,7 +137,7 @@ public class MapPlugin implements IGamePluginService{
             "itemSpawn",
             tile.getWidth(),
             tile.getHeight(),
-            1
+            2
         ), itemSpawn);
         
         world.addtoEntityPartMap(new SpawnerPart(), itemSpawn);
@@ -129,7 +149,7 @@ public class MapPlugin implements IGamePluginService{
         
         Entity background = new Entity();
         
-        world.addtoEntityPartMap(new PositionPart(x,y,wallRadians), background);
+        world.addtoEntityPartMap(new PositionPart(x,y,standardRadians), background);
         world.addtoEntityPartMap(new VisualPart("background_sprite",gameData.getDisplayWidth()+gameData.getDisplayWidth()/2,gameData.getDisplayHeight()+gameData.getDisplayWidth()/2,0),background);
     }
    
