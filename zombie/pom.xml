@@ -86,6 +86,7 @@
         <module>RocketLauncher</module>
         <module>Rifle</module>
         <module>AudioSystem</module>
+        <module>ExplosionSystem</module>
     </modules>
 
     <properties>

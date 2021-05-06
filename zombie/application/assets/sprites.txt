@@ -1,13 +1,13 @@
 sprites.png
-size: 1761, 1709
+size: 1823, 1492
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 Ammobox
   rotate: false
-  xy: 852, 892
-  size: 909, 817
-  orig: 909, 817
+  xy: 465, 0
+  size: 150, 135
+  orig: 150, 135
   offset: 0, 0
   index: -1
 crosshair
@@ -40,7 +40,7 @@ enemyIdle
   index: -1
 enemySpawn
   rotate: false
-  xy: 252, 892
+  xy: 904, 892
   size: 600, 600
   orig: 600, 600
   offset: 0, 0
@@ -73,9 +73,16 @@ HotBarRifle
   orig: 100, 100
   offset: 0, 0
   index: -1
+idleExplosion
+  rotate: false
+  xy: 252, 892
+  size: 652, 530
+  orig: 652, 530
+  offset: 0, 0
+  index: -1
 itemSpawn
   rotate: false
-  xy: 465, 0
+  xy: 615, 0
   size: 150, 148
   orig: 150, 148
   offset: 0, 0
@@ -103,7 +110,7 @@ PlayerGun2
   index: -1
 playerIdle
   rotate: false
-  xy: 1115, 0
+  xy: 1265, 0
   size: 308, 190
   orig: 308, 190
   offset: 0, 0
@@ -173,21 +180,21 @@ Rocket
   index: -1
 spiderIdle
   rotate: false
-  xy: 615, 0
+  xy: 765, 0
   size: 250, 173
   orig: 250, 173
   offset: 0, 0
   index: -1
 spiderLegsDown
   rotate: false
-  xy: 1423, 0
+  xy: 1573, 0
   size: 250, 190
   orig: 250, 190
   offset: 0, 0
   index: -1
 spiderLegsUp
   rotate: false
-  xy: 865, 0
+  xy: 1015, 0
   size: 250, 175
   orig: 250, 175
   offset: 0, 0
