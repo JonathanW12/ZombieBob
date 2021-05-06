@@ -28,6 +28,24 @@ public class HealthProcessingSystem implements IEntityProcessingService {
     public void process(GameData gameData, World world) {
 
         // Check if hashmap exists
+        if (world.getMapByPart(LifePart.class.getSimpleName()) != null) {
+
+            // Loops through all Lifeparts in hashmap
+            for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart(LifePart.class.getSimpleName()).entrySet()) {
+                LifePart lifepart = (LifePart) world.getMapByPart(LifePart.class.getSimpleName()).get(entry.getKey());
+                if (lifepart != null && lifepart.getLife() <= 0) {
+                    lifepart.setDead(true);
+                }
+
+                // If dead remove
+                if (lifepart != null && lifepart.isDead()) {
+                    world.removeEntityParts(entry.getKey());
+                }
+
+            }
+        }
+
+        // Check if hashmap exists
         if (world.getMapByPart(DamagePart.class.getSimpleName()) != null) {
 
             // Loops through all DamageParts in hashmap

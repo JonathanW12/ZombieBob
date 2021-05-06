@@ -165,6 +165,11 @@ public class HotbarContolSystem implements IEntityProcessingService {
         TextPart textPart = (TextPart) world.getMapByPart("TextPart").get(playerHealthInformation);
         String healthMessage = ("Health: " +lifePart.getLife());
 
+        if (lifePart.getLife() <= 0){
+            healthMessage = ("Dead");
+        }
+
+
         PositionPart textPosition = (PositionPart) world.getMapByPart("PositionPart").get(playerHealthInformation);
         textPosition.setPosition(hotbarPositionX+10, hotbarPositionY+19);
         textPart.setMessage(healthMessage);

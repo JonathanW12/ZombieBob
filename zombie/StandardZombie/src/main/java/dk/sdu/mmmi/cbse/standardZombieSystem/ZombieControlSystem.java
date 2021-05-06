@@ -91,7 +91,9 @@ public class ZombieControlSystem implements IEntityProcessingService {
                 
                 if (distance <= weaponPart.getRange() && weaponPart.getTimeSinceLastTrigger() > weaponPart.getFireRate()) {
                     combatPart.setAttacking(true);
-                    lifePart.setIsHit(true);
+                    // OBS
+                    lifePart.setLife(lifePart.getLife()-weaponPart.getDamage());
+
                 } 
             }
         }

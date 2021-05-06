@@ -21,10 +21,12 @@ public class ZombieCreator {
 
         WeaponPart weaponPart = new WeaponPart(
                 30,
-                40,
+                80,
                 1f,
                 1
         );
+        // Used in health system
+
         WeaponAnimationPart weaponAnimationPart = new WeaponAnimationPart(
                 "enemyIdle",
                 "enemyHit",
@@ -34,6 +36,8 @@ public class ZombieCreator {
                 0.3f,
                 50f
         );
+
+
 
         world.addtoEntityPartMap(weaponPart, zombieAttack);
         world.addtoEntityPartMap(weaponAnimationPart, zombieAttack);
@@ -56,6 +60,8 @@ public class ZombieCreator {
         world.addtoEntityPartMap(audioPart, zombie);
         world.addtoEntityPartMap(combatPart, zombie);
         world.addtoEntityPartMap(createInitialAnimationEnemy(weaponAnimationPart), zombie);
+
+
     }
 
     // Armed initial animation
