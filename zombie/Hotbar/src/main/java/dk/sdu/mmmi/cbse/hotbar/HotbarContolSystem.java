@@ -20,6 +20,7 @@ import java.util.UUID;
 public class HotbarContolSystem implements IEntityProcessingService {
     float radians = 3.1415f / 2;
     int itemPicSize = 38;
+    private int activeItemPicSize = 55;
     //positions match the spaces on the hotbar sprite
     float[] itemPositionsX = new float[4];
     float hotbarPositionY;
@@ -31,6 +32,7 @@ public class HotbarContolSystem implements IEntityProcessingService {
     private UUID killInformationEntityID;
     private int level;
     private int zombiesKilled = 0;
+    private UUID previousWeapon = null;
 
 
     ArrayList<UUID> itemsToBeRemoved = new ArrayList<UUID>();
@@ -47,6 +49,7 @@ public class HotbarContolSystem implements IEntityProcessingService {
         if(!excistingItems2.isEmpty()){
             removeItemsNoLongerInInventory(world,weaponInventoryPart);
             reorganizeHotbarItemPositions(world, weaponInventoryPart);
+            updateActiveWeapon(entry.getKey(), world);
         }
         for(UUID id : weaponInventoryPart.getInventory()){
             addNewItemsToHotbar(world,id,weaponInventoryPart);
@@ -60,6 +63,28 @@ public class HotbarContolSystem implements IEntityProcessingService {
         updateInformationPositions(world,gameData,playerPositionPart);
     }
 }
+    private void updateActiveWeapon(UUID playerUUID, World world){
+        CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(playerUUID);
+        UUID currentWeaponUUID = combatPart.getCurrentWeapon();
+
+        if (previousWeapon != currentWeaponUUID){
+            for (Map.Entry<UUID,UUID> weaponUUID : excistingItems2.entrySet()){
+                if (weaponUUID.getKey().equals(currentWeaponUUID)){
+                    if (previousWeapon != null){
+                        VisualPart previousWeaponVisualPart = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(previousWeapon);
+                        previousWeaponVisualPart.setHeight(itemPicSize);
+                        previousWeaponVisualPart.setWidth(itemPicSize);
+                    }
+                    VisualPart currentWeaponVisual = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(weaponUUID.getValue());
+                    currentWeaponVisual.setWidth(activeItemPicSize);
+                    currentWeaponVisual.setHeight(activeItemPicSize);
+
+                    previousWeapon = weaponUUID.getValue();
+                }
+            }
+        }
+    }
+
 
     private void updateInformationPositions(World world, GameData gameData, PositionPart playerPositionPart) {
         PositionPart levelPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(levelInformationEntityID);

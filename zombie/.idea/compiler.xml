@@ -6,37 +6,38 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="CommonLocations" />
-        <module name="CommonEnemy" />
-        <module name="SilentUpdate" />
-        <module name="Zombie-branding" />
-        <module name="AnimationSystem" />
-        <module name="Zombie-app" />
-        <module name="AudioSystem" />
-        <module name="AIMovementSystem" />
-        <module name="CommonWeapon" />
-        <module name="Enemy" />
-        <module name="CollisionSystem" />
-        <module name="Rifle" />
-        <module name="Core" />
-        <module name="TimerSystem" />
-        <module name="CommonAnimation" />
-        <module name="Player" />
         <module name="Movement" />
+        <module name="CommonAnimation" />
         <module name="CommonLevel" />
-        <module name="CombatSystem" />
-        <module name="Hotbar" />
+        <module name="Zombie-app" />
         <module name="CommonTiles" />
-        <module name="RocketLauncher" />
-        <module name="Common" />
-        <module name="StandardZombie" />
-        <module name="HandGun" />
-        <module name="ProjectileSystem" />
+        <module name="Player" />
+        <module name="CommonWeapon" />
         <module name="RigidPhysicsSystem" />
-        <module name="LootingSystem" />
+        <module name="SpiderBoss" />
+        <module name="AudioSystem" />
         <module name="Level" />
-        <module name="Map" />
+        <module name="Rifle" />
+        <module name="Enemy" />
+        <module name="HandGun" />
+        <module name="Common" />
+        <module name="TimerSystem" />
+        <module name="SilentUpdate" />
+        <module name="CollisionSystem" />
+        <module name="AIMovementSystem" />
+        <module name="CombatSystem" />
+        <module name="CommonEnemy" />
+        <module name="LootingSystem" />
+        <module name="Hotbar" />
+        <module name="AnimationSystem" />
         <module name="HealthSystem" />
+        <module name="ProjectileSystem" />
+        <module name="Map" />
+        <module name="StandardZombie" />
+        <module name="Core" />
+        <module name="Zombie-branding" />
+        <module name="RocketLauncher" />
+        <module name="CommonLocations" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -69,6 +70,7 @@
       <module name="RigidPhysicsSystem" target="1.8" />
       <module name="RocketLauncher" target="1.8" />
       <module name="SilentUpdate" target="1.8" />
+      <module name="SpiderBoss" target="1.8" />
       <module name="StandardZombie" target="1.8" />
       <module name="TimerSystem" target="1.8" />
       <module name="Zombie" target="1.8" />
