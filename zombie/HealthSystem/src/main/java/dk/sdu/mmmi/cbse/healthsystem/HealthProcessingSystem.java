@@ -75,11 +75,14 @@ public class HealthProcessingSystem implements IEntityProcessingService {
                                 if (lifePartCollidingEntity != null) {
                                     lifePartCollidingEntity.setLife(lifePartCollidingEntity.getLife() - damagePart.getDamage());
                                 }
-                                
+
                                 // If bullet can explode, set explosive part to true
-                                ExplosivePart explosivePart = (ExplosivePart) world.getMapByPart(ExplosivePart.class.getSimpleName()).get(entry.getKey());
-                                if (explosivePart != null) {
-                                    explosivePart.setIsReadyToExplode(true);
+                                if (world.getMapByPart(ExplosivePart.class.getSimpleName()) != null) {
+
+                                    ExplosivePart explosivePart = (ExplosivePart) world.getMapByPart(ExplosivePart.class.getSimpleName()).get(entry.getKey());
+                                    if (explosivePart != null) {
+                                        explosivePart.setIsReadyToExplode(true);
+                                    }
                                 }
                                 LifePart lifePart = (LifePart) world.getMapByPart(LifePart.class.getSimpleName()).get(entry.getKey());
                                 // Removing bullet after impact
@@ -96,7 +99,7 @@ public class HealthProcessingSystem implements IEntityProcessingService {
                             if (lifePartCollidingEntity != null && lifePartCollidingEntity.isDead()) {
 
                                 //TO BE CHANGED.
-                                if (world.getMapByPart(EnemyPart.class.getSimpleName()).get(collidingEntity) != null){
+                                if (world.getMapByPart(EnemyPart.class.getSimpleName()).get(collidingEntity) != null) {
                                     gameData.getLevelInformation().setEnemiesKilled(++zombiesKilled);
                                 }
                                 world.removeEntityParts(collidingEntity);

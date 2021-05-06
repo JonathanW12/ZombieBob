@@ -86,5 +86,6 @@
     <orderEntry type="module" module-name="RocketLauncher" />
     <orderEntry type="module" module-name="Rifle" />
     <orderEntry type="module" module-name="AudioSystem" />
+    <orderEntry type="module" module-name="ExplosionSystem" />
   </component>
 </module>

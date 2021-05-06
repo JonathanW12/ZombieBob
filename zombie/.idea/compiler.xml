@@ -27,6 +27,7 @@
         <module name="CommonEnemy" />
         <module name="LootingSystem" />
         <module name="Hotbar" />
+        <module name="ExplosionSystem" />
         <module name="AnimationSystem" />
         <module name="HealthSystem" />
         <module name="ProjectileSystem" />
@@ -53,6 +54,7 @@
       <module name="CommonTiles" target="1.8" />
       <module name="CommonWeapon" target="1.8" />
       <module name="Core" target="1.8" />
+      <module name="ExplosionSystem" target="1.8" />
       <module name="HandGun" target="1.8" />
       <module name="HealthSystem" target="1.8" />
       <module name="Hotbar" target="1.8" />
