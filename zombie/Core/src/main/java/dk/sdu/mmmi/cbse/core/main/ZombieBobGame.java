@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.core.coreprocessors.AudioProcessor;
 import dk.sdu.mmmi.cbse.core.managers.GameInputProcessor;
 import dk.sdu.mmmi.cbse.core.screens.MainMenuScreen;
 
@@ -13,6 +14,7 @@ public class ZombieBobGame extends Game implements ApplicationListener {
     
     private GameData gameData;
     private World world;
+    private AudioProcessor audioProcessor;
     
     @Override
     public void create() {
@@ -23,6 +25,7 @@ public class ZombieBobGame extends Game implements ApplicationListener {
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
         
         setupInputProcessors();
+        audioProcessor = new AudioProcessor(world);
 
         setScreen(new MainMenuScreen(this));
     }
@@ -38,6 +41,15 @@ public class ZombieBobGame extends Game implements ApplicationListener {
     private void setupInputProcessors() {
         InputProcessor keyInputProcessor = new GameInputProcessor(gameData);
         Gdx.input.setInputProcessor(keyInputProcessor); 
+    }
+    
+    public AudioProcessor getAudioProcessor() {
+        return audioProcessor;
+    }
+    
+    @Override
+    public void dispose() {
+        audioProcessor.dispose();
     }
     
 }

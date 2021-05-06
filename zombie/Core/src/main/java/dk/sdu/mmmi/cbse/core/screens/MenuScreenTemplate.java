@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import dk.sdu.mmmi.cbse.common.data.GameData;
+import dk.sdu.mmmi.cbse.core.coreprocessors.AudioProcessor;
 import dk.sdu.mmmi.cbse.core.main.ZombieBobGame;
 
 public class MenuScreenTemplate implements Screen {
@@ -92,6 +93,12 @@ public class MenuScreenTemplate implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(delta);
         stage.draw();
+        
+        update();
+    }
+    
+    private void update() {
+        game.getAudioProcessor().processAudio();
     }
     
     public ZombieBobGame getGame() {
@@ -115,7 +122,9 @@ public class MenuScreenTemplate implements Screen {
     }
     
     @Override
-    public void show() { }
+    public void show() { 
+        game.getAudioProcessor().setMusicState(AudioProcessor.MusicState.MENUMUSIC);
+    }
     
     @Override
     public void hide() { }

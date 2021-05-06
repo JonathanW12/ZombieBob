@@ -43,7 +43,7 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
         update();
     }
     
-    private void update() {
+    private void update() {   
         if (getGameData().getKeys().isPressed(GameKeys.ESCAPE)) {
             Gdx.app.exit();
         }

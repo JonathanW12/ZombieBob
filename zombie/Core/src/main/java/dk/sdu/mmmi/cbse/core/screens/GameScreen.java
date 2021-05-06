@@ -29,7 +29,6 @@ public class GameScreen implements Screen{
     private final World world;
     private OrthographicCamera cam;
     private ExtendViewport viewport;
-    private AudioProcessor audioProcessor;
     private RenderProcessor renderProcessor;
     private final GameLookup gameLookup;
     private Vector3 mousePosition;
@@ -40,7 +39,6 @@ public class GameScreen implements Screen{
         world = game.getWorld();
         
         setupCam();
-        audioProcessor = new AudioProcessor(world);
         renderProcessor = new RenderProcessor(gameData, world, cam);
         mousePosition = new Vector3(); 
         gameLookup = new GameLookup(gameData, world);
@@ -88,8 +86,8 @@ public class GameScreen implements Screen{
             postEntityProcessorService.process(gameData, world);
         }
         
-        // Process audio
-        audioProcessor.processAudio();
+        game.getAudioProcessor().processAudio();
+        
         // Quit if escape is clicked
         if (gameData.getKeys().isPressed(GameKeys.ESCAPE)) {
             Gdx.app.exit();
@@ -103,7 +101,7 @@ public class GameScreen implements Screen{
     
     @Override
     public void show() {
-        
+        game.getAudioProcessor().setMusicState(AudioProcessor.MusicState.GAMEMUSIC);
     }
     
     @Override
@@ -124,7 +122,6 @@ public class GameScreen implements Screen{
     @Override
     public void dispose() {
         renderProcessor.dispose();
-        audioProcessor.dispose();
     }
       
     private void setupCursorImage() {
