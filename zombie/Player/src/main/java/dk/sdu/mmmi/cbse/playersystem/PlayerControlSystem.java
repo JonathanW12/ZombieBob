@@ -54,7 +54,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                     weaponInventoryPart.removeWeapon(removeWeaponId);
                     }
                 }
-                bananaTest(world,gameData,weaponInventoryPart);
+               // bananaTest(world,gameData,weaponInventoryPart);
                 if (gameData.getMouse().isMiddleClick()){
                 }
                 if (gameData.getMouse().getScroll() == -1){
@@ -70,28 +70,28 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 movingPart.setUp(gameData.getKeys().isDown(GameKeys.UP));
                 movingPart.setDown(gameData.getKeys().isDown(GameKeys.DOWN));
 
-
-                if (gameData.getKeys().isPressed(GameKeys.NUM_1)){
-                    if (weaponInventoryPart.getInventory().size()> 0){
-                        combatPart.setCurrentWeapon(weaponInventoryPart.getInventory().get(0));
+                if (!combatPart.isAttacking()) {
+                    if (gameData.getKeys().isPressed(GameKeys.NUM_1)) {
+                        if (weaponInventoryPart.getInventory().size() > 0) {
+                            combatPart.setCurrentWeapon(weaponInventoryPart.getInventory().get(0));
+                        }
+                    }
+                    if (gameData.getKeys().isPressed(GameKeys.NUM_2)) {
+                        if (weaponInventoryPart.getInventory().size() > 1) {
+                            combatPart.setCurrentWeapon(weaponInventoryPart.getInventory().get(1));
+                        }
+                    }
+                    if (gameData.getKeys().isPressed(GameKeys.NUM_3)) {
+                        if (weaponInventoryPart.getInventory().size() > 2) {
+                            combatPart.setCurrentWeapon(weaponInventoryPart.getInventory().get(2));
+                        }
+                    }
+                    if (gameData.getKeys().isPressed(GameKeys.NUM_4)) {
+                        if (weaponInventoryPart.getInventory().size() > 3) {
+                            combatPart.setCurrentWeapon(weaponInventoryPart.getInventory().get(3));
+                        }
                     }
                 }
-                if (gameData.getKeys().isPressed(GameKeys.NUM_2)){
-                    if (weaponInventoryPart.getInventory().size()> 1){
-                        combatPart.setCurrentWeapon(weaponInventoryPart.getInventory().get(1));
-                    }
-                }
-                if (gameData.getKeys().isPressed(GameKeys.NUM_3)){
-                    if (weaponInventoryPart.getInventory().size()> 2){
-                        combatPart.setCurrentWeapon(weaponInventoryPart.getInventory().get(2));
-                    }
-                }
-                if (gameData.getKeys().isPressed(GameKeys.NUM_4)){
-                    if (weaponInventoryPart.getInventory().size()> 3){
-                        combatPart.setCurrentWeapon(weaponInventoryPart.getInventory().get(3));
-                    }
-                }
-
                 //combatPart.setAttacking(gameData.getKeys().isPressed(GameKeys.SPACE));
                 
                 collectorPart.setCollecting(gameData.getKeys().isPressed(GameKeys.E));
@@ -114,7 +114,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                     setAnimation(animationPart, weaponAnimationPart);
                     
                     visualPart.setSpriteName(weaponAnimationPart.getIdleSpriteName());
-                    if ( weaponPart.isIsAttacking() ) {
+                    if (weaponPart != null && weaponPart.isIsAttacking() ) {
                         AudioPart audioPart = (AudioPart) world.getMapByPart(AudioPart.class.getSimpleName()).get(combatPart.getCurrentWeapon());
                         audioPart.setIsPlaying(true);
                         animationPart.setCurrentAnimation("shoot");
@@ -132,6 +132,8 @@ public class PlayerControlSystem implements IEntityProcessingService {
             }
         }
     }
+
+    /*
     
     private void bananaTest(World world,GameData gameData, WeaponInventoryPart weaponInventoryPart){
         if(gameData.getKeys().isPressed(GameKeys.SHIFT)){
@@ -144,7 +146,8 @@ public class PlayerControlSystem implements IEntityProcessingService {
             }
         }
     }
-    
+    */
+
     private void setAnimation(AnimationPart animationPart, WeaponAnimationPart weaponAnimation) {
         if (animationPart.getAnimationByName("shoot") == null ||
             !animationPart.getAnimationByName("shoot").getTextureFileName().equals(weaponAnimation.getAttackAnimationName())

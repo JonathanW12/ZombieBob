@@ -125,8 +125,10 @@ public class LootingProcessingSystem implements IEntityProcessingService {
                                                     ((VisualPart) world.getMapByPart("VisualPart").get(item.getKey())).setIsVisible(false);
 
                                                     //combat part has the current weapon to be the weapon on the ground. Set this to be the looted weapon.
-                                                    combatPart.setCurrentWeapon(item.getKey());
-                                                    
+                                                    if (weaponInventory.getInventory().isEmpty()) {
+                                                        combatPart.setCurrentWeapon(item.getKey());
+                                                    }
+
                                                     // Remove item from spawn
                                                     world.getItemSpawnByCurrentItem(combatPart.getCurrentWeapon()).removeCurrentItem();
                                                 }
@@ -138,9 +140,11 @@ public class LootingProcessingSystem implements IEntityProcessingService {
                                                 ((VisualPart) world.getMapByPart("VisualPart").get(item.getKey())).setIsVisible(false);
                                                 CombatPart combatPart = ((CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey()));
                                                 if (combatPart != null) {
-                                                    combatPart.setCurrentWeapon(item.getKey());
+                                                    if (weaponInventory.getInventory().size() == 1) {
+                                                        combatPart.setCurrentWeapon(item.getKey());
+                                                    }
                                                     // Remove item from spawn
-                                                    world.getItemSpawnByCurrentItem(combatPart.getCurrentWeapon()).removeCurrentItem();
+                                                    world.getItemSpawnByCurrentItem(item.getKey()).removeCurrentItem();
                                                 }
                                             }
                                         }

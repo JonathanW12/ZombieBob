@@ -110,7 +110,7 @@ public class RenderProcessor {
     }
 
     public void processRendering(GameData gameData) {
-        float lerp = 0.98f;
+        float lerp = 4f;
         Vector3 position = cam.position;
         if (world.getMapByPart(PlayerPart.class.getSimpleName()).keySet().toArray().length > 0) {
             UUID uuid = (UUID) world.getMapByPart(PlayerPart.class.getSimpleName()).keySet().toArray()[0];
