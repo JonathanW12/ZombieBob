@@ -21,6 +21,7 @@ public class HotbarContolSystem implements IEntityProcessingService {
     float radians = 3.1415f / 2;
     int itemPicSize = 38;
     private int activeItemPicSize = 55;
+
     //positions match the spaces on the hotbar sprite
     float[] itemPositionsX = new float[4];
     float hotbarPositionY;
@@ -30,6 +31,7 @@ public class HotbarContolSystem implements IEntityProcessingService {
     // Information Variables
     private UUID levelInformationEntityID;
     private UUID killInformationEntityID;
+    private UUID playerHealthInformation;
     private int level;
     private int zombiesKilled = 0;
     private UUID previousWeapon = null;
@@ -55,7 +57,7 @@ public class HotbarContolSystem implements IEntityProcessingService {
             addNewItemsToHotbar(world,id,weaponInventoryPart);
         }
     }
-        displayPlayerHp();
+        displayPlayerHp(entry.getKey(),world);
 
         // update Levelinformation and Enemies killed information on Hotbar
         displayLevelInformation(gameData,world);
@@ -63,6 +65,8 @@ public class HotbarContolSystem implements IEntityProcessingService {
         updateInformationPositions(world,gameData,playerPositionPart);
     }
 }
+
+
     private void updateActiveWeapon(UUID playerUUID, World world){
         CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(playerUUID);
         UUID currentWeaponUUID = combatPart.getCurrentWeapon();
@@ -134,7 +138,7 @@ public class HotbarContolSystem implements IEntityProcessingService {
                 visualItem.setResizable(false);
                 excistingItems2.put(playerWeaponID, hotbarItem.getUUID());
 
-    }
+        }
     }
     private void removeItemsNoLongerInInventory(World world, WeaponInventoryPart weaponInventoryPart){
         for(Map.Entry weaponId : excistingItems2.entrySet()){
@@ -149,8 +153,23 @@ public class HotbarContolSystem implements IEntityProcessingService {
         itemsToBeRemoved.forEach(id -> excistingItems2.remove(id));
         itemsToBeRemoved.clear();
     }
-    private void displayPlayerHp(){
-        
+    private void displayPlayerHp(UUID playerUUID, World world){
+        LifePart lifePart = (LifePart) world.getMapByPart(LifePart.class.getSimpleName()).get(playerUUID);
+        if (playerHealthInformation == null){
+            Entity HealthInformation = new Entity();
+            playerHealthInformation = HealthInformation.getUUID();
+
+            world.addtoEntityPartMap(new PositionPart(600, 750, 2f), HealthInformation);
+            world.addtoEntityPartMap(new TextPart(null, 4), HealthInformation);
+        }
+        TextPart textPart = (TextPart) world.getMapByPart("TextPart").get(playerHealthInformation);
+        String healthMessage = ("Health: " +lifePart.getLife());
+
+        PositionPart textPosition = (PositionPart) world.getMapByPart("PositionPart").get(playerHealthInformation);
+        textPosition.setPosition(hotbarPositionX+10, hotbarPositionY+19);
+        textPart.setMessage(healthMessage);
+
+
     }
 
     private void displayLevelInformation(GameData gameData,World world) {
@@ -174,7 +193,7 @@ public class HotbarContolSystem implements IEntityProcessingService {
             levelMessage = ("Level: " + (level));
         }
         PositionPart textPosition = (PositionPart) world.getMapByPart("PositionPart").get(levelInformationEntityID);
-        textPosition.setPosition(hotbarPositionX+10, hotbarPositionY+13);
+        textPosition.setPosition(hotbarPositionX+10, hotbarPositionY+5);
         textPart.setMessage(levelMessage);
     }
 
@@ -190,7 +209,7 @@ public class HotbarContolSystem implements IEntityProcessingService {
 
         TextPart textPart = (TextPart) world.getMapByPart("TextPart").get(killInformationEntityID);
         PositionPart textPosition = (PositionPart) world.getMapByPart("PositionPart").get(killInformationEntityID);
-        textPosition.setPosition(hotbarPositionX+10, hotbarPositionY-2);
+        textPosition.setPosition(hotbarPositionX+10, hotbarPositionY-10);
         String killMessage = ("Zombies Slain: " + zombiesKilled);
         textPart.setMessage(killMessage);
     }

@@ -67,10 +67,12 @@ public class HealthProcessingSystem implements IEntityProcessingService {
 
                             // If dead remove
                             if (lifePartCollidingEntity != null && lifePartCollidingEntity.isDead()) {
-                                world.removeEntityParts(collidingEntity);
-                                //TO BE CHANGED.
-                                gameData.getLevelInformation().setEnemiesKilled(++zombiesKilled);
 
+                                //TO BE CHANGED.
+                                if (world.getMapByPart(EnemyPart.class.getSimpleName()).get(collidingEntity) != null){
+                                    gameData.getLevelInformation().setEnemiesKilled(++zombiesKilled);
+                                }
+                                world.removeEntityParts(collidingEntity);
                             }
                         }
                     }
