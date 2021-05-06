@@ -1,27 +1,27 @@
 package dk.sdu.mmmi.cbse.map;
 
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import java.util.HashMap;
 import java.util.Map;
 import dk.sdu.mmmi.cbse.common.services.IMapLookup;
+import org.openide.util.lookup.ServiceProvider;
 
+@ServiceProvider(service = IMapLookup.class)
 public class MapFinder implements IMapLookup {
     
     private static FileHandle[] filehandles;
     private FileHandle[] mapThumbnailFiles;
     
-    public Map<String, Sprite> findAllMaps() {
+    public Map<String, FileHandle> findAllMaps() {
         FileHandle[] mapFiles = getMapFiles();
-        Map<String, Sprite> resultMap = new HashMap<>();
+        Map<String, FileHandle> resultMap = new HashMap<>();
         
         for (FileHandle mapFile: mapFiles) {
             String mapName = mapFile.nameWithoutExtension();
-            Sprite mapThumbnail = getMapThumbnail(mapName);
+            FileHandle mapThumbnailFile = getMapThumbnail(mapName);
             
-            if (mapThumbnail != null) {
-                resultMap.put(mapName, mapThumbnail);
+            if (mapThumbnailFile != null) {
+                resultMap.put(mapName, mapThumbnailFile);
             }
         }
         
@@ -62,15 +62,15 @@ public class MapFinder implements IMapLookup {
         return mapThumbnailFiles;
     }
     
-    private Sprite getMapThumbnail(String mapName) {
+    private FileHandle getMapThumbnail(String mapName) {
         getMapThumbnails();
         
         for (FileHandle file: mapThumbnailFiles) {
             if (file.nameWithoutExtension().equals(mapName)) {
-                return new Sprite(new Texture(file));
+                return file;
             }
         }
-        
+              
         return null;
     }
 }

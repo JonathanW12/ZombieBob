@@ -56,8 +56,8 @@ public class GameLookup {
         return lookup.lookupAll(IPostEntityProcessingService.class);
     }
     
-    public Collection<? extends IMapLookup> getMapLookups() {
-        return lookup.lookupAll(IMapLookup.class);
+    public IMapLookup getMapLookup() {
+        return lookup.lookup(IMapLookup.class);
     }
 
     public final LookupListener lookupListener = new LookupListener() {

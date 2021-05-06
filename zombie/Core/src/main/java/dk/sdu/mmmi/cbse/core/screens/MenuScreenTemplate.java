@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import dk.sdu.mmmi.cbse.common.data.GameData;
+import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.core.coreprocessors.AudioProcessor;
 import dk.sdu.mmmi.cbse.core.main.ZombieBobGame;
 
@@ -17,6 +18,7 @@ public class MenuScreenTemplate implements Screen {
     
     private final ZombieBobGame game;
     private GameData gameData;
+    private World world;
     private Stage stage;
     private Skin skin;
     private BitmapFont titleFont;
@@ -27,6 +29,7 @@ public class MenuScreenTemplate implements Screen {
     public MenuScreenTemplate(ZombieBobGame game) {
         this.game = game;
         gameData = game.getGameData();
+        world = game.getWorld();
         stage = new Stage(new StretchViewport(
             gameData.getDisplayWidth(),
             gameData.getDisplayHeight()
@@ -107,6 +110,10 @@ public class MenuScreenTemplate implements Screen {
     
     public GameData getGameData() {
         return gameData;
+    }
+    
+    public World getWorld() {
+        return world;
     }
     
     public Stage getStage() {
