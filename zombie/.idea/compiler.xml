@@ -11,11 +11,11 @@
         <module name="SilentUpdate" />
         <module name="Zombie-branding" />
         <module name="AnimationSystem" />
-        <module name="Zombie-app" />
         <module name="AudioSystem" />
+        <module name="Zombie-app" />
         <module name="AIMovementSystem" />
         <module name="CommonWeapon" />
-        <module name="Enemy" />
+        <module name="SpiderBoss" />
         <module name="CollisionSystem" />
         <module name="Rifle" />
         <module name="Core" />
@@ -43,7 +43,6 @@
       <module name="AIMovementSystem" target="1.8" />
       <module name="AnimationSystem" target="1.8" />
       <module name="AudioSystem" target="1.8" />
-      <module name="BulletSystem" target="1.8" />
       <module name="CollisionSystem" target="1.8" />
       <module name="CombatSystem" target="1.8" />
       <module name="Common" target="1.8" />
@@ -54,14 +53,12 @@
       <module name="CommonTiles" target="1.8" />
       <module name="CommonWeapon" target="1.8" />
       <module name="Core" target="1.8" />
-      <module name="Enemy" target="1.8" />
       <module name="HandGun" target="1.8" />
       <module name="HealthSystem" target="1.8" />
       <module name="Hotbar" target="1.8" />
       <module name="Level" target="1.8" />
       <module name="LootingSystem" target="1.8" />
       <module name="Map" target="1.8" />
-      <module name="MiniMap" target="1.8" />
       <module name="Movement" target="1.8" />
       <module name="Player" target="1.8" />
       <module name="ProjectileSystem" target="1.8" />
@@ -69,9 +66,9 @@
       <module name="RigidPhysicsSystem" target="1.8" />
       <module name="RocketLauncher" target="1.8" />
       <module name="SilentUpdate" target="1.8" />
+      <module name="SpiderBoss" target="1.8" />
       <module name="StandardZombie" target="1.8" />
       <module name="TimerSystem" target="1.8" />
-      <module name="Zombie" target="1.8" />
       <module name="Zombie-app" target="1.8" />
       <module name="Zombie-branding" target="1.8" />
       <module name="Zombie-parent" target="1.5" />
