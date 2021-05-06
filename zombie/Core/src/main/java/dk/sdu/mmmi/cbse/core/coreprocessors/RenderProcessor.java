@@ -96,8 +96,9 @@ public class RenderProcessor {
             sprites.put("wall_sprite", new Sprite(img4));
         }
 
-        font = fontGenerator.generateFont(30);
-        font.setScale(.5f);
+        FreeTypeFontGenerator.FreeTypeFontParameter fontParameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        fontParameter.size = 15;
+        font = fontGenerator.generateFont(fontParameter);
 
         fontGenerator.dispose(); // Dispose after use
 

@@ -1,12 +1,13 @@
 package dk.sdu.mmmi.cbse.core.main;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import org.openide.modules.ModuleInstall;
 
 public class Installer extends ModuleInstall {
 
-    private static ZombieBobGame g;
+    private static ApplicationListener g;
 
     @Override
     public void restored() {
