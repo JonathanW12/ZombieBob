@@ -1,5 +1,6 @@
 package dk.sdu.mmmi.cbse.core.main;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -19,7 +20,7 @@ import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.core.coreprocessors.AudioProcessor;
 import dk.sdu.mmmi.cbse.core.coreprocessors.RenderProcessor;
 
-public class Game implements ApplicationListener {
+public class ZombieBobGame extends Game implements ApplicationListener {
 
     private static OrthographicCamera cam;
     private ExtendViewport viewport;
