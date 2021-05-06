@@ -4,6 +4,7 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import dk.sdu.mmmi.cbse.common.services.IMapLookup;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 import java.util.Collection;
 import java.util.List;
@@ -16,12 +17,12 @@ public class GameLookup {
     
     private GameData gameData;
     private World world;
-    
+    private static GameLookup instance;
     private final Lookup lookup;
     private List<IGamePluginService> gamePlugins;
     private Lookup.Result<IGamePluginService> result;
        
-    public GameLookup(GameData gameData, World world) {
+    private GameLookup(GameData gameData, World world) {
         this.gameData = gameData;
         this.world = world;
         lookup = Lookup.getDefault();
@@ -39,12 +40,24 @@ public class GameLookup {
         }
     }
     
+    public static GameLookup getInstance(GameData gameData, World world) {
+        if (instance == null) {
+            instance = new GameLookup(gameData, world);
+        }
+        
+        return instance;
+    }
+    
     public Collection<? extends IEntityProcessingService> getEntityProcessingServices() {
         return lookup.lookupAll(IEntityProcessingService.class);
     }
 
     public Collection<? extends IPostEntityProcessingService> getPostEntityProcessingServices() {
         return lookup.lookupAll(IPostEntityProcessingService.class);
+    }
+    
+    public Collection<? extends IMapLookup> getMapLookups() {
+        return lookup.lookupAll(IMapLookup.class);
     }
 
     public final LookupListener lookupListener = new LookupListener() {

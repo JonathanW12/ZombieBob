@@ -41,7 +41,7 @@ public class GameScreen implements Screen{
         setupCam();
         renderProcessor = new RenderProcessor(gameData, world, cam);
         mousePosition = new Vector3(); 
-        gameLookup = new GameLookup(gameData, world);
+        gameLookup = GameLookup.getInstance(gameData, world);
         setupCursorImage();
         setupInputProcessors();
     }
