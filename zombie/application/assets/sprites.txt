@@ -138,7 +138,7 @@ projectile
   index: -1
 RifleAmmo
   rotate: false
-  xy: 16, 0
+  xy: 133, 0
   size: 32, 132
   orig: 32, 132
   offset: 0, 0

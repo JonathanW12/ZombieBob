@@ -27,17 +27,18 @@ import dk.sdu.mmmi.cbse.common.data.entitytypeparts.PlayerPart;
 import dk.sdu.mmmi.cbse.commonanimation.Animation;
 import dk.sdu.mmmi.cbse.commontiles.Tile;
 import dk.sdu.mmmi.cbse.commontiles.Tiles;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 public class RenderProcessor {
-    
+
     private final GameData gameData;
     private final World world;
     private final OrthographicCamera cam;
-    
+
     private final SpriteBatch batch;
     private final int zDepth;
     private ArrayList<ArrayList<UUID>> sortedVisualList;
@@ -48,25 +49,25 @@ public class RenderProcessor {
     private TextureAtlas textureAtlas;
     private TextureAtlas animationTextureAtlas;
     private ShapeRenderer shapeRenderer;
-    
+
     public RenderProcessor(GameData gameData, World world, OrthographicCamera cam) {
         this.gameData = gameData;
         this.world = world;
-        this.cam = cam;   
+        this.cam = cam;
         batch = new SpriteBatch();
         zDepth = 5;
         sortedVisualList = new ArrayList<>(zDepth);
         sprites = new HashMap<>();
         animationRegions = new HashMap<>();
         shapeRenderer = new ShapeRenderer();
-        
+
         // Initialize font generator
         try {
             fontGenerator = new FreeTypeFontGenerator(Gdx.files.local("font/Roboto-Light.ttf"));
         } catch (GdxRuntimeException e) {
             fontGenerator = new FreeTypeFontGenerator(Gdx.files.local("../../font/Roboto-Light.ttf"));
         }
-        
+
         // Initialize assets
         try {
             textureAtlas = new TextureAtlas(Gdx.files.local("assets/sprites.txt"));
@@ -94,28 +95,35 @@ public class RenderProcessor {
             Texture img4 = new Texture("../../assets/Wall_Test2.png");
             sprites.put("wall_sprite", new Sprite(img4));
         }
-        
+
         font = fontGenerator.generateFont(30);
         font.setScale(.5f);
-        
+
         fontGenerator.dispose(); // Dispose after use
-        
+
         for (int i = 0; i < zDepth; i++) {
             sortedVisualList.add(new ArrayList());
         }
-        
+
         addSprites();
         addAnimations();
     }
-    
-    public void processRendering() {
+
+    public void processRendering(GameData gameData) {
+        float lerp = 0.98f;
+        Vector3 position = cam.position;
         if (world.getMapByPart(PlayerPart.class.getSimpleName()).keySet().toArray().length > 0) {
             UUID uuid = (UUID) world.getMapByPart(PlayerPart.class.getSimpleName()).keySet().toArray()[0];
             PositionPart playerPositionPart = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(uuid);
             cam.unproject(new Vector3(playerPositionPart.getX(), playerPositionPart.getY(), 0));
-            cam.position.set(playerPositionPart.getX(), playerPositionPart.getY(), 0);
+            //cam.position.set(playerPositionPart.getX(), playerPositionPart.getY(), 0);
+            position.x += (playerPositionPart.getX() - position.x) * lerp * gameData.getDelta();
+            position.y += (playerPositionPart.getY() - position.y) * lerp * gameData.getDelta();
             cam.update();
+
             batch.setProjectionMatrix(cam.combined);
+
+
         }
 
         // clear screen to black
@@ -124,7 +132,7 @@ public class RenderProcessor {
 
         gameData.setDelta(Gdx.graphics.getDeltaTime());
     }
-    
+
     private ArrayList<ArrayList<UUID>> sortVisualParts() {
         for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart("VisualPart").entrySet()) {
             VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entry.getKey());
@@ -155,36 +163,36 @@ public class RenderProcessor {
 
                 if (animationPart != null && animationPart.isAnimated()) {
                     drawAnimation(
-                        animationPart,
-                        positionPart.getX(),
-                        positionPart.getY(),
-                        positionPart.getRadians(),
-                        visualPart.getWidth(),
-                        animationPart.getAnimationByName(animationPart.getCurrentAnimationName()).getFrameCount()
+                            animationPart,
+                            positionPart.getX(),
+                            positionPart.getY(),
+                            positionPart.getRadians(),
+                            visualPart.getWidth(),
+                            animationPart.getAnimationByName(animationPart.getCurrentAnimationName()).getFrameCount()
                     );
                 } else if (visualPart.getIsVisible()) {
                     drawSprite(
-                        visualPart.getSpriteName(),
-                        positionPart.getX(),
-                        positionPart.getY(),
-                        positionPart.getRadians(),
-                        visualPart.getWidth(),
-                        visualPart.getResizable(),
-                        visualPart.getHeight()
+                            visualPart.getSpriteName(),
+                            positionPart.getX(),
+                            positionPart.getY(),
+                            positionPart.getRadians(),
+                            visualPart.getWidth(),
+                            visualPart.getResizable(),
+                            visualPart.getHeight()
                     );
                 }
             }
         }
-        
+
         drawFonts();
-        batch.end(); 
-        
+        batch.end();
+
         clearSortedVisualList();
 
-        if (gameData.getKeys().isDown(GameKeys.SPACE)) {
-            drawHitboxes();
-            drawTiles();
-        }
+    if (gameData.getKeys().isDown(GameKeys.SPACE)) {
+        drawHitboxes();
+        //drawTiles();
+    }
     }
 
     private void drawHitboxes() {
@@ -206,7 +214,7 @@ public class RenderProcessor {
                                  i < corners.size();
                                  j = i++) {
 
-                                shapeRenderer.line(corners.get(i).x, corners.get(i).y, corners.get(j).x, corners.get(j).y);
+                                shapeRenderer.line(corners.get(i).x / 4, corners.get(i).y / 4, corners.get(j).x / 4, corners.get(j).y / 4);
                             }
                         }
 
@@ -259,7 +267,7 @@ public class RenderProcessor {
         float originalWidth = sprite.getWidth();
         float originalHeight = sprite.getHeight();
         float newHeight;
-        
+
         if (resizable == true) {
             newHeight = (originalHeight / originalWidth) * width;
         } else {
@@ -301,7 +309,7 @@ public class RenderProcessor {
 
         sprite.draw(batch);
     }
-    
+
     private void addSprites() {
         Array<TextureAtlas.AtlasRegion> regions = textureAtlas.getRegions();
 
@@ -323,12 +331,12 @@ public class RenderProcessor {
     public void resize(int width, int height) {
         batch.setProjectionMatrix(cam.combined);
     }
-    
+
     public void dispose() {
         batch.dispose();
         textureAtlas.dispose();
         animationTextureAtlas.dispose();
         shapeRenderer.dispose();
     }
-    
+
 }

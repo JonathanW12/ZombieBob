@@ -1,5 +1,6 @@
 package dk.sdu.mmmi.cbse.common.data;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import dk.sdu.mmmi.cbse.commonlevel.LevelInformation;
 import dk.sdu.mmmi.cbse.common.events.Event;
 import java.util.ArrayList;
@@ -15,6 +16,30 @@ public class GameData {
     private final MouseMovement mouse = new MouseMovement();
     private List<Event> events = new CopyOnWriteArrayList<>();
     private static LevelInformation levelInformation;
+    private float camPosX;
+    private float camPosY;
+
+    public float getCamPosX() {
+        return camPosX;
+    }
+
+    public void setCamPosX(float camPosX) {
+        this.camPosX = camPosX;
+    }
+
+    public float getCamPosY() {
+        return camPosY;
+    }
+
+    public void setCamPosY(float camPosY) {
+        this.camPosY = camPosY;
+    }
+
+
+
+
+
+
 
     public void addEvent(Event e) {
         events.add(e);

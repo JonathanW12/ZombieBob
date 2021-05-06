@@ -126,6 +126,9 @@ public class LootingProcessingSystem implements IEntityProcessingService {
 
                                                     //combat part has the current weapon to be the weapon on the ground. Set this to be the looted weapon.
                                                     combatPart.setCurrentWeapon(item.getKey());
+                                                    
+                                                    // Remove item from spawn
+                                                    world.getItemSpawnByCurrentItem(combatPart.getCurrentWeapon()).removeCurrentItem();
                                                 }
                                             } else {
                                                 //add to inventory, and share position with collector. Item is no longer lootable.
@@ -136,11 +139,13 @@ public class LootingProcessingSystem implements IEntityProcessingService {
                                                 CombatPart combatPart = ((CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey()));
                                                 if (combatPart != null) {
                                                     combatPart.setCurrentWeapon(item.getKey());
+                                                    // Remove item from spawn
+                                                    world.getItemSpawnByCurrentItem(combatPart.getCurrentWeapon()).removeCurrentItem();
                                                 }
                                             }
                                         }
                                     }
-                                } //
+                                }
                             }
                         }
                     }

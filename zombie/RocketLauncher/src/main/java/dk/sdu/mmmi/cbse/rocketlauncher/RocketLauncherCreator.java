@@ -4,20 +4,21 @@ import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
+import dk.sdu.mmmi.cbse.common.data.Position;
+import java.util.UUID;
 
 public class RocketLauncherCreator {
 
     private static final RocketLauncherData rocketLauncherData = RocketLauncherData.getInstance();
 
-
-    public void spawnRocketLauncher(GameData gameData, World world) {
+    public UUID spawnRocketLauncher(Position position, GameData gameData, World world) {
         Entity rocketLauncher = RocketLauncherCreator.scaffoldGun(world);
 
         VisualPart visualPart = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(rocketLauncher.getUUID());
         visualPart.setIsVisible(true);
 
-        float spawnX = gameData.getDisplayWidth()/3;
-        float spawnY = gameData.getDisplayHeight()/2;
+        float spawnX = position.getX();
+        float spawnY = position.getY();
         float radians = 3.1415f / 2;
 
         PositionPart positionPart = new PositionPart(spawnX, spawnY, radians);
@@ -26,6 +27,8 @@ public class RocketLauncherCreator {
         world.addtoEntityPartMap(new LootablePart(), rocketLauncher);
 
         RocketLauncherProcessor.addToProcessingList(rocketLauncher);
+        
+        return rocketLauncher.getUUID();
     }
 
     protected static Entity scaffoldGun(World world) {

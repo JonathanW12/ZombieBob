@@ -10,6 +10,8 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/AudioSystem/pom.xml" />
+        <option value="$PROJECT_DIR$/RocketLauncher/pom.xml" />
         <option value="$PROJECT_DIR$/SpiderBoss/pom.xml" />
         <option value="$PROJECT_DIR$/Zombie/pom.xml" />
       </set>
