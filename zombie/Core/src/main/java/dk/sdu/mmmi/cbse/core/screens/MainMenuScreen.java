@@ -2,92 +2,51 @@ package dk.sdu.mmmi.cbse.core.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
-import dk.sdu.mmmi.cbse.common.data.GameData;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.core.main.ZombieBobGame;
 
-public class MainMenuScreen implements Screen {
+public class MainMenuScreen extends MenuScreenTemplate implements Screen {
     
-    private final ZombieBobGame game;
-    private GameData gameData;
-    private Stage stage;
-    private Skin skin;
+    private BitmapFont title;
+    private SpriteBatch secondaryBatch; // Sprite batch for non-actors
     
     public MainMenuScreen(ZombieBobGame game) {
-        this.game = game;
-        gameData = game.getGameData();
-        stage = new Stage(new StretchViewport(
-            gameData.getDisplayWidth(),
-            gameData.getDisplayHeight()
-        ));
+        super(game);
+        secondaryBatch = new SpriteBatch();
         
-        skin = new Skin(getSkinJSON());
         setupUI();
     }
     
-    private FileHandle getSkinJSON() {
-        FileHandle filehandle;
-        String osName = System.getProperty("os.name");
-        if (osName.startsWith("Windows")) {
-            filehandle = new FileHandle("../../skin/uiskin.json");
-        } else {
-            filehandle = new FileHandle("./skin/uiskin.json");
-        }
-        
-        return filehandle;
-    }
-    
     private void setupUI() {
-        Label title;
-        title = new Label("ZombieBob", skin, "title");
-        title.setFontScale(1);
-        float titleWidth = title.getWidth();
-        title.setX(stage.getWidth() / 2 - titleWidth / 2);
-        title.setY(stage.getHeight() - 150);
-        stage.addActor(title);
-        
-        TextButton test = new TextButton("Test", skin);
-        stage.addActor(test);
+        title = getTitleFont();
     }
     
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0.149f, 0.133f, 0.133f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act(delta);
-        stage.draw();
+        super.render(delta);
         
-        if (gameData.getKeys().isPressed(GameKeys.ESCAPE)) {
+        secondaryBatch.begin();
+        
+        float estimatedTitleWidth = 625;
+        title.setColor(0.541f, 0.011f, 0.011f, 1);
+        title.draw(
+            secondaryBatch,
+            "ZombieBob",
+            getStage().getWidth() / 2 - estimatedTitleWidth / 2,
+            getStage().getHeight() - 150
+        );
+        
+        secondaryBatch.end();
+        
+        update();
+    }
+    
+    private void update() {
+        if (getGameData().getKeys().isPressed(GameKeys.ESCAPE)) {
             Gdx.app.exit();
         }
     }
     
-     @Override
-    public void show() {
-
-    }
-    
-    @Override
-    public void hide() { }
-    
-    @Override
-    public void pause() { }
-
-    @Override
-    public void resume() { }
-    
-    @Override
-    public void resize(int width, int height) {
-    }
-    
-    @Override
-    public void dispose() {
-    }
 }
