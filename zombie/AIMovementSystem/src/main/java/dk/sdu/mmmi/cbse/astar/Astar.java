@@ -38,41 +38,43 @@ public class Astar implements IEntityProcessingService {
     @Override
     public void process(GameData gameData, World world) {
         if (world.getMapByPart(AiMovementPart.class.getSimpleName()) != null && world.getMapByPart(PlayerPart.class.getSimpleName()) != null) {
-            UUID playerUUID = (UUID) world.getMapByPart(PlayerPart.class.getSimpleName()).keySet().toArray()[0];
-            PositionPart playerPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(playerUUID);
+            if (world.getMapByPart(PlayerPart.class.getSimpleName()).keySet().toArray().length > 0) {
+                UUID playerUUID = (UUID) world.getMapByPart(PlayerPart.class.getSimpleName()).keySet().toArray()[0];
+                PositionPart playerPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(playerUUID);
 
-            for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(AiMovementPart.class.getSimpleName()).entrySet()) {
-                AiMovementPart aiPart = (AiMovementPart) entry.getValue();
-                long currentTime = System.currentTimeMillis();
-                
-                if (aiPart.getLevel() < 5 && (currentTime > aiPart.getLastUpdate() + aiPart.getDelay()) && entry.getKey() != playerUUID) {
-                    aiPart.resetDelay();
-                    PositionPart positionPart = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(entry.getKey());
-                    MovingPart movingPart = (MovingPart) world.getMapByPart(MovingPart.class.getSimpleName()).get(entry.getKey());
-                    currentNode = getCurrentNode(gameData, positionPart);
-                    goalNode = getGoalNode(gameData, world);
-                    
-                    // Handle nodes being null
-                    if (currentNode != null && goalNode != null) {
-                        // If player is in same tile, switch to simple AI
-                        if (currentNode.equals(goalNode)) {
-                            chasePlayerInTile(positionPart, movingPart, world);
-                        } else {
-                            findPlayerPath(gameData, world, entry.getKey());                   
-                            if (path.size() > 0) {
-                                Node node = path.get(path.size() - 1);
-                                float newDirection = (float) Math.atan2(
-                                    node.getY() - positionPart.getY(),
-                                    node.getX() - positionPart.getX()
-                                );
-                                positionPart.setRadians(newDirection);
-                                movingPart.setUp(true);
+                for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(AiMovementPart.class.getSimpleName()).entrySet()) {
+                    AiMovementPart aiPart = (AiMovementPart) entry.getValue();
+                    long currentTime = System.currentTimeMillis();
+
+                    if (aiPart.getLevel() < 5 && (currentTime > aiPart.getLastUpdate() + aiPart.getDelay()) && entry.getKey() != playerUUID) {
+                        aiPart.resetDelay();
+                        PositionPart positionPart = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(entry.getKey());
+                        MovingPart movingPart = (MovingPart) world.getMapByPart(MovingPart.class.getSimpleName()).get(entry.getKey());
+                        currentNode = getCurrentNode(gameData, positionPart);
+                        goalNode = getGoalNode(gameData, world);
+
+                        // Handle nodes being null
+                        if (currentNode != null && goalNode != null) {
+                            // If player is in same tile, switch to simple AI
+                            if (currentNode.equals(goalNode)) {
+                                chasePlayerInTile(positionPart, movingPart, world);
                             } else {
-                                movingPart.setUp(false);
+                                findPlayerPath(gameData, world, entry.getKey());                   
+                                if (path.size() > 0) {
+                                    Node node = path.get(path.size() - 1);
+                                    float newDirection = (float) Math.atan2(
+                                        node.getY() - positionPart.getY(),
+                                        node.getX() - positionPart.getX()
+                                    );
+                                    positionPart.setRadians(newDirection);
+                                    movingPart.setUp(true);
+                                } else {
+                                    movingPart.setUp(false);
+                                }
                             }
-                        }
-                    }  
-                }                
+                        }  
+                    }                
+                }
             }
         }
     }
