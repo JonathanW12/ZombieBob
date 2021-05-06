@@ -189,10 +189,10 @@ public class RenderProcessor {
 
         clearSortedVisualList();
 
-
+    if (gameData.getKeys().isDown(GameKeys.SPACE)) {
         drawHitboxes();
         //drawTiles();
-
+    }
     }
 
     private void drawHitboxes() {
