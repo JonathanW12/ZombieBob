@@ -12,8 +12,6 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
-import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
-import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.core.coreprocessors.AudioProcessor;
 import dk.sdu.mmmi.cbse.core.coreprocessors.RenderProcessor;
@@ -29,7 +27,7 @@ public class GameScreen implements Screen{
     private final World world;
     private OrthographicCamera cam;
     private ExtendViewport viewport;
-    private RenderProcessor renderProcessor;
+    private final RenderProcessor renderProcessor;
     private final GameLookup gameLookup;
     private Vector3 mousePosition;
     
@@ -79,14 +77,14 @@ public class GameScreen implements Screen{
         gameData.setCamPosY(cam.position.y);
 
         // Update
-        for (IEntityProcessingService entityProcessorService : gameLookup.getEntityProcessingServices()) {
+        gameLookup.getEntityProcessingServices().forEach(entityProcessorService -> {
             entityProcessorService.process(gameData, world);
-        }
+        });
 
         // Post Update
-        for (IPostEntityProcessingService postEntityProcessorService : gameLookup.getPostEntityProcessingServices()) {
+        gameLookup.getPostEntityProcessingServices().forEach(postEntityProcessorService -> {
             postEntityProcessorService.process(gameData, world);
-        }
+        });
         
         game.getAudioProcessor().processAudio();
         

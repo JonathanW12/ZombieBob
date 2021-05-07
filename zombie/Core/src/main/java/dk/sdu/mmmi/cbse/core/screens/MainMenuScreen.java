@@ -20,10 +20,10 @@ import java.util.Map;
 public class MainMenuScreen extends MenuScreenTemplate implements Screen {
     
     private BitmapFont title;
-    private SpriteBatch secondaryBatch; // Sprite batch for non-actors
-    private GameLookup gameLookup;
+    private final SpriteBatch secondaryBatch; // Sprite batch for non-actors
+    private final GameLookup gameLookup;
     private int currentlyDisplayedMap;
-    private Map<String, String> allMaps;
+    private final Map<String, String> allMaps;
     private String currentMapName;
     private Texture currentMapThumbnail;
     
@@ -82,9 +82,9 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
     
     private void setupMaps() {
         Map<String, String> mapFiles = gameLookup.getMapLookup().findAllMaps();
-        for (Map.Entry<String, String> mapFile: mapFiles.entrySet()) {
+        mapFiles.entrySet().forEach(mapFile -> {
             allMaps.put(mapFile.getKey(), mapFile.getValue());
-        }
+        });
     }
     
     private void setMap() {

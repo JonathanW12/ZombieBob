@@ -31,15 +31,15 @@ import dk.sdu.mmmi.cbse.core.managers.MouseInputProcessor;
 public class MenuScreenTemplate implements Screen {
     
     private final ZombieBobGame game;
-    private GameData gameData;
-    private World world;
-    private Stage stage;
-    private Skin skin;
-    private BitmapFont titleFont;
+    private final GameData gameData;
+    private final World world;
+    private final Stage stage;
+    private final Skin skin;
+    private final BitmapFont titleFont;
     
     // Stage actors
     private Image musicButton, soundButton;
-    private Group hoverButtonGroup;
+    private final Group hoverButtonGroup;
     
     public MenuScreenTemplate(ZombieBobGame game) {
         this.game = game;
@@ -182,12 +182,13 @@ public class MenuScreenTemplate implements Screen {
         float mouseX = Gdx.input.getX();
         float mouseY = stage.getHeight() - Gdx.input.getY();
         
-        if (mouseX >= actor.getX() && mouseX <= actor.getX() + actor.getWidth() &&
-            mouseY >= actor.getY() && mouseY <= actor.getY() + actor.getHeight()) {
-            return true;
-        } else {
-            return false;
-        }
+        return (
+            mouseX >= actor.getX() &&
+            mouseX <= actor.getX() + actor.getWidth() &&
+            mouseY >= actor.getY() &&
+            mouseY <= actor.getY() + actor.getHeight()
+        ) ;
+
     }
     
     public ZombieBobGame getGame() {
