@@ -1,18 +1,25 @@
 package dk.sdu.mmmi.cbse.core.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import dk.sdu.mmmi.cbse.common.data.GameData;
+import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.core.coreprocessors.AudioProcessor;
 import dk.sdu.mmmi.cbse.core.main.ZombieBobGame;
+import dk.sdu.mmmi.cbse.core.managers.GameInputProcessor;
+import dk.sdu.mmmi.cbse.core.managers.MouseInputProcessor;
 
 public class MenuScreenTemplate implements Screen {
     
@@ -96,12 +103,17 @@ public class MenuScreenTemplate implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(delta);
         stage.draw();
-        
+
         update();
+        gameData.getKeys().update();
     }
     
     private void update() {
         game.getAudioProcessor().processAudio();
+        
+        if (gameData.getKeys().isPressed(GameKeys.ESCAPE)) {
+            Gdx.app.exit();
+        }
     }
     
     public ZombieBobGame getGame() {
@@ -130,11 +142,28 @@ public class MenuScreenTemplate implements Screen {
     
     @Override
     public void show() { 
+        setupInputProcessors();
+        setupCursor();
         game.getAudioProcessor().setMusicState(AudioProcessor.MusicState.MENUMUSIC);
     }
     
     @Override
     public void hide() { }
+    
+    private void setupCursor() {
+        Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
+    }
+    
+    private void setupInputProcessors() {
+        InputProcessor keyInputProcessor = new GameInputProcessor(gameData);
+        InputProcessor mouseInputProcessor = new MouseInputProcessor(gameData, (OrthographicCamera) stage.getCamera());
+        InputMultiplexer inputMultiplexer = new InputMultiplexer();
+
+        inputMultiplexer.addProcessor(keyInputProcessor);
+        inputMultiplexer.addProcessor(mouseInputProcessor);
+
+        Gdx.input.setInputProcessor(inputMultiplexer); 
+    }
     
     @Override
     public void pause() { }

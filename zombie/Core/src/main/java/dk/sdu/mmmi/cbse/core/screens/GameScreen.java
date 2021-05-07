@@ -67,8 +67,9 @@ public class GameScreen implements Screen{
     @Override
     public void render(float delta) {
         renderProcessor.processRendering(gameData);
-        update();
         renderProcessor.draw();
+
+        update();
         gameData.getKeys().update();
     }
 
@@ -88,19 +89,21 @@ public class GameScreen implements Screen{
         
         game.getAudioProcessor().processAudio();
         
-        // Quit if escape is clicked
-        if (gameData.getKeys().isPressed(GameKeys.ESCAPE)) {
-            Gdx.app.exit();
-        }
-        
         // Update mousePosition every gameloop even if no event is fired
         mousePosition = cam.unproject(new Vector3(mousePosition.set(Gdx.input.getX(),Gdx.input.getY(),0)));
         gameData.getMouse().setMousePosition(mousePosition.x,mousePosition.y);
+        
+        // Pause if escape is clicked
+        if (gameData.getKeys().isPressed(GameKeys.ESCAPE)) {
+            game.setScreen(new MainMenuScreen(game));
+        }
 
     }
     
     @Override
     public void show() {
+        setupInputProcessors();
+        setupCursorImage();
         game.getAudioProcessor().setMusicState(AudioProcessor.MusicState.GAMEMUSIC);
     }
     
@@ -151,4 +154,5 @@ public class GameScreen implements Screen{
 
         Gdx.input.setInputProcessor(inputMultiplexer); 
     }
+    
 }
