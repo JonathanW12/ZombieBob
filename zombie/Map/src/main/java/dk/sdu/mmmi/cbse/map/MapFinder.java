@@ -12,16 +12,16 @@ public class MapFinder implements IMapLookup {
     private static FileHandle[] filehandles;
     private FileHandle[] mapThumbnailFiles;
     
-    public Map<String, FileHandle> findAllMaps() {
+    public Map<String, String> findAllMaps() {
         FileHandle[] mapFiles = getMapFiles();
-        Map<String, FileHandle> resultMap = new HashMap<>();
+        Map<String, String> resultMap = new HashMap<>();
         
         for (FileHandle mapFile: mapFiles) {
             String mapName = mapFile.nameWithoutExtension();
-            FileHandle mapThumbnailFile = getMapThumbnail(mapName);
+            String mapThumbnailFileName = getMapThumbnail(mapName);
             
-            if (mapThumbnailFile != null) {
-                resultMap.put(mapName, mapThumbnailFile);
+            if (mapThumbnailFileName != null) {
+                resultMap.put(mapName, mapThumbnailFileName);
             }
         }
         
@@ -62,12 +62,12 @@ public class MapFinder implements IMapLookup {
         return mapThumbnailFiles;
     }
     
-    private FileHandle getMapThumbnail(String mapName) {
+    private String getMapThumbnail(String mapName) {
         getMapThumbnails();
         
         for (FileHandle file: mapThumbnailFiles) {
             if (file.nameWithoutExtension().equals(mapName)) {
-                return file;
+                return file.name();
             }
         }
               

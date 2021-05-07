@@ -108,7 +108,7 @@ public class MenuScreenTemplate implements Screen {
         gameData.getKeys().update();
     }
     
-    private void update() {
+    public void update() {
         game.getAudioProcessor().processAudio();
         
         if (gameData.getKeys().isPressed(GameKeys.ESCAPE)) {
@@ -150,11 +150,11 @@ public class MenuScreenTemplate implements Screen {
     @Override
     public void hide() { }
     
-    private void setupCursor() {
+    public void setupCursor() {
         Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
     }
     
-    private void setupInputProcessors() {
+    public void setupInputProcessors() {
         InputProcessor keyInputProcessor = new GameInputProcessor(gameData);
         InputProcessor mouseInputProcessor = new MouseInputProcessor(gameData, (OrthographicCamera) stage.getCamera());
         InputMultiplexer inputMultiplexer = new InputMultiplexer();

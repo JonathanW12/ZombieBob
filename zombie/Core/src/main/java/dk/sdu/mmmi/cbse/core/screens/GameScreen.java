@@ -73,7 +73,7 @@ public class GameScreen implements Screen{
         gameData.getKeys().update();
     }
 
-    private void update() {
+    private void update() {        
         gameData.setCamPosX(cam.position.x);
         gameData.setCamPosY(cam.position.y);
 

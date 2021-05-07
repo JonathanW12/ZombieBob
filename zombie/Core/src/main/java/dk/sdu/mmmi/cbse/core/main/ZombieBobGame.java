@@ -6,7 +6,7 @@ import com.badlogic.gdx.Gdx;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.core.coreprocessors.AudioProcessor;
-import dk.sdu.mmmi.cbse.core.screens.GameScreen;
+import dk.sdu.mmmi.cbse.core.screens.MainMenuScreen;
 
 public class ZombieBobGame extends Game implements ApplicationListener {
     
@@ -24,7 +24,7 @@ public class ZombieBobGame extends Game implements ApplicationListener {
         
         audioProcessor = new AudioProcessor(world);
 
-        setScreen(new GameScreen(this));
+        setScreen(new MainMenuScreen(this));
     }
     
     public GameData getGameData() {
