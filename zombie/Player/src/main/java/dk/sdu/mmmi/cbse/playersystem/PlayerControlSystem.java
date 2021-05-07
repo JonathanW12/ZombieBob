@@ -4,6 +4,7 @@ import com.badlogic.gdx.Input;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.GameKeys;
+import dk.sdu.mmmi.cbse.common.data.MouseMovement;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.AnimationPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.CombatPart;
@@ -39,7 +40,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 CollectorPart collectorPart = (CollectorPart) world.getMapByPart(CollectorPart.class.getSimpleName()).get(entry.getKey());
                 ColliderPart colliderPart = (ColliderPart) world.getMapByPart(ColliderPart.class.getSimpleName()).get(entry.getKey());
 
-                combatPart.setAttacking(gameData.getMouse().isLeftClick());
+                combatPart.setAttacking(gameData.getMouse().isDown(MouseMovement.LEFTCLICK));
                 if (world.getMapByPart(WeaponPart.class.getSimpleName()) != null && combatPart.getCurrentWeapon() != null){
                     weaponPart = (WeaponPart) world.getMapByPart(WeaponPart.class.getSimpleName()).get(combatPart.getCurrentWeapon());
                 }
@@ -47,16 +48,6 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 // Update player direction
                 updateDirection(positionPart, gameData);
 
-                if (gameData.getMouse().isRightClick()){
-                    //Inventory testing. to be deleted
-                    if(weaponInventoryPart.getInventory().size()>0){
-                    UUID removeWeaponId = weaponInventoryPart.getInventory().get(0);
-                    weaponInventoryPart.removeWeapon(removeWeaponId);
-                    }
-                }
-               // bananaTest(world,gameData,weaponInventoryPart);
-                if (gameData.getMouse().isMiddleClick()){
-                }
                 if (gameData.getMouse().getScroll() == -1){
                     gameData.getMouse().setScroll(0);
                 }

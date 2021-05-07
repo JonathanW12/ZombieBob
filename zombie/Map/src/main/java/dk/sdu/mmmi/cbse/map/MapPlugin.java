@@ -26,7 +26,7 @@ public class MapPlugin implements IGamePluginService{
         this.world = world;
         tiles = Tiles.getInstance(gameData).getTiles();    
         createBackground(gameData,world);
-        generateMapFromFile("map1", world);
+        generateMapFromFile("pain", world);
     }
     
     private void generateMapFromFile(String mapName, World world) {

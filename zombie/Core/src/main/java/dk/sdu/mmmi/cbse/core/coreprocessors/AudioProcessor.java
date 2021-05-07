@@ -22,6 +22,8 @@ public class AudioProcessor {
     private final HashMap<String, Sound> sounds;
     private final Music menuMusic;
     private final Music gameMusic;
+    private boolean musicOn;
+    private boolean soundOn;
     private MusicState currentMusicState;
     
     public AudioProcessor(World world) {
@@ -29,6 +31,9 @@ public class AudioProcessor {
         sounds = new HashMap<>();
         menuMusic = getMusic("menu-music.mp3");
         gameMusic = getMusic("game-music.mp3");
+        
+        musicOn = true;
+        soundOn = true;
         
         menuMusic.setLooping(true);
         gameMusic.setLooping(true);
@@ -39,30 +44,60 @@ public class AudioProcessor {
     }
     
     public void processAudio() {
-        if (world.getMapByPart(AudioPart.class.getSimpleName()) != null) {
-            for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart(AudioPart.class.getSimpleName()).entrySet()) { 
-                AudioPart audioPart = (AudioPart) entry.getValue();
+        processSound();
+        processMusic();
+    }
+    
+    private void processSound() {
+        if (soundOn) {
+            if (world.getMapByPart(AudioPart.class.getSimpleName()) != null) {
+                for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart(AudioPart.class.getSimpleName()).entrySet()) { 
+                    AudioPart audioPart = (AudioPart) entry.getValue();
 
-                if (audioPart.getIsPlaying()) {
-                    Sound sound = getSound(audioPart.getFileName());
-                    audioPart.setIsPlaying(false);
-                    long soundId = sound.play(0.1f);
-                    sound.setLooping(soundId, false);
+                    if (audioPart.getIsPlaying()) {
+                        Sound sound = getSound(audioPart.getFileName());
+                        audioPart.setIsPlaying(false);
+                        long soundId = sound.play(0.1f);
+                        sound.setLooping(soundId, false);
+                    }
                 }
             }
         }
-        
-        if (currentMusicState == MusicState.MENUMUSIC) {
-            gameMusic.stop();      
-            menuMusic.play();
-        } else if (currentMusicState == MusicState.GAMEMUSIC) {
+    }
+    
+    private void processMusic() {
+        if (musicOn) {
+            if (currentMusicState == MusicState.MENUMUSIC) {
+                gameMusic.stop();      
+                menuMusic.play();
+            } else if (currentMusicState == MusicState.GAMEMUSIC) {
+                menuMusic.stop();
+                gameMusic.play();
+            }
+        } else {
+            gameMusic.stop(); 
             menuMusic.stop();
-            gameMusic.play();
         }
     }
     
     public void setMusicState(MusicState musicState) {
         this.currentMusicState = musicState;
+    }
+    
+    public boolean getMusicOn() {
+        return musicOn;
+    }
+    
+    public boolean getSoundOn() {
+        return soundOn;
+    }
+    
+    public void setMusicOn(boolean musicOn) {
+        this.musicOn = musicOn;
+    }
+    
+    public void setSoundOn(boolean  soundOn) {
+        this.soundOn = soundOn;
     }
     
     private Sound getSound(String fileName) {        

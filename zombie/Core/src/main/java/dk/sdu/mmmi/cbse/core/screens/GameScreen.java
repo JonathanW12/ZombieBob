@@ -71,6 +71,7 @@ public class GameScreen implements Screen{
 
         update();
         gameData.getKeys().update();
+        gameData.getMouse().update();
     }
 
     private void update() {        

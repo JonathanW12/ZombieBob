@@ -29,7 +29,7 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
     
     // Scene actors
     private Label mapLabel;
-    private Image mapImage;
+    private Image mapImage, nextMapButton, prevMapButton;
     
     public MainMenuScreen(ZombieBobGame game) {
         super(game);
@@ -45,13 +45,15 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
     private void setupUI() {
         title = getTitleFont();
         setupMapUI();
+        addNextMapButton();
+        addPrevMapButton();
     }
     
     private void setupMapUI() {
         float thumbnailWidth = 800;
         float thumbnailHeight = 450; 
         float labelWidth = 275;
-        float lebelHeight = 75;
+        float labelHeight = 75;
         
         // Create map thumbnail image
         mapImage = new Image();
@@ -68,13 +70,13 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
             getStage().getWidth() / 2 - labelWidth / 2,
             100,
             labelWidth,
-            lebelHeight
+            labelHeight
         );
         mapLabel.setAlignment(Align.center);
         
         // Add actors to stage and set their values
         getStage().addActor(mapImage);
-        getStage().addActor(mapLabel);
+        getHoverButtonGroup().addActor(mapLabel);
         setMap();
     }
     
@@ -104,6 +106,26 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
     
     private String getCapitalizedMapName() {
         return (currentMapName.substring(0,1).toUpperCase()) + currentMapName.substring(1);
+    }
+    
+    private void addNextMapButton() {      
+        nextMapButton = new Image(getButtonTexture("right-nav-button.png"));
+        nextMapButton.setPosition(
+            getStage().getWidth() / 2 + 150,
+            100
+        );
+        getHoverButtonGroup().addActor(nextMapButton);
+    }
+    
+    private void addPrevMapButton() {
+        float buttonWidth = 55;
+        
+        prevMapButton = new Image(getButtonTexture("left-nav-button.png"));
+        prevMapButton.setPosition(
+            getStage().getWidth() / 2 - 150 - buttonWidth,
+            100
+        );
+        getHoverButtonGroup().addActor(prevMapButton);
     }
     
     public void nextMap() {

@@ -8,13 +8,20 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.GameKeys;
+import dk.sdu.mmmi.cbse.common.data.MouseMovement;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.core.coreprocessors.AudioProcessor;
 import dk.sdu.mmmi.cbse.core.main.ZombieBobGame;
@@ -31,7 +38,8 @@ public class MenuScreenTemplate implements Screen {
     private BitmapFont titleFont;
     
     // Stage actors
-    private Button musicButton, soundButton;
+    private Image musicButton, soundButton;
+    private Group hoverButtonGroup;
     
     public MenuScreenTemplate(ZombieBobGame game) {
         this.game = game;
@@ -45,7 +53,13 @@ public class MenuScreenTemplate implements Screen {
         skin = new Skin(getSkinFile());
         titleFont = getTitleFontFile();
         
+        hoverButtonGroup = new Group();
+        
         setupUI();
+    }
+    
+    public Group getHoverButtonGroup() {
+        return hoverButtonGroup;
     }
     
     private FileHandle getSkinFile() {
@@ -75,26 +89,38 @@ public class MenuScreenTemplate implements Screen {
     private void setupUI() {
         addMusicButton();
         addSoundButton();
+        
+        stage.addActor(hoverButtonGroup);
     }
     
     private void addMusicButton() {
-        musicButton = new Button(skin, "music");
-        musicButton.setChecked(true);
+        musicButton = new Image(getButtonTexture(getMusicButtonIcon()));
         musicButton.setPosition(
-            stage.getWidth() - 60,
-            stage.getHeight() - 60
+            stage.getWidth() - 160,
+            stage.getHeight() - 80
         );
-        stage.addActor(musicButton);
+        hoverButtonGroup.addActor(musicButton);
     }
     
     private void addSoundButton() {
-        soundButton = new Button(skin, "sound");
-        soundButton.setChecked(true);
+        soundButton = new Image(getButtonTexture(getSoundButtonIcon()));
         soundButton.setPosition(
-            stage.getWidth() - 115,
-            stage.getHeight() - 60
+            stage.getWidth() - 85,
+            stage.getHeight() - 80
         );
-        stage.addActor(soundButton);
+        hoverButtonGroup.addActor(soundButton);
+    }
+    
+    public Texture getButtonTexture(String fileName) {
+        Texture buttonTexture;
+        
+        try {
+            buttonTexture = new Texture(Gdx.files.local("raw-assets/" + fileName));
+        } catch (GdxRuntimeException e) {
+            buttonTexture = new Texture(Gdx.files.local("../../raw-assets/" + fileName));
+        }
+        
+        return buttonTexture;
     }
     
     @Override
@@ -106,13 +132,61 @@ public class MenuScreenTemplate implements Screen {
 
         update();
         gameData.getKeys().update();
+        gameData.getMouse().update();
     }
     
     public void update() {
-        game.getAudioProcessor().processAudio();
-        
         if (gameData.getKeys().isPressed(GameKeys.ESCAPE)) {
             Gdx.app.exit();
+        }
+        
+        game.getAudioProcessor().processAudio();
+        handleAudioButtons();
+    }
+    
+    private void handleAudioButtons() {
+        // Handle music button
+        if (isMouseOnActor(musicButton) && gameData.getMouse().isPressed(MouseMovement.LEFTCLICK)) {
+            game.getAudioProcessor().setMusicOn(!game.getAudioProcessor().getMusicOn());
+            musicButton.setDrawable(new SpriteDrawable(new Sprite(getButtonTexture(getMusicButtonIcon()))));
+        }
+       
+        // Handle sound button
+        if (isMouseOnActor(soundButton) && gameData.getMouse().isPressed(MouseMovement.LEFTCLICK)) {
+            game.getAudioProcessor().setSoundOn(!game.getAudioProcessor().getSoundOn());
+            soundButton.setDrawable(new SpriteDrawable(new Sprite(getButtonTexture(getSoundButtonIcon()))));
+        }
+    }
+    
+    private String getMusicButtonIcon() {
+        boolean soundOn = game.getAudioProcessor().getMusicOn();
+        
+        if (soundOn) {
+            return "music-button.png";
+        } else {
+            return "music-button-disabled.png";
+        }
+    }
+    
+    private String getSoundButtonIcon() {
+        boolean soundOn = game.getAudioProcessor().getSoundOn();
+        
+        if (soundOn) {
+            return "sound-button.png";
+        } else {
+            return "sound-button-disabled.png";
+        }
+    }
+    
+    private boolean isMouseOnActor(Actor actor) {
+        float mouseX = Gdx.input.getX();
+        float mouseY = stage.getHeight() - Gdx.input.getY();
+        
+        if (mouseX >= actor.getX() && mouseX <= actor.getX() + actor.getWidth() &&
+            mouseY >= actor.getY() && mouseY <= actor.getY() + actor.getHeight()) {
+            return true;
+        } else {
+            return false;
         }
     }
     
@@ -142,9 +216,9 @@ public class MenuScreenTemplate implements Screen {
     
     @Override
     public void show() { 
+        game.getAudioProcessor().setMusicState(AudioProcessor.MusicState.MENUMUSIC);
         setupInputProcessors();
         setupCursor();
-        game.getAudioProcessor().setMusicState(AudioProcessor.MusicState.MENUMUSIC);
     }
     
     @Override
@@ -161,6 +235,7 @@ public class MenuScreenTemplate implements Screen {
 
         inputMultiplexer.addProcessor(keyInputProcessor);
         inputMultiplexer.addProcessor(mouseInputProcessor);
+        inputMultiplexer.addProcessor(stage);
 
         Gdx.input.setInputProcessor(inputMultiplexer); 
     }
@@ -175,6 +250,8 @@ public class MenuScreenTemplate implements Screen {
     public void resize(int width, int height) { }
     
     @Override
-    public void dispose() { }
+    public void dispose() {    
+        stage.dispose();
+    }
     
 }
