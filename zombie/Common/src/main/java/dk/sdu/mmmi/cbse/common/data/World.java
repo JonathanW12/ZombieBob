@@ -1,8 +1,6 @@
 package dk.sdu.mmmi.cbse.common.data;
 
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.LootablePart;
-import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -51,6 +49,11 @@ public class World {
         if (entityPartMap.containsKey(entityPartNameKey)) { 
             entityPartMap.remove(entityPartNameKey, entityUUID);
         }
+    }
+    
+    public void clearEntityMaps() {
+        entityMap.clear();
+        entityPartMap.clear();
     }
     
     public void getMapForSpecificPart(){

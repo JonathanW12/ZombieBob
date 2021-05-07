@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import dk.sdu.mmmi.cbse.common.data.GameKeys;
+import dk.sdu.mmmi.cbse.common.data.MouseMovement;
 import dk.sdu.mmmi.cbse.core.main.GameLookup;
 import dk.sdu.mmmi.cbse.core.main.ZombieBobGame;
 import java.util.HashMap;
@@ -77,7 +78,7 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
         // Add actors to stage and set their values
         getStage().addActor(mapImage);
         getHoverButtonGroup().addActor(mapLabel);
-        setMap();
+        setDisplayedMap();
     }
     
     private void setupMaps() {
@@ -87,7 +88,7 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
         });
     }
     
-    private void setMap() {
+    private void setDisplayedMap() {
         int mapIndex = currentlyDisplayedMap;
         int currentIndex = 0;
         
@@ -130,12 +131,16 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
     
     public void nextMap() {
         currentlyDisplayedMap = (currentlyDisplayedMap + 1) % allMaps.size();
-        setMap();
+        setDisplayedMap();
     }
     
     public void prevMap() {
-        currentlyDisplayedMap = (currentlyDisplayedMap - 1) % allMaps.size();
-        setMap();
+        currentlyDisplayedMap--;
+        if (currentlyDisplayedMap < 0) {
+            currentlyDisplayedMap = allMaps.size() - 1;
+        }
+
+        setDisplayedMap();
     }
     
     private Texture getMapImageTexture(String fileName) {
@@ -173,9 +178,35 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
     @Override
     public void update() { 
         super.update();
-        
+        handleMapNavButton();
+        handleMapSelectButtons();
+    }
+    
+    private void handleMapNavButton() {
+        // Next map
+        if (isMouseOnActor(nextMapButton) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK)) {
+            nextMap();
+        }
         if (getGameData().getKeys().isPressed(GameKeys.RIGHT)) {
             nextMap();
+        }
+        
+        // Previous map
+        if (isMouseOnActor(prevMapButton) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK)) {
+            prevMap();
+        }
+        if (getGameData().getKeys().isPressed(GameKeys.LEFT)) {
+            prevMap();
+        }
+    }
+    
+    private void handleMapSelectButtons() {
+        if (isMouseOnActor(mapLabel) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK)) {
+            gameLookup.getMapLookup().setMap(currentMapName, getGameData(), getWorld());
+        }
+        
+        if (isMouseOnActor(mapImage) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK)) {
+            gameLookup.getMapLookup().setMap(currentMapName, getGameData(), getWorld());
         }
     }
     

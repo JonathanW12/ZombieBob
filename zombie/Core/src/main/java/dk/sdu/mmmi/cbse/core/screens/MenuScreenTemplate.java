@@ -178,7 +178,7 @@ public class MenuScreenTemplate implements Screen {
         }
     }
     
-    private boolean isMouseOnActor(Actor actor) {
+    public boolean isMouseOnActor(Actor actor) {
         float mouseX = Gdx.input.getX();
         float mouseY = stage.getHeight() - Gdx.input.getY();
         

@@ -1,5 +1,7 @@
 package dk.sdu.mmmi.cbse.common.services;
 
+import dk.sdu.mmmi.cbse.common.data.GameData;
+import dk.sdu.mmmi.cbse.common.data.World;
 import java.util.Map;
 
 public interface IMapLookup {
@@ -10,4 +12,9 @@ public interface IMapLookup {
      * map names and thumbnails
      */
     public Map<String, String> findAllMaps();
+    
+    /**
+     * Sets the current map
+     */
+    public void setMap(String mapName, GameData gameData, World world);
 }

@@ -10,7 +10,6 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.VisualPart;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.StructurePart;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.commontiles.Tile;
-import dk.sdu.mmmi.cbse.commontiles.Tiles;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 
@@ -18,18 +17,15 @@ import org.openide.util.lookup.ServiceProviders;
     @ServiceProvider(service = IGamePluginService.class),})
 public class MapPlugin implements IGamePluginService{
     private final float standardRadians = 3.1415f / 2;
-    private World world;
-    private Tile[][] tiles;
     
     @Override
     public void start(GameData gameData, World world) {
-        this.world = world;
-        tiles = Tiles.getInstance(gameData).getTiles();    
-        createBackground(gameData,world);
-        generateMapFromFile("pain", world);
+        // Do nothing    
     }
     
-    private void generateMapFromFile(String mapName, World world) {
+    public void generateMapFromFile(String mapName, World world, Tile[][] tiles) {
+        resetMap(world);
+        
         FileHandle filehandle;
         String osName = System.getProperty("os.name");
         if (osName.startsWith("Windows")) {
@@ -50,19 +46,19 @@ public class MapPlugin implements IGamePluginService{
                     Tile tile = tiles[lineCount - i][j];
                     
                     if (cells[j].equals("0")) {
-                        placeFloor(tile);
+                        placeFloor(tile, world);
                     } else if (cells[j].equals("1")) {
-                        placeWall(tile);
+                        placeWall(tile, world);
                     } else if (cells[j].equals("2")) {
-                        placeFloor(tile);
-                        placeEnemySpawn(tile);
+                        placeFloor(tile, world);
+                        placeEnemySpawn(tile, world);
                         world.addEnemySpawnPosition(
                             (int) (tile.getX() + tile.getWidth() / 2),
                             (int) (tile.getY() + tile.getHeight() / 2)
                         );
                     } else if (cells[j].equals("3")) {
-                        placeFloor(tile);
-                        placeItemSpawn(tile);
+                        placeFloor(tile, world);
+                        placeItemSpawn(tile, world);
                         world.addItemSpawnPosition(
                             (int) (tile.getX() + tile.getWidth() / 2),
                             (int) (tile.getY() + tile.getHeight() / 2)
@@ -73,7 +69,23 @@ public class MapPlugin implements IGamePluginService{
         }
     }
     
-    private void placeFloor(Tile tile) {
+    private void resetMap(World world) {
+        world.getItemSpawns().clear();
+        world.getEnemySpawnPositions().clear();
+        world.clearEntityMaps();
+    }
+    
+    public void createBackground(GameData gameData, World world){
+        float x = gameData.getDisplayWidth()/2;
+        float y = gameData.getDisplayHeight()/2;
+        
+        Entity background = new Entity();
+        
+        world.addtoEntityPartMap(new PositionPart(x,y,standardRadians), background);
+        world.addtoEntityPartMap(new VisualPart("background_sprite",gameData.getDisplayWidth()+gameData.getDisplayWidth()/2,gameData.getDisplayHeight()+gameData.getDisplayWidth()/2,0),background);
+    }
+    
+    private void placeFloor(Tile tile, World world) {
         Entity floor = new Entity();
             
         world.addtoEntityPartMap(new PositionPart(
@@ -89,7 +101,7 @@ public class MapPlugin implements IGamePluginService{
         ), floor);
     }
     
-    private void placeWall(Tile tile) {
+    private void placeWall(Tile tile, World world) {
         Entity wall = new Entity();
             
         world.addtoEntityPartMap(new PositionPart(
@@ -109,7 +121,7 @@ public class MapPlugin implements IGamePluginService{
         tile.setIsWalkable(false);
     }
     
-    private void placeEnemySpawn(Tile tile) {
+    private void placeEnemySpawn(Tile tile, World world) {
         Entity enemySpawn = new Entity();
         
         world.addtoEntityPartMap(new PositionPart(
@@ -125,7 +137,7 @@ public class MapPlugin implements IGamePluginService{
         ), enemySpawn);
     }
     
-    private void placeItemSpawn(Tile tile) {
+    private void placeItemSpawn(Tile tile, World world) {
         Entity itemSpawn = new Entity();
         
         world.addtoEntityPartMap(new PositionPart(
@@ -141,16 +153,6 @@ public class MapPlugin implements IGamePluginService{
         ), itemSpawn);
         
         world.addtoEntityPartMap(new SpawnerPart(), itemSpawn);
-    }
-    
-    private void createBackground(GameData gameData, World world){
-        float x = gameData.getDisplayWidth()/2;
-        float y = gameData.getDisplayHeight()/2;
-        
-        Entity background = new Entity();
-        
-        world.addtoEntityPartMap(new PositionPart(x,y,standardRadians), background);
-        world.addtoEntityPartMap(new VisualPart("background_sprite",gameData.getDisplayWidth()+gameData.getDisplayWidth()/2,gameData.getDisplayHeight()+gameData.getDisplayWidth()/2,0),background);
     }
    
     @Override
