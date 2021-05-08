@@ -231,7 +231,10 @@ public class MenuScreenTemplate implements Screen {
     
     public void setupInputProcessors() {
         InputProcessor keyInputProcessor = new GameInputProcessor(gameData);
-        InputProcessor mouseInputProcessor = new MouseInputProcessor(gameData, (OrthographicCamera) stage.getCamera());
+        InputProcessor mouseInputProcessor = new MouseInputProcessor(
+            gameData,
+            (OrthographicCamera) stage.getCamera()
+        );
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
 
         inputMultiplexer.addProcessor(keyInputProcessor);

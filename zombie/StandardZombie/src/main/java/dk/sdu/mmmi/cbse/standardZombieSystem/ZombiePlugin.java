@@ -19,8 +19,10 @@ public class ZombiePlugin implements IGamePluginService{
     }
     @Override
     public void stop(GameData gameData, World world) {
-        for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(EnemyPart.class.getSimpleName()).entrySet()){
-            world.removeEntityParts(entry.getKey());
+        if (world.getMapByPart(EnemyPart.class.getSimpleName()) != null) {
+            for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(EnemyPart.class.getSimpleName()).entrySet()){
+                world.removeEntityParts(entry.getKey());
+            }
         }
     }
 }

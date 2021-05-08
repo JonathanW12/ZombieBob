@@ -14,10 +14,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-
 @ServiceProviders(value = {
     @ServiceProvider(service = IEntityProcessingService.class)})
 public class HotbarContolSystem implements IEntityProcessingService {
+
     float radians = 3.1415f / 2;
     int itemPicSize = 38;
     private int activeItemPicSize = 55;
@@ -36,45 +36,43 @@ public class HotbarContolSystem implements IEntityProcessingService {
     private int zombiesKilled = 0;
     private UUID previousWeapon = null;
 
-
     ArrayList<UUID> itemsToBeRemoved = new ArrayList<UUID>();
     //This hashMap: Keys are weapon IDs in the players inventory and values are weapon IDs in the hotbar
-    HashMap<UUID,UUID> excistingItems2 = new HashMap<UUID,UUID>();
-    
+    HashMap<UUID, UUID> excistingItems2 = new HashMap<UUID, UUID>();
+
     @Override
     public void process(GameData gameData, World world) {
-    for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart("PlayerPart").entrySet()){
-        WeaponInventoryPart weaponInventoryPart = (WeaponInventoryPart) world.getMapByPart("WeaponInventoryPart").get(entry.getKey());
-        PositionPart playerPositionPart = (PositionPart) world.getMapByPart("PositionPart").get(entry.getKey());
-        updateHotbarPositionWithItems(world,gameData,playerPositionPart);
-        if(weaponInventoryPart.getInventory()!=null){
-        if(!excistingItems2.isEmpty()){
-            removeItemsNoLongerInInventory(world,weaponInventoryPart);
-            reorganizeHotbarItemPositions(world, weaponInventoryPart);
-            updateActiveWeapon(entry.getKey(), world);
-        }
-        for(UUID id : weaponInventoryPart.getInventory()){
-            addNewItemsToHotbar(world,id,weaponInventoryPart);
+        for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart("PlayerPart").entrySet()) {
+            WeaponInventoryPart weaponInventoryPart = (WeaponInventoryPart) world.getMapByPart("WeaponInventoryPart").get(entry.getKey());
+            PositionPart playerPositionPart = (PositionPart) world.getMapByPart("PositionPart").get(entry.getKey());
+            updateHotbarPositionWithItems(world, gameData, playerPositionPart);
+            if (weaponInventoryPart.getInventory() != null) {
+                if (!excistingItems2.isEmpty()) {
+                    removeItemsNoLongerInInventory(world, weaponInventoryPart);
+                    reorganizeHotbarItemPositions(world, weaponInventoryPart);
+                    updateActiveWeapon(entry.getKey(), world);
+                }
+                for (UUID id : weaponInventoryPart.getInventory()) {
+                    addNewItemsToHotbar(world, id, weaponInventoryPart);
+                }
+            }
+            displayPlayerHp(entry.getKey(), world);
+
+            // update Levelinformation and Enemies killed information on Hotbar
+            displayLevelInformation(gameData, world);
+            displayKillInformation(gameData, world);
+            updateInformationPositions(world, gameData, playerPositionPart);
         }
     }
-        displayPlayerHp(entry.getKey(),world);
 
-        // update Levelinformation and Enemies killed information on Hotbar
-        displayLevelInformation(gameData,world);
-        displayKillInformation(gameData, world);
-        updateInformationPositions(world,gameData,playerPositionPart);
-    }
-}
-
-
-    private void updateActiveWeapon(UUID playerUUID, World world){
+    private void updateActiveWeapon(UUID playerUUID, World world) {
         CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(playerUUID);
         UUID currentWeaponUUID = combatPart.getCurrentWeapon();
 
-        if (previousWeapon != currentWeaponUUID){
-            for (Map.Entry<UUID,UUID> weaponUUID : excistingItems2.entrySet()){
-                if (weaponUUID.getKey().equals(currentWeaponUUID)){
-                    if (previousWeapon != null){
+        if (previousWeapon != currentWeaponUUID) {
+            for (Map.Entry<UUID, UUID> weaponUUID : excistingItems2.entrySet()) {
+                if (weaponUUID.getKey().equals(currentWeaponUUID)) {
+                    if (previousWeapon != null) {
                         VisualPart previousWeaponVisualPart = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(previousWeapon);
                         previousWeaponVisualPart.setHeight(itemPicSize);
                         previousWeaponVisualPart.setWidth(itemPicSize);
@@ -89,13 +87,13 @@ public class HotbarContolSystem implements IEntityProcessingService {
         }
     }
 
-
     private void updateInformationPositions(World world, GameData gameData, PositionPart playerPositionPart) {
         PositionPart levelPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(levelInformationEntityID);
         PositionPart killPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(killInformationEntityID);
-        
+
     }
-    private void updateHotbarPositionWithItems(World world, GameData gameData, PositionPart playerPositionPart){
+
+    private void updateHotbarPositionWithItems(World world, GameData gameData, PositionPart playerPositionPart) {
         if (world.getMapByPart(HotbarPart.class.getSimpleName()).keySet().toArray().length > 0) {
             UUID uuid = (UUID) world.getMapByPart(HotbarPart.class.getSimpleName()).keySet().toArray()[0];
             PositionPart hotbarPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(uuid);
@@ -103,19 +101,20 @@ public class HotbarContolSystem implements IEntityProcessingService {
             float camX = gameData.getCamPosX();
             float camY = gameData.getCamPosY();
 
-            hotbarPositionY = (camY-gameData.getDisplayHeight()/4)+hotbarVis.getHeight()/2;
+            hotbarPositionY = (camY - gameData.getDisplayHeight() / 4) + hotbarVis.getHeight() / 2;
             hotbarPositionX = camX;
-            hotbarPos.setPosition(hotbarPositionX,hotbarPositionY );
+            hotbarPos.setPosition(hotbarPositionX, hotbarPositionY);
 
             for (int i = 0; i < 4; i++) {
                 float startpos = 30;
                 float pictureSpace = 11;
-                itemPositionsX[i] = hotbarPos.getX()-hotbarVis.getWidth()/2+startpos+itemPicSize/2+(pictureSpace+itemPicSize)*(i);
+                itemPositionsX[i] = hotbarPos.getX() - hotbarVis.getWidth() / 2 + startpos + itemPicSize / 2 + (pictureSpace + itemPicSize) * (i);
             }
         }
     }
-    private void reorganizeHotbarItemPositions(World world, WeaponInventoryPart weaponInventoryPart){
-        for(Map.Entry weaponId : excistingItems2.entrySet()){
+
+    private void reorganizeHotbarItemPositions(World world, WeaponInventoryPart weaponInventoryPart) {
+        for (Map.Entry weaponId : excistingItems2.entrySet()) {
             PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(weaponId.getValue());
 
             itemIndex = weaponInventoryPart.getInventory().indexOf(weaponId.getKey());
@@ -123,98 +122,126 @@ public class HotbarContolSystem implements IEntityProcessingService {
             positionPart.setY(hotbarPositionY);
         }
     }
-    private void addNewItemsToHotbar(World world, UUID playerWeaponID, WeaponInventoryPart weaponInventoryPart){
-        if(!excistingItems2.containsKey(playerWeaponID)){
+
+    private void addNewItemsToHotbar(World world, UUID playerWeaponID, WeaponInventoryPart weaponInventoryPart) {
+        if (!excistingItems2.containsKey(playerWeaponID)) {
             VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(playerWeaponID);
 
             Entity hotbarItem = new Entity();
             //return the position in the inventory the item should be placed
             itemIndex = weaponInventoryPart.getInventory().indexOf(playerWeaponID);
 
-                world.addtoEntityPartMap(new PositionPart(itemPositionsX[itemIndex], hotbarPositionY, radians), hotbarItem);
-                world.addtoEntityPartMap(new VisualPart(visualPart.getSpriteName(), itemPicSize, itemPicSize, 4), hotbarItem);
+            world.addtoEntityPartMap(new PositionPart(itemPositionsX[itemIndex], hotbarPositionY, radians), hotbarItem);
+            world.addtoEntityPartMap(new VisualPart(visualPart.getSpriteName(), itemPicSize, itemPicSize, 4), hotbarItem);
 
-                VisualPart visualItem = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(hotbarItem.getUUID());
-                visualItem.setResizable(false);
-                excistingItems2.put(playerWeaponID, hotbarItem.getUUID());
+            VisualPart visualItem = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(hotbarItem.getUUID());
+            visualItem.setResizable(false);
+            excistingItems2.put(playerWeaponID, hotbarItem.getUUID());
 
         }
     }
-    private void removeItemsNoLongerInInventory(World world, WeaponInventoryPart weaponInventoryPart){
-        for(Map.Entry weaponId : excistingItems2.entrySet()){
-        if(!weaponInventoryPart.getInventory().contains(weaponId.getKey())){
-            //Removing player item from hotbar list
-            itemsToBeRemoved.add((UUID) weaponId.getKey());
-            //Removing hotbar item from world
-            world.removeEntityParts((UUID) weaponId.getValue());
-        }
+
+    private void removeItemsNoLongerInInventory(World world, WeaponInventoryPart weaponInventoryPart) {
+        for (Map.Entry weaponId : excistingItems2.entrySet()) {
+            if (!weaponInventoryPart.getInventory().contains(weaponId.getKey())) {
+                //Removing player item from hotbar list
+                itemsToBeRemoved.add((UUID) weaponId.getKey());
+                //Removing hotbar item from world
+                world.removeEntityParts((UUID) weaponId.getValue());
+            }
         }
         //Removing player item from hotbar list
         itemsToBeRemoved.forEach(id -> excistingItems2.remove(id));
         itemsToBeRemoved.clear();
     }
-    private void displayPlayerHp(UUID playerUUID, World world){
-        LifePart lifePart = (LifePart) world.getMapByPart(LifePart.class.getSimpleName()).get(playerUUID);
-        if (playerHealthInformation == null){
-            Entity HealthInformation = new Entity();
-            playerHealthInformation = HealthInformation.getUUID();
 
-            world.addtoEntityPartMap(new PositionPart(600, 750, 2f), HealthInformation);
-            world.addtoEntityPartMap(new TextPart(null, 4), HealthInformation);
+    private void displayPlayerHp(UUID playerUUID, World world) {
+        LifePart lifePart = (LifePart) world.getMapByPart(LifePart.class.getSimpleName()).get(playerUUID);
+        if (playerHealthInformation == null || world.getMapByPart(TextPart.class.getSimpleName()) == null) {
+            Entity healthInformation = new Entity();
+            playerHealthInformation = healthInformation.getUUID();
+
+            world.addtoEntityPartMap(new PositionPart(600, 750, 2f), healthInformation);
+            world.addtoEntityPartMap(new TextPart(null, 4), healthInformation);
         }
         TextPart textPart = (TextPart) world.getMapByPart("TextPart").get(playerHealthInformation);
-        String healthMessage = ("Health: " +lifePart.getLife());
+        String healthMessage = ("Health: " + lifePart.getLife());
 
-        if (lifePart.getLife() <= 0){
+        if (lifePart.getLife() <= 0) {
             healthMessage = ("Dead");
         }
 
-
         PositionPart textPosition = (PositionPart) world.getMapByPart("PositionPart").get(playerHealthInformation);
-        textPosition.setPosition(hotbarPositionX+10, hotbarPositionY+19);
+        textPosition.setPosition(hotbarPositionX + 10, hotbarPositionY + 19);
         textPart.setMessage(healthMessage);
-
 
     }
 
-    private void displayLevelInformation(GameData gameData,World world) {
-        if (levelInformationEntityID == null) {
+    private void displayLevelInformation(GameData gameData, World world) {     
+        PositionPart textPosition;
+        TextPart textPart;
+        
+        if (levelInformationEntityID == null ||
+                world.getMapByPart(TextPart.class.getSimpleName()) == null ||
+                world.getMapByPart(PositionPart.class.getSimpleName()) == null  ||
+                (world.getMapByPart(PositionPart.class.getSimpleName()).get(levelInformationEntityID) == null) ||
+                (world.getMapByPart(TextPart.class.getSimpleName()).get(levelInformationEntityID) == null)
+            ) {
             Entity levelInformation = new Entity();
             levelInformationEntityID = levelInformation.getUUID();
+            
+            textPosition = new PositionPart(600, 750, 2f);
+            textPart = new TextPart(null, 4);
 
-            world.addtoEntityPartMap(new PositionPart(600, 750, 2f), levelInformation);
-            world.addtoEntityPartMap(new TextPart(null, 4), levelInformation);
+            world.addtoEntityPartMap(textPosition, levelInformation);
+            world.addtoEntityPartMap(textPart, levelInformation);
+        } else {
+            textPosition = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(levelInformationEntityID);
+            textPart = (TextPart) world.getMapByPart(TextPart.class.getSimpleName()).get(levelInformationEntityID);
         }
 
         level = gameData.getLevelInformation().getCurrentLevel();
 
-        TextPart textPart = (TextPart) world.getMapByPart("TextPart").get(levelInformationEntityID);
         String levelMessage;
         if (level < 1) {
             levelMessage = ("Level: " + "Starting Soon");
-        } else if (level>2 && ((level)%5) == 0){
-            levelMessage = ("Level: " + (level)+ " - BOSS -");
+        } else if (level > 2 && ((level) % 5) == 0) {
+            levelMessage = ("Level: " + (level) + " - BOSS -");
         } else {
             levelMessage = ("Level: " + (level));
         }
-        PositionPart textPosition = (PositionPart) world.getMapByPart("PositionPart").get(levelInformationEntityID);
-        textPosition.setPosition(hotbarPositionX+10, hotbarPositionY+5);
+        
+        textPosition.setPosition(hotbarPositionX + 10, hotbarPositionY + 5);
         textPart.setMessage(levelMessage);
     }
 
     private void displayKillInformation(GameData gameData, World world) {
-        if(killInformationEntityID == null){
+        PositionPart textPosition;
+        TextPart textPart;
+        
+        if (killInformationEntityID == null ||
+                world.getMapByPart(TextPart.class.getSimpleName()) == null ||
+                world.getMapByPart(PositionPart.class.getSimpleName()) == null  ||
+                (world.getMapByPart(PositionPart.class.getSimpleName()).get(killInformationEntityID) == null) ||
+                (world.getMapByPart(TextPart.class.getSimpleName()).get(killInformationEntityID) == null)
+        ) {
             Entity killInformation = new Entity();
             killInformationEntityID = killInformation.getUUID();
-            world.addtoEntityPartMap(new PositionPart(600,700,2f), killInformation);
-            world.addtoEntityPartMap(new TextPart(null,4), killInformation);
+            
+            textPosition = new PositionPart(600, 700, 2f);
+            textPart = new TextPart(null, 4);
+            
+            world.addtoEntityPartMap(textPosition, killInformation);
+            world.addtoEntityPartMap(textPart, killInformation);
+        } else {
+            textPart = (TextPart) world.getMapByPart("TextPart").get(killInformationEntityID);
+            textPosition = (PositionPart) world.getMapByPart("PositionPart").get(killInformationEntityID);
         }
 
         zombiesKilled = gameData.getLevelInformation().getEnemiesKilled();
 
-        TextPart textPart = (TextPart) world.getMapByPart("TextPart").get(killInformationEntityID);
-        PositionPart textPosition = (PositionPart) world.getMapByPart("PositionPart").get(killInformationEntityID);
-        textPosition.setPosition(hotbarPositionX+10, hotbarPositionY-10);
+        
+        textPosition.setPosition(hotbarPositionX + 10, hotbarPositionY - 10);
         String killMessage = ("Zombies Slain: " + zombiesKilled);
         textPart.setMessage(killMessage);
     }

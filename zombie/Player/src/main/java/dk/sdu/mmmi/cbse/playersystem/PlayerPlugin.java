@@ -52,8 +52,10 @@ public class PlayerPlugin implements IGamePluginService {
 
     @Override
     public void stop(GameData gameData, World world) {
-        for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(PlayerPart.class.getSimpleName()).entrySet()){
-            world.removeEntityParts(entry.getKey());
+        if (world.getMapByPart(PlayerPart.class.getSimpleName()) != null) {
+            for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(PlayerPart.class.getSimpleName()).entrySet()){
+                world.removeEntityParts(entry.getKey());
+            }
         }
     }
     

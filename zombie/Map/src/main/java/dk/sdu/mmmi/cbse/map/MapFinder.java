@@ -5,12 +5,12 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import java.util.HashMap;
 import java.util.Map;
-import dk.sdu.mmmi.cbse.common.services.IMapLookup;
 import dk.sdu.mmmi.cbse.commontiles.Tiles;
 import org.openide.util.lookup.ServiceProvider;
+import dk.sdu.mmmi.cbse.common.services.IMapService;
 
-@ServiceProvider(service = IMapLookup.class)
-public class MapFinder implements IMapLookup {
+@ServiceProvider(service = IMapService.class)
+public class MapFinder implements IMapService {
     
     private static FileHandle[] filehandles;
     private FileHandle[] mapThumbnailFiles;

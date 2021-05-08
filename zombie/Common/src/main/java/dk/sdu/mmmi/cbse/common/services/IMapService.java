@@ -4,7 +4,7 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import java.util.Map;
 
-public interface IMapLookup {
+public interface IMapService {
     
     /**
      * Returns all maps in the application maps folder

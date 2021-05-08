@@ -10,10 +10,10 @@ import org.openide.util.lookup.ServiceProvider;
 public class LevelSystem implements IEntityProcessingService {
 
     private LevelInformation levelInformation = new LevelInformation();
-    private long currentTime = System.currentTimeMillis();
-    private long lastSpawnTime = currentTime;
+    private static long currentTime = System.currentTimeMillis();
+    private static long lastSpawnTime = currentTime;
     private long roundDelay = 7000;
-    private int level = 0;
+    private static int level = 0;
 
     @Override
     public void process(GameData gameData, World world) {
@@ -34,7 +34,13 @@ public class LevelSystem implements IEntityProcessingService {
         updateTime();
 
     }
+    
     private void updateTime() {
         currentTime = System.currentTimeMillis();
+    }
+    
+    protected static void resetLevel(GameData gameData) {
+        level = 0;
+        gameData.getLevelInformation().setCurrentLevel(level);
     }
 }

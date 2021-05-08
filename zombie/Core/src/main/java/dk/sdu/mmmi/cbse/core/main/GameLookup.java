@@ -4,7 +4,6 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
-import dk.sdu.mmmi.cbse.common.services.IMapLookup;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 import java.util.Collection;
 import java.util.List;
@@ -12,6 +11,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
+import dk.sdu.mmmi.cbse.common.services.IMapService;
 
 public class GameLookup {
     
@@ -32,9 +32,25 @@ public class GameLookup {
         result = lookup.lookupResult(IGamePluginService.class);
         result.addLookupListener(lookupListener);
         result.allItems();
-
-        // Start all game plugins found by lookup
+        
+        initializePlugins();
+    }
+    
+    private void initializePlugins() {
+        gamePlugins.clear();
+        
         for (IGamePluginService plugin : result.allInstances()) {
+            plugin.start(gameData, world);
+            gamePlugins.add(plugin);
+        }
+    }
+    
+    // Restart all game plugins found by lookup
+    public void restartPlugins() {
+        gamePlugins.clear();
+        
+        for (IGamePluginService plugin : result.allInstances()) {
+            plugin.stop(gameData, world);
             plugin.start(gameData, world);
             gamePlugins.add(plugin);
         }
@@ -56,8 +72,8 @@ public class GameLookup {
         return lookup.lookupAll(IPostEntityProcessingService.class);
     }
     
-    public IMapLookup getMapLookup() {
-        return lookup.lookup(IMapLookup.class);
+    public IMapService getMapService() {
+        return lookup.lookup(IMapService.class);
     }
 
     public final LookupListener lookupListener = new LookupListener() {
