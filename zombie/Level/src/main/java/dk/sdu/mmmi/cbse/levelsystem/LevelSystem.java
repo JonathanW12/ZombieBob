@@ -41,6 +41,8 @@ public class LevelSystem implements IEntityProcessingService {
     
     protected static void resetLevel(GameData gameData) {
         level = 0;
-        gameData.getLevelInformation().setCurrentLevel(level);
+        currentTime = System.currentTimeMillis();
+        lastSpawnTime = currentTime;
+        gameData.getLevelInformation().resetLevel();
     }
 }

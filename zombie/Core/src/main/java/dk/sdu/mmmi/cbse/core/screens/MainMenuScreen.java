@@ -21,12 +21,14 @@ import java.util.Map;
 public class MainMenuScreen extends MenuScreenTemplate implements Screen {
 
     private BitmapFont title;
-    private final SpriteBatch secondaryBatch; // Sprite batch for non-actors
     private final GameLookup gameLookup;
     private int currentlyDisplayedMap;
     private final Map<String, String> allMaps;
     private String currentMapName;
     private Texture currentMapThumbnail;
+    
+    // Secondary sprite batch for non-actors (Mainly game title)
+    private final SpriteBatch secondaryBatch; 
 
     // Scene actors
     private Label mapLabel;

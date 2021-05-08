@@ -42,6 +42,10 @@ public class RifleProcessor implements IEntityProcessingService {
             }
         }
     }
+    
+    protected static void clearProcessingList() {
+        rifles.clear();
+    }
 
     protected static void addToProcessingList(Entity rifle) {
         rifles.add(rifle);

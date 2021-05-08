@@ -34,11 +34,11 @@ public class HotbarContolSystem implements IEntityProcessingService {
     private UUID playerHealthInformation;
     private int level;
     private int zombiesKilled = 0;
-    private UUID previousWeapon = null;
+    private static UUID previousWeapon = null;
 
-    ArrayList<UUID> itemsToBeRemoved = new ArrayList<UUID>();
+    private static ArrayList<UUID> itemsToBeRemoved = new ArrayList<UUID>();
     //This hashMap: Keys are weapon IDs in the players inventory and values are weapon IDs in the hotbar
-    HashMap<UUID, UUID> excistingItems2 = new HashMap<UUID, UUID>();
+    private static HashMap<UUID, UUID> excistingItems2 = new HashMap<UUID, UUID>();
 
     @Override
     public void process(GameData gameData, World world) {
@@ -244,5 +244,11 @@ public class HotbarContolSystem implements IEntityProcessingService {
         textPosition.setPosition(hotbarPositionX + 10, hotbarPositionY - 10);
         String killMessage = ("Zombies Slain: " + zombiesKilled);
         textPart.setMessage(killMessage);
+    }
+    
+    protected static void resetInventory() {
+        itemsToBeRemoved.clear();
+        excistingItems2.clear();
+        previousWeapon = null;
     }
 }

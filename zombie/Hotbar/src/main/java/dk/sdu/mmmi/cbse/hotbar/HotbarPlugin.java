@@ -18,7 +18,7 @@ public class HotbarPlugin implements IGamePluginService {
     @Override
     public void start(GameData gameData, World world) {
         createHotbar(gameData,world);
-        //gameData.setDisplayHeight(gameData.getDisplayHeight()-(int) hotbarHeight);
+        HotbarContolSystem.resetInventory();
     }
     
     private void createHotbar(GameData gameData, World world){
@@ -38,6 +38,7 @@ public class HotbarPlugin implements IGamePluginService {
 
     @Override
     public void stop(GameData gameData, World world) {
+        HotbarContolSystem.resetInventory();
     }
     
 }

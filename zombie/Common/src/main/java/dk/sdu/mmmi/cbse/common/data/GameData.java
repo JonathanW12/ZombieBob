@@ -34,13 +34,7 @@ public class GameData {
     public void setCamPosY(float camPosY) {
         this.camPosY = camPosY;
     }
-
-
-
-
-
-
-
+    
     public void addEvent(Event e) {
         events.add(e);
     }
