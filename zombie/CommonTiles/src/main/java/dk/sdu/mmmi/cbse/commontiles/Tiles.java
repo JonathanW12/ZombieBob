@@ -1,9 +1,7 @@
 package dk.sdu.mmmi.cbse.commontiles;
 
 import dk.sdu.mmmi.cbse.common.data.GameData;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Tiles {
     
@@ -32,7 +30,7 @@ public class Tiles {
         return tiles;
     }
     
-    private void initializeTiles(GameData gameData) {
+    protected static void initializeTiles(GameData gameData) {
         int verticalTiles = (int) (gameData.getDisplayHeight() / tileHeight);
         int horizontalTiles = (int) (gameData.getDisplayWidth() / tileWidth);
         

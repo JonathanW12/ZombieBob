@@ -20,6 +20,7 @@ public class MapFinder implements IMapService {
         mapPlugin = new MapPlugin();
     }
     
+    @Override
     public Map<String, String> findAllMaps() {
         FileHandle[] mapFiles = getMapFiles();
         Map<String, String> resultMap = new HashMap<>();
@@ -36,6 +37,7 @@ public class MapFinder implements IMapService {
         return resultMap;
     }
     
+    @Override
     public void setMap(String mapName, GameData gameData, World world) {
         mapPlugin.createBackground(gameData, world);
         mapPlugin.generateMapFromFile(mapName, world, Tiles.getInstance(gameData).getTiles());

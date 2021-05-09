@@ -73,7 +73,6 @@ public class MapPlugin implements IGamePluginService {
     private void resetMap(World world) {
         world.getItemSpawns().clear();
         world.getEnemySpawnPositions().clear();
-        world.clearEntityMaps();
     }
 
     public void createBackground(GameData gameData, World world) {

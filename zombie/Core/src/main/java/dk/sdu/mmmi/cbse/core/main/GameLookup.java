@@ -47,6 +47,7 @@ public class GameLookup {
     
     // Restart all game plugins found by lookup
     public void restartPlugins() {
+        world.clearEntityMaps();
         gamePlugins.clear();
         
         for (IGamePluginService plugin : result.allInstances()) {

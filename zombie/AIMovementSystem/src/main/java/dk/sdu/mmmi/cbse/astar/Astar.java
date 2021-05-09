@@ -92,12 +92,6 @@ public class Astar implements IEntityProcessingService {
         while (openSet.size() > 0) {
             lowestNode = openSet.peek();
             
-            for (Node node: openSet) {
-                if (node.getF() < lowestNode.getF()) {
-                    lowestNode = node;
-                }
-            }
-            
             // Check for solution
             if (lowestNode.equals(getGoalNode(gameData, world))) {
                 Node temp = lowestNode;
@@ -113,7 +107,7 @@ public class Astar implements IEntityProcessingService {
             closedSet.add(lowestNode);
             
             for (Node neighbor: lowestNode.getNeighbors()) {
-                if (!closedSet.contains(neighbor) && !neighbor.getIsObstacle()) {            
+                if (neighbor != null && !closedSet.contains(neighbor) && !neighbor.getIsObstacle()) {            
                     if (!openSet.contains(neighbor)) {
                         openSet.add(neighbor);
                     } 

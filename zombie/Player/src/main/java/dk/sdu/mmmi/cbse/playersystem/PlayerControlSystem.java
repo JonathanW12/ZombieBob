@@ -1,7 +1,5 @@
 package dk.sdu.mmmi.cbse.playersystem;
 
-import com.badlogic.gdx.Input;
-import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.common.data.MouseMovement;

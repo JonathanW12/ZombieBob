@@ -37,12 +37,10 @@ public class RenderProcessor {
     private final GameData gameData;
     private final World world;
     private final OrthographicCamera cam;
-
     private final SpriteBatch batch;
     private final int zDepth;
     private ArrayList<ArrayList<UUID>> sortedVisualList;
     private final BitmapFont font;
-    private FreeTypeFontGenerator fontGenerator;
     private final HashMap<String, Sprite> sprites;
     private final HashMap<String, TextureRegion> animationRegions;
     private TextureAtlas textureAtlas;
@@ -59,13 +57,6 @@ public class RenderProcessor {
         sprites = new HashMap<>();
         animationRegions = new HashMap<>();
         shapeRenderer = new ShapeRenderer();
-
-        // Initialize font generator
-        try {
-            fontGenerator = new FreeTypeFontGenerator(Gdx.files.local("font/Roboto-Light.ttf"));
-        } catch (GdxRuntimeException e) {
-            fontGenerator = new FreeTypeFontGenerator(Gdx.files.local("../../font/Roboto-Light.ttf"));
-        }
 
         // Initialize assets
         try {

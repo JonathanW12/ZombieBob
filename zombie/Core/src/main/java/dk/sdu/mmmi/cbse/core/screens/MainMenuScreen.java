@@ -208,8 +208,10 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
     }
 
     private void startSelectedMap() {
-        gameLookup.getMapService().setMap(currentMapName, getGameData(), getWorld());
+        getWorld().clearEntityMaps();
+        
         gameLookup.restartPlugins();
+        gameLookup.getMapService().setMap(currentMapName, getGameData(), getWorld());
         getGame().setScreen(new GameScreen(getGame()));
     }
 
