@@ -6,6 +6,7 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.AiMovementPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.MovingPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.PositionPart;
+import dk.sdu.mmmi.cbse.common.data.entitytypeparts.EnemyPart;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.PlayerPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.commontiles.Tile;
@@ -50,7 +51,7 @@ public class Astar implements IEntityProcessingService {
                         aiPart.resetDelay();
                         PositionPart positionPart = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(entry.getKey());
                         MovingPart movingPart = (MovingPart) world.getMapByPart(MovingPart.class.getSimpleName()).get(entry.getKey());
-                        currentNode = getCurrentNode(gameData, positionPart);
+                        currentNode = getNodeByPosition(gameData, positionPart);
                         goalNode = getGoalNode(gameData, world);
 
                         // Handle nodes being null
@@ -83,7 +84,7 @@ public class Astar implements IEntityProcessingService {
     private void findPlayerPath(GameData gameData, World world, UUID enemyId) {
         PositionPart startPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(enemyId);
         Node lowestNode;
-        Node originalNode = getCurrentNode(gameData, startPos);
+        Node originalNode = getNodeByPosition(gameData, startPos);
         path.clear();
         openSet.clear();
         closedSet.clear();
@@ -112,13 +113,30 @@ public class Astar implements IEntityProcessingService {
                         openSet.add(neighbor);
                     } 
                    
-                    neighbor.setG(lowestNode.getG() + 1);
+                    neighbor.setG(calculateG(neighbor, gameData, world));
                     neighbor.setH(calculateH(neighbor, getGoalNode(gameData, world)));
                     neighbor.setF(neighbor.getG() + neighbor.getH());
                     neighbor.setParent(lowestNode);
                 }
             }
         }
+    }
+    
+    private float calculateG(Node neighborNode, GameData gameData, World world) {
+        float defaultG = currentNode.getG() + 1;
+        float resultG = defaultG;
+        
+        for (Map.Entry<UUID, EntityPart> enemy: world.getMapByPart(EnemyPart.class.getSimpleName()).entrySet()) {
+            PositionPart enemyPosition = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(enemy.getKey());
+            
+            if (getNodeByPosition(gameData, enemyPosition).equals(neighborNode)) {
+                // Make nodes that already contain an enemy more expensive than
+                // walking around the node
+                resultG += 2.5f; 
+            }
+        }
+        
+        return resultG;
     }
     
     private float calculateH(Node a, Node b) {
@@ -130,7 +148,7 @@ public class Astar implements IEntityProcessingService {
         );
     }
     
-    private Node getCurrentNode(GameData gameData, PositionPart positionPart) {
+    private Node getNodeByPosition(GameData gameData, PositionPart positionPart) {
         int row = (int) (positionPart.getY() / Tiles.getTileHeight());
         int col = (int) (positionPart.getX() / Tiles.getTileWidth());
         Tile currentTile = Tiles.getInstance(gameData).getTileByRowAndCol(row, col);
