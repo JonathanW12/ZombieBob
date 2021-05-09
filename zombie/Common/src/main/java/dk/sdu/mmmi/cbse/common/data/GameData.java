@@ -1,6 +1,5 @@
 package dk.sdu.mmmi.cbse.common.data;
 
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import dk.sdu.mmmi.cbse.commonlevel.LevelInformation;
 import dk.sdu.mmmi.cbse.common.events.Event;
 import java.util.ArrayList;

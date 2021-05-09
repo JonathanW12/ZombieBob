@@ -64,18 +64,20 @@ public class GameScreen implements Screen{
 
     @Override
     public void render(float delta) {
-        renderProcessor.processRendering(gameData);
-        renderProcessor.draw();
-
+        gameData.setCamPosX(cam.position.x);
+        gameData.setCamPosY(cam.position.y);
+        
+        gameData.setDelta(delta);
+        
         update();
+        renderProcessor.draw();
+        renderProcessor.processRendering(gameData);
+
         gameData.getKeys().update();
         gameData.getMouse().update();
     }
 
     private void update() {        
-        gameData.setCamPosX(cam.position.x);
-        gameData.setCamPosY(cam.position.y);
-
         // Update
         gameLookup.getEntityProcessingServices().forEach(entityProcessorService -> {
             entityProcessorService.process(gameData, world);
@@ -96,7 +98,6 @@ public class GameScreen implements Screen{
         if (gameData.getKeys().isPressed(GameKeys.ESCAPE)) {
             game.setScreen(new MainMenuScreen(game));
         }
-
     }
     
     @Override
