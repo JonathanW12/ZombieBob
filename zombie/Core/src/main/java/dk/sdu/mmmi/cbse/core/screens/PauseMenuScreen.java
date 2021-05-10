@@ -22,7 +22,36 @@ public class PauseMenuScreen extends MenuScreenTemplate implements Screen {
         setupUI();
     }
     
-    private void setupUI() {
+    @Override
+    public void render(float delta) {
+        super.render(delta);
+
+        secondaryBatch.begin();
+
+        float estimatedTitleWidth = 750;
+        title.setColor(0.541f, 0.011f, 0.011f, 1);
+        title.draw(
+                secondaryBatch,
+                "Game Paused",
+                getStage().getWidth() / 2 - estimatedTitleWidth / 2,
+                getStage().getHeight() - 150
+        );
+
+        secondaryBatch.end();
+
+        update();
+    }
+    
+    @Override
+    public void update() {
+        super.update();
+        handleResumeButton();
+        handleSettingsButton();
+        handleMainMenuButton();
+        handleExitButton();
+    }
+    
+        private void setupUI() {
         float buttonWidth = 275;
         float buttonHeight = 75;
         
@@ -73,35 +102,6 @@ public class PauseMenuScreen extends MenuScreenTemplate implements Screen {
         getStage().addActor(settingsButton);
         getStage().addActor(mainMenuButton);
         getStage().addActor(exitButton);
-    }
-    
-    @Override
-    public void render(float delta) {
-        super.render(delta);
-
-        secondaryBatch.begin();
-
-        float estimatedTitleWidth = 750;
-        title.setColor(0.541f, 0.011f, 0.011f, 1);
-        title.draw(
-                secondaryBatch,
-                "Game Paused",
-                getStage().getWidth() / 2 - estimatedTitleWidth / 2,
-                getStage().getHeight() - 150
-        );
-
-        secondaryBatch.end();
-
-        update();
-    }
-    
-    @Override
-    public void update() {
-        super.update();
-        handleResumeButton();
-        handleSettingsButton();
-        handleMainMenuButton();
-        handleExitButton();
     }
     
     private void handleResumeButton() {

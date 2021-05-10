@@ -26,7 +26,7 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
     private final Map<String, String> allMaps;
     private String currentMapName;
     private Texture currentMapThumbnail;
-    private final SpriteBatch secondaryBatch; 
+    private final SpriteBatch secondaryBatch;
 
     // Scene actors
     private Label mapLabel;
@@ -41,6 +41,33 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
 
         setupMaps();
         setupUI();
+    }
+
+    @Override
+    public void render(float delta) {
+        super.render(delta);
+
+        secondaryBatch.begin();
+
+        float estimatedTitleWidth = 625;
+        title.setColor(0.541f, 0.011f, 0.011f, 1);
+        title.draw(
+                secondaryBatch,
+                "ZombieBob",
+                getStage().getWidth() / 2 - estimatedTitleWidth / 2,
+                getStage().getHeight() - 150
+        );
+
+        secondaryBatch.end();
+
+        update();
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        handleMapNavButton();
+        handleMapSelectButtons();
     }
 
     private void setupUI() {
@@ -77,7 +104,7 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
 
         // Add actors to stage and set their values
         getStage().addActor(mapImage);
-        getHoverButtonGroup().addActor(mapLabel);
+        getStage().addActor(mapLabel);
         setDisplayedMap();
     }
 
@@ -115,7 +142,7 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
                 getStage().getWidth() / 2 + 150,
                 100
         );
-        getHoverButtonGroup().addActor(nextMapButton);
+        getStage().addActor(nextMapButton);
     }
 
     private void addPrevMapButton() {
@@ -126,15 +153,15 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
                 getStage().getWidth() / 2 - 150 - buttonWidth,
                 100
         );
-        getHoverButtonGroup().addActor(prevMapButton);
+        getStage().addActor(prevMapButton);
     }
 
-    public void nextMap() {
+    private void nextMap() {
         currentlyDisplayedMap = (currentlyDisplayedMap + 1) % allMaps.size();
         setDisplayedMap();
     }
 
-    public void prevMap() {
+    private void prevMap() {
         currentlyDisplayedMap--;
         if (currentlyDisplayedMap < 0) {
             currentlyDisplayedMap = allMaps.size() - 1;
@@ -155,33 +182,6 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
         return imageTexture;
     }
 
-    @Override
-    public void render(float delta) {
-        super.render(delta);
-
-        secondaryBatch.begin();
-
-        float estimatedTitleWidth = 625;
-        title.setColor(0.541f, 0.011f, 0.011f, 1);
-        title.draw(
-                secondaryBatch,
-                "ZombieBob",
-                getStage().getWidth() / 2 - estimatedTitleWidth / 2,
-                getStage().getHeight() - 150
-        );
-
-        secondaryBatch.end();
-
-        update();
-    }
-
-    @Override
-    public void update() {
-        super.update();
-        handleMapNavButton();
-        handleMapSelectButtons();
-    }
-
     private void handleMapNavButton() {
         // Show the next map when the right button is clicked or when the right arrow key is pressed
         if ((isMouseOnActor(nextMapButton) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK))
@@ -196,26 +196,21 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
         }
     }
 
-    // Start game with selected map when the map label, map image, the enter key or space key is pressed
+    // Start game with the selected map when the map label, map image, the enter key or space key is pressed
     private void handleMapSelectButtons() {
-        if ((isMouseOnActor(mapLabel) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK))
-                || (isMouseOnActor(mapImage) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK))
-                || (getGameData().getKeys().isPressed(GameKeys.ESCAPE) || (getGameData().getKeys().isPressed(GameKeys.SPACE)))) {
+        if ((isMouseOnActor(mapImage) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK))
+                || (isMouseOnActor(mapLabel) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK))
+                || (getGameData().getKeys().isPressed(GameKeys.ENTER) || (getGameData().getKeys().isPressed(GameKeys.SPACE)))) {
             startSelectedMap();
         }
     }
 
     private void startSelectedMap() {
         getWorld().clearEntityMaps();
-        
+
         gameLookup.restartPlugins();
         gameLookup.getMapService().setMap(currentMapName, getGameData(), getWorld());
         getGame().setScreen(new GameScreen(getGame()));
-    }
-
-    @Override
-    public void show() {
-        super.show();
     }
 
 }

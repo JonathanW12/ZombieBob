@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -39,7 +38,6 @@ public class MenuScreenTemplate implements Screen {
     
     // Stage actors
     private Image musicButton, soundButton;
-    private final Group hoverButtonGroup;
     
     public MenuScreenTemplate(ZombieBobGame game) {
         this.game = game;
@@ -53,13 +51,79 @@ public class MenuScreenTemplate implements Screen {
         skin = new Skin(getSkinFile());
         titleFont = getTitleFontFile();
         
-        hoverButtonGroup = new Group();
-        
         setupUI();
     }
     
-    public Group getHoverButtonGroup() {
-        return hoverButtonGroup;
+    @Override
+    public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        stage.act(delta);
+        stage.draw();
+
+        update();
+        gameData.getKeys().update();
+        gameData.getMouse().update();
+    }
+    
+    @Override
+    public void show() { 
+        game.getAudioProcessor().setMusicState(AudioProcessor.MusicState.MENUMUSIC);
+        setupInputProcessors();
+        setupCursor();
+    }
+    
+    @Override
+    public void hide() { }
+    
+    @Override
+    public void pause() { }
+
+    @Override
+    public void resume() { }
+    
+    @Override
+    public void resize(int width, int height) { }
+    
+    @Override
+    public void dispose() {    
+        stage.dispose();
+    }
+    
+    public void update() {
+        // Exit game if the escape key is pressed
+        if (gameData.getKeys().isPressed(GameKeys.ESCAPE)) {
+            game.dispose();
+            Gdx.app.exit();
+        }
+        
+        game.getAudioProcessor().processAudio();
+        handleAudioButtons();
+    }
+    
+    public Texture getButtonTexture(String fileName) {
+        Texture buttonTexture;
+        
+        try {
+            buttonTexture = new Texture(Gdx.files.local("raw-assets/" + fileName));
+        } catch (GdxRuntimeException e) {
+            buttonTexture = new Texture(Gdx.files.local("../../raw-assets/" + fileName));
+        }
+        
+        return buttonTexture;
+    }
+    
+    public boolean isMouseOnActor(Actor actor) {
+        float mouseX = Gdx.input.getX();
+        float mouseY = stage.getHeight() - Gdx.input.getY();
+        
+        return (
+            mouseX >= actor.getX() &&
+            mouseX <= actor.getX() + actor.getWidth() &&
+            mouseY >= actor.getY() &&
+            mouseY <= actor.getY() + actor.getHeight()
+        ) ;
+
     }
     
     private FileHandle getSkinFile() {
@@ -89,8 +153,6 @@ public class MenuScreenTemplate implements Screen {
     private void setupUI() {
         addMusicButton();
         addSoundButton();
-        
-        stage.addActor(hoverButtonGroup);
     }
     
     private void addMusicButton() {
@@ -99,7 +161,7 @@ public class MenuScreenTemplate implements Screen {
             stage.getWidth() - 160,
             stage.getHeight() - 80
         );
-        hoverButtonGroup.addActor(musicButton);
+        stage.addActor(musicButton);
     }
     
     private void addSoundButton() {
@@ -108,40 +170,7 @@ public class MenuScreenTemplate implements Screen {
             stage.getWidth() - 85,
             stage.getHeight() - 80
         );
-        hoverButtonGroup.addActor(soundButton);
-    }
-    
-    public Texture getButtonTexture(String fileName) {
-        Texture buttonTexture;
-        
-        try {
-            buttonTexture = new Texture(Gdx.files.local("raw-assets/" + fileName));
-        } catch (GdxRuntimeException e) {
-            buttonTexture = new Texture(Gdx.files.local("../../raw-assets/" + fileName));
-        }
-        
-        return buttonTexture;
-    }
-    
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act(delta);
-        stage.draw();
-
-        update();
-        gameData.getKeys().update();
-        gameData.getMouse().update();
-    }
-    
-    public void update() {
-        if (gameData.getKeys().isPressed(GameKeys.ESCAPE)) {
-            Gdx.app.exit();
-        }
-        
-        game.getAudioProcessor().processAudio();
-        handleAudioButtons();
+        stage.addActor(soundButton);
     }
     
     private void handleAudioButtons() {
@@ -177,20 +206,7 @@ public class MenuScreenTemplate implements Screen {
             return "sound-button-disabled.png";
         }
     }
-    
-    public boolean isMouseOnActor(Actor actor) {
-        float mouseX = Gdx.input.getX();
-        float mouseY = stage.getHeight() - Gdx.input.getY();
-        
-        return (
-            mouseX >= actor.getX() &&
-            mouseX <= actor.getX() + actor.getWidth() &&
-            mouseY >= actor.getY() &&
-            mouseY <= actor.getY() + actor.getHeight()
-        ) ;
 
-    }
-    
     public ZombieBobGame getGame() {
         return game;
     }
@@ -215,16 +231,6 @@ public class MenuScreenTemplate implements Screen {
         return titleFont;
     }
     
-    @Override
-    public void show() { 
-        game.getAudioProcessor().setMusicState(AudioProcessor.MusicState.MENUMUSIC);
-        setupInputProcessors();
-        setupCursor();
-    }
-    
-    @Override
-    public void hide() { }
-    
     public void setupCursor() {
         Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
     }
@@ -243,19 +249,5 @@ public class MenuScreenTemplate implements Screen {
 
         Gdx.input.setInputProcessor(inputMultiplexer); 
     }
-    
-    @Override
-    public void pause() { }
 
-    @Override
-    public void resume() { }
-    
-    @Override
-    public void resize(int width, int height) { }
-    
-    @Override
-    public void dispose() {    
-        stage.dispose();
-    }
-    
 }

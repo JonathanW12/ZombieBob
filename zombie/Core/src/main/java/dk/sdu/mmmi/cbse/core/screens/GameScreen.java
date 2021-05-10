@@ -20,7 +20,7 @@ import dk.sdu.mmmi.cbse.core.main.ZombieBobGame;
 import dk.sdu.mmmi.cbse.core.managers.GameInputProcessor;
 import dk.sdu.mmmi.cbse.core.managers.MouseInputProcessor;
 
-public class GameScreen implements Screen{
+public class GameScreen implements Screen {
 
     private final ZombieBobGame game;
     private final GameData gameData;
@@ -44,24 +44,6 @@ public class GameScreen implements Screen{
         setupInputProcessors();
     }
     
-    private void setupCam() {
-        cam = new OrthographicCamera(
-            gameData.getDisplayWidth(),
-            gameData.getDisplayHeight()
-        );
-        cam.translate(
-            gameData.getDisplayWidth() / 2,
-            gameData.getDisplayHeight() / 2
-        );
-        cam.update();
-
-        viewport = new ExtendViewport(
-            gameData.getDisplayWidth() / 2,
-            gameData.getDisplayHeight() / 2, 
-            cam
-        );
-    }
-
     @Override
     public void render(float delta) {
         gameData.setCamPosX(cam.position.x);
@@ -75,29 +57,6 @@ public class GameScreen implements Screen{
 
         gameData.getKeys().update();
         gameData.getMouse().update();
-    }
-
-    private void update() {        
-        // Update
-        gameLookup.getEntityProcessingServices().forEach(entityProcessorService -> {
-            entityProcessorService.process(gameData, world);
-        });
-
-        // Post Update
-        gameLookup.getPostEntityProcessingServices().forEach(postEntityProcessorService -> {
-            postEntityProcessorService.process(gameData, world);
-        });
-        
-        game.getAudioProcessor().processAudio();
-        
-        // Update mousePosition every gameloop even if no event is fired
-        mousePosition = cam.unproject(new Vector3(mousePosition.set(Gdx.input.getX(),Gdx.input.getY(),0)));
-        gameData.getMouse().setMousePosition(mousePosition.x,mousePosition.y);
-        
-        // Pause if escape is clicked
-        if (gameData.getKeys().isPressed(GameKeys.ESCAPE)) {
-            game.setScreen(new PauseMenuScreen(game));
-        }
     }
     
     @Override
@@ -125,6 +84,47 @@ public class GameScreen implements Screen{
     @Override
     public void dispose() {
         renderProcessor.dispose();
+    }
+    
+    private void setupCam() {
+        cam = new OrthographicCamera(
+            gameData.getDisplayWidth(),
+            gameData.getDisplayHeight()
+        );
+        cam.translate(
+            gameData.getDisplayWidth() / 2,
+            gameData.getDisplayHeight() / 2
+        );
+        cam.update();
+
+        viewport = new ExtendViewport(
+            gameData.getDisplayWidth() / 2,
+            gameData.getDisplayHeight() / 2, 
+            cam
+        );
+    }
+
+    private void update() {        
+        // Process entities
+        gameLookup.getEntityProcessingServices().forEach(entityProcessorService -> {
+            entityProcessorService.process(gameData, world);
+        });
+
+        // Post Update
+        gameLookup.getPostEntityProcessingServices().forEach(postEntityProcessorService -> {
+            postEntityProcessorService.process(gameData, world);
+        });
+        
+        game.getAudioProcessor().processAudio();
+        
+        // Update mousePosition every gameloop even if no event is fired
+        mousePosition = cam.unproject(new Vector3(mousePosition.set(Gdx.input.getX(),Gdx.input.getY(),0)));
+        gameData.getMouse().setMousePosition(mousePosition.x,mousePosition.y);
+        
+        // Pause if escape is clicked
+        if (gameData.getKeys().isPressed(GameKeys.ESCAPE)) {
+            game.setScreen(new PauseMenuScreen(game));
+        }
     }
       
     private void setupCursorImage() {
