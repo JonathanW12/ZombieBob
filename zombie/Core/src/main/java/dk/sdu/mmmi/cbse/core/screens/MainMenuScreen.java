@@ -26,8 +26,6 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
     private final Map<String, String> allMaps;
     private String currentMapName;
     private Texture currentMapThumbnail;
-    
-    // Secondary sprite batch for non-actors (Mainly game title)
     private final SpriteBatch secondaryBatch; 
 
     // Scene actors

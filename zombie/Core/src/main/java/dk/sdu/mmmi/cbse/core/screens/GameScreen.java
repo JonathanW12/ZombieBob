@@ -96,7 +96,7 @@ public class GameScreen implements Screen{
         
         // Pause if escape is clicked
         if (gameData.getKeys().isPressed(GameKeys.ESCAPE)) {
-            game.setScreen(new MainMenuScreen(game));
+            game.setScreen(new PauseMenuScreen(game));
         }
     }
     
