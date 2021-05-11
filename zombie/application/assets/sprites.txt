@@ -1,5 +1,5 @@
 sprites.png
-size: 1823, 1492
+size: 1977, 1470
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -40,7 +40,7 @@ enemyIdle
   index: -1
 enemySpawn
   rotate: false
-  xy: 904, 892
+  xy: 1309, 870
   size: 600, 600
   orig: 600, 600
   offset: 0, 0
@@ -75,7 +75,7 @@ HotBarRifle
   index: -1
 idleExplosion
   rotate: false
-  xy: 252, 892
+  xy: 657, 870
   size: 652, 530
   orig: 652, 530
   offset: 0, 0
@@ -89,70 +89,84 @@ itemSpawn
   index: -1
 playerbazooka
   rotate: false
-  xy: 0, 892
+  xy: 405, 870
   size: 252, 403
   orig: 252, 403
   offset: 0, 0
   index: -1
 PlayerGun1
   rotate: false
-  xy: 775, 190
+  xy: 1083, 190
   size: 315, 285
   orig: 315, 285
   offset: 0, 0
   index: -1
 PlayerGun2
   rotate: false
-  xy: 1090, 190
+  xy: 0, 477
   size: 405, 299
   orig: 405, 299
   offset: 0, 0
   index: -1
 playerIdle
   rotate: false
-  xy: 1265, 0
+  xy: 1299, 0
   size: 308, 190
   orig: 308, 190
   offset: 0, 0
   index: -1
+playerIdleKnife
+  rotate: false
+  xy: 775, 190
+  size: 308, 247
+  orig: 308, 247
+  offset: 0, 0
+  index: -1
+PlayerKnifeMove2
+  rotate: false
+  xy: 1398, 190
+  size: 254, 287
+  orig: 254, 287
+  offset: 0, 0
+  index: -1
 PlayerShoot1
   rotate: false
-  xy: 1005, 492
+  xy: 1662, 477
   size: 315, 393
   orig: 315, 393
   offset: 0, 0
   index: -1
 PlayerShoot2
   rotate: false
-  xy: 1320, 492
+  xy: 0, 870
   size: 405, 400
   orig: 405, 400
   offset: 0, 0
   index: -1
 PlayerSword
   rotate: false
-  xy: 0, 492
+  xy: 657, 477
   size: 253, 325
   orig: 253, 325
   offset: 0, 0
   index: -1
 PlayerUzi
   rotate: false
-  xy: 1495, 190
+  xy: 405, 477
   size: 252, 302
   orig: 252, 302
   offset: 0, 0
   index: -1
 PlayerWalk1
   rotate: false
-  xy: 564, 492
+  xy: 1221, 477
   size: 311, 353
   orig: 311, 353
   offset: 0, 0
   index: -1
 PlayerWalk2
   rotate: false
-  xy: 253, 492
+  xy: 910, 477
   size: 311, 332
   orig: 311, 332
   offset: 0, 0
@@ -173,7 +187,7 @@ RifleAmmo
   index: -1
 Rocket
   rotate: false
-  xy: 875, 492
+  xy: 1532, 477
   size: 130, 379
   orig: 130, 379
   offset: 0, 0
@@ -187,7 +201,7 @@ spiderIdle
   index: -1
 spiderLegsDown
   rotate: false
-  xy: 1573, 0
+  xy: 1607, 0
   size: 250, 190
   orig: 250, 190
   offset: 0, 0
@@ -197,5 +211,12 @@ spiderLegsUp
   xy: 1015, 0
   size: 250, 175
   orig: 250, 175
+  offset: 0, 0
+  index: -1
+Sword
+  rotate: false
+  xy: 1265, 0
+  size: 34, 183
+  orig: 34, 183
   offset: 0, 0
   index: -1

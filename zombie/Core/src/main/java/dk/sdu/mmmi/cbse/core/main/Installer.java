@@ -17,7 +17,7 @@ public class Installer extends ModuleInstall {
         cfg.title = "ZombieBoB 0.4.1";
         cfg.width = 1920;
         cfg.height = 1080;
-        cfg.fullscreen = true;
+        cfg.fullscreen = false;
         cfg.useGL30 = false;
         cfg.resizable = false;
 
