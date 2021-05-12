@@ -35,25 +35,24 @@
     <orderEntry type="library" name="Maven: org.netbeans.api:org-netbeans-api-annotations-common:RELEASE112" level="project" />
     <orderEntry type="module" module-name="Player" />
     <orderEntry type="module" module-name="Core" />
-    <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx-platform:natives-desktop:1.5.0" level="project" />
-    <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx-backend-lwjgl:1.5.0" level="project" />
-    <orderEntry type="library" name="Maven: org.lwjgl.lwjgl:lwjgl:2.9.1" level="project" />
-    <orderEntry type="library" name="Maven: org.lwjgl.lwjgl:lwjgl-platform:natives-windows:2.9.1" level="project" />
-    <orderEntry type="library" name="Maven: org.lwjgl.lwjgl:lwjgl-platform:natives-linux:2.9.1" level="project" />
-    <orderEntry type="library" name="Maven: org.lwjgl.lwjgl:lwjgl-platform:natives-osx:2.9.1" level="project" />
+    <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx-platform:natives-desktop:1.9.8" level="project" />
+    <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx-backend-lwjgl:1.9.8" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl.lwjgl:lwjgl:2.9.2" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl.lwjgl:lwjgl-platform:natives-windows:2.9.2" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl.lwjgl:lwjgl-platform:natives-linux:2.9.2" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl.lwjgl:lwjgl-platform:natives-osx:2.9.2" level="project" />
     <orderEntry type="library" name="Maven: net.java.jinput:jinput:2.0.5" level="project" />
     <orderEntry type="library" name="Maven: net.java.jutils:jutils:1.0.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: net.java.jinput:jinput-platform:natives-linux:2.0.5" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: net.java.jinput:jinput-platform:natives-windows:2.0.5" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: net.java.jinput:jinput-platform:natives-osx:2.0.5" level="project" />
-    <orderEntry type="library" name="Maven: org.lwjgl.lwjgl:lwjgl_util:2.9.1" level="project" />
+    <orderEntry type="library" name="Maven: org.lwjgl.lwjgl:lwjgl_util:2.9.2" level="project" />
     <orderEntry type="library" name="Maven: com.badlogicgames.jlayer:jlayer:1.0.1-gdx" level="project" />
     <orderEntry type="library" name="Maven: org.jcraft:jorbis:0.0.17" level="project" />
-    <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx-box2d:1.5.0" level="project" />
-    <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx-box2d-platform:natives-desktop:1.5.0" level="project" />
-    <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx-freetype:1.5.0" level="project" />
-    <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx-freetype-platform:natives-desktop:1.5.0" level="project" />
-    <orderEntry type="module" module-name="CommonTiles" />
+    <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx-box2d:1.9.8" level="project" />
+    <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx-box2d-platform:natives-desktop:1.9.8" level="project" />
+    <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx-freetype:1.9.8" level="project" />
+    <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx-freetype-platform:natives-desktop:1.9.8" level="project" />
     <orderEntry type="module" module-name="Movement" />
     <orderEntry type="module" module-name="TimerSystem" />
     <orderEntry type="module" module-name="HealthSystem" />
@@ -61,7 +60,6 @@
     <orderEntry type="module" module-name="CombatSystem" />
     <orderEntry type="module" module-name="AnimationSystem" />
     <orderEntry type="module" module-name="ProjectileSystem" />
-    <orderEntry type="module" module-name="Hotbar" />
     <orderEntry type="module" module-name="CommonEnemy" />
     <orderEntry type="module" module-name="CommonAnimation" />
     <orderEntry type="module" module-name="CollisionSystem" />
@@ -87,5 +85,7 @@
     <orderEntry type="module" module-name="Rifle" />
     <orderEntry type="module" module-name="AudioSystem" />
     <orderEntry type="module" module-name="ExplosionSystem" />
+    <orderEntry type="module" module-name="Hotbar" />
+    <orderEntry type="module" module-name="CommonTiles" />
   </component>
 </module>

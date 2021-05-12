@@ -5,6 +5,7 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.EnemyPart;
 import dk.sdu.mmmi.cbse.common.data.Position;
+import dk.sdu.mmmi.cbse.common.data.entitytypeparts.ZombiePart;
 
 public class ZombieCreator {
     public void createZombie(int health, Position position, World world){
@@ -57,6 +58,7 @@ public class ZombieCreator {
         world.addtoEntityPartMap(new LifePart(health), zombie);
         world.addtoEntityPartMap(new AiMovementPart(4), zombie);
         world.addtoEntityPartMap(new ColliderPart(40,40),zombie);
+        world.addtoEntityPartMap(new ZombiePart(), zombie);
         world.addtoEntityPartMap(audioPart, zombie);
         world.addtoEntityPartMap(combatPart, zombie);
         world.addtoEntityPartMap(createInitialAnimationEnemy(weaponAnimationPart), zombie);

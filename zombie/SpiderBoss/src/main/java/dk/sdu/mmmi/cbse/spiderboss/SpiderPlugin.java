@@ -23,6 +23,8 @@ public class SpiderPlugin implements IGamePluginService{
             for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(EnemyPart.class.getSimpleName()).entrySet()){
                 world.removeEntityParts(entry.getKey());
             }
+            SpiderWebProcessor.clearProcessingList();
+
         }
     }
 }

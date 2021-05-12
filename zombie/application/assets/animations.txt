@@ -1,18 +1,18 @@
 animations.png
-size: 1874, 1716
+size: 1874, 1704
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 enemyHit
   rotate: false
-  xy: 206, 173
+  xy: 456, 173
   size: 450, 263
   orig: 450, 263
   offset: 0, 0
   index: -1
 enemyWalk
   rotate: false
-  xy: 0, 173
+  xy: 250, 173
   size: 206, 200
   orig: 206, 200
   offset: 0, 0
@@ -26,72 +26,79 @@ explosion
   index: -1
 PlayerShootBazooka
   rotate: false
-  xy: 1386, 1204
+  xy: 1386, 1192
   size: 252, 512
   orig: 252, 512
   offset: 0, 0
   index: -1
 PlayerShootGun
   rotate: false
-  xy: 1244, 811
+  xy: 1244, 799
   size: 630, 393
   orig: 630, 393
   offset: 0, 0
   index: -1
 PlayerShootGunOLD
   rotate: false
-  xy: 0, 1204
+  xy: 0, 1192
   size: 630, 394
   orig: 630, 394
   offset: 0, 0
   index: -1
 PlayerShootRifle
   rotate: false
-  xy: 630, 1204
+  xy: 630, 1192
   size: 252, 399
   orig: 252, 399
   offset: 0, 0
   index: -1
 PlayerSwingSword
   rotate: false
-  xy: 0, 475
+  xy: 504, 463
   size: 672, 336
   orig: 672, 336
   offset: 0, 0
   index: -1
 PlayerWalk
   rotate: false
-  xy: 0, 811
+  xy: 0, 799
   size: 1244, 353
   orig: 1244, 353
   offset: 0, 0
   index: -1
 PlayerWalkBazooka
   rotate: false
-  xy: 882, 1204
+  xy: 882, 1192
   size: 504, 403
   orig: 504, 403
   offset: 0, 0
   index: -1
 PlayerWalkGun
   rotate: false
-  xy: 656, 173
+  xy: 906, 173
   size: 616, 290
   orig: 616, 290
   offset: 0, 0
   index: -1
 PlayerWalkRifle
   rotate: false
-  xy: 1272, 173
+  xy: 0, 463
   size: 504, 302
   orig: 504, 302
   offset: 0, 0
   index: -1
 PlayerWalkSword
   rotate: false
-  xy: 672, 475
+  xy: 1176, 463
   size: 512, 336
   orig: 512, 336
+  offset: 0, 0
+  index: -1
+spiderAttack
+  rotate: false
+  xy: 0, 173
+  size: 250, 189
+  orig: 250, 189
   offset: 0, 0
   index: -1
 spiderWalk

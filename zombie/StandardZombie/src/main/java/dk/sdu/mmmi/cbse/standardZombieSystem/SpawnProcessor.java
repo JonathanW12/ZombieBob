@@ -46,7 +46,7 @@ public class SpawnProcessor implements IEntityProcessingService {
                 difficulty = difficulty*2;
             }
 
-            if (level % 5 != 0) {
+            if (level % 500 != 0) {
                 if (level > min && level <= max) {
                     currentIncrease = difficulty * level;
                     for (int i = 0; i < level; i++) {

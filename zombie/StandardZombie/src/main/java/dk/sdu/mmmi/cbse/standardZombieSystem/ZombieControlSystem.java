@@ -7,28 +7,33 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.EnemyPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.VisualPart;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.PlayerPart;
+import dk.sdu.mmmi.cbse.common.data.entitytypeparts.ZombiePart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 @ServiceProviders(value = {
     @ServiceProvider(service = IEntityProcessingService.class)})
 public class ZombieControlSystem implements IEntityProcessingService {
-    
     private WeaponAnimationPart weaponAnimationPart;
+
 
     @Override
     public void process(GameData gameData, World world) {
-        if (world.getMapByPart(EnemyPart.class.getSimpleName()) != null) {
-            for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(EnemyPart.class.getSimpleName()).entrySet()){
-            
+
+        if (world.getMapByPart(ZombiePart.class.getSimpleName()) != null){
+         for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(ZombiePart.class.getSimpleName()).entrySet()){
+
                 MovingPart movingPart = (MovingPart) world.getMapByPart("MovingPart").get(entry.getKey());
                 VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entry.getKey());
                 AnimationPart animationPart = (AnimationPart) world.getMapByPart(AnimationPart.class.getSimpleName()).get(entry.getKey());
                 CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey());
-                
+
                 attackPlayer(world, entry.getKey());
 
                 // Animation processing
@@ -60,7 +65,7 @@ public class ZombieControlSystem implements IEntityProcessingService {
                     if (movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp()) {
                         animationPart.setCurrentAnimation("walk");
                     }
-                }    
+                }
             }
         }
     }
@@ -116,5 +121,5 @@ public class ZombieControlSystem implements IEntityProcessingService {
                 );
         }   
     }
-            
+
 }

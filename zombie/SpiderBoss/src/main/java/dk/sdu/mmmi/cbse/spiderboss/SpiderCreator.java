@@ -5,55 +5,47 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.EnemyPart;
+import dk.sdu.mmmi.cbse.common.data.entitytypeparts.SpiderPart;
 
 public class SpiderCreator {
+
+    SpiderWebCreator spiderWebCreator = new SpiderWebCreator();
+
     public void createSpiderBoss(int health, Position position, World world) {
         float speed = 2;
         float radians = 3.14159f / 2;
         float rotationSpeed = 3;
 
-        Entity zombie = new Entity();
+        Entity spider = new Entity();
 
-        // Standard zombie attack
-        Entity zombieAttack = new Entity();
-
-        WeaponPart weaponPart = new WeaponPart(
-                30,
-                40,
-                1f,
-                1
-        );
-        WeaponAnimationPart weaponAnimationPart = new WeaponAnimationPart(
-                "spiderIdle",
-                "spiderWalk",
-                "spiderWalk",
-                4,
-                4,
-                0.3f,
-                0.3f
-        );
-
-        world.addtoEntityPartMap(weaponPart, zombieAttack);
-        world.addtoEntityPartMap(weaponAnimationPart, zombieAttack);
+        // Creating webshooter for the spider
+        Entity webShooter = spiderWebCreator.createWebShooter(world);
 
         CombatPart combatPart = new CombatPart();
-        combatPart.setCurrentWeapon(zombieAttack.getUUID());
 
-        // Create zombie
+        WeaponAnimationPart weaponAnimationPart = (WeaponAnimationPart) world.getMapByPart(WeaponAnimationPart.class.getSimpleName()).get(webShooter.getUUID());
+        PositionPart positionPartWeb = new PositionPart(position.getX(),position.getY(),radians);
+        world.addtoEntityPartMap(positionPartWeb,webShooter);
+
+        // Setting webshooter as weapon
+        combatPart.setCurrentWeapon(webShooter.getUUID());
+
+        // Create Spdierboss
         ColliderPart colliderPart = new ColliderPart();
         for(int i = 0; i < 8; i++) {
             colliderPart.addShapePoint(25, (float) (i * Math.PI / 4));
         }
 
-        world.addtoEntityPartMap(new PositionPart(position.getX(), position.getY(), radians), zombie);
-        world.addtoEntityPartMap(new VisualPart("spiderIdle", 100, 100), zombie);
-        world.addtoEntityPartMap(new MovingPart(speed, rotationSpeed), zombie);
-        world.addtoEntityPartMap(new EnemyPart(), zombie);
-        world.addtoEntityPartMap(new LifePart(health), zombie);
-        world.addtoEntityPartMap(new AiMovementPart(4), zombie);
-        world.addtoEntityPartMap(colliderPart,zombie);
-        world.addtoEntityPartMap(combatPart, zombie);
-        world.addtoEntityPartMap(createInitialAnimationSpider(weaponAnimationPart), zombie);
+        world.addtoEntityPartMap(new PositionPart(position.getX(), position.getY(), radians), spider);
+        world.addtoEntityPartMap(new VisualPart("spiderIdle", 100, 100), spider);
+        world.addtoEntityPartMap(new MovingPart(speed, rotationSpeed), spider);
+        world.addtoEntityPartMap(new EnemyPart(), spider);
+        world.addtoEntityPartMap(new LifePart(health), spider);
+        world.addtoEntityPartMap(new AiMovementPart(4), spider);
+        world.addtoEntityPartMap(colliderPart,spider);
+        world.addtoEntityPartMap(combatPart, spider);
+        world.addtoEntityPartMap(new SpiderPart(),spider);
+        world.addtoEntityPartMap(createInitialAnimationSpider(weaponAnimationPart), spider);
     }
 
     // Armed initial animation
@@ -80,4 +72,6 @@ public class SpiderCreator {
 
         return animationPart;
     }
+
+
 }
