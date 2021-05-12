@@ -57,14 +57,14 @@
 
             <!-- SilentUpdate Module Dependency for later use-->
         <!--
-        <dependency>
+-->        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>SilentUpdate</artifactId>
             <version>${project.version}</version>
         </dependency>
-        -->
+        
 
-        <dependency>
+<!--        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Common</artifactId>
             <version>${project.version}</version>
@@ -212,7 +212,7 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>CommonTiles</artifactId>
             <version>${project.version}</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
 

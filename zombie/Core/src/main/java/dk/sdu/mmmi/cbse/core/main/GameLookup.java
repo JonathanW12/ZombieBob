@@ -51,7 +51,6 @@ public class GameLookup {
         gamePlugins.clear();
         
         for (IGamePluginService plugin : result.allInstances()) {
-            plugin.stop(gameData, world);
             plugin.start(gameData, world);
             gamePlugins.add(plugin);
         }

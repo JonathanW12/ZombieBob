@@ -26,6 +26,7 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.TextPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.VisualPart;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.PlayerPart;
 import dk.sdu.mmmi.cbse.commonanimation.Animation;
+import dk.sdu.mmmi.cbse.core.main.UpdatesEditor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -182,8 +183,14 @@ public class RenderProcessor {
 
         clearSortedVisualList();
 
-        if (gameData.getKeys().isDown(GameKeys.SPACE)) {
-            drawHitboxes();
+        if (gameData.getKeys().isPressed(GameKeys.SPACE)) {
+            
+            UpdatesEditor updatesEditor = UpdatesEditor.getInstance();
+            if(updatesEditor.isActive("CollisionSystem")){
+                updatesEditor.deactivate("CollisionSystem");
+            } else {
+                updatesEditor.activate("CollisionSystem");
+            }
         }
     }
 
