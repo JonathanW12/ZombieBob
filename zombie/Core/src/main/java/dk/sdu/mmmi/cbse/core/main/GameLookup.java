@@ -11,17 +11,18 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
+import dk.sdu.mmmi.cbse.common.services.IMapService;
 
 public class GameLookup {
     
     private GameData gameData;
     private World world;
-    
+    private static GameLookup instance;
     private final Lookup lookup;
     private List<IGamePluginService> gamePlugins;
     private Lookup.Result<IGamePluginService> result;
        
-    public GameLookup(GameData gameData, World world) {
+    private GameLookup(GameData gameData, World world) {
         this.gameData = gameData;
         this.world = world;
         lookup = Lookup.getDefault();
@@ -31,12 +32,37 @@ public class GameLookup {
         result = lookup.lookupResult(IGamePluginService.class);
         result.addLookupListener(lookupListener);
         result.allItems();
-
-        // Start all game plugins found by lookup
+        
+        initializePlugins();
+    }
+    
+    private void initializePlugins() {
+        gamePlugins.clear();
+        
         for (IGamePluginService plugin : result.allInstances()) {
             plugin.start(gameData, world);
             gamePlugins.add(plugin);
         }
+    }
+    
+    // Restart all game plugins found by lookup
+    public void restartPlugins() {
+        world.clearEntityMaps();
+        gamePlugins.clear();
+        
+        for (IGamePluginService plugin : result.allInstances()) {
+            plugin.stop(gameData, world);
+            plugin.start(gameData, world);
+            gamePlugins.add(plugin);
+        }
+    }
+    
+    public static GameLookup getInstance(GameData gameData, World world) {
+        if (instance == null) {
+            instance = new GameLookup(gameData, world);
+        }
+        
+        return instance;
     }
     
     public Collection<? extends IEntityProcessingService> getEntityProcessingServices() {
@@ -45,6 +71,10 @@ public class GameLookup {
 
     public Collection<? extends IPostEntityProcessingService> getPostEntityProcessingServices() {
         return lookup.lookupAll(IPostEntityProcessingService.class);
+    }
+    
+    public IMapService getMapService() {
+        return lookup.lookup(IMapService.class);
     }
 
     public final LookupListener lookupListener = new LookupListener() {

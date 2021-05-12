@@ -17,9 +17,6 @@ import java.util.UUID;
     @ServiceProvider(service = IEntityProcessingService.class)})
 public class ZombieControlSystem implements IEntityProcessingService {
     
-    private final long spawnDelay = 5000;
-    private long currentTime = System.currentTimeMillis();
-    private long lastSpawnTime = currentTime;
     private WeaponAnimationPart weaponAnimationPart;
 
     @Override
@@ -27,13 +24,12 @@ public class ZombieControlSystem implements IEntityProcessingService {
         if (world.getMapByPart(EnemyPart.class.getSimpleName()) != null) {
             for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(EnemyPart.class.getSimpleName()).entrySet()){
             
-                PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(entry.getKey());
                 MovingPart movingPart = (MovingPart) world.getMapByPart("MovingPart").get(entry.getKey());
                 VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entry.getKey());
                 AnimationPart animationPart = (AnimationPart) world.getMapByPart(AnimationPart.class.getSimpleName()).get(entry.getKey());
                 CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey());
                 
-                attackPlayer(gameData, world, entry.getKey());
+                attackPlayer(world, entry.getKey());
 
                 // Animation processing
                 if (!animationPart.isCurrentAnimationInterruptible() && !animationPart.hasCurrentAnimationLooped()) {
@@ -44,7 +40,6 @@ public class ZombieControlSystem implements IEntityProcessingService {
                     );
                 }
 
-                
                 if (combatPart != null && combatPart.getCurrentWeapon() != null) {
                     weaponAnimationPart = (WeaponAnimationPart) world.getMapByPart(
                         WeaponAnimationPart.class.getSimpleName()).get(combatPart.getCurrentWeapon()
@@ -68,11 +63,9 @@ public class ZombieControlSystem implements IEntityProcessingService {
                 }    
             }
         }
-        
-        //spawnZombies(gameData, world);
     }
     
-    private void attackPlayer(GameData gameData, World world, UUID zombieID) {
+    private void attackPlayer(World world, UUID zombieID) {
         PositionPart zombiePos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(zombieID);
         CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(zombieID);
         WeaponPart weaponPart = (WeaponPart) world.getMapByPart(WeaponPart.class.getSimpleName()).get(combatPart.getCurrentWeapon());
@@ -93,24 +86,10 @@ public class ZombieControlSystem implements IEntityProcessingService {
                     combatPart.setAttacking(true);
                     // OBS
                     lifePart.setLife(lifePart.getLife()-weaponPart.getDamage());
-
                 } 
             }
         }
     }
-    /*
-    private void spawnZombies(GameData gameData, World world) {
-        currentTime = System.currentTimeMillis();
-        if (currentTime > lastSpawnTime + spawnDelay) {
-            float spawnX = gameData.getDisplayWidth() - 25;
-            float spawnY = gameData.getDisplayHeight() / 2;
-            
-            ZombiePlugin.createZombie(gameData, world, spawnX, spawnY);
-            lastSpawnTime = currentTime;
-        }
-    }
-
-     */
     
     private void setAnimation(AnimationPart animationPart, WeaponAnimationPart weaponAnimation) {
         if (animationPart.getAnimationByName("hit") == null ||

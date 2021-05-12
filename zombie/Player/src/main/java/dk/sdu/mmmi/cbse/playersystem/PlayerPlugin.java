@@ -29,6 +29,17 @@ public class PlayerPlugin implements IGamePluginService {
 
         Entity player = new Entity();
         
+        AudioPart audioPart = new AudioPart("walking-sound.wav");
+        audioPart.setStandardDelay(300L);
+        
+        ColliderPart collider = new ColliderPart();
+        collider.addShapePoint(25,(float)Math.PI/6);
+        collider.addShapePoint(40,(float)Math.PI/2);
+        collider.addShapePoint(25,5*(float)Math.PI/6);
+        collider.addShapePoint(25,(float)(Math.PI+Math.PI/6));
+        collider.addShapePoint(40,(float)(Math.PI+Math.PI/2));
+        collider.addShapePoint(25,(float)(Math.PI+5*Math.PI/6));
+        
         world.addtoEntityPartMap(new PositionPart(x, y, radians), player);
         world.addtoEntityPartMap(new VisualPart("playerIdle", 80, 80,3), player);
         world.addtoEntityPartMap(new MovingPart(speed,rotationSpeed),player);
@@ -39,21 +50,17 @@ public class PlayerPlugin implements IGamePluginService {
         world.addtoEntityPartMap(new WeaponInventoryPart(4), player);
         world.addtoEntityPartMap(new CombatPart(), player);
         world.addtoEntityPartMap(new CollectorPart(), player);
-        ColliderPart collider = new ColliderPart();
-        collider.addShapePoint(25,(float)Math.PI/6);
-        collider.addShapePoint(40,(float)Math.PI/2);
-        collider.addShapePoint(25,5*(float)Math.PI/6);
-        collider.addShapePoint(25,(float)(Math.PI+Math.PI/6));
-        collider.addShapePoint(40,(float)(Math.PI+Math.PI/2));
-        collider.addShapePoint(25,(float)(Math.PI+5*Math.PI/6));
+        world.addtoEntityPartMap(audioPart, player);
         world.addtoEntityPartMap(collider, player);
         world.addtoEntityPartMap(createInitialAnimation(), player);
     }
 
     @Override
     public void stop(GameData gameData, World world) {
-        for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(PlayerPart.class.getSimpleName()).entrySet()){
-            world.removeEntityParts(entry.getKey());
+        if (world.getMapByPart(PlayerPart.class.getSimpleName()) != null) {
+            for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(PlayerPart.class.getSimpleName()).entrySet()){
+                world.removeEntityParts(entry.getKey());
+            }
         }
     }
     

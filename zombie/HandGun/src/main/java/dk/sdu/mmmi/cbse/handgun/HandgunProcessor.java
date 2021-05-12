@@ -51,4 +51,8 @@ public class HandgunProcessor implements IEntityProcessingService {
         guns.add(gun);
     }
     
+    protected static void clearProcessingList() {
+        guns.clear();
+    }
+    
 }

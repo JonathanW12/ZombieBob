@@ -1,17 +1,18 @@
 package dk.sdu.mmmi.cbse.core.main;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import org.openide.modules.ModuleInstall;
 
 public class Installer extends ModuleInstall {
 
-    private static Game g;
+    private static ApplicationListener g;
 
     @Override
     public void restored() {
 
-        g = new Game();
+        g = new ZombieBobGame();
 
         LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
         cfg.title = "ZombieBoB 0.4.1";

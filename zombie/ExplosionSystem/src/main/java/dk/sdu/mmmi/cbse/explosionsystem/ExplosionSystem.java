@@ -4,6 +4,7 @@ import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.AnimationPart;
+import dk.sdu.mmmi.cbse.common.data.entityparts.AudioPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.ColliderPart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.DamagePart;
 import dk.sdu.mmmi.cbse.common.data.entityparts.EntityPart;
@@ -48,13 +49,16 @@ public class ExplosionSystem implements IEntityProcessingService {
                         false // Animation can't be interrupted
                     );
                     animationPart.setCurrentAnimation("explode");
+                    
+                    AudioPart explosionSound = new AudioPart("rocket-explosion.wav");
+                    explosionSound.setIsPlaying(true);
 
                     world.addtoEntityPartMap(new PositionPart(positionPart.getX(), positionPart.getY(), radians), explosion);
                     world.addtoEntityPartMap(new ColliderPart(width, height), explosion);
                     world.addtoEntityPartMap(new DamagePart(800), explosion);
                     world.addtoEntityPartMap(new VisualPart("idleExplosion", width * 2, height * 2, 3), explosion);
                     world.addtoEntityPartMap(animationPart, explosion);
-                    
+                    world.addtoEntityPartMap(explosionSound, explosion);
                     
                     activeExplosions.put(explosion, System.currentTimeMillis());
                 }

@@ -13,7 +13,7 @@ import org.openide.util.lookup.ServiceProvider;
 @ServiceProvider(service = IEntityProcessingService.class)
 public class SpawnProcessor implements IEntityProcessingService{
 
-    private boolean spawnedWeapon;
+    private static boolean spawnedWeapon;
     private RifleCreator rifleCreator;
     private Random randomGenerator;
     
@@ -33,6 +33,10 @@ public class SpawnProcessor implements IEntityProcessingService{
             spawn.setCurrentItem(rifleID);
             spawnedWeapon = true;
         }
+    }
+    
+    protected static void resetSpawnProcessor() {
+        spawnedWeapon = false;
     }
     
     private ItemSpawn getSpawnPosition(World world) {

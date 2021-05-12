@@ -46,6 +46,10 @@ public class RocketLauncherProcessor implements IEntityProcessingService {
             }
         }
     }
+    
+    protected static void clearProcessingList() {
+        rocketLaunchers.clear();
+    }
 
     protected static void addToProcessingList(Entity rocketLauncher) {
         rocketLaunchers.add(rocketLauncher);

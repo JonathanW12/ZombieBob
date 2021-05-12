@@ -22,9 +22,20 @@ public class AudioSystem implements IEntityProcessingService {
                 if (audioPart.getIsRandomlyReplaying()) {
                     if (System.currentTimeMillis() > audioPart.getActualDelay() + audioPart.getLastReplayTime()) {
                         audioPart.setIsPlaying(true);
-                        audioPart.resetDelayTimer();
+                        audioPart.resetReplayingDelayTimer();
                     }
                 }
+                
+                // Handle standard delay
+                if (audioPart.getStandardDelay() > 0L) {
+                    if (audioPart.getIsPlaying()) {
+                        if ((audioPart.getStandardDelay() + audioPart.getLastReplayTime() >= System.currentTimeMillis())) {
+                            audioPart.setIsPlaying(false);
+                        } else {
+                            audioPart.resetStandardDelayTimer();
+                        }
+                    }
+                } 
             }
         }
     }

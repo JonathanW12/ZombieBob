@@ -9,6 +9,8 @@ public class AudioPart implements EntityPart {
     private boolean isRandomlyReplaying;
     private long minReplayDelay;
     private long maxReplayDelay;
+    private long standardDelay;
+
     private long actualDelay;
     private long lastReplayTime;
     private final Random randomGenerator;
@@ -19,6 +21,7 @@ public class AudioPart implements EntityPart {
         isRandomlyReplaying = false;
         minReplayDelay = 0L;
         maxReplayDelay = 0L;
+        standardDelay = 0L;
         actualDelay = 0L;
         lastReplayTime = System.currentTimeMillis();
         randomGenerator = new Random();
@@ -35,14 +38,18 @@ public class AudioPart implements EntityPart {
         this.maxReplayDelay = maxReplayDelay;
         
         isRandomlyReplaying = true;
-        resetDelayTimer();
+        resetReplayingDelayTimer();
     }
     
-    public void resetDelayTimer() {
+    public void resetReplayingDelayTimer() {
         long newRandomDelay = randomGenerator.nextInt((int) (maxReplayDelay - minReplayDelay)) + minReplayDelay;
         lastReplayTime = System.currentTimeMillis();
         
         actualDelay = newRandomDelay;
+    }
+    
+    public void resetStandardDelayTimer() {
+        lastReplayTime = System.currentTimeMillis();
     }
             
     public String getFileName() {
@@ -71,6 +78,14 @@ public class AudioPart implements EntityPart {
     
     public long getActualDelay() {
         return actualDelay;
+    }
+    
+    public long getStandardDelay() {
+        return standardDelay;
+    }
+
+    public void setStandardDelay(long standardDelay) {
+        this.standardDelay = standardDelay;
     }
     
     public void setFileName(String fileName) {

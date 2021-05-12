@@ -15,7 +15,7 @@ public class SpawnProcessor implements IEntityProcessingService {
 
     private ZombieCreator zombieCreator = new ZombieCreator();
     private int level;
-    private int previousLevel;
+    private int nextLevel;
     double defaultHealth;
     double difficulty;
     //double increment = difficulty * level;
@@ -26,7 +26,7 @@ public class SpawnProcessor implements IEntityProcessingService {
     private List<Position> spawnPositions;
 
     public SpawnProcessor() {
-        previousLevel = 1;
+        nextLevel = 1;
         defaultHealth = 100;
         difficulty = 0.10;
         min = 0;
@@ -39,7 +39,7 @@ public class SpawnProcessor implements IEntityProcessingService {
 
         level = gameData.getLevelInformation().getCurrentLevel();
 
-        if (level > min && level == previousLevel) {
+        if (level > min && level == nextLevel) {
             spawnPositions = world.getEnemySpawnPositions();
 
             if (level % 10 == 0){
@@ -64,8 +64,12 @@ public class SpawnProcessor implements IEntityProcessingService {
                     }
                 }
             }
-            previousLevel++;
+            nextLevel++;
         }
 
+        // Handles map reset
+        if (level == 0) {
+            nextLevel = 1;
+        }
     }
 }

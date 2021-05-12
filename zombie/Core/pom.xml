@@ -112,7 +112,7 @@
 
     </dependencies>
     <properties>
-        <libGDX.version>1.5.0</libGDX.version>
+        <libGDX.version>1.9.8</libGDX.version>
     </properties>
     <build>
         <plugins>

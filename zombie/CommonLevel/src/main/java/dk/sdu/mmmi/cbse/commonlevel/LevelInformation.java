@@ -19,4 +19,9 @@ public class LevelInformation {
     public void setEnemiesKilled(int enemiesKilled) {
         this.enemiesKilled = enemiesKilled;
     }
+    
+    public void resetLevel() {
+        currentLevel = 0;
+        enemiesKilled = 0;
+    }
 }

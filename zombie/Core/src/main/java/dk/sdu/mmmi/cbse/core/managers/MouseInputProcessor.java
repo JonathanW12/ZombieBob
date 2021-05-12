@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import dk.sdu.mmmi.cbse.common.data.GameData;
+import dk.sdu.mmmi.cbse.common.data.MouseMovement;
 
 public class MouseInputProcessor implements InputProcessor {
 
@@ -37,13 +38,13 @@ public class MouseInputProcessor implements InputProcessor {
     public boolean touchDown(int i, int i1, int i2, int i3) {
 
         if (i3 == Input.Buttons.LEFT){
-            gameData.getMouse().setLeftClick(true);
+            gameData.getMouse().setKey(MouseMovement.LEFTCLICK, true);
         }
         if (i3 == Input.Buttons.RIGHT){
-            gameData.getMouse().setRightClick(true);
+            gameData.getMouse().setKey(MouseMovement.RIGHTCLICK, true);
         }
         if (i3 == Input.Buttons.MIDDLE){
-            gameData.getMouse().setMiddleClick(true);
+            gameData.getMouse().setKey(MouseMovement.MIDDLECLICK, true);
         }
         return false;
     }
@@ -52,13 +53,13 @@ public class MouseInputProcessor implements InputProcessor {
     public boolean touchUp(int i, int i1, int i2, int i3) {
 
         if (i3 == Input.Buttons.LEFT){
-            gameData.getMouse().setLeftClick(false);
+            gameData.getMouse().setKey(MouseMovement.LEFTCLICK, false);
         }
         if (i3 == Input.Buttons.RIGHT){
-            gameData.getMouse().setRightClick(false);
+            gameData.getMouse().setKey(MouseMovement.RIGHTCLICK, false);
         }
         if (i3 == Input.Buttons.MIDDLE){
-            gameData.getMouse().setMiddleClick(false);
+            gameData.getMouse().setKey(MouseMovement.MIDDLECLICK, false);
         }
 
         return false;
