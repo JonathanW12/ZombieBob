@@ -112,7 +112,7 @@ public class PauseMenuScreen extends MenuScreenTemplate implements Screen {
     
     private void handleSettingsButton() {
         if ((isMouseOnActor(settingsButton) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK))) {
-            // getGame().setScreen(new GameScreen(getGame()));
+             getGame().setScreen(new ModuleHandlerScreen(getGame()));
         }
     }
     

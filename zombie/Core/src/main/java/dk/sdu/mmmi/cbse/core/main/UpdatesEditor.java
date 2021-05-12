@@ -127,8 +127,8 @@ public class UpdatesEditor {
                 newContent += string;
                 newContent += newline;
             }
-            System.out.println("New Content: ");
-            System.out.print(newContent);
+            //System.out.println("New Content: ");
+            //System.out.print(newContent);
            
         
         
