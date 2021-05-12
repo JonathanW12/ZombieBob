@@ -68,7 +68,6 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
         super.update();
         handleMapNavButton();
         handleMapSelectButtons();
-        handleHighScoreButton();
     }
 
     private void setupUI() {
@@ -205,13 +204,6 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
             startSelectedMap();
         }
     }
-
-    private void handleHighScoreButton(){
-        if (getGameData().getKeys().isPressed(GameKeys.SHIFT)) {
-            getGame().setScreen(new HighscoreScreen(getGame()));
-        }
-    }
-
 
     private void startSelectedMap() {
         getWorld().clearEntityMaps();

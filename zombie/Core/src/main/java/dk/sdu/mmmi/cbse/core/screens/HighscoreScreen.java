@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
-import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.common.data.MouseMovement;
 import dk.sdu.mmmi.cbse.core.main.ZombieBobGame;
 import java.io.BufferedReader;
@@ -17,7 +16,6 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import org.json.JSONArray;
 
@@ -36,19 +34,17 @@ public class HighscoreScreen extends MenuScreenTemplate implements Screen {
         setupUI();
     }
 
-
-
     @Override
     public void render(float delta) {
         super.render(delta);
 
         secondaryBatch.begin();
 
-        float estimatedTitleWidth = 635;
+        float estimatedTitleWidth = 660;
         title.setColor(0.541f, 0.011f, 0.011f, 1);
         title.draw(
                 secondaryBatch,
-                "Highscore",
+                "Highscores",
                 getStage().getWidth() / 2 - estimatedTitleWidth / 2,
                 getStage().getHeight() - 150
         );
@@ -62,7 +58,6 @@ public class HighscoreScreen extends MenuScreenTemplate implements Screen {
     public void update() {
         super.update();
         handleMainMenuButton();
-        handleGameOverButton();
     }
 
     private void setupUI() {
@@ -138,7 +133,7 @@ public class HighscoreScreen extends MenuScreenTemplate implements Screen {
                     buttonWidth,
                     buttonHeight
             );
-            scoreLabel[1].setAlignment(Align.center);
+            scoreLabel[1].setAlignment(Align.right);
             
             i++;
         }
@@ -170,12 +165,6 @@ public class HighscoreScreen extends MenuScreenTemplate implements Screen {
     private void handleMainMenuButton() {
         if ((isMouseOnActor(mainMenuButton) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK))) {
             getGame().setScreen(new MainMenuScreen(getGame()));
-        }
-    }
-
-    private void handleGameOverButton(){
-        if (getGameData().getKeys().isPressed(GameKeys.SHIFT)) {
-            getGame().setScreen(new GameOverScreen(getGame()));
         }
     }
 

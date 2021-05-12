@@ -6,10 +6,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.Align;
-import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.MouseMovement;
 import dk.sdu.mmmi.cbse.core.main.ZombieBobGame;
-
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class GameOverScreen extends MenuScreenTemplate implements Screen {
@@ -19,7 +24,7 @@ public class GameOverScreen extends MenuScreenTemplate implements Screen {
     private Label mainMenuButton,submitHighscoreBtn, score;
     private TextField nameField;
     private ArrayList<Label[]> highscoreList = new ArrayList<>();
-    private final static String highscoreURL = "https://zombiebob-map-generator.herokuapp.com/get-highscores";
+    
     public GameOverScreen(ZombieBobGame game) {
         super(game);
         secondaryBatch = new SpriteBatch();
@@ -37,7 +42,7 @@ public class GameOverScreen extends MenuScreenTemplate implements Screen {
         title.setColor(0.541f, 0.011f, 0.011f, 1);
         title.draw(
                 secondaryBatch,
-                "GameOver",
+                "Game Over",
                 getStage().getWidth() / 2 - estimatedTitleWidth / 2,
                 getStage().getHeight() - 150
         );
@@ -51,6 +56,7 @@ public class GameOverScreen extends MenuScreenTemplate implements Screen {
     public void update() {
         super.update();
         handleMainMenuButton();
+        handleSubmitScoreButton();
     }
 
     private void setupUI() {
@@ -58,47 +64,49 @@ public class GameOverScreen extends MenuScreenTemplate implements Screen {
         float buttonHeight = 75;
 
         title = getTitleFont();
-
-        addHighscore();
-
-
-
+        
+        // Name text field
         nameField = new TextField("John Doe", getSkin(), "default");
         nameField.setBounds(
                 getStage().getWidth() / 2 - buttonWidth / 2,
-                getStage().getHeight() / 2,
+                getStage().getHeight() / 2 + 100,
                 buttonWidth,
                 buttonHeight
         );
         nameField.setAlignment(Align.center);
         getStage().addActor(nameField);
 
-        String enemiesKilled = "" + getGameData().getLevelInformation().getEnemiesKilled();
-
-        score = new Label(enemiesKilled, getSkin(), "title-plain");
+        // Score label
+        score = new Label(
+                "Score: " + getGameData().getLevelInformation().getEnemiesKilled() * 100,
+                getSkin(),
+                "title-plain"
+        );
         score.setBounds(
                 getStage().getWidth() / 2 - buttonWidth / 2,
-                getStage().getHeight() / 3,
+                getStage().getHeight() / 2 + 30,
                 buttonWidth,
                 buttonHeight
         );
         score.setAlignment(Align.center);
         getStage().addActor(score);
 
+        // Submit button
         submitHighscoreBtn = new Label("Submit Highscore", getSkin(), "title");
         submitHighscoreBtn.setBounds(
                 getStage().getWidth() / 2 - buttonWidth / 2,
-                getStage().getHeight() / 84,
+                200,
                 buttonWidth,
                 buttonHeight
         );
         submitHighscoreBtn.setAlignment(Align.center);
+        getStage().addActor(submitHighscoreBtn);
 
         // Create main menu button
         mainMenuButton = new Label("Main Menu", getSkin(), "title");
         mainMenuButton.setBounds(
                 getStage().getWidth() / 2 - buttonWidth / 2,
-                getStage().getHeight() / 8,
+                100,
                 buttonWidth,
                 buttonHeight
         );
@@ -107,9 +115,35 @@ public class GameOverScreen extends MenuScreenTemplate implements Screen {
         getStage().addActor(mainMenuButton);
         drawScoreLabels();
     }
+    
+    private void handleSubmitScoreButton() {
+        if (isMouseOnActor(submitHighscoreBtn) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK)) {
+            try {
+                System.out.println("Clicked");
+                addHighscore();
+            } catch (IOException e) {
+               e.printStackTrace();
+            }
+        }
+    }
 
-    private void addHighscore() {
-
+    private void addHighscore() throws MalformedURLException, ProtocolException, IOException {
+        String name = URLEncoder.encode(nameField.getText(), StandardCharsets.UTF_8);
+        String score = "" + getGameData().getLevelInformation().getEnemiesKilled() * 100;
+        
+        if (name.equals("")) {
+            name = "Anonymous";
+        }
+        
+        URL url = new URL("https://zombiebob-map-generator.herokuapp.com/add-highscore?name=" + name + "&score=" + score);
+        
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+        
+        connection.getInputStream();
+        connection.disconnect();
+        
+        getGame().setScreen(new HighscoreScreen(getGame()));
     }
 
     private void drawScoreLabels() {
@@ -141,31 +175,7 @@ public class GameOverScreen extends MenuScreenTemplate implements Screen {
             i++;
         }
     }
-
-    /*
-    // From https://stackoverflow.com/questions/4308554/simplest-way-to-read-json-from-a-url-in-java
-    private static String readAll(Reader rd) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        int cp;
-        while ((cp = rd.read()) != -1) {
-            sb.append((char) cp);
-        }
-        return sb.toString();
-    }
-
-    private static JSONObject getHighscoresJSON() throws IOException, JSONException {
-        InputStream inputStream = new URL(highscoreURL).openStream();
-
-        try {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
-            String jsonText = readAll(rd);
-            JSONObject json = new JSONObject(jsonText);
-            return json;
-        } finally {
-            inputStream.close();
-        }
-    }
-*/
+    
     private void handleMainMenuButton() {
         if ((isMouseOnActor(mainMenuButton) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK))) {
             getGame().setScreen(new MainMenuScreen(getGame()));

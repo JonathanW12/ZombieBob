@@ -13,7 +13,7 @@ public class PauseMenuScreen extends MenuScreenTemplate implements Screen {
     
     private BitmapFont title;
     private final SpriteBatch secondaryBatch; 
-    private Label resumeButton, settingsButton, mainMenuButton, exitButton;
+    private Label resumeButton, settingsButton, mainMenuButton, highscoresButton, exitButton;
     
     public PauseMenuScreen(ZombieBobGame game) {
         super(game);
@@ -48,6 +48,7 @@ public class PauseMenuScreen extends MenuScreenTemplate implements Screen {
         handleResumeButton();
         handleSettingsButton();
         handleMainMenuButton();
+        handleHighscoresButton();
         handleExitButton();
     }
     
@@ -77,6 +78,16 @@ public class PauseMenuScreen extends MenuScreenTemplate implements Screen {
         );
         settingsButton.setAlignment(Align.center);
         
+        // Create highscores button
+        highscoresButton = new Label("Highscores", getSkin(), "title");
+        highscoresButton.setBounds(
+                getStage().getWidth() / 2 - buttonWidth / 2,
+                getStage().getHeight() - 800,
+                buttonWidth,
+                buttonHeight
+        );
+        highscoresButton.setAlignment(Align.center);
+        
         // Create main menu button
         mainMenuButton = new Label("Main Manu", getSkin(), "title");
         mainMenuButton.setBounds(
@@ -86,12 +97,12 @@ public class PauseMenuScreen extends MenuScreenTemplate implements Screen {
                 buttonHeight
         );
         mainMenuButton.setAlignment(Align.center);
-        
+
         // Create exit button
         exitButton = new Label("Exit Game", getSkin(), "title");
         exitButton.setBounds(
                 getStage().getWidth() / 2 - buttonWidth / 2,
-                getStage().getHeight() - 800,
+                getStage().getHeight() - 900,
                 buttonWidth,
                 buttonHeight
         );
@@ -100,6 +111,7 @@ public class PauseMenuScreen extends MenuScreenTemplate implements Screen {
         // Add buttons to stage
         getStage().addActor(resumeButton);
         getStage().addActor(settingsButton);
+        getStage().addActor(highscoresButton);
         getStage().addActor(mainMenuButton);
         getStage().addActor(exitButton);
     }
@@ -113,6 +125,12 @@ public class PauseMenuScreen extends MenuScreenTemplate implements Screen {
     private void handleSettingsButton() {
         if ((isMouseOnActor(settingsButton) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK))) {
             // getGame().setScreen(new GameScreen(getGame()));
+        }
+    }
+    
+    private void handleHighscoresButton() {
+        if ((isMouseOnActor(highscoresButton) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK))) {
+            getGame().setScreen(new HighscoreScreen(getGame()));
         }
     }
     
