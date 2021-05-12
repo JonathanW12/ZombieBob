@@ -94,6 +94,11 @@
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20210307</version>
+        </dependency>
 <!--        <dependency>
             <groupId>com.codeandweb.physicseditor</groupId>
             <artifactId>gdx-pe-loader</artifactId>
