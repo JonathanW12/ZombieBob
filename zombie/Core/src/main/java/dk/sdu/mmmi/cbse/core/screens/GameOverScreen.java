@@ -4,39 +4,28 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.Align;
-import dk.sdu.mmmi.cbse.common.data.GameKeys;
+import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.MouseMovement;
 import dk.sdu.mmmi.cbse.core.main.ZombieBobGame;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.URL;
-import java.nio.charset.Charset;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import org.json.JSONArray;
 
-public class HighscoreScreen extends MenuScreenTemplate implements Screen {
+public class GameOverScreen extends MenuScreenTemplate implements Screen {
 
     private BitmapFont title;
     private final SpriteBatch secondaryBatch;
-    private Label mainMenuButton, highscoreName, highscoreScore;
+    private Label mainMenuButton,submitHighscoreBtn, score;
+    private TextField nameField;
     private ArrayList<Label[]> highscoreList = new ArrayList<>();
     private final static String highscoreURL = "https://zombiebob-map-generator.herokuapp.com/get-highscores";
-
-    public HighscoreScreen(ZombieBobGame game) {
+    public GameOverScreen(ZombieBobGame game) {
         super(game);
         secondaryBatch = new SpriteBatch();
 
         setupUI();
     }
-
-
 
     @Override
     public void render(float delta) {
@@ -48,7 +37,7 @@ public class HighscoreScreen extends MenuScreenTemplate implements Screen {
         title.setColor(0.541f, 0.011f, 0.011f, 1);
         title.draw(
                 secondaryBatch,
-                "Highscore",
+                "GameOver",
                 getStage().getWidth() / 2 - estimatedTitleWidth / 2,
                 getStage().getHeight() - 150
         );
@@ -62,7 +51,6 @@ public class HighscoreScreen extends MenuScreenTemplate implements Screen {
     public void update() {
         super.update();
         handleMainMenuButton();
-        handleGameOverButton();
     }
 
     private void setupUI() {
@@ -71,7 +59,40 @@ public class HighscoreScreen extends MenuScreenTemplate implements Screen {
 
         title = getTitleFont();
 
-        addScoreLabels();
+        addHighscore();
+
+
+
+        nameField = new TextField("John Doe", getSkin(), "default");
+        nameField.setBounds(
+                getStage().getWidth() / 2 - buttonWidth / 2,
+                getStage().getHeight() / 2,
+                buttonWidth,
+                buttonHeight
+        );
+        nameField.setAlignment(Align.center);
+        getStage().addActor(nameField);
+
+        String enemiesKilled = "" + getGameData().getLevelInformation().getEnemiesKilled();
+
+        score = new Label(enemiesKilled, getSkin(), "title-plain");
+        score.setBounds(
+                getStage().getWidth() / 2 - buttonWidth / 2,
+                getStage().getHeight() / 3,
+                buttonWidth,
+                buttonHeight
+        );
+        score.setAlignment(Align.center);
+        getStage().addActor(score);
+
+        submitHighscoreBtn = new Label("Submit Highscore", getSkin(), "title");
+        submitHighscoreBtn.setBounds(
+                getStage().getWidth() / 2 - buttonWidth / 2,
+                getStage().getHeight() / 84,
+                buttonWidth,
+                buttonHeight
+        );
+        submitHighscoreBtn.setAlignment(Align.center);
 
         // Create main menu button
         mainMenuButton = new Label("Main Menu", getSkin(), "title");
@@ -86,38 +107,15 @@ public class HighscoreScreen extends MenuScreenTemplate implements Screen {
         getStage().addActor(mainMenuButton);
         drawScoreLabels();
     }
-    
-    private void addScoreLabels() {
-        try {
-            JSONObject j = getHighscoresJSON();
-            JSONArray highscores = j.getJSONArray("highscores");
 
-            int highScoreLength = highscores.length();
+    private void addHighscore() {
 
-            if (highScoreLength > 5) {
-                highScoreLength = 5;
-            }
-
-            for (int i = 0; i < highScoreLength; i++) {
-                String name = highscores.getJSONObject(i).getString("name");
-                String score = highscores.getJSONObject(i).getString("score");
-
-                highscoreName = new Label("" + name, getSkin(), "title-plain");
-                highscoreScore = new Label("" + score, getSkin(), "title-plain");
-                
-                Label[] scoreLabels = { highscoreName, highscoreScore };
-                highscoreList.add(scoreLabels);
-            }
-
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
-        }
     }
-    
+
     private void drawScoreLabels() {
         float buttonWidth = 275;
         float buttonHeight = 75;
-        
+
         int i = 0;
         for (Label[] scoreLabel: highscoreList) {
             // Add name label
@@ -129,7 +127,7 @@ public class HighscoreScreen extends MenuScreenTemplate implements Screen {
                     buttonHeight
             );
             scoreLabel[0].setAlignment(Align.left);
-            
+
             // Add score label
             getStage().addActor(scoreLabel[1]);
             scoreLabel[1].setBounds(
@@ -139,11 +137,12 @@ public class HighscoreScreen extends MenuScreenTemplate implements Screen {
                     buttonHeight
             );
             scoreLabel[1].setAlignment(Align.center);
-            
+
             i++;
         }
     }
 
+    /*
     // From https://stackoverflow.com/questions/4308554/simplest-way-to-read-json-from-a-url-in-java
     private static String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();
@@ -166,16 +165,10 @@ public class HighscoreScreen extends MenuScreenTemplate implements Screen {
             inputStream.close();
         }
     }
-
+*/
     private void handleMainMenuButton() {
         if ((isMouseOnActor(mainMenuButton) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK))) {
             getGame().setScreen(new MainMenuScreen(getGame()));
-        }
-    }
-
-    private void handleGameOverButton(){
-        if (getGameData().getKeys().isPressed(GameKeys.SHIFT)) {
-            getGame().setScreen(new GameOverScreen(getGame()));
         }
     }
 
