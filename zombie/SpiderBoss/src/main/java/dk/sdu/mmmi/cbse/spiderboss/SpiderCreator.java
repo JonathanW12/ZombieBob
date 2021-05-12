@@ -6,10 +6,12 @@ import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.EnemyPart;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.SpiderPart;
+import java.util.Random;
 
 public class SpiderCreator {
 
     SpiderWebCreator spiderWebCreator = new SpiderWebCreator();
+    private Random randomgenerator;
 
     public void createSpiderBoss(int health, Position position, World world) {
         float speed = 2;
@@ -36,7 +38,11 @@ public class SpiderCreator {
             colliderPart.addShapePoint(25, (float) (i * Math.PI / 4));
         }
 
-        world.addtoEntityPartMap(new PositionPart(position.getX(), position.getY(), radians), spider);
+        world.addtoEntityPartMap(new PositionPart(
+                position.getX() + getRandomOffset(),
+                position.getY() + getRandomOffset(),
+                radians
+        ), spider);
         world.addtoEntityPartMap(new VisualPart("spiderIdle", 100, 100), spider);
         world.addtoEntityPartMap(new MovingPart(speed, rotationSpeed), spider);
         world.addtoEntityPartMap(new EnemyPart(), spider);
@@ -46,6 +52,14 @@ public class SpiderCreator {
         world.addtoEntityPartMap(combatPart, spider);
         world.addtoEntityPartMap(new SpiderPart(),spider);
         world.addtoEntityPartMap(createInitialAnimationSpider(weaponAnimationPart), spider);
+    }
+    
+    private float getRandomOffset() {
+        if (randomgenerator == null) {
+            randomgenerator = new Random();
+        }
+        
+        return (float) randomgenerator.nextInt(30) - 15;
     }
 
     // Armed initial animation

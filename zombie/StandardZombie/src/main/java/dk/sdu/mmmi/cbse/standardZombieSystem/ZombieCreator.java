@@ -6,13 +6,17 @@ import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.EnemyPart;
 import dk.sdu.mmmi.cbse.common.data.Position;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.ZombiePart;
+import java.util.Random;
 
 public class ZombieCreator {
+    
+    private Random randomgenerator;
+    
     public void createZombie(int health, Position position, World world){
         float speed = 2;
         float rotationSpeed = 3;
-        float spawnX = position.getX();
-        float spawnY = position.getY();
+        float spawnX = position.getX() + getRandomOffset();
+        float spawnY = position.getY() + getRandomOffset();
         float radians = 3.14159f / 2;
 
         Entity zombie = new Entity();
@@ -62,8 +66,14 @@ public class ZombieCreator {
         world.addtoEntityPartMap(audioPart, zombie);
         world.addtoEntityPartMap(combatPart, zombie);
         world.addtoEntityPartMap(createInitialAnimationEnemy(weaponAnimationPart), zombie);
-
-
+    }
+    
+    private float getRandomOffset() {
+        if (randomgenerator == null) {
+            randomgenerator = new Random();
+        }
+        
+        return (float) randomgenerator.nextInt(30) - 15;
     }
 
     // Armed initial animation
