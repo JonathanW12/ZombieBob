@@ -29,7 +29,10 @@ public class PlayerPlugin implements IGamePluginService {
 
         Entity player = new Entity();
         
-        AudioPart audioPart = new AudioPart("walking-sound.wav");
+        AudioPart audioPart = new AudioPart(
+                "walking-sound.wav",
+                0.2f
+        );
         audioPart.setStandardDelay(300L);
         
         ColliderPart collider = new ColliderPart();

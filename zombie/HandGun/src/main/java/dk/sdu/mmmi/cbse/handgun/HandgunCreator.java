@@ -56,7 +56,8 @@ public class HandgunCreator {
             height
         );
         AudioPart audioPart = new AudioPart(
-            gunData.getShootingSoundFileName()
+            gunData.getShootingSoundFileName(),
+            0.08f
         );
         
         world.addtoEntityPartMap(weaponPart, gun);

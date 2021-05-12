@@ -50,7 +50,10 @@ public class ExplosionSystem implements IEntityProcessingService {
                     );
                     animationPart.setCurrentAnimation("explode");
                     
-                    AudioPart explosionSound = new AudioPart("rocket-explosion.wav");
+                    AudioPart explosionSound = new AudioPart(
+                            "rocket-explosion.wav",
+                            1f
+                    );
                     explosionSound.setIsPlaying(true);
 
                     world.addtoEntityPartMap(new PositionPart(positionPart.getX(), positionPart.getY(), radians), explosion);

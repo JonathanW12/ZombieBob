@@ -37,8 +37,8 @@ public class AudioProcessor {
         
         menuMusic.setLooping(true);
         gameMusic.setLooping(true);
-        menuMusic.setVolume(1f);
-        gameMusic.setVolume(1f);
+        menuMusic.setVolume(0.5f);
+        gameMusic.setVolume(0.5f);
         
         currentMusicState = MusicState.MENUMUSIC;
     }
@@ -57,7 +57,7 @@ public class AudioProcessor {
                     if (audioPart.getIsPlaying()) {
                         Sound sound = getSound(audioPart.getFileName());
                         audioPart.setIsPlaying(false);
-                        long soundId = sound.play(0.1f);
+                        long soundId = sound.play(audioPart.getVolume());
                         sound.setLooping(soundId, false);
                     }
                 }

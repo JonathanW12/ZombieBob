@@ -10,9 +10,9 @@ public class AudioPart implements EntityPart {
     private long minReplayDelay;
     private long maxReplayDelay;
     private long standardDelay;
-
     private long actualDelay;
     private long lastReplayTime;
+    private float volume;
     private final Random randomGenerator;
     
     public AudioPart(String fileName) {
@@ -24,6 +24,20 @@ public class AudioPart implements EntityPart {
         standardDelay = 0L;
         actualDelay = 0L;
         lastReplayTime = System.currentTimeMillis();
+        volume = 0.1f;
+        randomGenerator = new Random();
+    }
+    
+    public AudioPart(String fileName, float volume) {
+        this.fileName = fileName;
+        isPlaying = false;
+        isRandomlyReplaying = false;
+        minReplayDelay = 0L;
+        maxReplayDelay = 0L;
+        standardDelay = 0L;
+        actualDelay = 0L;
+        lastReplayTime = System.currentTimeMillis();
+        this.volume = volume;
         randomGenerator = new Random();
     }
     
@@ -83,6 +97,10 @@ public class AudioPart implements EntityPart {
     public long getStandardDelay() {
         return standardDelay;
     }
+    
+    public float getVolume() {
+        return volume;
+    }
 
     public void setStandardDelay(long standardDelay) {
         this.standardDelay = standardDelay;
@@ -106,6 +124,10 @@ public class AudioPart implements EntityPart {
     
     public void setMaxReplayDelay(long maxReplayDelay) {
         this.maxReplayDelay = maxReplayDelay;
+    }
+    
+    public void setVolume(float volume) {
+        this.volume = volume;
     }
     
 }

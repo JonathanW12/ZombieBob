@@ -58,7 +58,8 @@ public class RocketLauncherCreator {
                 height
         );
         AudioPart audioPart = new AudioPart(
-            rocketLauncherData.getShootingSoundFileName()
+            rocketLauncherData.getShootingSoundFileName(),
+            0.12f
         );
 
         world.addtoEntityPartMap(weaponPart, rocketLauncher);

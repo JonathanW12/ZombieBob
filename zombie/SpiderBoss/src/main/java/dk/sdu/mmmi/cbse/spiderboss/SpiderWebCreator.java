@@ -27,7 +27,8 @@ public class SpiderWebCreator {
         );
 
         AudioPart audioPart = new AudioPart(
-                spiderwebData.getShootingSoundFileName()
+                spiderwebData.getShootingSoundFileName(),
+                0.1f
         );
 
 
