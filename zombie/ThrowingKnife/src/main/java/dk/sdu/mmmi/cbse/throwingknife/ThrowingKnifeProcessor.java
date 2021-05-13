@@ -45,20 +45,20 @@ public class ThrowingKnifeProcessor implements IEntityProcessingService {
 
                 MovingPart movingPart = new MovingPart(20, 1000);
                 world.addtoEntityPartMap(movingPart, bullet);
-                world.addtoEntityPartMap(new PositionPart(spawnX, spawnY, weaponPosition.getRadians()+((rand.nextFloat()/2)-0.25f)), bullet);
+                world.addtoEntityPartMap(new PositionPart(spawnX, spawnY, weaponPosition.getRadians()), bullet);
                 world.addtoEntityPartMap(new ProjectilePart(weaponPart.getRange()), bullet);
                 world.addtoEntityPartMap(new ColliderPart(5,5), bullet);
                 world.addtoEntityPartMap(new DamagePart(weaponPart.getDamage()), bullet);
                 world.addtoEntityPartMap(new LifePart(1), bullet);
-                world.addtoEntityPartMap(new VisualPart("Sword",20, 20), bullet);
+                world.addtoEntityPartMap(new VisualPart("Sword",25, 15), bullet);
 
                 movingPart.setUp(true);
             }
         }
     }
 
-    protected static void addToProcessingList(Entity rifle) {
-        knifes.add(rifle);
+    protected static void addToProcessingList(Entity knife) {
+        knifes.add(knife);
     }
 
 }
