@@ -53,7 +53,7 @@ public class RenderProcessor {
         this.world = world;
         this.cam = cam;
         batch = new SpriteBatch();
-        zDepth = 5;
+        zDepth = 6;
         sortedVisualList = new ArrayList<>(zDepth);
         sprites = new HashMap<>();
         animationRegions = new HashMap<>();

@@ -31,7 +31,7 @@ public class HotbarPlugin implements IGamePluginService {
         
         world.addtoEntityPartMap(new PositionPart(x,y,radians), hotbar);
         world.addtoEntityPartMap(new HotbarPart(),hotbar);
-        world.addtoEntityPartMap(new VisualPart("hotbar_sprite",hotbarWidth,hotbarHeight,3),hotbar);
+        world.addtoEntityPartMap(new VisualPart("hotbar_sprite",hotbarWidth,hotbarHeight,4),hotbar);
         VisualPart visualPart = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(hotbar.getUUID());
         visualPart.setResizable(false);
     }
