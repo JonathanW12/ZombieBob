@@ -21,9 +21,9 @@ public class Installer extends ModuleInstall {
 //      cfg.fullscreen = true;
         cfg.useGL30 = false;
         cfg.resizable = false;
-        
+
         System.setProperty("org.lwjgl.opengl.Window.undecorated", "true");
-        cfg.fullscreen = true;
+        cfg.fullscreen = false;
 //      https://stackoverflow.com/questions/38726801/libgdx-fullscreen-windowed-mode-has-border
 
         new LwjglApplication(g, cfg);
