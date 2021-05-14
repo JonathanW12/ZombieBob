@@ -52,7 +52,7 @@ public class PauseMenuScreen extends MenuScreenTemplate implements Screen {
         handleExitButton();
     }
     
-        private void setupUI() {
+    private void setupUI() {
         float buttonWidth = 275;
         float buttonHeight = 75;
         
@@ -124,7 +124,7 @@ public class PauseMenuScreen extends MenuScreenTemplate implements Screen {
     
     private void handleSettingsButton() {
         if ((isMouseOnActor(settingsButton) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK))) {
-            // getGame().setScreen(new GameScreen(getGame()));
+             getGame().setScreen(new ModuleHandlerScreen(getGame()));
         }
     }
     
