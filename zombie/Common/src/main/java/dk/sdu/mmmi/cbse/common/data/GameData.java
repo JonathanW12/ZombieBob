@@ -78,7 +78,7 @@ public class GameData {
         return displayHeight;
     }
 
-    public static LevelInformation getLevelInformation() {
+    public LevelInformation getLevelInformation() {
         if (levelInformation != null){
             return levelInformation;
         } else {

@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.GameKeys;
+import dk.sdu.mmmi.cbse.common.data.entitytypeparts.PlayerPart;
 import dk.sdu.mmmi.cbse.core.coreprocessors.AudioProcessor;
 import dk.sdu.mmmi.cbse.core.coreprocessors.RenderProcessor;
 import dk.sdu.mmmi.cbse.core.main.GameLookup;
@@ -104,7 +105,9 @@ public class GameScreen implements Screen {
         );
     }
 
-    private void update() {        
+    private void update() {
+        handleGameOver();
+        
         // Process entities
         gameLookup.getEntityProcessingServices().forEach(entityProcessorService -> {
             entityProcessorService.process(gameData, world);
@@ -153,6 +156,12 @@ public class GameScreen implements Screen {
         inputMultiplexer.addProcessor(mouseInputProcessor);
 
         Gdx.input.setInputProcessor(inputMultiplexer); 
+    }
+    
+    private void handleGameOver() {
+        if (world.getMapByPart(PlayerPart.class.getSimpleName()).keySet().toArray().length == 0) {
+            game.setScreen(new GameOverScreen(game));
+        }
     }
     
 }
