@@ -118,7 +118,7 @@ public class MapPlugin implements IGamePluginService {
                 "wall_sprite",
                 tile.getWidth(),
                 tile.getHeight(),
-                0
+                1
         ), wall);
         world.addtoEntityPartMap(new ColliderPart(tile.getWidth(), tile.getHeight()), wall);
         world.addtoEntityPartMap(new StructurePart(), wall);
@@ -138,7 +138,7 @@ public class MapPlugin implements IGamePluginService {
                 "enemySpawn",
                 tile.getWidth(),
                 tile.getHeight(),
-                1
+                2
         ), enemySpawn);
     }
 
@@ -154,7 +154,7 @@ public class MapPlugin implements IGamePluginService {
                 "itemSpawn",
                 tile.getWidth(),
                 tile.getHeight(),
-                1
+                2
         ), itemSpawn);
 
         world.addtoEntityPartMap(new SpawnerPart(), itemSpawn);
