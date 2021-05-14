@@ -6,38 +6,38 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Common" />
         <module name="CommonLocations" />
-        <module name="StandardZombie" />
-        <module name="TimerSystem" />
-        <module name="CommonLevel" />
-        <module name="Hotbar" />
-        <module name="RocketLauncher" />
-        <module name="ProjectileSystem" />
-        <module name="Rifle" />
-        <module name="Level" />
-        <module name="Zombie-branding" />
         <module name="CommonEnemy" />
-        <module name="LootingSystem" />
-        <module name="SpiderBoss" />
-        <module name="HealthSystem" />
+        <module name="SilentUpdate" />
+        <module name="Zombie-branding" />
         <module name="AnimationSystem" />
-        <module name="CollisionSystem" />
-        <module name="CommonTiles" />
-        <module name="CommonWeapon" />
         <module name="AudioSystem" />
-        <module name="Player" />
+        <module name="Zombie-app" />
         <module name="AIMovementSystem" />
-        <module name="RigidPhysicsSystem" />
-        <module name="HandGun" />
-        <module name="Movement" />
-        <module name="CombatSystem" />
+        <module name="CommonWeapon" />
+        <module name="SpiderBoss" />
+        <module name="Rifle" />
+        <module name="CollisionSystem" />
+        <module name="TimerSystem" />
         <module name="Core" />
         <module name="CommonAnimation" />
-        <module name="Zombie-app" />
-        <module name="SilentUpdate" />
+        <module name="Player" />
+        <module name="Movement" />
+        <module name="CommonLevel" />
+        <module name="CombatSystem" />
+        <module name="Hotbar" />
+        <module name="CommonTiles" />
         <module name="ExplosionSystem" />
+        <module name="RocketLauncher" />
+        <module name="Common" />
+        <module name="StandardZombie" />
+        <module name="HandGun" />
+        <module name="ProjectileSystem" />
+        <module name="RigidPhysicsSystem" />
+        <module name="Level" />
+        <module name="LootingSystem" />
         <module name="Map" />
+        <module name="HealthSystem" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -53,7 +53,7 @@
       <module name="CommonLocations" target="1.8" />
       <module name="CommonTiles" target="1.8" />
       <module name="CommonWeapon" target="1.8" />
-      <module name="Core" target="1.8" />
+      <module name="Core" target="10" />
       <module name="ExplosionSystem" target="1.8" />
       <module name="HandGun" target="1.8" />
       <module name="HealthSystem" target="1.8" />

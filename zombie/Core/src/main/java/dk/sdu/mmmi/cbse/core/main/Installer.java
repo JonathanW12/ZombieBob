@@ -18,9 +18,13 @@ public class Installer extends ModuleInstall {
         cfg.title = "ZombieBoB 0.4.1";
         cfg.width = 1920;
         cfg.height = 1080;
-        cfg.fullscreen = true;
+//      cfg.fullscreen = true;
         cfg.useGL30 = false;
         cfg.resizable = false;
+        
+        System.setProperty("org.lwjgl.opengl.Window.undecorated", "true");
+        cfg.fullscreen = true;
+//      https://stackoverflow.com/questions/38726801/libgdx-fullscreen-windowed-mode-has-border
 
         new LwjglApplication(g, cfg);
     }
