@@ -91,11 +91,7 @@ public class MenuScreenTemplate implements Screen {
     }
     
     public void update() {
-        // Exit game if the escape key is pressed
-        if (gameData.getKeys().isPressed(GameKeys.ESCAPE)) {
-            game.dispose();
-            Gdx.app.exit();
-        }
+
         
         game.getAudioProcessor().processAudio();
         handleAudioButtons();

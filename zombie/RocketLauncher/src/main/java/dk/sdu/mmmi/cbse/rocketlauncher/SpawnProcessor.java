@@ -26,7 +26,7 @@ public class SpawnProcessor implements IEntityProcessingService{
 
     @Override
     public void process(GameData gameData, World world) {
-        if (gameData.getLevelInformation().getCurrentLevel() == 20 && !spawnedWeapon) {
+        if (gameData.getLevelInformation().getCurrentLevel() == 10 && !spawnedWeapon) {
             ItemSpawn spawn = getSpawnPosition(world);
             
             UUID rocketLauncherID = rocketLauncherCreator.spawnRocketLauncher(spawn.getPosition(), gameData, world);

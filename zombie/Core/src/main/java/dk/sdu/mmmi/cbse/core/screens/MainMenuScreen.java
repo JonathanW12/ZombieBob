@@ -68,6 +68,12 @@ public class MainMenuScreen extends MenuScreenTemplate implements Screen {
         super.update();
         handleMapNavButton();
         handleMapSelectButtons();
+
+        // Exit game if the escape key is pressed
+        if (getGameData().getKeys().isPressed(GameKeys.ESCAPE)) {
+            getGame().dispose();
+            Gdx.app.exit();
+        }
     }
 
     private void setupUI() {
