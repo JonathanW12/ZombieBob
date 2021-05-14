@@ -108,10 +108,12 @@
 </module>
 <
 >
+<!--
 <module codenamebase="dk.sdu.mmmi.cbse.CommonLevel" distribution="CommonLevel-1.0-SNAPSHOT.nbm" downloadsize="4279" license="13255ACB" needsrestart="false" releasedate="2021/05/12">
 <
 >
 <manifest OpenIDE-Module="dk.sdu.mmmi.cbse.CommonLevel" OpenIDE-Module-Display-Category="dk.sdu.mmmi.cbse" OpenIDE-Module-Implementation-Version="1.0-20210512" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="org.netbeans.api.annotations.common/1 &gt; 1.33" OpenIDE-Module-Name="CommonLevel" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
+-->
 <
 >
 </module>
@@ -153,10 +155,12 @@
 </module>
 <
 >
+<!--
 <module codenamebase="dk.sdu.mmmi.cbse.ExplosionSystem" distribution="ExplosionSystem-1.0-SNAPSHOT.nbm" downloadsize="6068" license="13255ACB" needsrestart="false" releasedate="2021/05/12" targetcluster="zombie">
 <
 >
 <manifest OpenIDE-Module="dk.sdu.mmmi.cbse.ExplosionSystem" OpenIDE-Module-Display-Category="dk.sdu.mmmi.cbse" OpenIDE-Module-Implementation-Version="1.0-20210512" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="org.netbeans.api.annotations.common/1 &gt; 1.33, dk.sdu.mmmi.cbse.Common &gt; 1.0" OpenIDE-Module-Name="ExplosionSystem" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
+-->
 <
 >
 </module>
@@ -333,10 +337,12 @@
 </module>
 <
 >
+<!--
 <module codenamebase="dk.sdu.mmmi.cbse.RocketLauncher" distribution="RocketLauncher-1.0-SNAPSHOT.nbm" downloadsize="10310" license="13255ACB" needsrestart="false" releasedate="2021/05/12" targetcluster="zombie">
 <
 >
 <manifest OpenIDE-Module="dk.sdu.mmmi.cbse.RocketLauncher" OpenIDE-Module-Display-Category="dk.sdu.mmmi.cbse" OpenIDE-Module-Implementation-Version="1.0-20210512" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="org.netbeans.api.annotations.common/1 &gt; 1.33, dk.sdu.mmmi.cbse.Common &gt; 1.0, dk.sdu.mmmi.cbse.CommonLevel &gt; 1.0" OpenIDE-Module-Name="RocketLauncher" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
+-->
 <
 >
 </module>
