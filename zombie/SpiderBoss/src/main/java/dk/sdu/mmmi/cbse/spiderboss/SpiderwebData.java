@@ -27,7 +27,7 @@ public class SpiderwebData {
         fireRate = 2f;
         attackAnimationFrameDuration = 0.3f;
         walkAnimationFrameDuration = 0.3f;
-        shootingSoundFileName = "gun-shooting.wav"; // TO BE CHANGED TO SPIDER SOUND
+        shootingSoundFileName = "spider.wav";
     }
 
     public static SpiderwebData getInstance() {

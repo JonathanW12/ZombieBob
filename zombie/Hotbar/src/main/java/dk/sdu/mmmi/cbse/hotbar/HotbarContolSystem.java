@@ -5,6 +5,7 @@ import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 import dk.sdu.mmmi.cbse.common.data.entitytypeparts.HotbarPart;
+import dk.sdu.mmmi.cbse.common.data.entitytypeparts.PlayerPart;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
@@ -168,6 +169,9 @@ public class HotbarContolSystem implements IEntityProcessingService {
         String healthMessage = ("Health: " + lifePart.getLife());
 
         if (lifePart.getLife() <= 0) {
+            healthMessage = ("Dead");
+        }
+        if (world.getMapByPart(PlayerPart.class.getSimpleName()) == null){
             healthMessage = ("Dead");
         }
 
