@@ -52,10 +52,12 @@
 </module>
 <
 >
+<!--
 <module codenamebase="dk.sdu.mmmi.cbse.CollisionSystem" distribution="CollisionSystem-1.0-SNAPSHOT.nbm" downloadsize="7176" license="13255ACB" needsrestart="false" releasedate="2021/05/12" targetcluster="zombie">
 <
 >
 <manifest OpenIDE-Module="dk.sdu.mmmi.cbse.CollisionSystem" OpenIDE-Module-Display-Category="dk.sdu.mmmi.cbse" OpenIDE-Module-Implementation-Version="1.0-20210512" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="org.netbeans.api.annotations.common/1 &gt; 1.29.1, dk.sdu.mmmi.cbse.Common &gt; 1.0, org.netbeans.libs.junit5 &gt; 1.3" OpenIDE-Module-Name="CollisionSystem" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
+-->
 <
 >
 </module>

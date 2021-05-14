@@ -119,7 +119,6 @@ public class GameOverScreen extends MenuScreenTemplate implements Screen {
     private void handleSubmitScoreButton() {
         if (isMouseOnActor(submitHighscoreBtn) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK)) {
             try {
-                System.out.println("Clicked");
                 addHighscore();
             } catch (IOException e) {
                e.printStackTrace();
