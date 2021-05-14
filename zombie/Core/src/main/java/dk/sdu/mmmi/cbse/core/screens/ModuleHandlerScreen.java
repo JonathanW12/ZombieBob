@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import dk.sdu.mmmi.cbse.common.data.GameKeys;
 import dk.sdu.mmmi.cbse.core.main.ZombieBobGame;
 import java.util.HashMap;
 import com.badlogic.gdx.utils.Align;
@@ -39,6 +40,10 @@ public class ModuleHandlerScreen extends MenuScreenTemplate implements Screen{
         super.update();
         handleMainMenu();
         labels.forEach((String moduleName,Label label) ->{handleModuleClick(moduleName);});
+
+        if (getGameData().getKeys().isPressed(GameKeys.ESCAPE)) {
+            getGame().setScreen(new PauseMenuScreen(getGame()));
+        }
     }
     
     @Override
