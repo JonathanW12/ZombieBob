@@ -17,7 +17,7 @@ import dk.sdu.mmmi.cbse.core.main.UpdatesEditor;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class ModuleHandlerScreen extends MenuScreenTemplate implements Screen{
+class ModuleHandlerScreen extends MenuScreenTemplate implements Screen{
     private UpdatesEditor updatesEditor = UpdatesEditor.getInstance();
     private BitmapFont title;
     private Label mainMenuButton;
