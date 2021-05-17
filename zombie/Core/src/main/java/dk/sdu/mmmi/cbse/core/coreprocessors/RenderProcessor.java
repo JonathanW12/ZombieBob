@@ -185,12 +185,12 @@ public class RenderProcessor {
 
         if (gameData.getKeys().isPressed(GameKeys.SPACE)) {
             
-            UpdatesEditor updatesEditor = UpdatesEditor.getInstance();
-            if(updatesEditor.isActive("CollisionSystem")){
-                updatesEditor.deactivate("CollisionSystem");
-            } else {
-                updatesEditor.activate("CollisionSystem");
-            }
+//            UpdatesEditor updatesEditor = UpdatesEditor.getInstance();
+//            if(updatesEditor.isActive("CollisionSystem")){
+//                updatesEditor.deactivate("CollisionSystem");
+//            } else {
+//                updatesEditor.activate("CollisionSystem");
+//            }
         }
     }
 
