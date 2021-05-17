@@ -55,13 +55,13 @@
     <orderEntry type="library" name="Maven: com.badlogicgames.gdx:gdx-freetype-platform:natives-desktop:1.9.8" level="project" />
     <orderEntry type="library" name="Maven: org.json:json:20210307" level="project" />
     <orderEntry type="module" module-name="Movement" />
-    <orderEntry type="module" module-name="TimerSystem" />
+    <orderEntry type="library" name="Maven: dk.sdu.mmmi.cbse:TimerSystem:1.0-SNAPSHOT" level="project" />
     <orderEntry type="module" module-name="HealthSystem" />
     <orderEntry type="module" module-name="AIMovementSystem" />
     <orderEntry type="module" module-name="CombatSystem" />
     <orderEntry type="module" module-name="AnimationSystem" />
     <orderEntry type="module" module-name="ProjectileSystem" />
-    <orderEntry type="module" module-name="CommonEnemy" />
+    <orderEntry type="library" name="Maven: dk.sdu.mmmi.cbse:CommonEnemy:1.0-SNAPSHOT" level="project" />
     <orderEntry type="module" module-name="CommonAnimation" />
     <orderEntry type="module" module-name="CollisionSystem" />
     <orderEntry type="library" name="Maven: org.netbeans.api:org-netbeans-libs-junit5:RELEASE112" level="project" />

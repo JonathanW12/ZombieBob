@@ -64,14 +64,12 @@
         <module>Movement</module>
         <module>CommonAnimation</module>
         <module>AnimationSystem</module>
-        <module>TimerSystem</module>
         <module>HealthSystem</module>
         <module>AIMovementSystem</module>
         <module>CombatSystem</module>
         <module>ProjectileSystem</module>
         <module>Hotbar</module>
         <module>StandardZombie</module>
-        <module>CommonEnemy</module>
         <module>CommonLocations</module>
         <module>LootingSystem</module>
         <module>CollisionSystem</module>
