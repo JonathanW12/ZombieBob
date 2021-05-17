@@ -36,7 +36,7 @@ public class ThrowingKnifeData {
         fireRate = 0.3f;
         attackAnimationFrameDuration = 0.03f;
         walkAnimationFrameDuration = 0.2f;
-        shootingSoundFileName = "rifle-shooting.ogg";
+        shootingSoundFileName = "ThrowingKnife.mp3";
     }
 
     public static ThrowingKnifeData getInstance() {
