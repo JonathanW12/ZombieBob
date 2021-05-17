@@ -18,8 +18,8 @@
         <module name="SpiderBoss" />
         <module name="Rifle" />
         <module name="CollisionSystem" />
-        <module name="TimerSystem" />
         <module name="Core" />
+        <module name="TimerSystem" />
         <module name="CommonAnimation" />
         <module name="Player" />
         <module name="Movement" />
