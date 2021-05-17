@@ -49,7 +49,7 @@ public class UpdatesEditor {
         } else {
             filehandle = new File("./netbeans_site/updates.xml");
         }
-
+        System.out.println("Full file path: " + filehandle.getAbsolutePath());
         return filehandle;
     }
     
