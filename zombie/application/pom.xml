@@ -75,21 +75,14 @@
             <artifactId>Player</artifactId>
             <version>${project.version}</version>
         </dependency>
-
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Core</artifactId>
             <version>${project.version}</version>
         </dependency>
-
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Movement</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>TimerSystem</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -117,11 +110,6 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>ProjectileSystem</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>CommonEnemy</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
