@@ -136,6 +136,20 @@ playerIdle
   orig: 308, 190
   offset: 0, 0
   index: -1
+playerIdleKnife
+  rotate: false
+  xy: 775, 190
+  size: 308, 247
+  orig: 308, 247
+  offset: 0, 0
+  index: -1
+PlayerKnifeMove2
+  rotate: false
+  xy: 1398, 190
+  size: 254, 287
+  orig: 254, 287
+  offset: 0, 0
+  index: -1
 PlayerShoot1
   rotate: false
   xy: 752, 723

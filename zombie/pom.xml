@@ -85,6 +85,7 @@
         <module>Rifle</module>
         <module>AudioSystem</module>
         <module>ExplosionSystem</module>
+        <module>ThrowingKnife</module>
     </modules>
 
     <properties>

@@ -24,6 +24,20 @@ explosion
   orig: 800, 128
   offset: 0, 0
   index: -1
+PlayerKnifeMove2
+  rotate: false
+  xy: 450, 200
+  size: 254, 287
+  orig: 254, 287
+  offset: 0, 0
+  index: -1
+PlayerKnifeWalking
+  rotate: false
+  xy: 704, 200
+  size: 548, 289
+  orig: 548, 289
+  offset: 0, 0
+  index: -1
 PlayerShootBazooka
   rotate: false
   xy: 1386, 1192
