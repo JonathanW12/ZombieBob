@@ -40,7 +40,6 @@ class ModuleHandlerScreen extends MenuScreenTemplate implements Screen{
         super.update();
         handleMainMenu();
         labels.forEach((String moduleName,Label label) ->{handleModuleClick(moduleName);});
-
         if (getGameData().getKeys().isPressed(GameKeys.ESCAPE)) {
             getGame().setScreen(new PauseMenuScreen(getGame()));
         }
@@ -80,8 +79,8 @@ class ModuleHandlerScreen extends MenuScreenTemplate implements Screen{
         });
     }
     private void setUpModule(String moduleName, int index, boolean value){
-        float xPos = 100 + xOffSet*(float) Math.floor(index/7);
-        float yPos = 100+yOffSet + yOffSet*(index%6);
+        float xPos = 100 + xOffSet*(float) Math.floor(index/6);
+        float yPos = 100 + yOffSet + yOffSet*(index%6);
         Label button = new Label(moduleName, getSkin(), "title");
         button.setBounds(xPos,yPos, buttonWidth,buttonHeight);
         button.setAlignment(Align.center);
