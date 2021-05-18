@@ -1,123 +1,116 @@
 animations.png
-size: 1864, 1611
+size: 1874, 1703
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 enemyHit
   rotate: false
-  xy: 1399, 1256
+  xy: 456, 173
   size: 450, 263
   orig: 450, 263
   offset: 0, 0
   index: -1
 enemyWalk
   rotate: false
-  xy: 546, 1396
+  xy: 250, 173
   size: 206, 200
   orig: 206, 200
   offset: 0, 0
   index: -1
 explosion
-  rotate: true
-  xy: 970, 531
-  size: 720, 128
+  rotate: false
+  xy: 0, 0
+  size: 800, 128
   orig: 800, 128
-  offset: 40, 0
+  offset: 0, 0
   index: -1
 PlayerKnifeMove2
   rotate: false
-  xy: 1606, 948
-  size: 251, 277
+  xy: 906, 173
+  size: 254, 287
   orig: 254, 287
-  offset: 2, 10
+  offset: 0, 0
   index: -1
 PlayerKnifeWalking
   rotate: false
-  xy: 1, 1322
-  size: 543, 288
+  xy: 1160, 173
+  size: 548, 289
   orig: 548, 289
-  offset: 4, 1
+  offset: 0, 0
   index: -1
 PlayerShootBazooka
-  rotate: true
-  xy: 1247, 293
+  rotate: false
+  xy: 1386, 1191
   size: 252, 512
   orig: 252, 512
   offset: 0, 0
   index: -1
 PlayerShootGun
   rotate: false
-  xy: 1, 927
+  xy: 1244, 798
   size: 630, 393
   orig: 630, 393
   offset: 0, 0
   index: -1
 PlayerShootGunOLD
   rotate: false
-  xy: 1, 531
+  xy: 0, 1191
   size: 630, 394
   orig: 630, 394
   offset: 0, 0
   index: -1
 PlayerShootRifle
   rotate: false
-  xy: 1606, 547
+  xy: 630, 1191
   size: 252, 399
   orig: 252, 399
   offset: 0, 0
   index: -1
-PlayerSwingSword
-  rotate: true
-  xy: 633, 531
-  size: 672, 335
-  orig: 672, 336
-  offset: 0, 0
-  index: -1
 PlayerWalk
   rotate: false
-  xy: 1, 1
+  xy: 0, 798
   size: 1244, 353
   orig: 1244, 353
   offset: 0, 0
   index: -1
 PlayerWalkBazooka
   rotate: false
-  xy: 1100, 547
+  xy: 882, 1191
   size: 504, 403
   orig: 504, 403
   offset: 0, 0
   index: -1
 PlayerWalkGun
   rotate: false
-  xy: 1247, 1
+  xy: 0, 462
   size: 616, 290
   orig: 616, 290
   offset: 0, 0
   index: -1
 PlayerWalkRifle
   rotate: false
-  xy: 1100, 952
+  xy: 616, 462
   size: 504, 302
   orig: 504, 302
   offset: 0, 0
   index: -1
 PlayerWalkSword
   rotate: false
-  xy: 885, 1256
+  xy: 1120, 462
   size: 512, 336
   orig: 512, 336
   offset: 0, 0
   index: -1
 spiderAttack
   rotate: false
-  xy: 633, 1205
+  xy: 0, 173
   size: 250, 189
   orig: 250, 189
   offset: 0, 0
   index: -1
 spiderWalk
   rotate: false
-  xy: 1, 356
+  xy: 800, 0
   size: 1000, 173
   orig: 1000, 173
   offset: 0, 0

@@ -21,50 +21,17 @@
     </properties>
 
     <dependencies>
-        <!--
-        <dependency>
-            <groupId>org.netbeans.cluster</groupId>
-            <artifactId>platform</artifactId>
-            <version>${netbeans.version}</version>
-            <type>pom</type>
-        </dependency>
-        -->
-
         <!-- NB runtime -->
         <dependency>
             <groupId>org.netbeans.modules</groupId>
             <artifactId>org-netbeans-core-startup</artifactId>
             <version>${netbeans.version}</version>
-        </dependency>
-        <!-- OSGi integration -->
+        </dependency>  
         <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-netbeans-core-netigso</artifactId>
-            <version>${netbeans.version}</version>
-        </dependency>
-        <!-- Equinox integration -->
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-netbeans-modules-netbinox</artifactId>
-            <version>${netbeans.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-netbeans-modules-nbjunit</artifactId>
-            <version>${netbeans.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-            <!-- SilentUpdate Module Dependency for later use-->
-        <!--
--->       
-<!--        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>SilentUpdate</artifactId>
             <version>${project.version}</version>
-        </dependency>-->
-
-
+        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Common</artifactId>
@@ -100,8 +67,6 @@
             <artifactId>CombatSystem</artifactId>
             <version>${project.version}</version>
         </dependency>
-
-
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>AnimationSystem</artifactId>
@@ -208,8 +173,6 @@
             <version>${project.version}</version>
         </dependency>
     </dependencies>
-
-
     <build>
         <plugins>
             <plugin>
