@@ -33,6 +33,7 @@ public class UpdatesEditor {
     //private static final String xmlFilePath = "";
             //"C:\\Users\\phili\\Desktop\\AsteroidsNetbeansModules\\AsteroidsNetbeansModules\\netbeans_site\\updates.xml";
     private final HashMap<String, Boolean> enabledModules = new HashMap<>();
+    private final ArrayList<String> nonLoadableModules = new ArrayList<>();
     private static UpdatesEditor instance = new UpdatesEditor();
     private ArrayList<String> xmlElements = new ArrayList<>();
     private File updatesXMLFile = getUpdatesXMLFile();
@@ -49,16 +50,37 @@ public class UpdatesEditor {
         } else {
             filehandle = new File("./netbeans_site/updates.xml");
         }
-
+        System.out.println("Full file path: " + filehandle.getAbsolutePath());
         return filehandle;
     }
     
+    private File getNonLoadableModulesFile(){
+        File filehandle;
+        String osName = System.getProperty("os.name");
+        if (osName.startsWith("Windows")) {
+            filehandle = new File("../../non_dynamic_modules.txt");
+        } else {
+            filehandle = new File("./non_dynamic_modules.txt");
+        }
+
+        return filehandle;   
+    }
     
     private UpdatesEditor(){
         System.out.println("reading updates.xml files");
         this.xmlElements = new ArrayList<>();
         File file = getUpdatesXMLFile();
         try {
+            
+            
+            Scanner scanner = new Scanner(getNonLoadableModulesFile()).useDelimiter(",");
+            
+            while(scanner.hasNext()){
+                nonLoadableModules.add(scanner.next());
+            }
+            scanner.close();
+            
+            
             
             Scanner sc = new Scanner(file).useDelimiter("<|\\>");
             while(sc.hasNext()){
@@ -84,12 +106,14 @@ public class UpdatesEditor {
                         String[] strings = element.split("codenamebase=\"dk.sdu.mmmi.cbse.");
                         String newString = strings[1].replaceAll("\"", "");
                         String moduleName = newString.split(" ")[0];
+                        if(!nonLoadableModules.contains(moduleName)){
                             if(!this.xmlElements.get(i-1).equals("<!--")){
                                 this.enabledModules.put(moduleName, true);
                             } else {
                                 this.enabledModules.put(moduleName, false);
                             }
                         }
+                    }
                     }
                 }
             sc.close();
