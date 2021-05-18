@@ -34,7 +34,11 @@ public class ThrowingKnifeProcessor implements IEntityProcessingService {
 
     public void process(GameData gameData, World world) {
         for (Entity knife: knifes) {
-            WeaponPart weaponPart = (WeaponPart) world.getMapByPart(WeaponPart.class.getSimpleName()).get(knife.getUUID());
+            if(world.getMapByPart(WeaponPart.class.getSimpleName())!=null){
+            WeaponPart weaponPart = (WeaponPart)world.getMapByPart(WeaponPart.class.getSimpleName()).get(knife.getUUID());
+            if(weaponPart != null){
+                
+            
             PositionPart weaponPosition = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(knife.getUUID());
             if (weaponPart.isIsAttacking()) {
                 float spawnDistanceFromAttacker = 50f;
@@ -54,6 +58,8 @@ public class ThrowingKnifeProcessor implements IEntityProcessingService {
 
                 movingPart.setUp(true);
             }
+        }
+        }
         }
     }
 
