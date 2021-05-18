@@ -16,7 +16,9 @@ public class SpiderWebProcessor implements IEntityProcessingService {
 
     public void process(GameData gameData, World world) {
         for (Entity webShooter: webShooters) {
+            if(world.getMapByPart(WeaponPart.class.getSimpleName())!=null){
             WeaponPart weaponPart = (WeaponPart) world.getMapByPart(WeaponPart.class.getSimpleName()).get(webShooter.getUUID());
+            if(weaponPart != null){
             PositionPart weaponPosition = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(webShooter.getUUID());
 
             if (weaponPart.isIsAttacking()) {
@@ -36,6 +38,8 @@ public class SpiderWebProcessor implements IEntityProcessingService {
                 world.addtoEntityPartMap(new VisualPart("web", 20, 20), web);
 
                 movingPart.setUp(true);
+            }
+        }
             }
         }
     }
