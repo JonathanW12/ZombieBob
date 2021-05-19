@@ -36,12 +36,13 @@ public class CombatProcessingSystem implements IEntityProcessingService {
             if(world.getMapByPart(WeaponPart.class.getSimpleName()) != null && currentWeapon != null){
                 //System.out.println("found attached weapon to combat part");
                 WeaponPart weaponPart = ((WeaponPart)world.getMapByPart(WeaponPart.class.getSimpleName()).get(currentWeapon));
+                weaponPart.setIsAttacking(false);
                 weaponPart.setTimeSinceLastTrigger(weaponPart.getTimeSinceLastTrigger() + gameData.getDelta());
             
                 if(((CombatPart)entry.getValue()).isAttacking()){
                     if(weaponPart.getTimeSinceLastTrigger() > weaponPart.getFireRate()){
-                        if(world.getMapByPart(ZombiePart.class.getSimpleName()) != null){
-                            if(world.getMapByPart(ZombiePart.class.getSimpleName()).get(entry.getKey())!=null){
+                            //check if attacking entity is a zombie
+                            if(world.getMapByPart(ZombiePart.class.getSimpleName()) != null && world.getMapByPart(ZombiePart.class.getSimpleName()).get(entry.getKey())!=null){
                                 //processing of zombie attack
                                 if (world.getMapByPart(PlayerPart.class.getSimpleName()) != null) {
                                     for (Map.Entry<UUID,EntityPart> player : world.getMapByPart(PlayerPart.class.getSimpleName()).entrySet()) {
@@ -57,25 +58,19 @@ public class CombatProcessingSystem implements IEntityProcessingService {
                                             );
                                         }
                                         if (distance <= weaponPart.getRange() && weaponPart.getTimeSinceLastTrigger() > weaponPart.getFireRate()) {
-
-                                            // OBS
                                             lifePart.setLife(lifePart.getLife()-weaponPart.getDamage());
                                             weaponPart.setIsAttacking(true);
                                             weaponPart.setTimeSinceLastTrigger(0);
                                         }
                                     }
                                 }
+                            } else {
+                                weaponPart.setIsAttacking(true);
+                                weaponPart.setTimeSinceLastTrigger(0);
                             }
-                        } else {
-                            weaponPart.setIsAttacking(true);
-                            weaponPart.setTimeSinceLastTrigger(0);
-                        }
-                    } else {
-                        weaponPart.setIsAttacking(false);
-                    }
+                        } 
+                    } 
                 }
             }
         }
     }
-    
-}

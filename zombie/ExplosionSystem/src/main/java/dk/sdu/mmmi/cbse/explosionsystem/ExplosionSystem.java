@@ -79,13 +79,14 @@ public class ExplosionSystem implements IEntityProcessingService {
             Entity explosion = explosionMap.getKey();
             AnimationPart animationPart = (AnimationPart) world.getMapByPart(AnimationPart.class.getSimpleName()).get(explosion.getUUID());
             Long spawnTime = explosionMap.getValue();
-            
+            if(animationPart!=null){
             animationPart.setIsAnimated(true);
             animationPart.setCurrentAnimation("explode");
             
             if (spawnTime + explosionDuration < System.currentTimeMillis()) {
                 activeExplosionsIterator.remove();
                 world.removeEntityParts(explosion.getUUID());
+            }
             }
         }
     } 
