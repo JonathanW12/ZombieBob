@@ -76,6 +76,7 @@
     <orderEntry type="module" module-name="CommonWeapon" />
     <orderEntry type="module" module-name="HandGun" />
     <orderEntry type="module" module-name="LootingSystem" />
+    <orderEntry type="module" module-name="StandardZombie" />
     <orderEntry type="module" module-name="Map" />
   </component>
 </module>
