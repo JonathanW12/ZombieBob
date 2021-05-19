@@ -6,7 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Movement" />
+        <module name="ExplosionSystem" />
         <module name="CommonAnimation" />
         <module name="CommonLevel" />
         <module name="Zombie-app" />
@@ -15,20 +15,21 @@
         <module name="CommonWeapon" />
         <module name="RigidPhysicsSystem" />
         <module name="AudioSystem" />
+        <module name="ThrowingKnife" />
         <module name="Level" />
         <module name="SpiderBoss" />
         <module name="HandGun" />
         <module name="Common" />
+        <module name="ProjectileSystem" />
         <module name="Rifle" />
         <module name="CollisionSystem" />
         <module name="AIMovementSystem" />
+        <module name="Movement" />
         <module name="CombatSystem" />
         <module name="LootingSystem" />
         <module name="Hotbar" />
-        <module name="ExplosionSystem" />
         <module name="AnimationSystem" />
         <module name="HealthSystem" />
-        <module name="ProjectileSystem" />
         <module name="Map" />
         <module name="SilentUpdate" />
         <module name="StandardZombie" />
@@ -69,6 +70,7 @@
       <module name="SpiderBoss" target="1.8" />
       <module name="SpiderWeb" target="1.8" />
       <module name="StandardZombie" target="1.8" />
+      <module name="ThrowingKnife" target="1.8" />
       <module name="TimerSystem" target="1.8" />
       <module name="Zombie-app" target="1.8" />
       <module name="Zombie-branding" target="1.8" />

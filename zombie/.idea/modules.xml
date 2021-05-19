@@ -30,6 +30,7 @@
       <module fileurl="file://$PROJECT_DIR$/SilentUpdate/SilentUpdate.iml" filepath="$PROJECT_DIR$/SilentUpdate/SilentUpdate.iml" />
       <module fileurl="file://$PROJECT_DIR$/SpiderBoss/SpiderBoss.iml" filepath="$PROJECT_DIR$/SpiderBoss/SpiderBoss.iml" />
       <module fileurl="file://$PROJECT_DIR$/StandardZombie/StandardZombie.iml" filepath="$PROJECT_DIR$/StandardZombie/StandardZombie.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ThrowingKnife/ThrowingKnife.iml" filepath="$PROJECT_DIR$/ThrowingKnife/ThrowingKnife.iml" />
       <module fileurl="file://$PROJECT_DIR$/application/Zombie-app.iml" filepath="$PROJECT_DIR$/application/Zombie-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/branding/Zombie-branding.iml" filepath="$PROJECT_DIR$/branding/Zombie-branding.iml" />
       <module fileurl="file://$PROJECT_DIR$/Zombie-parent.iml" filepath="$PROJECT_DIR$/Zombie-parent.iml" />
