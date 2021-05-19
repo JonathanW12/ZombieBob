@@ -89,11 +89,6 @@ public class ColliderPart implements EntityPart {
     public class ShapePoint{
         public float distance;
         public float relRadians;
-        
-//        protected ShapePoint(float angle, float hypotenuse, PositionPart position){
-//            this.x = Math.round(position.getX() + hypotenuse * (float)Math.cos(angle));
-//            this.y = Math.round(position.getY() + hypotenuse * (float)Math.sin(angle));
-//        }
         /**
          * 
          * @param distance the shape point's distance from the shape center

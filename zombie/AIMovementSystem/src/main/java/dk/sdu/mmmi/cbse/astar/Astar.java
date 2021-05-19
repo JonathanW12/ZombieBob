@@ -62,6 +62,8 @@ public class Astar implements IEntityProcessingService {
                             } else {
                                 findPlayerPath(gameData, world, entry.getKey());                   
                                 if (path.size() > 0) {
+                                    
+                                    //last node index points the node closest to the enemy's current node 
                                     Node node = path.get(path.size() - 1);
                                     float newDirection = (float) Math.atan2(
                                         node.getY() - positionPart.getY(),
@@ -111,7 +113,7 @@ public class Astar implements IEntityProcessingService {
                 if (neighbor != null && !closedSet.contains(neighbor) && !neighbor.getIsObstacle()) {            
                     if (!openSet.contains(neighbor)) {
                         openSet.add(neighbor);
-                    } 
+                    }
                    
                     neighbor.setG(calculateG(neighbor, gameData, world));
                     neighbor.setH(calculateH(neighbor, getGoalNode(gameData, world)));
