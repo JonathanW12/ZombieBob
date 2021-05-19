@@ -129,7 +129,7 @@ public class Astar implements IEntityProcessingService {
         for (Map.Entry<UUID, EntityPart> enemy: world.getMapByPart(EnemyPart.class.getSimpleName()).entrySet()) {
             PositionPart enemyPosition = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(enemy.getKey());
             
-            if (getNodeByPosition(gameData, enemyPosition).equals(neighborNode)) {
+            if (getNodeByPosition(gameData, enemyPosition) != null && getNodeByPosition(gameData, enemyPosition).equals(neighborNode)) {
                 // Make nodes that already contain an enemy more expensive than
                 // walking around the node
                 resultG += 2.5f; 
