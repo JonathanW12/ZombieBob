@@ -24,7 +24,7 @@ public class ZombieBobGame extends Game implements ApplicationListener {
         
         audioProcessor = new AudioProcessor(world);
 
-        setScreen(new MainMenuScreen(this));
+        //setScreen(new MainMenuScreen(this));
     }
     
     public GameData getGameData() {

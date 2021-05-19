@@ -36,7 +36,9 @@ public class GameScreen implements Screen {
         this.game = game;
         gameData = game.getGameData();
         world = game.getWorld();
-        
+
+        System.out.println("LOL");
+
         setupCam();
         renderProcessor = new RenderProcessor(gameData, world, cam);
         mousePosition = new Vector3(); 

@@ -58,8 +58,10 @@
         <module>branding</module>
         <module>application</module>
         <module>Core</module>
-        <module>SilentUpdate</module>
+
         <module>Common</module>
+        <!--
+        <module>SilentUpdate</module>
         <module>Player</module>
         <module>Movement</module>
         <module>CommonAnimation</module>
@@ -86,6 +88,8 @@
         <module>AudioSystem</module>
         <module>ExplosionSystem</module>
         <module>ThrowingKnife</module>
+        -->
+        <module>TestingSystem</module>
     </modules>
 
     <properties>

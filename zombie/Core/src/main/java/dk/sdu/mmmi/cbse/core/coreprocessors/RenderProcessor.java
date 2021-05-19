@@ -105,6 +105,7 @@ public class RenderProcessor {
     }
 
     public void processRendering(GameData gameData) {
+
         float lerp = 3f;
         Vector3 camPosition = cam.position;
         
@@ -137,6 +138,8 @@ public class RenderProcessor {
     }
 
     public void draw() {
+
+
         // clear screen to black
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -192,6 +195,8 @@ public class RenderProcessor {
 //                updatesEditor.activate("CollisionSystem");
 //            }
         }
+
+
     }
 
     private void drawHitboxes() {
