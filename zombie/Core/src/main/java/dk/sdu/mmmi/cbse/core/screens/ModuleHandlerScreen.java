@@ -26,7 +26,7 @@ class ModuleHandlerScreen extends MenuScreenTemplate implements Screen{
     private final SpriteBatch secondaryBatch; 
     private float buttonWidth = 275;
     private float buttonHeight = 75;
-    private float xOffSet = 325;
+    private float xOffSet = 360;
     private float yOffSet = 100;
     private Image redX;
     public ModuleHandlerScreen(ZombieBobGame game) {
@@ -40,7 +40,6 @@ class ModuleHandlerScreen extends MenuScreenTemplate implements Screen{
         super.update();
         handleMainMenu();
         labels.forEach((String moduleName,Label label) ->{handleModuleClick(moduleName);});
-
         if (getGameData().getKeys().isPressed(GameKeys.ESCAPE)) {
             getGame().setScreen(new PauseMenuScreen(getGame()));
         }
@@ -66,8 +65,8 @@ class ModuleHandlerScreen extends MenuScreenTemplate implements Screen{
         title = getTitleFont();
         mainMenuButton = new Label("Main Manu", getSkin(), "title");
         mainMenuButton.setBounds(
-                (float) (getStage().getWidth() / 1.5 - buttonWidth / 2),
-                getStage().getHeight() - 150,
+                (getStage().getWidth()/2)-(buttonWidth/2),
+                100,
                 buttonWidth,
                 buttonHeight
         );
@@ -80,8 +79,8 @@ class ModuleHandlerScreen extends MenuScreenTemplate implements Screen{
         });
     }
     private void setUpModule(String moduleName, int index, boolean value){
-        float xPos = 100 + xOffSet*(float) Math.floor(index/7);
-        float yPos = 100 + yOffSet*(index%7);
+        float xPos = 100 + xOffSet*(float) Math.floor(index/6);
+        float yPos = 100 + yOffSet + yOffSet*(index%6);
         Label button = new Label(moduleName, getSkin(), "title");
         button.setBounds(xPos,yPos, buttonWidth,buttonHeight);
         button.setAlignment(Align.center);
@@ -89,7 +88,7 @@ class ModuleHandlerScreen extends MenuScreenTemplate implements Screen{
         labels.put(moduleName,button);
         
         redX = new Image(getButtonTexture("redX.png"));
-        redX.setPosition(labels.get(moduleName).getX()+buttonWidth/2,labels.get(moduleName).getY());
+        redX.setPosition((-1*redX.getWidth()/2)+labels.get(moduleName).getX()+buttonWidth/2,labels.get(moduleName).getY());
         redX.setVisible(!value);
         getStage().addActor(redX);
         removedModules.put(moduleName,redX);
