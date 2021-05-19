@@ -26,3 +26,4 @@ public class AIMovementPlugin implements IGamePluginService {
         }
     }
 }
+ 

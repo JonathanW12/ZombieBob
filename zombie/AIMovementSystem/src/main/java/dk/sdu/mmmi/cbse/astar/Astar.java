@@ -140,12 +140,10 @@ public class Astar implements IEntityProcessingService {
     }
     
     private float calculateH(Node a, Node b) {
-        return (float) (
-            Math.sqrt(
-                Math.pow(a.getX() - b.getX(), 2) +
-                Math.pow(a.getY() - b.getY(), 2)
-            )
-        );
+        float dx = Math.abs(a.getX() - b.getX());
+        float dy = Math.abs(a.getY() - b.getY());
+        
+        return dx + dy;
     }
     
     private Node getNodeByPosition(GameData gameData, PositionPart positionPart) {
