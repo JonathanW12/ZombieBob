@@ -53,7 +53,7 @@ public class ZombieControlSystem implements IEntityProcessingService {
                     setAnimation(animationPart, weaponAnimationPart);
                     
                     visualPart.setSpriteName(weaponAnimationPart.getIdleSpriteName());
-                    if (combatPart.isAttacking()) {
+                    if (((WeaponPart)world.getMapByPart(WeaponPart.class.getSimpleName()).get(combatPart.getCurrentWeapon())).isIsAttacking()) {
                         animationPart.setCurrentAnimation("hit");
                     } else if (movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp()) {
                         if (animationPart.hasCurrentAnimationLooped()) {
@@ -75,25 +75,25 @@ public class ZombieControlSystem implements IEntityProcessingService {
         CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(zombieID);
         WeaponPart weaponPart = (WeaponPart) world.getMapByPart(WeaponPart.class.getSimpleName()).get(combatPart.getCurrentWeapon());
         
-        combatPart.setAttacking(false);
+        combatPart.setAttacking(true);
         
-        if (world.getMapByPart(PlayerPart.class.getSimpleName()) != null) {
-            for (Map.Entry<UUID,EntityPart> player : world.getMapByPart(PlayerPart.class.getSimpleName()).entrySet()) {
-                PositionPart playerPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(player.getKey());
-                LifePart lifePart = (LifePart) world.getMapByPart(LifePart.class.getSimpleName()).get(player.getKey());
-                
-                float distance = (float) Math.sqrt(
-                    Math.pow(zombiePos.getX() - playerPos.getX(), 2) +
-                    Math.pow(zombiePos.getY() - playerPos.getY(), 2)
-                );
-                
-                if (distance <= weaponPart.getRange() && weaponPart.getTimeSinceLastTrigger() > weaponPart.getFireRate()) {
-                    combatPart.setAttacking(true);
-                    // OBS
-                    lifePart.setLife(lifePart.getLife()-weaponPart.getDamage());
-                } 
-            }
-        }
+//        if (world.getMapByPart(PlayerPart.class.getSimpleName()) != null) {
+//            for (Map.Entry<UUID,EntityPart> player : world.getMapByPart(PlayerPart.class.getSimpleName()).entrySet()) {
+//                PositionPart playerPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(player.getKey());
+//                LifePart lifePart = (LifePart) world.getMapByPart(LifePart.class.getSimpleName()).get(player.getKey());
+//                
+//                float distance = (float) Math.sqrt(
+//                    Math.pow(zombiePos.getX() - playerPos.getX(), 2) +
+//                    Math.pow(zombiePos.getY() - playerPos.getY(), 2)
+//                );
+//                
+//                if (distance <= weaponPart.getRange() && weaponPart.getTimeSinceLastTrigger() > weaponPart.getFireRate()) {
+//                    combatPart.setAttacking(true);
+//                    // OBS
+//                    lifePart.setLife(lifePart.getLife()-weaponPart.getDamage());
+//                } 
+//            }
+//        }
     }
     
     private void setAnimation(AnimationPart animationPart, WeaponAnimationPart weaponAnimation) {

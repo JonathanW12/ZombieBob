@@ -58,8 +58,19 @@ public class BoxCollisionCheckerTest {
         collider2 = new ColliderPart(10, 10);
         position2 = new PositionPart(105,105, (float)Math.PI);
         
+        BoxCollisionChecker instance = new BoxCollisionChecker();
+        boolean expResult = true;
+        boolean result = instance.areColliding(collider1, position1, collider2, position2);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testGivenCollidingRotatedBoxesReturnTrue() {
+        collider1 = new ColliderPart(10, 10);
+        position1 = new PositionPart(100,100, (float)Math.PI/7);
         
-        System.out.println("areColliding");
+        collider2 = new ColliderPart(10, 10);
+        position2 = new PositionPart(105,105, (float)Math.PI/7);
         
         BoxCollisionChecker instance = new BoxCollisionChecker();
         boolean expResult = true;
@@ -67,24 +78,88 @@ public class BoxCollisionCheckerTest {
         assertEquals(expResult, result);
     }
     
-//    @Test
-//    public void testGetMaxAndMinProjections(){
-//        BoxCollisionChecker instance = new BoxCollisionChecker();
-//        ArrayList<Point> corners = new ArrayList<>();
-//        corners.add(new Point());
-//        
-//        
-//        instance.getMaxAndMinProjections(corners, 10, 0)
-//        
-//        
-//    }
+    @Test
+    public void testGivenNotCollidingBoxesReturnFalse() {
+        collider1 = new ColliderPart(10, 10);
+        position1 = new PositionPart(100,100, (float)Math.PI);
+        
+        collider2 = new ColliderPart(10, 10);
+        position2 = new PositionPart(120,120, (float)Math.PI);
+        
+        BoxCollisionChecker instance = new BoxCollisionChecker();
+        boolean expResult = false;
+        boolean result = instance.areColliding(collider1, position1, collider2, position2);
+        assertEquals(expResult, result);
+    }
     
     @Test
-    public void testShapeCorners(){
+    public void testGivenNotCollidingRotatedBoxesReturnFalse() {
+        collider1 = new ColliderPart(10, 10);
+        position1 = new PositionPart(100,100, (float)Math.PI/10);
+        
+        collider2 = new ColliderPart(10, 10);
+        position2 = new PositionPart(120,120, (float)Math.PI/10);
+        
+        BoxCollisionChecker instance = new BoxCollisionChecker();
+        boolean expResult = false;
+        boolean result = instance.areColliding(collider1, position1, collider2, position2);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testGivenCollidingComplexPolygonsReturnTrue(){
+        
+        collider1 = new ColliderPart();
+        //creating a convex star shape with 4 corners
+        for(int i = 0; i < 8; i++){
+            collider1.addShapePoint(10 * (0.2f + i % 2),(float) (i * Math.PI / 4));
+        }
+        position1 = new PositionPart(100,100, 0);
+        
+        collider2 = new ColliderPart();
+        for(int i = 0; i < 8; i++){
+            collider2.addShapePoint(10 * (0.2f + i % 2),(float) (i * Math.PI / 4));
+        }
+        position2 = new PositionPart(120,100, 0);
+        
+        
+        BoxCollisionChecker instance = new BoxCollisionChecker();
+        boolean expResult = true;
+        boolean result = instance.areColliding(collider1, position1, collider2, position2);
+        assertEquals(expResult, result);
+        
+    }
+    @Test
+    public void testGivenNonCollidingComplexRotatedPolygonsReturnFalse(){
+        
+        collider1 = new ColliderPart();
+        //creating a convex star shape with 4 corners
+        for(int i = 0; i < 8; i++){
+            collider1.addShapePoint(10 * (0.1f + i % 2),(float) (i * Math.PI / 4));
+        }
+        position1 = new PositionPart(100,100, 0);
+        
+        collider2 = new ColliderPart();
+        for(int i = 0; i < 8; i++){
+            collider2.addShapePoint(10 * (0.1f + i % 2),(float) (i * Math.PI / 4));
+        }
+        
+        //rotating one star by 45 degrees to fit one of the star points into a concave space of the other star
+        position2 = new PositionPart(120,100, (float)Math.PI/4);
+        
+        
+        BoxCollisionChecker instance = new BoxCollisionChecker();
+        boolean expResult = false;
+        boolean result = instance.areColliding(collider1, position1, collider2, position2);
+        assertEquals(expResult, result);
+        
+    }
+    
+    //testing that the corners of the a regtangle gets positioned correct,
+    @Test
+    public void testShapeCornersOfSimpleRegtangle(){
         collider1 = new ColliderPart(10, 10);
         position1 = new PositionPart(0,0, 0);
-        
-        
         
         ArrayList<Vector2> corners = collider1.getCornerVecs(position1);
         
@@ -108,6 +183,10 @@ public class BoxCollisionCheckerTest {
         assertEquals(corner3x, corners.get(3).x,  "corner x3");
         assertEquals(corner3y, corners.get(3).y,  "corner y3");
     }
+    
+    
+    
+    
     
 //    @Test
 //    public void testShapeCornersWithRotation45(){

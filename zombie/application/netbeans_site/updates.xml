@@ -45,14 +45,11 @@
 <module codenamebase="org.netbeans.bootstrap" distribution="org-netbeans-bootstrap-RELEASE112.nbm" downloadsize="557290" homepage="http://www.netbeans.org/" license="3617C072" moduleauthor="" needsrestart="false" releasedate="2019/10/19" targetcluster="platform">
 <manifest AutoUpdate-Show-In-Client="false" OpenIDE-Module="org.netbeans.bootstrap/1" OpenIDE-Module-Display-Category="Infrastructure" OpenIDE-Module-Implementation-Version="11.2-d04fb24027334c4b6fd8397b5d0cdd33187a8f54" OpenIDE-Module-Java-Dependencies="Java &gt; 1.7" OpenIDE-Module-Long-Description="This module provides the initial infrastructure that loads all other parts of the application. It cannot be disabled." OpenIDE-Module-Module-Dependencies="org.openide.modules &gt; 7.44, org.openide.util.ui &gt; 9.3, org.openide.util &gt; 9.3, org.openide.util.lookup &gt; 8.0" OpenIDE-Module-Name="Bootstrap" OpenIDE-Module-Recommends="org.netbeans.NetigsoFramework" OpenIDE-Module-Short-Description="The core bootstrap of NetBeans-based applications." OpenIDE-Module-Specification-Version="2.84"/>
 </module>
-
-<module codenamebase="dk.sdu.mmmi.cbse.CollisionSystem" distribution="CollisionSystem-1.0-SNAPSHOT.nbm" downloadsize="8099" license="13255ACB" needsrestart="false" releasedate="2021/05/18" targetcluster="zombie">
-        
-    <manifest OpenIDE-Module="dk.sdu.mmmi.cbse.CollisionSystem" OpenIDE-Module-Display-Category="dk.sdu.mmmi.cbse" OpenIDE-Module-Implementation-Version="1.0-20210518" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="org.netbeans.api.annotations.common/1 &gt; 1.29.1, dk.sdu.mmmi.cbse.Common &gt; 1.0, org.netbeans.libs.junit5 &gt; 1.3" OpenIDE-Module-Name="CollisionSystem" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
-        
-
+<!--
+<module codenamebase="dk.sdu.mmmi.cbse.CollisionSystem" distribution="CollisionSystem-1.0-SNAPSHOT.nbm" downloadsize="8106" license="13255ACB" needsrestart="false" releasedate="2021/05/19" targetcluster="zombie">
+<manifest OpenIDE-Module="dk.sdu.mmmi.cbse.CollisionSystem" OpenIDE-Module-Display-Category="dk.sdu.mmmi.cbse" OpenIDE-Module-Implementation-Version="1.0-20210519" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="org.netbeans.api.annotations.common/1 &gt; 1.29.1, dk.sdu.mmmi.cbse.Common &gt; 1.0, org.netbeans.libs.junit5 &gt; 1.3" OpenIDE-Module-Name="CollisionSystem" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
 </module>
-<<<<<<< Updated upstream
+-->
 <module codenamebase="dk.sdu.mmmi.cbse.CombatSystem" distribution="CombatSystem-1.0-SNAPSHOT.nbm" downloadsize="5016" license="13255ACB" needsrestart="false" releasedate="2021/05/17" targetcluster="zombie">
 <manifest OpenIDE-Module="dk.sdu.mmmi.cbse.CombatSystem" OpenIDE-Module-Display-Category="dk.sdu.mmmi.cbse" OpenIDE-Module-Implementation-Version="1.0-20210517" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="org.netbeans.api.annotations.common/1 &gt; 1.29.1, dk.sdu.mmmi.cbse.Common &gt; 1.0" OpenIDE-Module-Name="CombatSystem" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
 </module>
@@ -91,14 +88,8 @@
 <module codenamebase="dk.sdu.mmmi.cbse.CommonEnemy" distribution="CommonEnemy-1.0-SNAPSHOT.nbm" downloadsize="7206" license="13255ACB" needsrestart="false" releasedate="2021/05/17">
 <manifest OpenIDE-Module="dk.sdu.mmmi.cbse.CommonEnemy" OpenIDE-Module-Display-Category="dk.sdu.mmmi.cbse" OpenIDE-Module-Implementation-Version="1.0-20210517" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="org.netbeans.api.annotations.common/1 &gt; 1.33, dk.sdu.mmmi.cbse.Common &gt; 1.0, dk.sdu.mmmi.cbse.CommonAnimation &gt; 1.0" OpenIDE-Module-Name="CommonEnemy" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
 </module>
-<
->
-<module codenamebase="dk.sdu.mmmi.cbse.CommonLevel" distribution="CommonLevel-1.0-SNAPSHOT.nbm" downloadsize="4279" license="13255ACB" needsrestart="false" releasedate="2021/05/12">
-<
->
-<manifest OpenIDE-Module="dk.sdu.mmmi.cbse.CommonLevel" OpenIDE-Module-Display-Category="dk.sdu.mmmi.cbse" OpenIDE-Module-Implementation-Version="1.0-20210512" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="org.netbeans.api.annotations.common/1 &gt; 1.33" OpenIDE-Module-Name="CommonLevel" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
-<
->
+<module codenamebase="dk.sdu.mmmi.cbse.CommonLocations" distribution="CommonLocations-1.0-SNAPSHOT.nbm" downloadsize="4867" license="13255ACB" needsrestart="false" releasedate="2021/05/19" targetcluster="zombie">
+<manifest OpenIDE-Module="dk.sdu.mmmi.cbse.CommonLocations" OpenIDE-Module-Display-Category="dk.sdu.mmmi.cbse" OpenIDE-Module-Implementation-Version="1.0-20210519" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="org.netbeans.api.annotations.common/1 &gt; 1.33, org.openide.util.lookup &gt; 8.39, dk.sdu.mmmi.cbse.Common &gt; 1.0" OpenIDE-Module-Name="CommonLocations" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
 </module>
 <module codenamebase="dk.sdu.mmmi.cbse.CommonLocations" distribution="CommonLocations-1.0-SNAPSHOT.nbm" downloadsize="4862" license="13255ACB" needsrestart="false" releasedate="2021/05/17" targetcluster="zombie">
 <manifest OpenIDE-Module="dk.sdu.mmmi.cbse.CommonLocations" OpenIDE-Module-Display-Category="dk.sdu.mmmi.cbse" OpenIDE-Module-Implementation-Version="1.0-20210517" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="org.netbeans.api.annotations.common/1 &gt; 1.33, org.openide.util.lookup &gt; 8.39, dk.sdu.mmmi.cbse.Common &gt; 1.0" OpenIDE-Module-Name="CommonLocations" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
@@ -296,12 +287,8 @@
 
 >>>>>>> Stashed changes
 </module>
-
-<module codenamebase="dk.sdu.mmmi.cbse.Rifle" distribution="Rifle-1.0-SNAPSHOT.nbm" downloadsize="10108" license="13255ACB" needsrestart="false" releasedate="2021/05/18" targetcluster="zombie">
-        
-    <manifest OpenIDE-Module="dk.sdu.mmmi.cbse.Rifle" OpenIDE-Module-Display-Category="dk.sdu.mmmi.cbse" OpenIDE-Module-Implementation-Version="1.0-20210518" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="org.netbeans.api.annotations.common/1 &gt; 1.33, dk.sdu.mmmi.cbse.Common &gt; 1.0, dk.sdu.mmmi.cbse.CommonLevel &gt; 1.0" OpenIDE-Module-Name="Rifle" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
-        
-
+<module codenamebase="dk.sdu.mmmi.cbse.Rifle" distribution="Rifle-1.0-SNAPSHOT.nbm" downloadsize="10119" license="13255ACB" needsrestart="false" releasedate="2021/05/19" targetcluster="zombie">
+<manifest OpenIDE-Module="dk.sdu.mmmi.cbse.Rifle" OpenIDE-Module-Display-Category="dk.sdu.mmmi.cbse" OpenIDE-Module-Implementation-Version="1.0-20210519" OpenIDE-Module-Long-Description="&lt;undefined&gt;" OpenIDE-Module-Module-Dependencies="org.netbeans.api.annotations.common/1 &gt; 1.33, dk.sdu.mmmi.cbse.Common &gt; 1.0, dk.sdu.mmmi.cbse.CommonLevel &gt; 1.0" OpenIDE-Module-Name="Rifle" OpenIDE-Module-Requires="org.openide.modules.ModuleFormat1" OpenIDE-Module-Short-Description="&lt;undefined&gt;" OpenIDE-Module-Specification-Version="1.0"/>
 </module>
 <<<<<<< Updated upstream
 <module codenamebase="dk.sdu.mmmi.cbse.RigidPhysicsSystem" distribution="RigidPhysicsSystem-1.0-SNAPSHOT.nbm" downloadsize="5427" license="13255ACB" needsrestart="false" releasedate="2021/05/17" targetcluster="zombie">

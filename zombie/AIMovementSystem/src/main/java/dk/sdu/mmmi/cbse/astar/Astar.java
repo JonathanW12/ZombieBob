@@ -62,6 +62,8 @@ public class Astar implements IEntityProcessingService {
                             } else {
                                 findPlayerPath(gameData, world, entry.getKey());                   
                                 if (path.size() > 0) {
+                                    
+                                    //last node index points the node closest to the enemy's current node 
                                     Node node = path.get(path.size() - 1);
                                     float newDirection = (float) Math.atan2(
                                         node.getY() - positionPart.getY(),
@@ -111,7 +113,7 @@ public class Astar implements IEntityProcessingService {
                 if (neighbor != null && !closedSet.contains(neighbor) && !neighbor.getIsObstacle()) {            
                     if (!openSet.contains(neighbor)) {
                         openSet.add(neighbor);
-                    } 
+                    }
                    
                     neighbor.setG(calculateG(neighbor, gameData, world));
                     neighbor.setH(calculateH(neighbor, getGoalNode(gameData, world)));
@@ -129,7 +131,7 @@ public class Astar implements IEntityProcessingService {
         for (Map.Entry<UUID, EntityPart> enemy: world.getMapByPart(EnemyPart.class.getSimpleName()).entrySet()) {
             PositionPart enemyPosition = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(enemy.getKey());
             
-            if (getNodeByPosition(gameData, enemyPosition).equals(neighborNode)) {
+            if (getNodeByPosition(gameData, enemyPosition) != null && getNodeByPosition(gameData, enemyPosition).equals(neighborNode)) {
                 // Make nodes that already contain an enemy more expensive than
                 // walking around the node
                 resultG += 2.5f; 

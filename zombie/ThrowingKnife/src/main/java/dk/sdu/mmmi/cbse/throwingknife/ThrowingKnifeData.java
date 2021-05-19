@@ -31,12 +31,12 @@ public class ThrowingKnifeData {
         walkAnimationName = "PlayerKnifeWalking";
         attackAnimationFrameCount = 1;
         walkAnimationFrameCount = 2;
-        damage = 100;
-        range = 600f;
-        fireRate = 0.3f;
+        damage = 200;
+        range = 250f;
+        fireRate = 1f;
         attackAnimationFrameDuration = 0.03f;
         walkAnimationFrameDuration = 0.2f;
-        shootingSoundFileName = "ThrowingKnife.mp3";
+        shootingSoundFileName = "ThrowingKnife.wav";
     }
 
     public static ThrowingKnifeData getInstance() {

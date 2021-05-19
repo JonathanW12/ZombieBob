@@ -40,6 +40,7 @@ public class ColliderPhysicsProcessor implements IPostEntityProcessingService{
                             
                             
                             PositionPart position2 = (PositionPart)world.getMapByPart(PositionPart.class.getSimpleName()).get(collider.getCollidingEntities().get(0));
+                            if(position2 != null){
                             for(UUID collidingEntity: collider.getCollidingEntities()){
                                 StructurePart structure = (StructurePart)world.getMapByPart(StructurePart.class.getSimpleName()).get(collidingEntity);
                                 if(structure == null){
@@ -62,6 +63,7 @@ public class ColliderPhysicsProcessor implements IPostEntityProcessingService{
                             
                             position1.setX(position1.getX() - xOffset/50-dx*1.1f);
                             position1.setY(position1.getY() - yOffset/50-dy*1.1f);
+                            }
                         }
                     }
                 }
