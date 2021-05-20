@@ -6,35 +6,38 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="CommonAnimation" />
-        <module name="Player" />
-        <module name="Movement" />
-        <module name="CommonEnemy" />
-        <module name="SilentUpdate" />
-        <module name="Zombie-branding" />
-        <module name="CombatSystem" />
+        <module name="StandardZombie" />
         <module name="AnimationSystem" />
+        <module name="SilentUpdate" />
+        <module name="HashMapTesting" />
+        <module name="CollisionSystem" />
+        <module name="Common" />
+        <module name="HandGun" />
+        <module name="Core" />
+        <module name="HealthSystem" />
+        <module name="SpawnerSystem" />
+        <module name="ArrayListTesting" />
+        <module name="AIMovementSystem" />
+        <module name="Map" />
+        <module name="Enemy" />
+        <module name="Player" />
+        <module name="Zombie-branding" />
+        <module name="CommonWeapon" />
+        <module name="CommonAnimation" />
         <module name="Zombie-app" />
         <module name="Hotbar" />
-        <module name="Common" />
-        <module name="AIMovementSystem" />
-        <module name="StandardZombie" />
-        <module name="HandGun" />
-        <module name="ProjectileSystem" />
-        <module name="SpawnerSystem" />
-        <module name="CommonWeapon" />
-        <module name="Enemy" />
         <module name="LootingSystem" />
-        <module name="CollisionSystem" />
-        <module name="Map" />
-        <module name="HealthSystem" />
-        <module name="Core" />
         <module name="TimerSystem" />
+        <module name="Movement" />
+        <module name="ProjectileSystem" />
+        <module name="CommonEnemy" />
+        <module name="CombatSystem" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="AIMovementSystem" target="1.8" />
       <module name="AnimationSystem" target="1.8" />
+      <module name="ArrayListTesting" target="1.8" />
       <module name="BulletSystem" target="1.8" />
       <module name="CollisionSystem" target="1.8" />
       <module name="CombatSystem" target="1.8" />
@@ -45,6 +48,7 @@
       <module name="Core" target="1.8" />
       <module name="Enemy" target="1.8" />
       <module name="HandGun" target="1.8" />
+      <module name="HashMapTesting" target="1.8" />
       <module name="HealthSystem" target="1.8" />
       <module name="Hotbar" target="1.8" />
       <module name="LootingSystem" target="1.8" />

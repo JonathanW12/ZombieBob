@@ -103,8 +103,11 @@ public class Game implements ApplicationListener {
         }
         
 
+        /*
         addSprites();
         addAnimations();
+
+         */
 
         cam = new OrthographicCamera(gameData.getDisplayWidth(), gameData.getDisplayHeight());
         cam.translate(gameData.getDisplayWidth() / 2, gameData.getDisplayHeight() / 2);
@@ -160,7 +163,7 @@ public class Game implements ApplicationListener {
 
 
         update();
-        draw();
+        // draw();
         gameData.getKeys().update();
     }
 
@@ -175,7 +178,7 @@ public class Game implements ApplicationListener {
             postEntityProcessorService.process(gameData, world);
         }
     }
-
+    /*
     private ArrayList<ArrayList<UUID>> sortVisualParts(){
         for (Map.Entry<UUID, EntityPart> entry: world.getMapByPart("VisualPart").entrySet()){ 
             VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entry.getKey());
@@ -189,35 +192,11 @@ public class Game implements ApplicationListener {
             sortedVisualList.get(i).clear();
         }
     }
+
+
     private void draw() {
         batch.begin();  
-        /*
-        for (Map.Entry<UUID, EntityPart> entry: world.getMapByPart("VisualPart").entrySet()){ 
-            PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(entry.getKey());
-            VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entry.getKey());
-            AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entry.getKey());
 
-            if (animationPart != null && animationPart.isAnimated()) {
-                drawAnimation(
-                    animationPart,
-                    positionPart.getX(),
-                    positionPart.getY(),
-                    positionPart.getRadians(),
-                    visualPart.getWidth(),
-                    animationPart.getAnimationByName(animationPart.getCurrentAnimationName()).getFrameCount()
-                );
-            } else {
-                drawSprite(
-                    visualPart.getSpriteName(),
-                    positionPart.getX(),
-                    positionPart.getY(),
-                    positionPart.getRadians(),
-                    visualPart.getWidth()
-                );
-            }
-
-        }
-    */
         sortVisualParts();
         for (int i = 0; i < zDepth; i++) {
 
@@ -314,7 +293,7 @@ public class Game implements ApplicationListener {
             animationRegions.put(region.name, region);
         }
     }
-
+*/
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height, true);

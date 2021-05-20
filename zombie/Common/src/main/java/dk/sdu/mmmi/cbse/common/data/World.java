@@ -8,14 +8,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class World {
 
-    private final Map<String, Entity> entityMap = new ConcurrentHashMap<>();
-    private Map<String, Map<UUID,EntityPart>> entityPartMap = new ConcurrentHashMap<>();
+    private final Map<String, Entity> entityMap = new HashMap<>();
+    private Map<String, Map<UUID,EntityPart>> entityPartMap = new HashMap<>();
     
     public void addtoEntityPartMap(EntityPart entityPart, Entity entity){
         String entityPartNameKey = entityPart.getClass().getSimpleName();
 
         if (!entityPartMap.containsKey(entityPartNameKey)){
-            entityPartMap.put(entityPartNameKey, new ConcurrentHashMap<UUID, EntityPart>());
+            entityPartMap.put(entityPartNameKey, new HashMap<UUID, EntityPart>());
             entityPartMap.get(entityPartNameKey).put(entity.getUUID(),entityPart);
 
         } else {
@@ -28,7 +28,7 @@ public class World {
         String entityPartNameKey = entityPart.getClass().getSimpleName();
 
         if (!entityPartMap.containsKey(entityPartNameKey)){
-            entityPartMap.put(entityPartNameKey, new ConcurrentHashMap<UUID, EntityPart>());
+            entityPartMap.put(entityPartNameKey, new HashMap<UUID, EntityPart>());
             entityPartMap.get(entityPartNameKey).put(entityUUID, entityPart);
 
         } else {
@@ -45,9 +45,15 @@ public class World {
         }
     }
     
-    public void getMapForSpecificPart(){
-
+    public void clearPartMap(){
+        entityPartMap.clear();
     }
+
+    public String addEntity(Entity entity) {
+        entityMap.put(entity.getID(), entity);
+        return entity.getID();
+    }
+
     public Map<UUID,EntityPart> getMapByPart(String partName){
         return entityPartMap.get(partName);
     }

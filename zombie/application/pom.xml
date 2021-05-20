@@ -69,9 +69,16 @@
             <artifactId>Common</artifactId>
             <version>${project.version}</version>
         </dependency>
+
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Player</artifactId>
+            <artifactId>HashMapTesting</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>ArrayListTesting</artifactId>
             <version>${project.version}</version>
         </dependency>
 
@@ -80,10 +87,25 @@
             <artifactId>Core</artifactId>
             <version>${project.version}</version>
         </dependency>
-
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Movement</artifactId>
+            <artifactId>CommonEnemy</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CommonAnimation</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CommonWeapon</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Player</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -103,18 +125,6 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>CombatSystem</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>AnimationSystem</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>ProjectileSystem</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -125,17 +135,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>SpawnerSystem</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>CommonEnemy</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>CommonAnimation</artifactId>
+            <artifactId>Movement</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -145,7 +145,17 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>CommonWeapon</artifactId>
+            <artifactId>AnimationSystem</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CombatSystem</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>SpawnerSystem</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -158,11 +168,13 @@
             <artifactId>LootingSystem</artifactId>
             <version>${project.version}</version>
         </dependency>
+
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>StandardZombie</artifactId>
             <version>${project.version}</version>
         </dependency>
+        -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Map</artifactId>

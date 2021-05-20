@@ -78,6 +78,8 @@
         <module>CommonWeapon</module>
         <module>HandGun</module>
         <module>Map</module>
+        <module>HashMapTesting</module>
+        <module>ArrayListTesting</module>
     </modules>
 
     <properties>

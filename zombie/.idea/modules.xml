@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AIMovementSystem/AIMovementSystem.iml" filepath="$PROJECT_DIR$/AIMovementSystem/AIMovementSystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/AnimationSystem/AnimationSystem.iml" filepath="$PROJECT_DIR$/AnimationSystem/AnimationSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ArrayListTesting/ArrayListTesting.iml" filepath="$PROJECT_DIR$/ArrayListTesting/ArrayListTesting.iml" />
       <module fileurl="file://$PROJECT_DIR$/CollisionSystem/CollisionSystem.iml" filepath="$PROJECT_DIR$/CollisionSystem/CollisionSystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/CombatSystem/CombatSystem.iml" filepath="$PROJECT_DIR$/CombatSystem/CombatSystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/Common/Common.iml" filepath="$PROJECT_DIR$/Common/Common.iml" />
@@ -13,6 +14,7 @@
       <module fileurl="file://$PROJECT_DIR$/Core/Core.iml" filepath="$PROJECT_DIR$/Core/Core.iml" />
       <module fileurl="file://$PROJECT_DIR$/Enemy/Enemy.iml" filepath="$PROJECT_DIR$/Enemy/Enemy.iml" />
       <module fileurl="file://$PROJECT_DIR$/HandGun/HandGun.iml" filepath="$PROJECT_DIR$/HandGun/HandGun.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HashMapTesting/HashMapTesting.iml" filepath="$PROJECT_DIR$/HashMapTesting/HashMapTesting.iml" />
       <module fileurl="file://$PROJECT_DIR$/HealthSystem/HealthSystem.iml" filepath="$PROJECT_DIR$/HealthSystem/HealthSystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/Hotbar/Hotbar.iml" filepath="$PROJECT_DIR$/Hotbar/Hotbar.iml" />
       <module fileurl="file://$PROJECT_DIR$/LootingSystem/LootingSystem.iml" filepath="$PROJECT_DIR$/LootingSystem/LootingSystem.iml" />
