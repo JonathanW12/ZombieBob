@@ -39,6 +39,7 @@
             <artifactId>Common</artifactId>
             <version>${project.version}</version>
         </dependency>
+<!--        
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Player</artifactId>
@@ -173,6 +174,20 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>ThrowingKnife</artifactId>
             <version>${project.version}</version>
+        </dependency>-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-modules-nbjunit</artifactId>
+            <version>RELEASE82</version>
+            <scope>test</scope>
+            <type>jar</type>
         </dependency>
     </dependencies>
     <build>
