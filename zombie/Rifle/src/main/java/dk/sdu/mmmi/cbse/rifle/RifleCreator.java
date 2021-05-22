@@ -10,11 +10,11 @@ import java.util.UUID;
 public class RifleCreator {
 
     private static final RifleData rifleData = RifleData.getInstance();
-
+    private static UUID rifleID;
 
     public UUID spawnRifleData(Position position, GameData gameData, World world) {
         Entity rifle = RifleCreator.scaffoldGun(world);
-
+        rifleID = rifle.getUUID();
         VisualPart visualPart = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(rifle.getUUID());
         visualPart.setIsVisible(true);
 
@@ -69,5 +69,8 @@ public class RifleCreator {
         world.addtoEntityPartMap(audioPart, rifle);
 
         return rifle;
+    }
+    public static UUID getRifleID(){
+        return rifleID;
     }
 }

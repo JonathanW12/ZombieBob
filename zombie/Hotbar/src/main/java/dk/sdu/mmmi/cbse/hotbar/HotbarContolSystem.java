@@ -69,7 +69,10 @@ public class HotbarContolSystem implements IEntityProcessingService {
     private void updateActiveWeapon(UUID playerUUID, World world) {
         CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(playerUUID);
         UUID currentWeaponUUID = combatPart.getCurrentWeapon();
-
+        if(currentWeaponUUID == null){
+            previousWeapon = null;
+        }
+        
         if (previousWeapon != currentWeaponUUID) {
             for (Map.Entry<UUID, UUID> weaponUUID : excistingItems2.entrySet()) {
                 if (weaponUUID.getKey().equals(currentWeaponUUID)) {

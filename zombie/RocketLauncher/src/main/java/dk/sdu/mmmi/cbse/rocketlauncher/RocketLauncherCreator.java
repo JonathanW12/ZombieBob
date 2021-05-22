@@ -10,10 +10,10 @@ import java.util.UUID;
 public class RocketLauncherCreator {
 
     private static final RocketLauncherData rocketLauncherData = RocketLauncherData.getInstance();
-
+    private static UUID rocketLauncherID;
     public UUID spawnRocketLauncher(Position position, GameData gameData, World world) {
         Entity rocketLauncher = RocketLauncherCreator.scaffoldGun(world);
-
+        rocketLauncherID = rocketLauncher.getUUID();
         VisualPart visualPart = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(rocketLauncher.getUUID());
         visualPart.setIsVisible(true);
 
@@ -70,5 +70,8 @@ public class RocketLauncherCreator {
         // RocketLauncherProcessor.addToProcessingList(rocketLauncher);
 
         return rocketLauncher;
+    }
+    public static UUID getRocketID(){
+        return rocketLauncherID;
     }
 }

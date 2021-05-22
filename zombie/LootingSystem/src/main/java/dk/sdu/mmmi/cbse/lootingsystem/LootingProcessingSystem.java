@@ -28,38 +28,6 @@ import org.openide.util.lookup.ServiceProviders;
 @ServiceProviders(value = {
         @ServiceProvider(service = IEntityProcessingService.class)})
 public class LootingProcessingSystem implements IEntityProcessingService {
-
-//    @Override
-//    public void process(GameData gameData, World world) {
-//        boolean enterKeyPressed = gameData.getKeys().isPressed(GameKeys.ENTER);
-//        
-//        if (world.getMapByPart(PlayerPart.class.getSimpleName()) != null && world.getMapByPart(LootablePart.class.getSimpleName()) != null) { 
-//            for (Map.Entry<UUID, EntityPart> player : world.getMapByPart(PlayerPart.class.getSimpleName()).entrySet()) {
-//                PositionPart pPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(player.getKey());
-//                CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(player.getKey());
-//                
-//                for (Map.Entry<UUID, EntityPart> item : world.getMapByPart(LootablePart.class.getSimpleName()).entrySet()) {
-//                    PositionPart iPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(item.getKey());
-//                    float distance = (float) Math.sqrt(
-//                        Math.pow(pPos.getX() - iPos.getX(), 2) +
-//                        Math.pow(pPos.getY() - iPos.getY(), 2)
-//                    );
-//                    
-//                    if (distance < 50 && enterKeyPressed) {
-//                        // Equip weapon
-//                        if (world.getMapByPart(WeaponPart.class.getSimpleName()).get(item.getKey()) != null) {
-//                            VisualPart visualPart = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(item.getKey());
-//                            
-//                            combatPart.setCurrentWeapon(item.getKey());
-//                            world.addtoEntityPartMap(pPos, item.getKey());
-//                            visualPart.setIsVisible(false);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-
     @Override
     public void process(GameData gameData, World world) {
 
