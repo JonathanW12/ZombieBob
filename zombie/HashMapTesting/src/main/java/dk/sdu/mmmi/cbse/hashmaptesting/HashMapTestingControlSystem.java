@@ -13,14 +13,35 @@ import java.util.UUID;
 @ServiceProvider(service = IEntityProcessingService.class)
 public class HashMapTestingControlSystem implements IEntityProcessingService {
 
-    private int jobsDone = 0;
+    private int job = 1;
     private int iterationCount = 0;
     private int totalIterations = 0;
 
     @Override
     public void process(GameData gameData, World world) {
 
-        if (jobsDone == 0) {
+        if (job == 1) {
+            Long startTime = System.nanoTime();
+
+
+            // 100 % Test, iterate through all positionParts, find lootableParts and remove
+            for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart(PositionPart.class.getSimpleName()).entrySet()) {
+                iterationCount++;
+            }
+
+
+
+            Long endTime = System.nanoTime();
+            Long timeElapsed = endTime - startTime;
+
+            job++;
+
+            System.out.println("Test 1: HashMap, Execution Time ->" + timeElapsed / 1000000+" ms Iterations Done ->:  "+iterationCount);
+            totalIterations +=iterationCount;
+            iterationCount = 0;
+        }
+
+        if (job == 2) {
             Long startTime = System.nanoTime();
 
             // 1 % Test, Find players
@@ -32,36 +53,14 @@ public class HashMapTestingControlSystem implements IEntityProcessingService {
             Long endTime = System.nanoTime();
             Long timeElapsed = endTime - startTime;
 
-            jobsDone++;
+            job++;
 
-            System.out.println("Execution time in milliseconds HashMap, Players 1%:    ->" + timeElapsed / 1000000+" ms");
-            System.out.println("Iteration Count: "+iterationCount);
-            totalIterations +=iterationCount;
-            iterationCount = 0;
-        }
-
-        if (jobsDone == 1) {
-            Long startTime = System.nanoTime();
-
-            // 25 % Test, iterate through all weaponParts, change damage
-            for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart(WeaponPart.class.getSimpleName()).entrySet()) {
-                WeaponPart weaponPart = (WeaponPart) entry.getValue();
-                weaponPart.setDamage(200);
-                iterationCount++;
-            }
-
-            Long endTime = System.nanoTime();
-            Long timeElapsed = endTime - startTime;
-
-            jobsDone++;
-
-            System.out.println("Execution time in milliseconds HashMap, mutate WeaponParts 25%:    ->" + timeElapsed / 1000000+" ms");
-            System.out.println("Iteration Count: "+iterationCount);
+            System.out.println("Test 2: HashMap, Execution Time ->" + timeElapsed / 1000000+" ms Iterations Done ->:  "+iterationCount);
             totalIterations += iterationCount;
             iterationCount = 0;
         }
 
-        if (jobsDone == 2) {
+        if (job == 3) {
             Long startTime = System.nanoTime();
 
             // 50 % Test, iterate through all lifeparts, change health
@@ -74,57 +73,33 @@ public class HashMapTestingControlSystem implements IEntityProcessingService {
             Long endTime = System.nanoTime();
             Long timeElapsed = endTime - startTime;
 
-            jobsDone++;
+            job++;
 
-            System.out.println("Execution time in milliseconds HashMap, mutate LifeParts 50%:    ->" + timeElapsed / 1000000+" ms");
-            System.out.println("Iteration Count: "+iterationCount);
+            System.out.println("Test 3: HashMap, Execution Time ->" + timeElapsed / 1000000+" ms Iterations Done ->:  "+iterationCount);
             totalIterations +=iterationCount;
             iterationCount = 0;
         }
 
-        if (jobsDone == 3) {
+        if (job == 4) {
             Long startTime = System.nanoTime();
 
-            // 75 % Test, iterate through all combatParts, setAttacking true
+            // 75 % Test, iterate through all combatParts, add a WeaponInventoryPart
             for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart(CombatPart.class.getSimpleName()).entrySet()) {
-                CombatPart combatPart = (CombatPart) entry.getValue();
-                combatPart.setAttacking(true);
+                world.addtoEntityPartMap(new WeaponInventoryPart(2),entry.getKey());
                 iterationCount++;
             }
 
             Long endTime = System.nanoTime();
             Long timeElapsed = endTime - startTime;
 
-            jobsDone++;
+            job++;
 
-            System.out.println("Execution time in milliseconds HashMap, mutate CombatParts 75%:    ->" + timeElapsed / 1000000+" ms");
-            System.out.println("Iteration Count: "+iterationCount);
+            System.out.println("Test 4: HashMap, Execution Time ->" + timeElapsed / 1000000+" ms Iterations Done ->:  "+iterationCount);
             totalIterations +=iterationCount;
             iterationCount = 0;
         }
 
-        if (jobsDone == 4) {
-            Long startTime = System.nanoTime();
-
-            // 100 % Test, iterate through all positionParts, setRadians
-            for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart(PositionPart.class.getSimpleName()).entrySet()) {
-                PositionPart positionPart = (PositionPart) entry.getValue();
-                positionPart.setRadians(2);
-                iterationCount++;
-            }
-
-            Long endTime = System.nanoTime();
-            Long timeElapsed = endTime - startTime;
-
-            jobsDone++;
-
-            System.out.println("Execution time in milliseconds HashMap, mutate PositionParts 100%:    ->" + timeElapsed / 1000000+" ms");
-            System.out.println("Iteration Count: "+iterationCount);
-            totalIterations +=iterationCount;
-            iterationCount = 0;
-        }
-
-        if (jobsDone == 5) {
+        if (job == 5) {
             Long startTime = System.nanoTime();
 
             // 100 % Test, iterate through all positionParts, find lootableParts and remove
@@ -139,19 +114,14 @@ public class HashMapTestingControlSystem implements IEntityProcessingService {
             Long endTime = System.nanoTime();
             Long timeElapsed = endTime - startTime;
 
-            jobsDone++;
+            job++;
 
-            System.out.println("Execution time in milliseconds HashMap, find PositionParts, remove related LootableParts, 100%:    ->" + timeElapsed / 1000000+" ms");
-            System.out.println("Iteration Count: "+iterationCount);
+            System.out.println("Test 5: HashMap, Execution Time ->" + timeElapsed / 1000000+" ms Iterations Done ->:  "+iterationCount);
             totalIterations +=iterationCount;
             iterationCount = 0;
-            System.out.println();
-            System.out.println("Total Iteration Count: "+ totalIterations);
+            System.out.println("5/5 tests done, total iterations -> "+totalIterations);
             System.out.println();
         }
-
     }
-
-
 }
 

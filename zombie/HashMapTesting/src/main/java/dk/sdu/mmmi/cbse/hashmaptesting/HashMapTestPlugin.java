@@ -12,7 +12,7 @@ import org.openide.util.lookup.ServiceProvider;
 @ServiceProvider(service = IGamePluginService.class)
 public class HashMapTestPlugin implements IGamePluginService {
 
-    private int limit = 5000000;
+    private int limit = 2500000;
     private double playerCount = limit*0.01;
     private double weaponCount = limit*0.24;
     private double enemyCount = limit*0.5;
@@ -25,19 +25,15 @@ public class HashMapTestPlugin implements IGamePluginService {
 
         for (int i = 0; i < playerCount; i++) {
             createPlayer(world);
-            playerCount--;
         }
         for (int i = 0; i < weaponCount; i++) {
             createWeapon(world);
-            weaponCount--;
         }
         for (int i = 0; i < enemyCount; i++) {
             createEnemy(world);
-            enemyCount--;
         }
         for (int i = 0; i < bulletCount; i++) {
             createBullet(world);
-            bulletCount--;
         }
     }
 
