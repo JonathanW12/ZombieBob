@@ -153,28 +153,29 @@ public class RenderProcessor {
                 VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entityUUID);
                 AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entityUUID);
 
-                if (animationPart != null && animationPart.isAnimated()) {
-                    drawAnimation(
-                            animationPart,
-                            positionPart.getX(),
-                            positionPart.getY(),
-                            positionPart.getRadians(),
-                            visualPart.getWidth(),
-                            animationPart.getAnimationByName(
-                                    animationPart.getCurrentAnimationName()
-                            ).getFrameCount()
-                    );
-                } else if (visualPart.getIsVisible()) {
-                    drawSprite(
-                            visualPart.getSpriteName(),
-                            positionPart.getX(),
-                            positionPart.getY(),
-                            positionPart.getRadians(),
-                            visualPart.getWidth(),
-                            visualPart.getResizable(),
-                            visualPart.getHeight()
-                    );
+                    if (animationPart != null && animationPart.isAnimated()) {
+                        drawAnimation(
+                                animationPart,
+                                positionPart.getX(),
+                                positionPart.getY(),
+                                positionPart.getRadians(),
+                                visualPart.getWidth(),
+                                animationPart.getAnimationByName(
+                                        animationPart.getCurrentAnimationName()
+                                ).getFrameCount()
+                        );
+                    } else if (visualPart != null && visualPart.getIsVisible()) {
+                        drawSprite(
+                                visualPart.getSpriteName(),
+                                positionPart.getX(),
+                                positionPart.getY(),
+                                positionPart.getRadians(),
+                                visualPart.getWidth(),
+                                visualPart.getResizable(),
+                                visualPart.getHeight()
+                        );
                 }
+
             }
         }
 

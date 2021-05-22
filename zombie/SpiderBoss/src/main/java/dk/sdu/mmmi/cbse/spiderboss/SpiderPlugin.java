@@ -21,7 +21,7 @@ public class SpiderPlugin implements IGamePluginService{
     public void stop(GameData gameData, World world) {
         // Removing spiders
         if (world.getMapByPart(SpiderPart.class.getSimpleName()) != null) {
-            for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(EnemyPart.class.getSimpleName()).entrySet()){
+            for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(SpiderPart.class.getSimpleName()).entrySet()){
                 world.removeEntityParts(entry.getKey());
             }
             // Clears processing array for webshooters (Spider guns)

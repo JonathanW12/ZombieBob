@@ -21,7 +21,7 @@ public class ZombiePlugin implements IGamePluginService{
     public void stop(GameData gameData, World world) {
         // Remove all zombies
         if (world.getMapByPart(ZombiePart.class.getSimpleName()) != null) {
-            for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(EnemyPart.class.getSimpleName()).entrySet()){
+            for (Map.Entry<UUID,EntityPart> entry : world.getMapByPart(ZombiePart.class.getSimpleName()).entrySet()){
                 world.removeEntityParts(entry.getKey());
             }
         }
