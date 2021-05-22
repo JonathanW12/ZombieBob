@@ -23,11 +23,11 @@ import java.util.UUID;
  */
 public class ThrowingKnifeCreator {
  private static final ThrowingKnifeData knifeData = ThrowingKnifeData.getInstance();
-
+    private static UUID knifeID;
 
     public UUID spawnKnifeData(Position position, GameData gameData, World world) {
         Entity knife = ThrowingKnifeCreator.scaffoldGun(world);
-
+        knifeID = knife.getUUID();
         VisualPart visualPart = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(knife.getUUID());
         visualPart.setIsVisible(true);
 
@@ -81,6 +81,9 @@ public class ThrowingKnifeCreator {
         world.addtoEntityPartMap(audioPart, knife);
 
         return knife;
+    }
+    public static UUID getKnifeID(){
+        return knifeID;
     }
 }
 

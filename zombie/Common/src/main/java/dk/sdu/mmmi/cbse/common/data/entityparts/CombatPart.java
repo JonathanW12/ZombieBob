@@ -30,7 +30,9 @@ public class CombatPart implements EntityPart{
     public UUID getCurrentWeapon() {
         return currentWeapon;
     }
-    
+    public void removeCurrentWeapon(){
+        this.currentWeapon = null;
+    }
     public void setAttacking(boolean b){
         this.isAttacking = b;
     }
