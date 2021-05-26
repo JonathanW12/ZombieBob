@@ -26,15 +26,15 @@ public class SpiderCreator {
         CombatPart combatPart = new CombatPart();
 
         WeaponAnimationPart weaponAnimationPart = (WeaponAnimationPart) world.getMapByPart(WeaponAnimationPart.class.getSimpleName()).get(webShooter.getUUID());
-        PositionPart positionPartWeb = new PositionPart(position.getX(),position.getY(),radians);
-        world.addtoEntityPartMap(positionPartWeb,webShooter);
+        PositionPart positionPartWeb = new PositionPart(position.getX(), position.getY(), radians);
+        world.addtoEntityPartMap(positionPartWeb, webShooter);
 
         // Setting webshooter as weapon
         combatPart.setCurrentWeapon(webShooter.getUUID());
 
         // Create Spdierboss
         ColliderPart colliderPart = new ColliderPart();
-        for(int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++) {
             colliderPart.addShapePoint(25, (float) (i * Math.PI / 4));
         }
 
@@ -48,17 +48,17 @@ public class SpiderCreator {
         world.addtoEntityPartMap(new EnemyPart(), spider);
         world.addtoEntityPartMap(new LifePart(health), spider);
         world.addtoEntityPartMap(new AiMovementPart(4), spider);
-        world.addtoEntityPartMap(colliderPart,spider);
+        world.addtoEntityPartMap(colliderPart, spider);
         world.addtoEntityPartMap(combatPart, spider);
-        world.addtoEntityPartMap(new SpiderPart(),spider);
+        world.addtoEntityPartMap(new SpiderPart(), spider);
         world.addtoEntityPartMap(createInitialAnimationSpider(weaponAnimationPart), spider);
     }
-    
+
     private float getRandomOffset() {
         if (randomgenerator == null) {
             randomgenerator = new Random();
         }
-        
+
         return (float) randomgenerator.nextInt(30) - 15;
     }
 
@@ -86,6 +86,5 @@ public class SpiderCreator {
 
         return animationPart;
     }
-
 
 }

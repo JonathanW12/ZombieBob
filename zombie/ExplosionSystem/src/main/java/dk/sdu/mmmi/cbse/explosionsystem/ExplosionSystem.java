@@ -20,36 +20,36 @@ import org.openide.util.lookup.ServiceProvider;
 
 @ServiceProvider(service = IEntityProcessingService.class)
 public class ExplosionSystem implements IEntityProcessingService {
-    
+
     private Map<Entity, Long> activeExplosions = new HashMap<>();
     private int frameCount = 5;
     private float frameDuration = 0.05f;
     private long explosionDuration = (long) (frameCount * frameDuration * 1000);
-    
+
     @Override
     public void process(GameData gameData, World world) {
         if (world.getMapByPart(ExplosivePart.class.getSimpleName()) != null) {
-            for (Map.Entry<UUID, EntityPart> entry: world.getMapByPart(ExplosivePart.class.getSimpleName()).entrySet()) {
+            for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart(ExplosivePart.class.getSimpleName()).entrySet()) {
                 ExplosivePart explosivePart = (ExplosivePart) entry.getValue();
                 PositionPart positionPart = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(entry.getKey());
-                
+
                 if (explosivePart.getIsReadyToExplode()) {
                     Entity explosion = new Entity();
-                    
+
                     float radians = 3.14159f / 2;
                     float width = 100;
                     float height = 100;
-                    
+
                     AnimationPart animationPart = new AnimationPart();
                     animationPart.addAnimation(
-                        "explode", // Set animation Id
-                        "explosion", // Animation asset name
-                        frameCount, // Frame count
-                        frameDuration, // Frame duration
-                        false // Animation can't be interrupted
+                            "explode", // Set animation Id
+                            "explosion", // Animation asset name
+                            frameCount, // Frame count
+                            frameDuration, // Frame duration
+                            false // Animation can't be interrupted
                     );
                     animationPart.setCurrentAnimation("explode");
-                    
+
                     AudioPart explosionSound = new AudioPart(
                             "rocket-explosion.wav",
                             1f
@@ -62,32 +62,32 @@ public class ExplosionSystem implements IEntityProcessingService {
                     world.addtoEntityPartMap(new VisualPart("idleExplosion", width * 2, height * 2, 3), explosion);
                     world.addtoEntityPartMap(animationPart, explosion);
                     world.addtoEntityPartMap(explosionSound, explosion);
-                    
+
                     activeExplosions.put(explosion, System.currentTimeMillis());
                 }
             }
         }
-        
+
         processActiveExplosions(world);
     }
-    
+
     private void processActiveExplosions(World world) {
         Iterator<Map.Entry<Entity, Long>> activeExplosionsIterator = activeExplosions.entrySet().iterator();
-        
+
         while (activeExplosionsIterator.hasNext()) {
             Map.Entry<Entity, Long> explosionMap = activeExplosionsIterator.next();
             Entity explosion = explosionMap.getKey();
             AnimationPart animationPart = (AnimationPart) world.getMapByPart(AnimationPart.class.getSimpleName()).get(explosion.getUUID());
             Long spawnTime = explosionMap.getValue();
-            if(animationPart!=null){
-            animationPart.setIsAnimated(true);
-            animationPart.setCurrentAnimation("explode");
-            
-            if (spawnTime + explosionDuration < System.currentTimeMillis()) {
-                activeExplosionsIterator.remove();
-                world.removeEntityParts(explosion.getUUID());
-            }
+            if (animationPart != null) {
+                animationPart.setIsAnimated(true);
+                animationPart.setCurrentAnimation("explode");
+
+                if (spawnTime + explosionDuration < System.currentTimeMillis()) {
+                    activeExplosionsIterator.remove();
+                    world.removeEntityParts(explosion.getUUID());
+                }
             }
         }
-    } 
+    }
 }

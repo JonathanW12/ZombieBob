@@ -1,6 +1,7 @@
 package dk.sdu.mmmi.cbse.rifle;
 
 public class RifleData {
+
     private final String visualPartName;
     private final String idleSpriteName;
     private final String attackAnimationName;
@@ -59,7 +60,7 @@ public class RifleData {
     }
 
     public int getWalkAnimationFrameCount() {
-        return  walkAnimationFrameCount;
+        return walkAnimationFrameCount;
     }
 
     public int getDamage() {
@@ -80,8 +81,8 @@ public class RifleData {
 
     public float getWalkAnimationFrameDuration() {
         return walkAnimationFrameDuration;
-    } 
-    
+    }
+
     public String getShootingSoundFileName() {
         return shootingSoundFileName;
     }

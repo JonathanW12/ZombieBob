@@ -5,6 +5,7 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
 
 public class SpiderWebCreator {
+
     private static final SpiderwebData spiderwebData = SpiderwebData.getInstance();
 
     protected Entity createWebShooter(World world) {
@@ -30,7 +31,6 @@ public class SpiderWebCreator {
                 spiderwebData.getShootingSoundFileName(),
                 0.1f
         );
-
 
         world.addtoEntityPartMap(weaponPart, webShooter);
         world.addtoEntityPartMap(weaponAnimationPart, webShooter);

@@ -11,7 +11,7 @@ public class Entity implements Serializable {
 
     private final UUID ID = UUID.randomUUID();
 
-    private float[] color = new float[]{240f,52f,52f,1f};
+    private float[] color = new float[]{240f, 52f, 52f, 1f};
     private float[] shapeX = new float[4];
     private float[] shapeY = new float[4];
     private float radius;
@@ -45,7 +45,7 @@ public class Entity implements Serializable {
         return ID.toString();
     }
 
-    public UUID getUUID(){
+    public UUID getUUID() {
         return ID;
     }
 

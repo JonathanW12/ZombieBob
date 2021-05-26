@@ -28,7 +28,7 @@ public class RifleCreator {
         world.addtoEntityPartMap(new LootablePart(), rifle);
 
         RifleProcessor.addToProcessingList(rifle);
-        
+
         return rifle.getUUID();
     }
 
@@ -59,8 +59,8 @@ public class RifleCreator {
                 height
         );
         AudioPart audioPart = new AudioPart(
-            rifleData.getShootingSoundFileName(),
-            0.08f
+                rifleData.getShootingSoundFileName(),
+                0.08f
         );
 
         world.addtoEntityPartMap(weaponPart, rifle);
@@ -70,7 +70,8 @@ public class RifleCreator {
 
         return rifle;
     }
-    public static UUID getRifleID(){
+
+    public static UUID getRifleID() {
         return rifleID;
     }
 }
