@@ -13,7 +13,6 @@ public class GameInputProcessor extends InputAdapter {
         this.gameData = gameData;
     }
 
-    
     @Override
     public boolean keyDown(int k) {
         if (k == Keys.UP || k == Keys.W) {

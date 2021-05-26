@@ -81,7 +81,7 @@ public class HighscoreScreen extends MenuScreenTemplate implements Screen {
         getStage().addActor(mainMenuButton);
         drawScoreLabels();
     }
-    
+
     private void addScoreLabels() {
         try {
             JSONObject j = getHighscoresJSON();
@@ -99,8 +99,8 @@ public class HighscoreScreen extends MenuScreenTemplate implements Screen {
 
                 highscoreName = new Label("" + name, getSkin(), "title-plain");
                 highscoreScore = new Label("" + score, getSkin(), "title-plain");
-                
-                Label[] scoreLabels = { highscoreName, highscoreScore };
+
+                Label[] scoreLabels = {highscoreName, highscoreScore};
                 highscoreList.add(scoreLabels);
             }
 
@@ -108,13 +108,13 @@ public class HighscoreScreen extends MenuScreenTemplate implements Screen {
             e.printStackTrace();
         }
     }
-    
+
     private void drawScoreLabels() {
         float buttonWidth = 275;
         float buttonHeight = 75;
-        
+
         int i = 0;
-        for (Label[] scoreLabel: highscoreList) {
+        for (Label[] scoreLabel : highscoreList) {
             // Add name label
             getStage().addActor(scoreLabel[0]);
             scoreLabel[0].setBounds(
@@ -124,7 +124,7 @@ public class HighscoreScreen extends MenuScreenTemplate implements Screen {
                     buttonHeight
             );
             scoreLabel[0].setAlignment(Align.left);
-            
+
             // Add score label
             getStage().addActor(scoreLabel[1]);
             scoreLabel[1].setBounds(
@@ -134,7 +134,7 @@ public class HighscoreScreen extends MenuScreenTemplate implements Screen {
                     buttonHeight
             );
             scoreLabel[1].setAlignment(Align.right);
-            
+
             i++;
         }
     }

@@ -90,29 +90,29 @@ public class RenderProcessor {
         addSprites();
         addAnimations();
     }
-    
+
     private BitmapFont getFont() {
         BitmapFont font;
         String osName = System.getProperty("os.name");
-        
+
         if (osName.startsWith("Windows")) {
             font = new BitmapFont(new FileHandle("../../font/hotbarFont.fnt"));
         } else {
             font = new BitmapFont(new FileHandle("./skin/hotbarFont.fnt"));
         }
-        
+
         return font;
     }
 
     public void processRendering(GameData gameData) {
         float lerp = 3f;
         Vector3 camPosition = cam.position;
-        
+
         if (world.getMapByPart(PlayerPart.class.getSimpleName()).keySet().toArray().length > 0) {
             UUID uuid = (UUID) world.getMapByPart(PlayerPart.class.getSimpleName()).keySet().toArray()[0];
             PositionPart playerPositionPart = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(uuid);
             cam.unproject(new Vector3(playerPositionPart.getX(), playerPositionPart.getY(), 0));
-            
+
             camPosition.x += (playerPositionPart.getX() - camPosition.x) * lerp * gameData.getDelta();
             camPosition.y += (playerPositionPart.getY() - camPosition.y) * lerp * gameData.getDelta();
             cam.update();
@@ -140,7 +140,7 @@ public class RenderProcessor {
         // clear screen to black
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        
+
         batch.begin();
 
         sortVisualParts();
@@ -153,27 +153,27 @@ public class RenderProcessor {
                 VisualPart visualPart = (VisualPart) world.getMapByPart("VisualPart").get(entityUUID);
                 AnimationPart animationPart = (AnimationPart) world.getMapByPart("AnimationPart").get(entityUUID);
 
-                    if (animationPart != null && animationPart.isAnimated()) {
-                        drawAnimation(
-                                animationPart,
-                                positionPart.getX(),
-                                positionPart.getY(),
-                                positionPart.getRadians(),
-                                visualPart.getWidth(),
-                                animationPart.getAnimationByName(
-                                        animationPart.getCurrentAnimationName()
-                                ).getFrameCount()
-                        );
-                    } else if (visualPart != null && visualPart.getIsVisible()) {
-                        drawSprite(
-                                visualPart.getSpriteName(),
-                                positionPart.getX(),
-                                positionPart.getY(),
-                                positionPart.getRadians(),
-                                visualPart.getWidth(),
-                                visualPart.getResizable(),
-                                visualPart.getHeight()
-                        );
+                if (animationPart != null && animationPart.isAnimated()) {
+                    drawAnimation(
+                            animationPart,
+                            positionPart.getX(),
+                            positionPart.getY(),
+                            positionPart.getRadians(),
+                            visualPart.getWidth(),
+                            animationPart.getAnimationByName(
+                                    animationPart.getCurrentAnimationName()
+                            ).getFrameCount()
+                    );
+                } else if (visualPart != null && visualPart.getIsVisible()) {
+                    drawSprite(
+                            visualPart.getSpriteName(),
+                            positionPart.getX(),
+                            positionPart.getY(),
+                            positionPart.getRadians(),
+                            visualPart.getWidth(),
+                            visualPart.getResizable(),
+                            visualPart.getHeight()
+                    );
                 }
 
             }
@@ -185,7 +185,7 @@ public class RenderProcessor {
         clearSortedVisualList();
 
         if (gameData.getKeys().isPressed(GameKeys.SPACE)) {
-            
+
 //            UpdatesEditor updatesEditor = UpdatesEditor.getInstance();
 //            if(updatesEditor.isActive("CollisionSystem")){
 //                updatesEditor.deactivate("CollisionSystem");
@@ -226,7 +226,7 @@ public class RenderProcessor {
 
     private void drawFonts() {
         font.setUseIntegerPositions(false);
-        
+
         if (world.getMapByPart("TextPart") != null) {
             for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart("TextPart").entrySet()) {
                 PositionPart positionPart = (PositionPart) world.getMapByPart("PositionPart").get(entry.getKey());
@@ -293,7 +293,7 @@ public class RenderProcessor {
             sprites.put(region.name, sprite);
         }
     }
-    
+
     // From https://stackoverflow.com/questions/27391911/white-vertical-lines-and-jittery-horizontal-lines-in-tile-map-movement
     private static void fixBleeding(TextureRegion region) {
         float fix = 1.25f;

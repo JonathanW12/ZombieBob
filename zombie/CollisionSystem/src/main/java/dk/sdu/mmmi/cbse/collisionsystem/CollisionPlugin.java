@@ -26,16 +26,16 @@ public class CollisionPlugin implements IGamePluginService {
 
     @Override
     public void start(GameData gameData, World world) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
     public void stop(GameData gameData, World world) {
-        if(world.getMapByPart(ColliderPart.class.getSimpleName())!= null){
-            for (Map.Entry<UUID, EntityPart> entry: world.getMapByPart(ColliderPart.class.getSimpleName()).entrySet()) {
-                ((ColliderPart)entry.getValue()).getCollidingEntities().clear();
+        if (world.getMapByPart(ColliderPart.class.getSimpleName()) != null) {
+            for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart(ColliderPart.class.getSimpleName()).entrySet()) {
+                ((ColliderPart) entry.getValue()).getCollidingEntities().clear();
             }
         }
     }
-    
+
 }

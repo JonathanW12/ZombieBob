@@ -18,7 +18,6 @@ public class SpawnProcessor implements IEntityProcessingService {
     private int nextLevel;
     double defaultHealth;
     double difficulty;
-    //double increment = difficulty * level;
     private double currentIncrease;
     private int min;
     private int max;
@@ -41,11 +40,7 @@ public class SpawnProcessor implements IEntityProcessingService {
 
         if (level > min && level == nextLevel) {
             spawnPositions = world.getEnemySpawnPositions();
-/*
-            if (level % 10 == 0){
-                difficulty = difficulty*2;
-            }
-*/
+
             if (level % 500 != 0) {
                 if (level > min && level <= max) {
                     currentIncrease = difficulty * level;
@@ -70,8 +65,8 @@ public class SpawnProcessor implements IEntityProcessingService {
         // Handles map reset
         if (level == 0) {
             nextLevel = 1;
-        } else if (nextLevel != level+1){
-            nextLevel=level+1;
+        } else if (nextLevel != level + 1) {
+            nextLevel = level + 1;
         }
     }
 }

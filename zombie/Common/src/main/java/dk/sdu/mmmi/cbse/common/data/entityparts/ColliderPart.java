@@ -66,12 +66,14 @@ public class ColliderPart implements EntityPart {
         for(int i = 0; i < this.shapePoints.size(); i++){
             ColliderPart.ShapePoint shapePoint1 = this.shapePoints.get(i);
             
-            float x = Math.round(position.getX() + shapePoint1.distance * ((float)Math.cos(position.getRadians() + shapePoint1.relRadians)));
-            float y = Math.round(position.getY() + shapePoint1.distance * ((float)Math.sin(position.getRadians() + shapePoint1.relRadians)));
+            float x = Math.round(position.getX() + 
+                    shapePoint1.distance * ((float)Math.cos(position.getRadians() + shapePoint1.relRadians)));
+            float y = Math.round(position.getY() + 
+                    shapePoint1.distance * ((float)Math.sin(position.getRadians() + shapePoint1.relRadians)));
             
             corners.add(new Vector2(x,y));
         }
-        return corners; 
+        return corners;
     }
     
     public static ArrayList<Vector2> getSideVecs(ArrayList<Vector2> corners){

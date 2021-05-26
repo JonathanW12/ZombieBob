@@ -9,10 +9,10 @@ import dk.sdu.mmmi.cbse.common.data.entitytypeparts.ZombiePart;
 import java.util.Random;
 
 public class ZombieCreator {
-    
+
     private Random randomgenerator;
-    
-    public void createZombie(int health, Position position, World world){
+
+    public void createZombie(int health, Position position, World world) {
         float speed = 2;
         float rotationSpeed = 3;
         float spawnX = position.getX() + getRandomOffset();
@@ -42,14 +42,12 @@ public class ZombieCreator {
                 50f
         );
 
-
-
         world.addtoEntityPartMap(weaponPart, zombieAttack);
         world.addtoEntityPartMap(weaponAnimationPart, zombieAttack);
 
         CombatPart combatPart = new CombatPart();
         combatPart.setCurrentWeapon(zombieAttack.getUUID());
-        
+
         // Configure zombie audio
         AudioPart audioPart = new AudioPart("zombie-growl.ogg");
         audioPart.playRandomly(5000L, 15000L);
@@ -61,18 +59,18 @@ public class ZombieCreator {
         world.addtoEntityPartMap(new EnemyPart(), zombie);
         world.addtoEntityPartMap(new LifePart(health), zombie);
         world.addtoEntityPartMap(new AiMovementPart(4), zombie);
-        world.addtoEntityPartMap(new ColliderPart(40,40),zombie);
+        world.addtoEntityPartMap(new ColliderPart(40, 40), zombie);
         world.addtoEntityPartMap(new ZombiePart(), zombie);
         world.addtoEntityPartMap(audioPart, zombie);
         world.addtoEntityPartMap(combatPart, zombie);
         world.addtoEntityPartMap(createInitialAnimationEnemy(weaponAnimationPart), zombie);
     }
-    
+
     private float getRandomOffset() {
         if (randomgenerator == null) {
             randomgenerator = new Random();
         }
-        
+
         return (float) randomgenerator.nextInt(30) - 15;
     }
 

@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.cbse.common.data.entityparts;
+    package dk.sdu.mmmi.cbse.common.data.entityparts;
 
 import java.util.Random;
 

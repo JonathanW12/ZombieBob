@@ -69,10 +69,10 @@ public class HotbarContolSystem implements IEntityProcessingService {
     private void updateActiveWeapon(UUID playerUUID, World world) {
         CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(playerUUID);
         UUID currentWeaponUUID = combatPart.getCurrentWeapon();
-        if(currentWeaponUUID == null){
+        if (currentWeaponUUID == null) {
             previousWeapon = null;
         }
-        
+
         if (previousWeapon != currentWeaponUUID) {
             for (Map.Entry<UUID, UUID> weaponUUID : excistingItems2.entrySet()) {
                 if (weaponUUID.getKey().equals(currentWeaponUUID)) {
@@ -174,7 +174,7 @@ public class HotbarContolSystem implements IEntityProcessingService {
         if (lifePart.getLife() <= 0) {
             healthMessage = ("Dead");
         }
-        if (world.getMapByPart(PlayerPart.class.getSimpleName()) == null){
+        if (world.getMapByPart(PlayerPart.class.getSimpleName()) == null) {
             healthMessage = ("Dead");
         }
 
@@ -184,19 +184,18 @@ public class HotbarContolSystem implements IEntityProcessingService {
 
     }
 
-    private void displayLevelInformation(GameData gameData, World world) {     
+    private void displayLevelInformation(GameData gameData, World world) {
         PositionPart textPosition;
         TextPart textPart;
-        
-        if (levelInformationEntityID == null ||
-                world.getMapByPart(TextPart.class.getSimpleName()) == null ||
-                world.getMapByPart(PositionPart.class.getSimpleName()) == null  ||
-                (world.getMapByPart(PositionPart.class.getSimpleName()).get(levelInformationEntityID) == null) ||
-                (world.getMapByPart(TextPart.class.getSimpleName()).get(levelInformationEntityID) == null)
-            ) {
+
+        if (levelInformationEntityID == null
+                || world.getMapByPart(TextPart.class.getSimpleName()) == null
+                || world.getMapByPart(PositionPart.class.getSimpleName()) == null
+                || (world.getMapByPart(PositionPart.class.getSimpleName()).get(levelInformationEntityID) == null)
+                || (world.getMapByPart(TextPart.class.getSimpleName()).get(levelInformationEntityID) == null)) {
             Entity levelInformation = new Entity();
             levelInformationEntityID = levelInformation.getUUID();
-            
+
             textPosition = new PositionPart(600, 750, 2f);
             textPart = new TextPart(null, 4);
 
@@ -217,7 +216,7 @@ public class HotbarContolSystem implements IEntityProcessingService {
         } else {
             levelMessage = ("Level: " + (level));
         }
-        
+
         textPosition.setPosition(hotbarPositionX + 10, hotbarPositionY + 5);
         textPart.setMessage(levelMessage);
     }
@@ -225,19 +224,18 @@ public class HotbarContolSystem implements IEntityProcessingService {
     private void displayKillInformation(GameData gameData, World world) {
         PositionPart textPosition;
         TextPart textPart;
-        
-        if (killInformationEntityID == null ||
-                world.getMapByPart(TextPart.class.getSimpleName()) == null ||
-                world.getMapByPart(PositionPart.class.getSimpleName()) == null  ||
-                (world.getMapByPart(PositionPart.class.getSimpleName()).get(killInformationEntityID) == null) ||
-                (world.getMapByPart(TextPart.class.getSimpleName()).get(killInformationEntityID) == null)
-        ) {
+
+        if (killInformationEntityID == null
+                || world.getMapByPart(TextPart.class.getSimpleName()) == null
+                || world.getMapByPart(PositionPart.class.getSimpleName()) == null
+                || (world.getMapByPart(PositionPart.class.getSimpleName()).get(killInformationEntityID) == null)
+                || (world.getMapByPart(TextPart.class.getSimpleName()).get(killInformationEntityID) == null)) {
             Entity killInformation = new Entity();
             killInformationEntityID = killInformation.getUUID();
-            
+
             textPosition = new PositionPart(600, 700, 2f);
             textPart = new TextPart(null, 4);
-            
+
             world.addtoEntityPartMap(textPosition, killInformation);
             world.addtoEntityPartMap(textPart, killInformation);
         } else {
@@ -247,12 +245,11 @@ public class HotbarContolSystem implements IEntityProcessingService {
 
         zombiesKilled = gameData.getLevelInformation().getEnemiesKilled();
 
-        
         textPosition.setPosition(hotbarPositionX + 10, hotbarPositionY - 10);
         String killMessage = ("Zombies Slain: " + zombiesKilled);
         textPart.setMessage(killMessage);
     }
-    
+
     protected static void resetInventory() {
         itemsToBeRemoved.clear();
         excistingItems2.clear();

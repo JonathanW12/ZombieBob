@@ -10,18 +10,18 @@ import dk.sdu.mmmi.cbse.common.data.MouseMovement;
 import dk.sdu.mmmi.cbse.core.main.ZombieBobGame;
 
 public class PauseMenuScreen extends MenuScreenTemplate implements Screen {
-    
+
     private BitmapFont title;
-    private final SpriteBatch secondaryBatch; 
+    private final SpriteBatch secondaryBatch;
     private Label resumeButton, settingsButton, mainMenuButton, highscoresButton, exitButton;
-    
+
     public PauseMenuScreen(ZombieBobGame game) {
         super(game);
         secondaryBatch = new SpriteBatch();
-        
+
         setupUI();
     }
-    
+
     @Override
     public void render(float delta) {
         super.render(delta);
@@ -41,7 +41,7 @@ public class PauseMenuScreen extends MenuScreenTemplate implements Screen {
 
         update();
     }
-    
+
     @Override
     public void update() {
         super.update();
@@ -51,13 +51,13 @@ public class PauseMenuScreen extends MenuScreenTemplate implements Screen {
         handleHighscoresButton();
         handleExitButton();
     }
-    
+
     private void setupUI() {
         float buttonWidth = 275;
         float buttonHeight = 75;
-        
+
         title = getTitleFont();
-        
+
         // Create resume button
         resumeButton = new Label("Resume Game", getSkin(), "title");
         resumeButton.setBounds(
@@ -67,7 +67,7 @@ public class PauseMenuScreen extends MenuScreenTemplate implements Screen {
                 buttonHeight
         );
         resumeButton.setAlignment(Align.center);
-        
+
         // Create settings button
         settingsButton = new Label("Settings", getSkin(), "title");
         settingsButton.setBounds(
@@ -77,7 +77,7 @@ public class PauseMenuScreen extends MenuScreenTemplate implements Screen {
                 buttonHeight
         );
         settingsButton.setAlignment(Align.center);
-        
+
         // Create highscores button
         highscoresButton = new Label("Highscores", getSkin(), "title");
         highscoresButton.setBounds(
@@ -87,7 +87,7 @@ public class PauseMenuScreen extends MenuScreenTemplate implements Screen {
                 buttonHeight
         );
         highscoresButton.setAlignment(Align.center);
-        
+
         // Create main menu button
         mainMenuButton = new Label("Main Manu", getSkin(), "title");
         mainMenuButton.setBounds(
@@ -107,7 +107,7 @@ public class PauseMenuScreen extends MenuScreenTemplate implements Screen {
                 buttonHeight
         );
         exitButton.setAlignment(Align.center);
-        
+
         // Add buttons to stage
         getStage().addActor(resumeButton);
         getStage().addActor(settingsButton);
@@ -115,36 +115,36 @@ public class PauseMenuScreen extends MenuScreenTemplate implements Screen {
         getStage().addActor(mainMenuButton);
         getStage().addActor(exitButton);
     }
-    
+
     private void handleResumeButton() {
         if ((isMouseOnActor(resumeButton) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK))) {
             getGame().setScreen(new GameScreen(getGame()));
         }
     }
-    
+
     private void handleSettingsButton() {
         if ((isMouseOnActor(settingsButton) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK))) {
-             getGame().setScreen(new ModuleHandlerScreen(getGame()));
+            getGame().setScreen(new ModuleHandlerScreen(getGame()));
         }
     }
-    
+
     private void handleHighscoresButton() {
         if ((isMouseOnActor(highscoresButton) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK))) {
             getGame().setScreen(new HighscoreScreen(getGame()));
         }
     }
-    
+
     private void handleMainMenuButton() {
         if ((isMouseOnActor(mainMenuButton) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK))) {
             getGame().setScreen(new MainMenuScreen(getGame()));
         }
     }
-    
+
     private void handleExitButton() {
         if ((isMouseOnActor(exitButton) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK))) {
             getGame().dispose();
             Gdx.app.exit();
         }
     }
-    
+
 }

@@ -21,10 +21,10 @@ public class GameOverScreen extends MenuScreenTemplate implements Screen {
 
     private BitmapFont title;
     private final SpriteBatch secondaryBatch;
-    private Label mainMenuButton,submitHighscoreBtn, score;
+    private Label mainMenuButton, submitHighscoreBtn, score;
     private TextField nameField;
     private ArrayList<Label[]> highscoreList = new ArrayList<>();
-    
+
     public GameOverScreen(ZombieBobGame game) {
         super(game);
         secondaryBatch = new SpriteBatch();
@@ -64,7 +64,7 @@ public class GameOverScreen extends MenuScreenTemplate implements Screen {
         float buttonHeight = 75;
 
         title = getTitleFont();
-        
+
         // Name text field
         nameField = new TextField("John Doe", getSkin(), "default");
         nameField.setBounds(
@@ -115,13 +115,13 @@ public class GameOverScreen extends MenuScreenTemplate implements Screen {
         getStage().addActor(mainMenuButton);
         drawScoreLabels();
     }
-    
+
     private void handleSubmitScoreButton() {
         if (isMouseOnActor(submitHighscoreBtn) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK)) {
             try {
                 addHighscore();
             } catch (IOException e) {
-               e.printStackTrace();
+                e.printStackTrace();
             }
         }
     }
@@ -129,19 +129,19 @@ public class GameOverScreen extends MenuScreenTemplate implements Screen {
     private void addHighscore() throws MalformedURLException, ProtocolException, IOException {
         String name = URLEncoder.encode(nameField.getText(), StandardCharsets.UTF_8);
         String score = "" + getGameData().getLevelInformation().getEnemiesKilled() * 100;
-        
+
         if (name.equals("")) {
             name = "Anonymous";
         }
-        
+
         URL url = new URL("https://zombiebob-map-generator.herokuapp.com/add-highscore?name=" + name + "&score=" + score);
-        
+
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
-        
+
         connection.getInputStream();
         connection.disconnect();
-        
+
         getGame().setScreen(new HighscoreScreen(getGame()));
     }
 
@@ -150,7 +150,7 @@ public class GameOverScreen extends MenuScreenTemplate implements Screen {
         float buttonHeight = 75;
 
         int i = 0;
-        for (Label[] scoreLabel: highscoreList) {
+        for (Label[] scoreLabel : highscoreList) {
             // Add name label
             getStage().addActor(scoreLabel[0]);
             scoreLabel[0].setBounds(
@@ -174,7 +174,7 @@ public class GameOverScreen extends MenuScreenTemplate implements Screen {
             i++;
         }
     }
-    
+
     private void handleMainMenuButton() {
         if ((isMouseOnActor(mainMenuButton) && getGameData().getMouse().isPressed(MouseMovement.LEFTCLICK))) {
             getGame().setScreen(new MainMenuScreen(getGame()));

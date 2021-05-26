@@ -14,14 +14,13 @@ import java.util.Map;
 import java.util.UUID;
 
 @ServiceProviders(value = {
-        @ServiceProvider(service = IEntityProcessingService.class)})
+    @ServiceProvider(service = IEntityProcessingService.class)})
 
 public class HealthProcessingSystem implements IEntityProcessingService {
 
     private LifePart lifePartOfDmger;
     private LifePart lifePartCollidingEntity;
     private DamagePart damagePart;
-    //scuff method for counting dead zombies
     private int zombiesKilled = 0;
 
     @Override
@@ -97,8 +96,6 @@ public class HealthProcessingSystem implements IEntityProcessingService {
 
                             // If dead remove
                             if (lifePartCollidingEntity != null && lifePartCollidingEntity.isDead()) {
-
-                                //TO BE CHANGED.
                                 if (world.getMapByPart(EnemyPart.class.getSimpleName()).get(collidingEntity) != null) {
                                     gameData.getLevelInformation().setEnemiesKilled(++zombiesKilled);
                                 }
@@ -112,4 +109,3 @@ public class HealthProcessingSystem implements IEntityProcessingService {
     }
 
 }
-    

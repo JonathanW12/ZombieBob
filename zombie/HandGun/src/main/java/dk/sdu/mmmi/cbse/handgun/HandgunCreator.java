@@ -8,16 +8,16 @@ import dk.sdu.mmmi.cbse.common.data.Position;
 import java.util.UUID;
 
 public class HandgunCreator {
-    
+
     private static final HandgunData gunData = HandgunData.getInstance();
     private static UUID handgunID;
-            
+
     public UUID spawnGun(Position position, GameData gameData, World world) {
         Entity gun = HandgunCreator.scaffoldGun(world);
         handgunID = gun.getUUID();
         VisualPart visualPart = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(gun.getUUID());
         visualPart.setIsVisible(true);
-        
+
         float spawnX = position.getX();
         float spawnY = position.getY();
         float radians = 3.14159f / 2;
@@ -26,52 +26,51 @@ public class HandgunCreator {
         world.addtoEntityPartMap(new LootablePart(), gun);
 
         HandgunProcessor.addToProcessingList(gun);
-        
+
         return gun.getUUID();
     }
 
     protected static Entity scaffoldGun(World world) {
         Entity gun = new Entity();
-        
+
         float width = 30;
         float height = 30;
-        
+
         WeaponPart weaponPart = new WeaponPart(
-            gunData.getDamage(),
-            gunData.getRange(),
-            gunData.getFireRate(),
-            1
+                gunData.getDamage(),
+                gunData.getRange(),
+                gunData.getFireRate(),
+                1
         );
         WeaponAnimationPart weaponAnimationPart = new WeaponAnimationPart(
-            gunData.getIdleSpriteName(),
-            gunData.getAttackAnimationName(),
-            gunData.getWalkAnimationName(),
-            gunData.getAttackAnimationFrameCount(),
-            gunData.getWalkAnimationFrameCount(),
-            gunData.getAttackAnimationFrameDuration(),
-            gunData.getWalkAnimationFrameDuration()
+                gunData.getIdleSpriteName(),
+                gunData.getAttackAnimationName(),
+                gunData.getWalkAnimationName(),
+                gunData.getAttackAnimationFrameCount(),
+                gunData.getWalkAnimationFrameCount(),
+                gunData.getAttackAnimationFrameDuration(),
+                gunData.getWalkAnimationFrameDuration()
         );
         VisualPart visualPart = new VisualPart(
-            gunData.getVisualPartName(),
-            width,
-            height
+                gunData.getVisualPartName(),
+                width,
+                height
         );
         AudioPart audioPart = new AudioPart(
-            gunData.getShootingSoundFileName(),
-            0.08f
+                gunData.getShootingSoundFileName(),
+                0.08f
         );
-        
+
         world.addtoEntityPartMap(weaponPart, gun);
         world.addtoEntityPartMap(weaponAnimationPart, gun);
         world.addtoEntityPartMap(visualPart, gun);
         world.addtoEntityPartMap(audioPart, gun);
-        
+
         // HandgunProcessor.addToProcessingList(gun);
-        
         return gun;
     }
 
-    protected static UUID getHandgunID(){
+    protected static UUID getHandgunID() {
         return handgunID;
     }
 }
