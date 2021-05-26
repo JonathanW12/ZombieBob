@@ -11,12 +11,12 @@ import java.util.UUID;
 import org.openide.util.lookup.ServiceProvider;
 
 @ServiceProvider(service = IEntityProcessingService.class)
-public class SpawnProcessor implements IEntityProcessingService{
+public class SpawnProcessor implements IEntityProcessingService {
 
     private static boolean spawnedWeapon;
     private RifleCreator rifleCreator;
     private Random randomGenerator;
-    
+
     public SpawnProcessor() {
         spawnedWeapon = false;
         rifleCreator = new RifleCreator();
@@ -26,35 +26,35 @@ public class SpawnProcessor implements IEntityProcessingService{
 
     @Override
     public void process(GameData gameData, World world) {
-        if (gameData.getLevelInformation().getCurrentLevel() == 5 && !spawnedWeapon){
+        if (gameData.getLevelInformation().getCurrentLevel() == 5 && !spawnedWeapon) {
             ItemSpawn spawn = getSpawnPosition(world);
-            
+
             UUID rifleID = rifleCreator.spawnRifleData(spawn.getPosition(), gameData, world);
             spawn.setCurrentItem(rifleID);
             spawnedWeapon = true;
         }
     }
-    
+
     protected static void resetSpawnProcessor() {
         spawnedWeapon = false;
     }
-    
+
     private ItemSpawn getSpawnPosition(World world) {
         List<ItemSpawn> availableSpawns = getAvailableItemSpawns(world);
         ItemSpawn spawn = availableSpawns.get(randomGenerator.nextInt(availableSpawns.size()));
-        
+
         return spawn;
     }
-    
+
     private List<ItemSpawn> getAvailableItemSpawns(World world) {
         List<ItemSpawn> resultList = new ArrayList<>();
-        
-        for (ItemSpawn spawn: world.getItemSpawns()) {
+
+        for (ItemSpawn spawn : world.getItemSpawns()) {
             if (spawn.getCurrentItem() == null) {
                 resultList.add(spawn);
             }
         }
-        
+
         return resultList;
     }
 }

@@ -7,6 +7,8 @@ import dk.sdu.mmmi.cbse.common.data.World;
 import java.util.UUID;
 
 public interface IEnemyCreatorService {
+
     public void createEnemy(int Health, Position position, World world);
+
     public void createBoss(int Health, Position position, World world);
 }

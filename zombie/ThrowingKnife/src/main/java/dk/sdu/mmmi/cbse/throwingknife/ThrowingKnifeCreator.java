@@ -22,7 +22,8 @@ import java.util.UUID;
  * @author lake
  */
 public class ThrowingKnifeCreator {
- private static final ThrowingKnifeData knifeData = ThrowingKnifeData.getInstance();
+
+    private static final ThrowingKnifeData knifeData = ThrowingKnifeData.getInstance();
     private static UUID knifeID;
 
     public UUID spawnKnifeData(Position position, GameData gameData, World world) {
@@ -40,8 +41,8 @@ public class ThrowingKnifeCreator {
         world.addtoEntityPartMap(positionPart, knife);
         world.addtoEntityPartMap(new LootablePart(), knife);
 
-       ThrowingKnifeProcessor.addToProcessingList(knife);
-       
+        ThrowingKnifeProcessor.addToProcessingList(knife);
+
         return knife.getUUID();
     }
 
@@ -72,7 +73,7 @@ public class ThrowingKnifeCreator {
                 height
         );
         AudioPart audioPart = new AudioPart(
-            knifeData.getShootingSoundFileName()
+                knifeData.getShootingSoundFileName()
         );
 
         world.addtoEntityPartMap(weaponPart, knife);
@@ -82,8 +83,8 @@ public class ThrowingKnifeCreator {
 
         return knife;
     }
-    public static UUID getKnifeID(){
+
+    public static UUID getKnifeID() {
         return knifeID;
     }
 }
-

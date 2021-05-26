@@ -36,7 +36,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 WeaponInventoryPart weaponInventoryPart = (WeaponInventoryPart) world.getMapByPart("WeaponInventoryPart").get(entry.getKey());
                 CollectorPart collectorPart = (CollectorPart) world.getMapByPart(CollectorPart.class.getSimpleName()).get(entry.getKey());
                 AudioPart walkingSound = (AudioPart) world.getMapByPart(AudioPart.class.getSimpleName()).get(entry.getKey());
-                
+
                 setWalkingSound(walkingSound, movingPart);
 
                 combatPart.setAttacking(gameData.getMouse().isDown(MouseMovement.LEFTCLICK));
@@ -121,10 +121,10 @@ public class PlayerControlSystem implements IEntityProcessingService {
             }
         }
     }
-    
+
     private void setWalkingSound(AudioPart audioPart, MovingPart movingPart) {
         audioPart.setIsPlaying(false);
-        
+
         if ((movingPart.isDown() || movingPart.isLeft() || movingPart.isRight() || movingPart.isUp())) {
             audioPart.setIsPlaying(true);
         }

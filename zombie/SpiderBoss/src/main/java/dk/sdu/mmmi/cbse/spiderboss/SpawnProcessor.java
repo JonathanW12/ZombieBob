@@ -9,7 +9,7 @@ import java.util.Random;
 import org.openide.util.lookup.ServiceProvider;
 
 @ServiceProvider(service = IEntityProcessingService.class)
-public class SpawnProcessor implements IEntityProcessingService{
+public class SpawnProcessor implements IEntityProcessingService {
 
     private SpiderCreator spiderCreator = new SpiderCreator();
     private int level;
@@ -23,7 +23,7 @@ public class SpawnProcessor implements IEntityProcessingService{
     private boolean spawned;
     private Random randomGenerator;
     private List<Position> spawnPositions;
-    
+
     public SpawnProcessor() {
         previousLevel = 1;
         defaultBoss = 800;
@@ -41,11 +41,11 @@ public class SpawnProcessor implements IEntityProcessingService{
         if (level > 0 && !spawned) {
             spawnPositions = world.getEnemySpawnPositions();
 
-            if (level % 10 == 0){
-                difficulty = difficulty*2;
+            if (level % 10 == 0) {
+                difficulty = difficulty * 2;
             }
-            
-            if (level%5 == 0){
+
+            if (level % 5 == 0) {
                 Position spawnPosition = spawnPositions.get(randomGenerator.nextInt(spawnPositions.size()));
                 currentIncrease = difficulty * level;
                 spiderCreator.createSpiderBoss(
@@ -54,7 +54,7 @@ public class SpawnProcessor implements IEntityProcessingService{
                 spawned = true;
             }
         }
-        if (level%5 != 0){
+        if (level % 5 != 0) {
             spawned = false;
         }
     }

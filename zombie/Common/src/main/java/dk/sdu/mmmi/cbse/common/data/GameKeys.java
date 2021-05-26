@@ -31,11 +31,11 @@ public class GameKeys {
     public void update() {
         for (int i = 0; i < NUM_KEYS; i++) {
             pkeys[i] = keys[i];
-            
+
         }
     }
 
-    public void setKey(int k, boolean b) { 
+    public void setKey(int k, boolean b) {
         keys[k] = b;
     }
 

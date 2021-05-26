@@ -22,12 +22,12 @@ import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 
 /**
- * @author phili
- * if entity is colliding with
+ * @author phili if entity is colliding with
  */
 @ServiceProviders(value = {
-        @ServiceProvider(service = IEntityProcessingService.class)})
+    @ServiceProvider(service = IEntityProcessingService.class)})
 public class LootingProcessingSystem implements IEntityProcessingService {
+
     @Override
     public void process(GameData gameData, World world) {
 
@@ -46,17 +46,15 @@ public class LootingProcessingSystem implements IEntityProcessingService {
 
                         if (world.getMapByPart(LootablePart.class.getSimpleName()) != null) {
 
-
                             //find all items within reach
                             for (Map.Entry<UUID, EntityPart> item : world.getMapByPart(LootablePart.class.getSimpleName()).entrySet()) {
 
                                 PositionPart iPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(item.getKey());
                                 if (iPos != null) {
 
-
                                     float distance = (float) Math.sqrt(
-                                            Math.pow(collectorPos.getX() - iPos.getX(), 2) +
-                                                    Math.pow(collectorPos.getY() - iPos.getY(), 2)
+                                            Math.pow(collectorPos.getX() - iPos.getX(), 2)
+                                            + Math.pow(collectorPos.getY() - iPos.getY(), 2)
                                     );
                                     //check ´if item is within reach
                                     if (distance < 50) {
@@ -84,7 +82,6 @@ public class LootingProcessingSystem implements IEntityProcessingService {
                                                     //make it lootable again
                                                     world.addtoEntityPartMap(new LootablePart(), currentWeapon);
                                                     ((VisualPart) world.getMapByPart("VisualPart").get(currentWeapon)).setIsVisible(true);
-
 
                                                     //add to inventory, and share position with collector. Item is no longer lootable.
                                                     weaponInventory.addWeapon(item.getKey());

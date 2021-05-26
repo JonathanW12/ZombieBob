@@ -33,7 +33,7 @@ public class GameData {
     public void setCamPosY(float camPosY) {
         this.camPosY = camPosY;
     }
-    
+
     public void addEvent(Event e) {
         events.add(e);
     }
@@ -50,7 +50,7 @@ public class GameData {
         return keys;
     }
 
-    public MouseMovement getMouse(){
+    public MouseMovement getMouse() {
         return mouse;
     }
 
@@ -79,7 +79,7 @@ public class GameData {
     }
 
     public LevelInformation getLevelInformation() {
-        if (levelInformation != null){
+        if (levelInformation != null) {
             return levelInformation;
         } else {
             return levelInformation = new LevelInformation();

@@ -22,23 +22,23 @@ import org.openide.util.lookup.ServiceProvider;
 
 @ServiceProvider(service = IGamePluginService.class)
 public class ThrowingKnifePlugin implements IGamePluginService {
-    
+
     @Override
     public void start(GameData gameData, World world) {
         // Do nothing
     }
-    
+
     @Override
     public void stop(GameData gameData, World world) {
         if (world.getMapByPart(PlayerPart.class.getSimpleName()) != null) {
             for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart(PlayerPart.class.getSimpleName()).entrySet()) {
-                 WeaponInventoryPart weaponInventoryPart = (WeaponInventoryPart) world.getMapByPart("WeaponInventoryPart").get(entry.getKey());
-                 weaponInventoryPart.removeWeapon(ThrowingKnifeCreator.getKnifeID());
+                WeaponInventoryPart weaponInventoryPart = (WeaponInventoryPart) world.getMapByPart("WeaponInventoryPart").get(entry.getKey());
+                weaponInventoryPart.removeWeapon(ThrowingKnifeCreator.getKnifeID());
 
-                 CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey());
-                 if(combatPart.getCurrentWeapon() == ThrowingKnifeCreator.getKnifeID()){
-                     combatPart.removeCurrentWeapon();
-                 }  
+                CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey());
+                if (combatPart.getCurrentWeapon() == ThrowingKnifeCreator.getKnifeID()) {
+                    combatPart.removeCurrentWeapon();
+                }
             }
         }
     }

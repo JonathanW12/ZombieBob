@@ -10,7 +10,8 @@ package dk.sdu.mmmi.cbse.throwingknife;
  * @author lake
  */
 public class ThrowingKnifeData {
-     private final String visualPartName;
+
+    private final String visualPartName;
     private final String idleSpriteName;
     private final String attackAnimationName;
     private final String walkAnimationName;
@@ -68,7 +69,7 @@ public class ThrowingKnifeData {
     }
 
     public int getWalkAnimationFrameCount() {
-        return  walkAnimationFrameCount;
+        return walkAnimationFrameCount;
     }
 
     public int getDamage() {
@@ -89,11 +90,9 @@ public class ThrowingKnifeData {
 
     public float getWalkAnimationFrameDuration() {
         return walkAnimationFrameDuration;
-    } 
-    
+    }
+
     public String getShootingSoundFileName() {
         return shootingSoundFileName;
     }
 }
- 
-

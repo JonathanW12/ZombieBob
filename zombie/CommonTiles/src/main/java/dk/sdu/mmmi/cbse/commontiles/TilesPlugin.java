@@ -1,6 +1,5 @@
 package dk.sdu.mmmi.cbse.commontiles;
 
-
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
@@ -18,5 +17,5 @@ public class TilesPlugin implements IGamePluginService {
     public void stop(GameData gameData, World world) {
         // Do nothing
     }
-    
+
 }

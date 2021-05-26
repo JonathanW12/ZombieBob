@@ -7,11 +7,11 @@ import org.openide.util.lookup.ServiceProvider;
 
 @ServiceProvider(service = IGamePluginService.class)
 public class LevelPlugin implements IGamePluginService {
-    
+
     public void start(GameData gameData, World world) {
         // Do nothing
     }
-    
+
     public void stop(GameData gameData, World world) {
         LevelSystem.resetLevel(gameData);
     }

@@ -33,33 +33,32 @@ public class ThrowingKnifeProcessor implements IEntityProcessingService {
     private Random rand = new Random();
 
     public void process(GameData gameData, World world) {
-        for (Entity knife: knifes) {
-            if(world.getMapByPart(WeaponPart.class.getSimpleName())!=null){
-            WeaponPart weaponPart = (WeaponPart)world.getMapByPart(WeaponPart.class.getSimpleName()).get(knife.getUUID());
-            if(weaponPart != null){
-                
-            
-            PositionPart weaponPosition = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(knife.getUUID());
-            if (weaponPart.isIsAttacking()) {
-                float spawnDistanceFromAttacker = 50f;
-                float spawnX = weaponPosition.getX() + spawnDistanceFromAttacker * (float) Math.cos(weaponPosition.getRadians());
-                float spawnY = weaponPosition.getY() + spawnDistanceFromAttacker * (float) Math.sin(weaponPosition.getRadians());
+        for (Entity knife : knifes) {
+            if (world.getMapByPart(WeaponPart.class.getSimpleName()) != null) {
+                WeaponPart weaponPart = (WeaponPart) world.getMapByPart(WeaponPart.class.getSimpleName()).get(knife.getUUID());
+                if (weaponPart != null) {
 
-                Entity bullet = new Entity();
+                    PositionPart weaponPosition = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(knife.getUUID());
+                    if (weaponPart.isIsAttacking()) {
+                        float spawnDistanceFromAttacker = 50f;
+                        float spawnX = weaponPosition.getX() + spawnDistanceFromAttacker * (float) Math.cos(weaponPosition.getRadians());
+                        float spawnY = weaponPosition.getY() + spawnDistanceFromAttacker * (float) Math.sin(weaponPosition.getRadians());
 
-                MovingPart movingPart = new MovingPart(20, 1000);
-                world.addtoEntityPartMap(movingPart, bullet);
-                world.addtoEntityPartMap(new PositionPart(spawnX, spawnY, weaponPosition.getRadians()), bullet);
-                world.addtoEntityPartMap(new ProjectilePart(weaponPart.getRange()), bullet);
-                world.addtoEntityPartMap(new ColliderPart(10, 10), bullet);
-                world.addtoEntityPartMap(new DamagePart(weaponPart.getDamage()), bullet);
-                world.addtoEntityPartMap(new LifePart(1), bullet);
-                world.addtoEntityPartMap(new VisualPart("Sword",20, 20), bullet);
+                        Entity bullet = new Entity();
 
-                movingPart.setUp(true);
+                        MovingPart movingPart = new MovingPart(20, 1000);
+                        world.addtoEntityPartMap(movingPart, bullet);
+                        world.addtoEntityPartMap(new PositionPart(spawnX, spawnY, weaponPosition.getRadians()), bullet);
+                        world.addtoEntityPartMap(new ProjectilePart(weaponPart.getRange()), bullet);
+                        world.addtoEntityPartMap(new ColliderPart(10, 10), bullet);
+                        world.addtoEntityPartMap(new DamagePart(weaponPart.getDamage()), bullet);
+                        world.addtoEntityPartMap(new LifePart(1), bullet);
+                        world.addtoEntityPartMap(new VisualPart("Sword", 20, 20), bullet);
+
+                        movingPart.setUp(true);
+                    }
+                }
             }
-        }
-        }
         }
     }
 
