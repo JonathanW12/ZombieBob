@@ -1,6 +1,7 @@
 package dk.sdu.mmmi.cbse.spiderboss;
 
 public class SpiderwebData {
+
     private final String visualPartName;
     private final String idleSpriteName;
     private final String attackAnimationName;
@@ -59,7 +60,7 @@ public class SpiderwebData {
     }
 
     public int getWalkAnimationFrameCount() {
-        return  walkAnimationFrameCount;
+        return walkAnimationFrameCount;
     }
 
     public int getDamage() {

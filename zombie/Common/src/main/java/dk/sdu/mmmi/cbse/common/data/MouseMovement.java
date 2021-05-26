@@ -1,9 +1,10 @@
 package dk.sdu.mmmi.cbse.common.data;
 
 public class MouseMovement {
+
     private float x;
     private float y;
-    
+
     private static boolean[] keys;
     private static boolean[] pkeys;
 
@@ -12,13 +13,13 @@ public class MouseMovement {
     public static final int RIGHTCLICK = 1;
     public static final int MIDDLECLICK = 2;
     private int scroll = 0;
-    
+
     public MouseMovement() {
         keys = new boolean[NUM_KEYS];
         pkeys = new boolean[NUM_KEYS];
     }
 
-    public void setMousePosition(float x,float y) {
+    public void setMousePosition(float x, float y) {
         this.x = x;
         this.y = y;
     }
@@ -37,7 +38,7 @@ public class MouseMovement {
         }
     }
 
-    public void setKey(int k, boolean b) { 
+    public void setKey(int k, boolean b) {
         keys[k] = b;
     }
 

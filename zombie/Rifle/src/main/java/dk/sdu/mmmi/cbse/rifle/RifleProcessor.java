@@ -1,6 +1,5 @@
 package dk.sdu.mmmi.cbse.rifle;
 
-
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
@@ -19,7 +18,7 @@ public class RifleProcessor implements IEntityProcessingService {
     private Random rand = new Random();
 
     public void process(GameData gameData, World world) {
-        for (Entity rifle: rifles) {
+        for (Entity rifle : rifles) {
             WeaponPart weaponPart = (WeaponPart) world.getMapByPart(WeaponPart.class.getSimpleName()).get(rifle.getUUID());
             PositionPart weaponPosition = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(rifle.getUUID());
             if (weaponPart.isIsAttacking()) {
@@ -31,9 +30,9 @@ public class RifleProcessor implements IEntityProcessingService {
 
                 MovingPart movingPart = new MovingPart(12, 1000);
                 world.addtoEntityPartMap(movingPart, bullet);
-                world.addtoEntityPartMap(new PositionPart(spawnX, spawnY, weaponPosition.getRadians()+((rand.nextFloat()/2)-0.25f)), bullet);
+                world.addtoEntityPartMap(new PositionPart(spawnX, spawnY, weaponPosition.getRadians() + ((rand.nextFloat() / 2) - 0.25f)), bullet);
                 world.addtoEntityPartMap(new ProjectilePart(weaponPart.getRange()), bullet);
-                world.addtoEntityPartMap(new ColliderPart(2,2), bullet);
+                world.addtoEntityPartMap(new ColliderPart(2, 2), bullet);
                 world.addtoEntityPartMap(new DamagePart(weaponPart.getDamage()), bullet);
                 world.addtoEntityPartMap(new LifePart(1), bullet);
                 world.addtoEntityPartMap(new VisualPart("RifleAmmo", 4, 4), bullet);
@@ -42,7 +41,7 @@ public class RifleProcessor implements IEntityProcessingService {
             }
         }
     }
-    
+
     protected static void clearProcessingList() {
         rifles.clear();
     }

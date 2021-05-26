@@ -12,6 +12,7 @@ import org.openide.util.lookup.ServiceProvider;
 
 @ServiceProvider(service = IGamePluginService.class)
 public class CombatPlugin implements IGamePluginService {
+
     @Override
     public void start(GameData gameData, World world) {
 
@@ -19,15 +20,15 @@ public class CombatPlugin implements IGamePluginService {
 
     @Override
     public void stop(GameData gameData, World world) {
-        if(world.getMapByPart(CombatPart.class.getSimpleName())!=null){
-         for(Map.Entry<UUID,EntityPart> entry : world.getMapByPart(CombatPart.class.getSimpleName()).entrySet()){
-             ((CombatPart)entry.getValue()).setAttacking(false);
-         }
+        if (world.getMapByPart(CombatPart.class.getSimpleName()) != null) {
+            for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart(CombatPart.class.getSimpleName()).entrySet()) {
+                ((CombatPart) entry.getValue()).setAttacking(false);
+            }
         }
-        if(world.getMapByPart(WeaponPart.class.getSimpleName())!=null){
-         for(Map.Entry<UUID,EntityPart> entry : world.getMapByPart(WeaponPart.class.getSimpleName()).entrySet()){
-             ((WeaponPart)entry.getValue()).setIsAttacking(false);
-         }
+        if (world.getMapByPart(WeaponPart.class.getSimpleName()) != null) {
+            for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart(WeaponPart.class.getSimpleName()).entrySet()) {
+                ((WeaponPart) entry.getValue()).setIsAttacking(false);
+            }
         }
     }
 }

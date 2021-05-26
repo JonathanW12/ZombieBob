@@ -21,7 +21,7 @@ public class LevelSystem implements IEntityProcessingService {
             lastSpawnTime = currentTime;
 
             // Every 5yh round will have double time
-            if (level > 0 && level%5 == 0){
+            if (level > 0 && level % 5 == 0) {
                 roundDelay = 14000;
             } else {
                 roundDelay = 7000;
@@ -34,11 +34,11 @@ public class LevelSystem implements IEntityProcessingService {
         updateTime(gameData.getDelta());
 
     }
-    
+
     private void updateTime(float delta) {
         currentTime += delta * 1000;
     }
-    
+
     protected static void resetLevel(GameData gameData) {
         level = 0;
         currentTime = 0;

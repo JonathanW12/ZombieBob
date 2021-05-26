@@ -7,6 +7,7 @@ import org.openide.util.lookup.ServiceProvider;
 
 @ServiceProvider(service = IGamePluginService.class)
 public class ExplosionPlugin implements IGamePluginService {
+
     @Override
     public void start(GameData gameData, World world) {
 
