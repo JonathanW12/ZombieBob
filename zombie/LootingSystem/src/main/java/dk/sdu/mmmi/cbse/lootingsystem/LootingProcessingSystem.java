@@ -22,43 +22,11 @@ import org.openide.util.lookup.ServiceProvider;
 import org.openide.util.lookup.ServiceProviders;
 
 /**
- * @author phili
- * if entity is colliding with
+ * @author phili if entity is colliding with
  */
 @ServiceProviders(value = {
-        @ServiceProvider(service = IEntityProcessingService.class)})
+    @ServiceProvider(service = IEntityProcessingService.class)})
 public class LootingProcessingSystem implements IEntityProcessingService {
-
-//    @Override
-//    public void process(GameData gameData, World world) {
-//        boolean enterKeyPressed = gameData.getKeys().isPressed(GameKeys.ENTER);
-//        
-//        if (world.getMapByPart(PlayerPart.class.getSimpleName()) != null && world.getMapByPart(LootablePart.class.getSimpleName()) != null) { 
-//            for (Map.Entry<UUID, EntityPart> player : world.getMapByPart(PlayerPart.class.getSimpleName()).entrySet()) {
-//                PositionPart pPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(player.getKey());
-//                CombatPart combatPart = (CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(player.getKey());
-//                
-//                for (Map.Entry<UUID, EntityPart> item : world.getMapByPart(LootablePart.class.getSimpleName()).entrySet()) {
-//                    PositionPart iPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(item.getKey());
-//                    float distance = (float) Math.sqrt(
-//                        Math.pow(pPos.getX() - iPos.getX(), 2) +
-//                        Math.pow(pPos.getY() - iPos.getY(), 2)
-//                    );
-//                    
-//                    if (distance < 50 && enterKeyPressed) {
-//                        // Equip weapon
-//                        if (world.getMapByPart(WeaponPart.class.getSimpleName()).get(item.getKey()) != null) {
-//                            VisualPart visualPart = (VisualPart) world.getMapByPart(VisualPart.class.getSimpleName()).get(item.getKey());
-//                            
-//                            combatPart.setCurrentWeapon(item.getKey());
-//                            world.addtoEntityPartMap(pPos, item.getKey());
-//                            visualPart.setIsVisible(false);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
 
     @Override
     public void process(GameData gameData, World world) {
@@ -78,17 +46,15 @@ public class LootingProcessingSystem implements IEntityProcessingService {
 
                         if (world.getMapByPart(LootablePart.class.getSimpleName()) != null) {
 
-
                             //find all items within reach
                             for (Map.Entry<UUID, EntityPart> item : world.getMapByPart(LootablePart.class.getSimpleName()).entrySet()) {
 
                                 PositionPart iPos = (PositionPart) world.getMapByPart(PositionPart.class.getSimpleName()).get(item.getKey());
                                 if (iPos != null) {
 
-
                                     float distance = (float) Math.sqrt(
-                                            Math.pow(collectorPos.getX() - iPos.getX(), 2) +
-                                                    Math.pow(collectorPos.getY() - iPos.getY(), 2)
+                                            Math.pow(collectorPos.getX() - iPos.getX(), 2)
+                                            + Math.pow(collectorPos.getY() - iPos.getY(), 2)
                                     );
                                     //check ´if item is within reach
                                     if (distance < 50) {
@@ -117,7 +83,6 @@ public class LootingProcessingSystem implements IEntityProcessingService {
                                                     world.addtoEntityPartMap(new LootablePart(), currentWeapon);
                                                     ((VisualPart) world.getMapByPart("VisualPart").get(currentWeapon)).setIsVisible(true);
 
-
                                                     //add to inventory, and share position with collector. Item is no longer lootable.
                                                     weaponInventory.addWeapon(item.getKey());
                                                     world.getMapByPart("PositionPart").replace(item.getKey(), collectorPos);
@@ -125,7 +90,12 @@ public class LootingProcessingSystem implements IEntityProcessingService {
                                                     ((VisualPart) world.getMapByPart("VisualPart").get(item.getKey())).setIsVisible(false);
 
                                                     //combat part has the current weapon to be the weapon on the ground. Set this to be the looted weapon.
-                                                    combatPart.setCurrentWeapon(item.getKey());
+                                                    if (weaponInventory.getInventory().isEmpty()) {
+                                                        combatPart.setCurrentWeapon(item.getKey());
+                                                    }
+
+                                                    // Remove item from spawn
+                                                    world.getItemSpawnByCurrentItem(combatPart.getCurrentWeapon()).removeCurrentItem();
                                                 }
                                             } else {
                                                 //add to inventory, and share position with collector. Item is no longer lootable.
@@ -135,12 +105,16 @@ public class LootingProcessingSystem implements IEntityProcessingService {
                                                 ((VisualPart) world.getMapByPart("VisualPart").get(item.getKey())).setIsVisible(false);
                                                 CombatPart combatPart = ((CombatPart) world.getMapByPart(CombatPart.class.getSimpleName()).get(entry.getKey()));
                                                 if (combatPart != null) {
-                                                    combatPart.setCurrentWeapon(item.getKey());
+                                                    if (weaponInventory.getInventory().size() == 1) {
+                                                        combatPart.setCurrentWeapon(item.getKey());
+                                                    }
+                                                    // Remove item from spawn
+                                                    world.getItemSpawnByCurrentItem(item.getKey()).removeCurrentItem();
                                                 }
                                             }
                                         }
                                     }
-                                } //
+                                }
                             }
                         }
                     }

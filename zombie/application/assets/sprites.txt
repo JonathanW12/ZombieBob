@@ -1,8 +1,15 @@
 sprites.png
-size: 928, 1474
+size: 1977, 1110
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+Ammobox
+  rotate: false
+  xy: 1139, 0
+  size: 150, 135
+  orig: 150, 135
+  offset: 0, 0
+  index: -1
 crosshair
   rotate: false
   xy: 0, 0
@@ -12,106 +19,281 @@ crosshair
   index: -1
 enemyBite
   rotate: false
-  xy: 250, 190
+  xy: 1092, 173
   size: 206, 192
   orig: 206, 192
   offset: 0, 0
   index: -1
 enemyHit
   rotate: false
-  xy: 0, 422
+  xy: 0, 405
   size: 208, 243
   orig: 208, 243
   offset: 0, 0
   index: -1
 enemyIdle
   rotate: false
-  xy: 456, 190
+  xy: 1298, 173
   size: 206, 200
   orig: 206, 200
   offset: 0, 0
   index: -1
+enemySpawn
+  rotate: false
+  xy: 987, 0
+  size: 120, 120
+  orig: 120, 120
+  offset: 0, 0
+  index: -1
+floorTexture
+  rotate: false
+  xy: 870, 0
+  size: 117, 117
+  orig: 117, 117
+  offset: 0, 0
+  index: -1
+HotBarBazooka
+  rotate: false
+  xy: 570, 0
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+HotBarGun
+  rotate: false
+  xy: 670, 0
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+HotBarRifle
+  rotate: false
+  xy: 770, 0
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+idleExplosion
+  rotate: false
+  xy: 48, 0
+  size: 62, 50
+  orig: 62, 50
+  offset: 0, 0
+  index: -1
+itemSpawn
+  rotate: false
+  xy: 1289, 0
+  size: 150, 148
+  orig: 150, 148
+  offset: 0, 0
+  index: -1
+left-nav-button
+  rotate: false
+  xy: 460, 0
+  size: 55, 75
+  orig: 55, 75
+  offset: 0, 0
+  index: -1
+music-button-disabled
+  rotate: false
+  xy: 110, 0
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+music-button
+  rotate: false
+  xy: 180, 0
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+playerbazooka
+  rotate: false
+  xy: 1725, 707
+  size: 252, 403
+  orig: 252, 403
+  offset: 0, 0
+  index: -1
 PlayerGun1
   rotate: false
-  xy: 208, 422
+  xy: 516, 405
   size: 315, 285
   orig: 315, 285
   offset: 0, 0
   index: -1
 PlayerGun2
   rotate: false
-  xy: 523, 422
+  xy: 1085, 405
   size: 405, 299
   orig: 405, 299
   offset: 0, 0
   index: -1
 playerIdle
   rotate: false
-  xy: 516, 0
+  xy: 534, 173
   size: 308, 190
   orig: 308, 190
   offset: 0, 0
   index: -1
+playerIdleKnife
+  rotate: false
+  xy: 208, 405
+  size: 308, 247
+  orig: 308, 247
+  offset: 0, 0
+  index: -1
+PlayerKnifeMove2
+  rotate: false
+  xy: 831, 405
+  size: 254, 287
+  orig: 254, 287
+  offset: 0, 0
+  index: -1
 PlayerShoot1
   rotate: false
-  xy: 0, 1074
+  xy: 1005, 707
   size: 315, 393
   orig: 315, 393
   offset: 0, 0
   index: -1
 PlayerShoot2
   rotate: false
-  xy: 315, 1074
+  xy: 1320, 707
   size: 405, 400
   orig: 405, 400
   offset: 0, 0
   index: -1
 PlayerSword
   rotate: false
-  xy: 0, 721
+  xy: 0, 707
   size: 253, 325
   orig: 253, 325
   offset: 0, 0
   index: -1
+PlayerUzi
+  rotate: false
+  xy: 1490, 405
+  size: 252, 302
+  orig: 252, 302
+  offset: 0, 0
+  index: -1
 PlayerWalk1
   rotate: false
-  xy: 564, 721
+  xy: 564, 707
   size: 311, 353
   orig: 311, 353
   offset: 0, 0
   index: -1
 PlayerWalk2
   rotate: false
-  xy: 253, 721
+  xy: 253, 707
   size: 311, 332
   orig: 311, 332
   offset: 0, 0
   index: -1
+pointy-cursor
+  rotate: false
+  xy: 16, 0
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 projectile
   rotate: false
-  xy: 662, 190
+  xy: 1729, 173
   size: 155, 232
   orig: 155, 232
   offset: 0, 0
   index: -1
+redX
+  rotate: false
+  xy: 250, 0
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+RifleAmmo
+  rotate: false
+  xy: 1107, 0
+  size: 32, 132
+  orig: 32, 132
+  offset: 0, 0
+  index: -1
+right-nav-button
+  rotate: false
+  xy: 515, 0
+  size: 55, 75
+  orig: 55, 75
+  offset: 0, 0
+  index: -1
+Rocket
+  rotate: false
+  xy: 875, 707
+  size: 130, 379
+  orig: 130, 379
+  offset: 0, 0
+  index: -1
+sound-button-disabled
+  rotate: false
+  xy: 320, 0
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+sound-button
+  rotate: false
+  xy: 390, 0
+  size: 70, 70
+  orig: 70, 70
+  offset: 0, 0
+  index: -1
+spiderAttack
+  rotate: false
+  xy: 284, 173
+  size: 250, 189
+  orig: 250, 189
+  offset: 0, 0
+  index: -1
 spiderIdle
   rotate: false
-  xy: 16, 0
+  xy: 1594, 0
   size: 250, 173
   orig: 250, 173
   offset: 0, 0
   index: -1
 spiderLegsDown
   rotate: false
-  xy: 0, 190
+  xy: 842, 173
   size: 250, 190
   orig: 250, 190
   offset: 0, 0
   index: -1
 spiderLegsUp
   rotate: false
-  xy: 266, 0
+  xy: 0, 173
   size: 250, 175
   orig: 250, 175
+  offset: 0, 0
+  index: -1
+Sword
+  rotate: false
+  xy: 250, 173
+  size: 34, 183
+  orig: 34, 183
+  offset: 0, 0
+  index: -1
+wall_sprite
+  rotate: false
+  xy: 1504, 173
+  size: 225, 225
+  orig: 225, 225
+  offset: 0, 0
+  index: -1
+web
+  rotate: false
+  xy: 1439, 0
+  size: 155, 160
+  orig: 155, 160
   offset: 0, 0
   index: -1

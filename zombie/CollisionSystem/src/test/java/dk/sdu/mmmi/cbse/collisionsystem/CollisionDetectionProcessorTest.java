@@ -42,31 +42,14 @@ public class CollisionDetectionProcessorTest {
     public CollisionDetectionProcessorTest() {
     }
     
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
     
     @BeforeEach
     public void setUp() {
-        e1 = new Entity();
-        collider1 = new ColliderPart(10);
-        position1 = new PositionPart(0,0,0);
-        
-        e2 = new Entity();
-        collider2 = new ColliderPart(10);
-        position2 = new PositionPart(0,10,0);
-        
         colliderParts = new ConcurrentHashMap<UUID, EntityPart>();
-        colliderParts.put(e1.getUUID(), collider1);
-        colliderParts.put(e2.getUUID(), collider2);
+        
         
         positionParts = new ConcurrentHashMap<UUID, EntityPart>();
-        positionParts.put(e1.getUUID(), position1);
-        positionParts.put(e2.getUUID(), position2);
+        
         
     }
     
@@ -79,19 +62,26 @@ public class CollisionDetectionProcessorTest {
      */
     @Test
     public void testGivenCollisionThenCollidingEntitiesUpdates() {
+        e1 = new Entity();
+        collider1 = new ColliderPart(10,10);
+        position1 = new PositionPart(0,0,0);
+        
+        e2 = new Entity();
+        collider2 = new ColliderPart(10,10);
+        position2 = new PositionPart(0,5,0);
+        
+        colliderParts.put(e1.getUUID(), collider1);
+        colliderParts.put(e2.getUUID(), collider2);
+        
+        positionParts.put(e1.getUUID(), position1);
+        positionParts.put(e2.getUUID(), position2);
+        
+        
         GameData mockGameData = mock(GameData.class);
-        
-        
         World mockWorld = mock(World.class);
         
-        
-        when(mockWorld.getMapByPart(ColliderPart.class.getSimpleName())).thenReturn(colliderParts);
-        
-        //when(mockWorld.getMapByPart("ColliderPart")).thenReturn(colliderParts);
-        
+        when(mockWorld.getMapByPart("ColliderPart")).thenReturn(colliderParts);
         when(mockWorld.getMapByPart("PositionPart")).thenReturn(positionParts);
-        //when(mockWorld.getMapByPart("PositionPart").get(e2.getUUID())).thenReturn(position2);
-        
         
         CollisionDetectionProcessor instance = new CollisionDetectionProcessor();
         instance.process(mockGameData, mockWorld);
@@ -101,9 +91,41 @@ public class CollisionDetectionProcessorTest {
         
         assertFalse(collider1.getCollidingEntities().contains(e1.getUUID()));
         assertFalse(collider2.getCollidingEntities().contains(e2.getUUID()));
-        
-        
-        
     }
+    
+    @Test
+    public void testGivenNoCollisionThenCollidingEntitiesDontUpdate() {
+        e1 = new Entity();
+        collider1 = new ColliderPart(10,10);
+        position1 = new PositionPart(0,0,0);
+        
+        e2 = new Entity();
+        collider2 = new ColliderPart(10,10);
+        position2 = new PositionPart(0,11,0);
+        
+        colliderParts.put(e1.getUUID(), collider1);
+        colliderParts.put(e2.getUUID(), collider2);
+        
+        positionParts.put(e1.getUUID(), position1);
+        positionParts.put(e2.getUUID(), position2);
+        
+        
+        GameData mockGameData = mock(GameData.class);
+        World mockWorld = mock(World.class);
+        
+        when(mockWorld.getMapByPart("ColliderPart")).thenReturn(colliderParts);
+        when(mockWorld.getMapByPart("PositionPart")).thenReturn(positionParts);
+        
+        CollisionDetectionProcessor instance = new CollisionDetectionProcessor();
+        instance.process(mockGameData, mockWorld);
+        
+        assertFalse(collider1.getCollidingEntities().contains(e2.getUUID()));
+        assertFalse(collider2.getCollidingEntities().contains(e1.getUUID()));
+        
+        assertFalse(collider1.getCollidingEntities().contains(e1.getUUID()));
+        assertFalse(collider2.getCollidingEntities().contains(e2.getUUID()));
+    }
+    
+    
     
 }

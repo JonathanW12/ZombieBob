@@ -230,6 +230,7 @@ public final class UpdateHandler {
             // have a problem => cannot continue
             LOGGER.info("Missing Silent Update Provider => cannot continue.");
             return;
+
         }
 
         try {
@@ -256,7 +257,6 @@ public final class UpdateHandler {
         }
 
         OperationContainer<OperationSupport> cont = OperationContainer.createForDirectUninstall();
-
         // loop all uninstalls and add to container for update
         for (UpdateElement ue : uninstalls) {
             if (cont.canBeAdded(ue.getUpdateUnit(), ue)) {

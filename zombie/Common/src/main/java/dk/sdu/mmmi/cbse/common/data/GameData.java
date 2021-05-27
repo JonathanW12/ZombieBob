@@ -1,7 +1,6 @@
 package dk.sdu.mmmi.cbse.common.data;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector3;
+import dk.sdu.mmmi.cbse.commonlevel.LevelInformation;
 import dk.sdu.mmmi.cbse.common.events.Event;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +14,25 @@ public class GameData {
     private final GameKeys keys = new GameKeys();
     private final MouseMovement mouse = new MouseMovement();
     private List<Event> events = new CopyOnWriteArrayList<>();
+    private static LevelInformation levelInformation;
+    private float camPosX;
+    private float camPosY;
+
+    public float getCamPosX() {
+        return camPosX;
+    }
+
+    public void setCamPosX(float camPosX) {
+        this.camPosX = camPosX;
+    }
+
+    public float getCamPosY() {
+        return camPosY;
+    }
+
+    public void setCamPosY(float camPosY) {
+        this.camPosY = camPosY;
+    }
 
     public void addEvent(Event e) {
         events.add(e);
@@ -32,7 +50,7 @@ public class GameData {
         return keys;
     }
 
-    public MouseMovement getMouse(){
+    public MouseMovement getMouse() {
         return mouse;
     }
 
@@ -58,6 +76,14 @@ public class GameData {
 
     public int getDisplayHeight() {
         return displayHeight;
+    }
+
+    public LevelInformation getLevelInformation() {
+        if (levelInformation != null) {
+            return levelInformation;
+        } else {
+            return levelInformation = new LevelInformation();
+        }
     }
 
     public <E extends Event> List<Event> getEvents(Class<E> type, String sourceID) {

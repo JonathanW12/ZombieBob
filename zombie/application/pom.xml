@@ -21,48 +21,19 @@
     </properties>
 
     <dependencies>
-        <!--
-        <dependency>
-            <groupId>org.netbeans.cluster</groupId>
-            <artifactId>platform</artifactId>
-            <version>${netbeans.version}</version>
-            <type>pom</type>
-        </dependency>
-        -->
-
         <!-- NB runtime -->
         <dependency>
             <groupId>org.netbeans.modules</groupId>
             <artifactId>org-netbeans-core-startup</artifactId>
             <version>${netbeans.version}</version>
         </dependency>
-        <!-- OSGi integration -->
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-netbeans-core-netigso</artifactId>
-            <version>${netbeans.version}</version>
-        </dependency>
-        <!-- Equinox integration -->
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-netbeans-modules-netbinox</artifactId>
-            <version>${netbeans.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-netbeans-modules-nbjunit</artifactId>
-            <version>${netbeans.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-            <!-- SilentUpdate Module Dependency for later use-->
-        <!--
+        
+        
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>SilentUpdate</artifactId>
             <version>${project.version}</version>
         </dependency>
-        -->
 
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -74,21 +45,14 @@
             <artifactId>Player</artifactId>
             <version>${project.version}</version>
         </dependency>
-
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Core</artifactId>
             <version>${project.version}</version>
         </dependency>
-
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Movement</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>TimerSystem</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -106,8 +70,6 @@
             <artifactId>CombatSystem</artifactId>
             <version>${project.version}</version>
         </dependency>
-
-
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>AnimationSystem</artifactId>
@@ -116,21 +78,6 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>ProjectileSystem</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>Hotbar</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>SpawnerSystem</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>CommonEnemy</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -160,16 +107,76 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>Map</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>RigidPhysicsSystem</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>StandardZombie</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Map</artifactId>
+            <artifactId>CommonLevel</artifactId>
             <version>${project.version}</version>
         </dependency>
-    </dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Level</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CommonLocations</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>SpiderBoss</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>RocketLauncher</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Rifle</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>AudioSystem</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>ExplosionSystem</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Hotbar</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CommonTiles</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>ThrowingKnife</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
+    </dependencies>
     <build>
         <plugins>
             <plugin>

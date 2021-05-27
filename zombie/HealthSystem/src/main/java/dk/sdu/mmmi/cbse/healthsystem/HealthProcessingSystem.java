@@ -1,5 +1,6 @@
 package dk.sdu.mmmi.cbse.healthsystem;
 
+import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.data.entityparts.*;
@@ -13,17 +14,35 @@ import java.util.Map;
 import java.util.UUID;
 
 @ServiceProviders(value = {
-        @ServiceProvider(service = IEntityProcessingService.class)})
+    @ServiceProvider(service = IEntityProcessingService.class)})
 
 public class HealthProcessingSystem implements IEntityProcessingService {
 
     private LifePart lifePartOfDmger;
     private LifePart lifePartCollidingEntity;
     private DamagePart damagePart;
-
+    private int zombiesKilled = 0;
 
     @Override
     public void process(GameData gameData, World world) {
+
+        // Check if hashmap exists
+        if (world.getMapByPart(LifePart.class.getSimpleName()) != null) {
+
+            // Loops through all Lifeparts in hashmap
+            for (Map.Entry<UUID, EntityPart> entry : world.getMapByPart(LifePart.class.getSimpleName()).entrySet()) {
+                LifePart lifepart = (LifePart) world.getMapByPart(LifePart.class.getSimpleName()).get(entry.getKey());
+                if (lifepart != null && lifepart.getLife() <= 0) {
+                    lifepart.setDead(true);
+                }
+
+                // If dead remove
+                if (lifepart != null && lifepart.isDead()) {
+                    world.removeEntityParts(entry.getKey());
+                }
+
+            }
+        }
 
         // Check if hashmap exists
         if (world.getMapByPart(DamagePart.class.getSimpleName()) != null) {
@@ -55,8 +74,20 @@ public class HealthProcessingSystem implements IEntityProcessingService {
                                 if (lifePartCollidingEntity != null) {
                                     lifePartCollidingEntity.setLife(lifePartCollidingEntity.getLife() - damagePart.getDamage());
                                 }
+
+                                // If bullet can explode, set explosive part to true
+                                if (world.getMapByPart(ExplosivePart.class.getSimpleName()) != null) {
+
+                                    ExplosivePart explosivePart = (ExplosivePart) world.getMapByPart(ExplosivePart.class.getSimpleName()).get(entry.getKey());
+                                    if (explosivePart != null) {
+                                        explosivePart.setIsReadyToExplode(true);
+                                    }
+                                }
+                                LifePart lifePart = (LifePart) world.getMapByPart(LifePart.class.getSimpleName()).get(entry.getKey());
                                 // Removing bullet after impact
-                                world.removeEntityParts(entry.getKey());
+                                if (lifePart != null) {
+                                    lifePart.setDead(true);
+                                }
                             }
 
                             if (lifePartCollidingEntity != null && lifePartCollidingEntity.getLife() <= 0) {
@@ -65,6 +96,9 @@ public class HealthProcessingSystem implements IEntityProcessingService {
 
                             // If dead remove
                             if (lifePartCollidingEntity != null && lifePartCollidingEntity.isDead()) {
+                                if (world.getMapByPart(EnemyPart.class.getSimpleName()).get(collidingEntity) != null) {
+                                    gameData.getLevelInformation().setEnemiesKilled(++zombiesKilled);
+                                }
                                 world.removeEntityParts(collidingEntity);
                             }
                         }
@@ -73,5 +107,5 @@ public class HealthProcessingSystem implements IEntityProcessingService {
             }
         }
     }
+
 }
-    

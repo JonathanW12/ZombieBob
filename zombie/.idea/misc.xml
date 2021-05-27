@@ -5,9 +5,19 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/Enemy/pom.xml" />
-        <option value="$PROJECT_DIR$/Map/pom.xml" />
+        <option value="$PROJECT_DIR$/RocketLauncher/pom.xml" />
+<<<<<<< Updated upstream
+        <option value="$PROJECT_DIR$/AudioSystem/pom.xml" />
+=======
+>>>>>>> Stashed changes
+        <option value="$PROJECT_DIR$/SpiderBoss/pom.xml" />
       </list>
     </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/Zombie/pom.xml" />
+      </set>
+    </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="false" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

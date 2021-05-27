@@ -6,9 +6,10 @@
 package dk.sdu.mmmi.cbse.common.data.entityparts;
 
 /**
- *ProjectilePart describes the type of an entity.
+ * ProjectilePart describes the type of an entity.
  */
-public class ProjectilePart implements EntityPart{
+public class ProjectilePart implements EntityPart {
+
     private float currentTravelDistance;
     private float maxTravelDistance;
 

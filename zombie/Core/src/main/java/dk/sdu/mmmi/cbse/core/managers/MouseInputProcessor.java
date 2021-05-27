@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import dk.sdu.mmmi.cbse.common.data.GameData;
+import dk.sdu.mmmi.cbse.common.data.MouseMovement;
 
 public class MouseInputProcessor implements InputProcessor {
 
@@ -35,14 +36,14 @@ public class MouseInputProcessor implements InputProcessor {
     @Override
     public boolean touchDown(int i, int i1, int i2, int i3) {
 
-        if (i3 == Input.Buttons.LEFT){
-            gameData.getMouse().setLeftClick(true);
+        if (i3 == Input.Buttons.LEFT) {
+            gameData.getMouse().setKey(MouseMovement.LEFTCLICK, true);
         }
-        if (i3 == Input.Buttons.RIGHT){
-            gameData.getMouse().setRightClick(true);
+        if (i3 == Input.Buttons.RIGHT) {
+            gameData.getMouse().setKey(MouseMovement.RIGHTCLICK, true);
         }
-        if (i3 == Input.Buttons.MIDDLE){
-            gameData.getMouse().setMiddleClick(true);
+        if (i3 == Input.Buttons.MIDDLE) {
+            gameData.getMouse().setKey(MouseMovement.MIDDLECLICK, true);
         }
         return false;
     }
@@ -50,14 +51,14 @@ public class MouseInputProcessor implements InputProcessor {
     @Override
     public boolean touchUp(int i, int i1, int i2, int i3) {
 
-        if (i3 == Input.Buttons.LEFT){
-            gameData.getMouse().setLeftClick(false);
+        if (i3 == Input.Buttons.LEFT) {
+            gameData.getMouse().setKey(MouseMovement.LEFTCLICK, false);
         }
-        if (i3 == Input.Buttons.RIGHT){
-            gameData.getMouse().setRightClick(false);
+        if (i3 == Input.Buttons.RIGHT) {
+            gameData.getMouse().setKey(MouseMovement.RIGHTCLICK, false);
         }
-        if (i3 == Input.Buttons.MIDDLE){
-            gameData.getMouse().setMiddleClick(false);
+        if (i3 == Input.Buttons.MIDDLE) {
+            gameData.getMouse().setKey(MouseMovement.MIDDLECLICK, false);
         }
 
         return false;
@@ -65,8 +66,8 @@ public class MouseInputProcessor implements InputProcessor {
 
     @Override
     public boolean touchDragged(int i, int i1, int i2) {
-        Vector3 mousePosition = cam.unproject(new Vector3(i,i1,0));
-        gameData.getMouse().setMousePosition(mousePosition.x,mousePosition.y);
+        Vector3 mousePosition = cam.unproject(new Vector3(i, i1, 0));
+        gameData.getMouse().setMousePosition(mousePosition.x, mousePosition.y);
 
         return false;
     }
@@ -74,8 +75,8 @@ public class MouseInputProcessor implements InputProcessor {
     @Override
     public boolean mouseMoved(int i, int i1) {
 
-        Vector3 mousePosition = cam.unproject(new Vector3(Gdx.input.getX(),Gdx.input.getY(),0));
-        gameData.getMouse().setMousePosition(mousePosition.x,mousePosition.y);
+        Vector3 mousePosition = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+        gameData.getMouse().setMousePosition(mousePosition.x, mousePosition.y);
 
         return false;
     }
@@ -87,4 +88,5 @@ public class MouseInputProcessor implements InputProcessor {
 
         return false;
     }
+
 }

@@ -1,67 +1,116 @@
 animations.png
-size: 1916, 1256
+size: 1874, 1703
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 enemyHit
   rotate: false
-  xy: 0, 0
+  xy: 456, 173
   size: 450, 263
   orig: 450, 263
   offset: 0, 0
   index: -1
 enemyWalk
   rotate: false
-  xy: 450, 0
+  xy: 250, 173
   size: 206, 200
   orig: 206, 200
   offset: 0, 0
   index: -1
+explosion
+  rotate: false
+  xy: 0, 0
+  size: 800, 128
+  orig: 800, 128
+  offset: 0, 0
+  index: -1
+PlayerKnifeMove2
+  rotate: false
+  xy: 906, 173
+  size: 254, 287
+  orig: 254, 287
+  offset: 0, 0
+  index: -1
+PlayerKnifeWalking
+  rotate: false
+  xy: 1160, 173
+  size: 548, 289
+  orig: 548, 289
+  offset: 0, 0
+  index: -1
+PlayerShootBazooka
+  rotate: false
+  xy: 1386, 1191
+  size: 252, 512
+  orig: 252, 512
+  offset: 0, 0
+  index: -1
 PlayerShootGun
   rotate: false
-  xy: 656, 0
+  xy: 1244, 798
   size: 630, 393
   orig: 630, 393
   offset: 0, 0
   index: -1
 PlayerShootGunOLD
   rotate: false
-  xy: 1286, 0
+  xy: 0, 1191
   size: 630, 394
   orig: 630, 394
   offset: 0, 0
   index: -1
-PlayerSwingSword
+PlayerShootRifle
   rotate: false
-  xy: 0, 394
-  size: 672, 336
-  orig: 672, 336
+  xy: 630, 1191
+  size: 252, 399
+  orig: 252, 399
   offset: 0, 0
   index: -1
 PlayerWalk
   rotate: false
-  xy: 672, 394
+  xy: 0, 798
   size: 1244, 353
   orig: 1244, 353
   offset: 0, 0
   index: -1
+PlayerWalkBazooka
+  rotate: false
+  xy: 882, 1191
+  size: 504, 403
+  orig: 504, 403
+  offset: 0, 0
+  index: -1
 PlayerWalkGun
   rotate: false
-  xy: 0, 747
+  xy: 0, 462
   size: 616, 290
   orig: 616, 290
   offset: 0, 0
   index: -1
+PlayerWalkRifle
+  rotate: false
+  xy: 616, 462
+  size: 504, 302
+  orig: 504, 302
+  offset: 0, 0
+  index: -1
 PlayerWalkSword
   rotate: false
-  xy: 616, 747
+  xy: 1120, 462
   size: 512, 336
   orig: 512, 336
   offset: 0, 0
   index: -1
+spiderAttack
+  rotate: false
+  xy: 0, 173
+  size: 250, 189
+  orig: 250, 189
+  offset: 0, 0
+  index: -1
 spiderWalk
   rotate: false
-  xy: 0, 1083
+  xy: 800, 0
   size: 1000, 173
   orig: 1000, 173
   offset: 0, 0
